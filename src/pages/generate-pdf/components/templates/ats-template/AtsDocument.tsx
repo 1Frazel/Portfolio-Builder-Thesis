@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const CurrentDocument = ({ user }: { user: { name: string } }) => {
+const AtsDocument = ({ user }: { user: { name: string } }) => {
   const { name } = user;
 
   return (
@@ -29,4 +29,4 @@ const CurrentDocument = ({ user }: { user: { name: string } }) => {
   );
 };
 
-export default CurrentDocument;
+export default AtsDocument;
