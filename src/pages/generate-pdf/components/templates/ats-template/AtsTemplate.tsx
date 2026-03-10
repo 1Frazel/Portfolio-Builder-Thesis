@@ -1,6 +1,7 @@
-import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import { useState } from "react";
 import AtsDocument from "./AtsDocument";
+import Preview from "../../Preview";
 
 const AtsTemplate = () => {
   const [user, setUser] = useState({
@@ -31,9 +32,7 @@ const AtsTemplate = () => {
         </div>
       </div>
       <div className="basis-1/2">
-        <PDFViewer className="w-full h-full" showToolbar={false}>
-          <AtsDocument user={user} />
-        </PDFViewer>
+        <Preview documentElement={<AtsDocument user={user} />} />
       </div>
     </>
   );
