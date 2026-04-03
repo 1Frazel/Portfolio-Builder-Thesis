@@ -9,7 +9,7 @@ const AtsTemplate = () => {
   });
 
   return (
-    <>
+    <div className="h-full w-full flex">
       <div className="basis-1/2">
         <div>
           <label htmlFor="">Full Name: </label>
@@ -34,7 +34,7 @@ const AtsTemplate = () => {
       <div className="basis-1/2">
         <Preview docs={<AtsDocument user={user} />} />
       </div>
-    </>
+    </div>
   );
 };
 

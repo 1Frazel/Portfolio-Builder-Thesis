@@ -12,6 +12,8 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 ).toString();
 
 const Preview = ({ docs }: { docs: JSX.Element }) => {
+  const [previousRenderValue, setPreviousRenderValue] = useState("");
+
   const [pageAmount, setPageAmount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -27,15 +29,38 @@ const Preview = ({ docs }: { docs: JSX.Element }) => {
     setCurrentPage((prev) => Math.min(prev, document.numPages));
   };
 
+  const isFirstRendering = !previousRenderValue;
+
+  const isLatestValueRendered = previousRenderValue === render.value;
+  const isBusy = render.loading || !isLatestValueRendered;
+
+  const shouldShowPreviousDocument = !isFirstRendering && isBusy;
+
   return (
     <div className="flex justify-center items-center">
+      {shouldShowPreviousDocument && previousRenderValue && (
+        <Document
+          key={`previous-${previousRenderValue}`}
+          file={previousRenderValue}
+          loading={null}
+          className="opacity-50 shadow-md"
+        >
+          <Page key={currentPage} pageNumber={currentPage} />
+        </Document>
+      )}
+
       <Document
         key={render.value}
         file={render.value}
-        loading={<p className="text-red-950">Loading...</p>}
+        loading={null}
         onLoadSuccess={onDocumentLoad}
+        className={`${shouldShowPreviousDocument ? "absolute opacity-0" : "shadow-md"}`}
       >
-        <Page key={currentPage} pageNumber={currentPage} />
+        <Page
+          key={currentPage}
+          pageNumber={currentPage}
+          onRenderSuccess={() => setPreviousRenderValue(render.value ?? "")}
+        />
       </Document>
     </div>
   );
