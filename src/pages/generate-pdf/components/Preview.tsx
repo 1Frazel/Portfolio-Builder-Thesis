@@ -13,8 +13,6 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 ).toString();
 
 const Preview = ({ docs }: { docs: JSX.Element }) => {
-  const [previousRenderValue, setPreviousRenderValue] = useState("");
-
   const [pageAmount, setPageAmount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -30,40 +28,18 @@ const Preview = ({ docs }: { docs: JSX.Element }) => {
     setCurrentPage((prev) => Math.min(prev, document.numPages));
   };
 
-  const isFirstRendering = !previousRenderValue;
-
-  const isLatestValueRendered = previousRenderValue === render.value;
-  const isBusy = render.loading || !isLatestValueRendered;
-
-  const shouldShowPreviousDocument = !isFirstRendering && isBusy;
-
   return (
     <>
       <div className="flex justify-center items-center">
-        {shouldShowPreviousDocument && previousRenderValue && (
+        <div className="h-[841px] w-[595px] shadow-md flex justify-center items-center rounded-md">
           <Document
-            key={`previous-${previousRenderValue}`}
-            file={previousRenderValue}
-            loading={null}
-            className="opacity-50 shadow-md"
+            key={render.value}
+            file={render.value}
+            onLoadSuccess={onDocumentLoad}
           >
             <Page key={currentPage} pageNumber={currentPage} />
           </Document>
-        )}
-
-        <Document
-          key={render.value}
-          file={render.value}
-          loading={null}
-          onLoadSuccess={onDocumentLoad}
-          className={`${shouldShowPreviousDocument ? "absolute opacity-0" : "shadow-md"}`}
-        >
-          <Page
-            key={currentPage}
-            pageNumber={currentPage}
-            onRenderSuccess={() => setPreviousRenderValue(render.value ?? "")}
-          />
-        </Document>
+        </div>
       </div>
 
       <PreviewNavigator
