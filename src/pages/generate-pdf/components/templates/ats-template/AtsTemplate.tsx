@@ -32,7 +32,7 @@ const AtsTemplate = () => {
         </div>
       </div>
       <div className="basis-1/2">
-        <Preview documentElement={<AtsDocument user={user} />} />
+        <Preview docs={<AtsDocument user={user} />} />
       </div>
     </>
   );
