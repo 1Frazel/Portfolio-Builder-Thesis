@@ -5,6 +5,7 @@ import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
 import type { DocumentCallback } from "react-pdf/src/shared/types.js";
 import { useAsync } from "react-use";
+import PreviewNavigator from "./PreviewNavigator";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",
@@ -37,32 +38,40 @@ const Preview = ({ docs }: { docs: JSX.Element }) => {
   const shouldShowPreviousDocument = !isFirstRendering && isBusy;
 
   return (
-    <div className="flex justify-center items-center">
-      {shouldShowPreviousDocument && previousRenderValue && (
-        <Document
-          key={`previous-${previousRenderValue}`}
-          file={previousRenderValue}
-          loading={null}
-          className="opacity-50 shadow-md"
-        >
-          <Page key={currentPage} pageNumber={currentPage} />
-        </Document>
-      )}
+    <>
+      <div className="flex justify-center items-center">
+        {shouldShowPreviousDocument && previousRenderValue && (
+          <Document
+            key={`previous-${previousRenderValue}`}
+            file={previousRenderValue}
+            loading={null}
+            className="opacity-50 shadow-md"
+          >
+            <Page key={currentPage} pageNumber={currentPage} />
+          </Document>
+        )}
 
-      <Document
-        key={render.value}
-        file={render.value}
-        loading={null}
-        onLoadSuccess={onDocumentLoad}
-        className={`${shouldShowPreviousDocument ? "absolute opacity-0" : "shadow-md"}`}
-      >
-        <Page
-          key={currentPage}
-          pageNumber={currentPage}
-          onRenderSuccess={() => setPreviousRenderValue(render.value ?? "")}
-        />
-      </Document>
-    </div>
+        <Document
+          key={render.value}
+          file={render.value}
+          loading={null}
+          onLoadSuccess={onDocumentLoad}
+          className={`${shouldShowPreviousDocument ? "absolute opacity-0" : "shadow-md"}`}
+        >
+          <Page
+            key={currentPage}
+            pageNumber={currentPage}
+            onRenderSuccess={() => setPreviousRenderValue(render.value ?? "")}
+          />
+        </Document>
+      </div>
+
+      <PreviewNavigator
+        currentPage={currentPage}
+        pageAmount={pageAmount}
+        setCurrentPage={setCurrentPage}
+      />
+    </>
   );
 };
 
