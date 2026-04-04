@@ -12,7 +12,16 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   import.meta.url,
 ).toString();
 
-const Preview = ({ docs }: { docs: JSX.Element }) => {
+const Preview = ({
+  docs,
+  widthClass = "",
+  heightClass = "",
+}: {
+  docs: JSX.Element;
+  widthClass: string;
+  heightClass: string;
+  customClass?: string;
+}) => {
   const [pageAmount, setPageAmount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -28,10 +37,14 @@ const Preview = ({ docs }: { docs: JSX.Element }) => {
     setCurrentPage((prev) => Math.min(prev, document.numPages));
   };
 
+  const previewClass = `shadow-md flex 
+  justify-center items-center rounded-md
+  ${widthClass} ${heightClass}`;
+
   return (
     <>
       <div className="flex justify-center items-center">
-        <div className="h-[841px] w-[595px] shadow-md flex justify-center items-center rounded-md">
+        <div className={previewClass}>
           <Document
             key={render.value}
             file={render.value}

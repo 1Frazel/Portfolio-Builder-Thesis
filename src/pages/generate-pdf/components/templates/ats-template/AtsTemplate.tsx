@@ -36,7 +36,11 @@ const AtsTemplate = () => {
         </div>
       </div>
       <div className="basis-1/2">
-        <Preview docs={<AtsDocument user={user} />} />
+        <Preview
+          heightClass="h-[841px]"
+          widthClass="w-[595px]"
+          docs={<AtsDocument user={user} />}
+        />
       </div>
     </div>
   );
