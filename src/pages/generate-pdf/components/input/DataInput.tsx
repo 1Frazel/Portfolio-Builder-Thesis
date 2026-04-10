@@ -2,12 +2,14 @@ const DataInput = ({
   label,
   onChange,
   stateKey,
+  type,
   containerClass = "",
   labelClass = "",
   inputClass = "",
 }: {
   label: string;
   stateKey: string;
+  type: string;
   onChange: (input: string, stateKey: string) => void;
   containerClass?: string;
   labelClass?: string;
@@ -19,8 +21,8 @@ const DataInput = ({
         {label}
       </label>
       <input
-        type="text"
-        className={`bg-[#eff2f9] rounded-md ${inputClass}`}
+        type={type}
+        className={`${type === "text" ? "bg-[#eff2f9] rounded-md" : ""} ${inputClass}`}
         onChange={(e) => onChange(e.target.value, stateKey)}
       />
     </div>

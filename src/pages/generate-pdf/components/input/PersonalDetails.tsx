@@ -22,6 +22,7 @@ const PersonalDetail = ({
               label={input.label}
               onChange={onChange}
               stateKey={input.id}
+              type={input.inputType}
             />
           );
         })}
