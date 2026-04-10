@@ -1,4 +1,5 @@
 import { Document, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
+import type { IAtsTemplateUser } from "./AtsTemplate";
 
 const styles = StyleSheet.create({
   page: {
@@ -12,14 +13,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const AtsDocument = ({ user }: { user: { name: string } }) => {
-  const { name } = user;
+const AtsDocument = ({ user }: { user: IAtsTemplateUser }) => {
+  const { firstName } = user;
 
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
-          <Text>{name}</Text>
+          <Text>{firstName}</Text>
           <Text>Section #2</Text>
           <Text>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean erat
