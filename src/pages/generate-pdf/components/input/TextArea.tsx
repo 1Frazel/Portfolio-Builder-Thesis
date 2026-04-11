@@ -2,15 +2,13 @@ import InputFieldWrapper from "./InputFieldWrapper";
 
 const TextArea = ({
   onChange,
-  stateKey,
   label,
   placeholder,
   containerClass = "",
   labelClass = "",
   inputClass = "",
 }: {
-  onChange: (input: string, stateKey: string) => void;
-  stateKey: string;
+  onChange: (input: string) => void;
   label: string;
   placeholder: string;
   containerClass?: string;
@@ -24,7 +22,7 @@ const TextArea = ({
       labelClass={labelClass}
     >
       <textarea
-        onChange={(e) => onChange(e.target.value, stateKey)}
+        onChange={(e) => onChange(e.target.value)}
         className={`bg-[#eff2f9] rounded-md ${inputClass}`}
         placeholder={placeholder}
       />

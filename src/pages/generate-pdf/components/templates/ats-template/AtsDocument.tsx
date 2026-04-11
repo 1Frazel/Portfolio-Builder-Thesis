@@ -1,5 +1,5 @@
 import { Document, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
-import type { IAtsTemplateUser } from "./AtsTemplate";
+import type { IPersonalDetail } from "../../input/personalDetail";
 
 const styles = StyleSheet.create({
   page: {
@@ -13,8 +13,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const AtsDocument = ({ user }: { user: IAtsTemplateUser }) => {
-  const { firstName } = user;
+const AtsDocument = ({
+  personalDetail,
+}: {
+  personalDetail: IPersonalDetail;
+}) => {
+  const { firstName } = personalDetail;
 
   return (
     <Document>

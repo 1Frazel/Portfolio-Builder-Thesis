@@ -2,7 +2,6 @@ import InputFieldWrapper from "./InputFieldWrapper";
 
 const InputField = ({
   onChange,
-  stateKey,
   label,
   type,
   placeholder,
@@ -10,8 +9,7 @@ const InputField = ({
   labelClass = "",
   inputClass = "",
 }: {
-  onChange: (input: string, stateKey: string) => void;
-  stateKey: string;
+  onChange: (input: string) => void;
   label: string;
   type: string;
   placeholder: string;
@@ -28,7 +26,7 @@ const InputField = ({
       <input
         type={type}
         className={`bg-[#eff2f9] rounded-md ${inputClass}`}
-        onChange={(e) => onChange(e.target.value, stateKey)}
+        onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
       />
     </InputFieldWrapper>

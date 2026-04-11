@@ -1,48 +1,58 @@
 import { useState } from "react";
 import AtsDocument from "./AtsDocument";
 
-import { useDebouncedCallback } from "use-debounce";
+
 import Preview from "../../preview/Preview";
 import {
   defaultPersonalDetail,
-  personalDetail,
+  listPersonalDetail,
 } from "../../input/personalDetail";
 import PersonalDetail from "../../input/PersonalDetails";
 import GeneratePdfFooter from "../../footer/GeneratePdfFooter";
 import PdfDownloadBtn from "../../button/PdfDownloadBtn";
 
-export interface IAtsTemplateUser {
-  address: string;
-  country: string;
-  email: string;
-  firstName: string;
-  jobTarget: string;
-  lastName: string;
-  linkedinUrl: string;
-  phone: string;
-  photo: string;
-  postalCode: string;
-}
-const AtsTemplate = () => {
-  const [user, setUser] = useState({ ...defaultPersonalDetail });
-  const [activeSectionIndex, setActiveSectionIndex] = useState(0);
+import {
+  defaultWorkExperiences,
+  listWorkExperiences,
+} from "../../input/workExperience";
+import WorkExperiences from "../../input/WorkExperiences";
 
-  const handleChange = useDebouncedCallback((value: string, key: string) => {
-    setUser({ ...user, [key]: value });
-  }, 500);
+const A4_SIZE = {
+  height: "h-[841px]",
+  width: "w-[595px]",
+};
+
+const AtsTemplate = () => {
+  const [personalDetail, setPersonalDetail] = useState({
+    ...defaultPersonalDetail,
+  });
+  const [workExperiences, setWorkExperiences] = useState([
+    defaultWorkExperiences,
+  ]);
+  const [activeSectionIndex, setActiveSectionIndex] = useState(0);
 
   const AtsTemplateSection = [
     {
       id: "personalDetail",
       title: "Personal Information",
       component: (
-        <PersonalDetail listInput={personalDetail} onChange={handleChange} />
+        <PersonalDetail
+          listInput={listPersonalDetail}
+          personalDetail={personalDetail}
+          setPersonalDetail={setPersonalDetail}
+        />
       ),
     },
     {
-      id: "professionalExperience",
-      title: "Professional Experience",
-      component: <>hello</>,
+      id: "workExperiences",
+      title: "Work Experiences",
+      component: (
+        <WorkExperiences
+          listInput={listWorkExperiences}
+          workExperiences={workExperiences}
+          setWorkExperience={setWorkExperiences}
+        />
+      ),
     },
     { id: "education", title: "Education", component: <></> },
     { id: "skills", title: "Skills", component: <></> },
@@ -56,7 +66,7 @@ const AtsTemplate = () => {
 
   const nextSectionTitle = AtsTemplateSection[activeSectionIndex].title;
   const nextComponent = AtsTemplateSection[activeSectionIndex].component;
-  console.log({ user });
+  console.log({ personalDetail, workExperiences });
 
   return (
     <div className="h-full w-full flex gap-[24px]">
@@ -73,15 +83,15 @@ const AtsTemplate = () => {
         >
           <PdfDownloadBtn
             filename="ats-cv"
-            docs={<AtsDocument user={user} />}
+            docs={<AtsDocument personalDetail={personalDetail} />}
           />
         </GeneratePdfFooter>
       </div>
 
       <Preview
-        heightClass="h-[841px]"
-        widthClass="w-[595px]"
-        docs={<AtsDocument user={user} />}
+        heightClass={A4_SIZE.height}
+        widthClass={A4_SIZE.width}
+        docs={<AtsDocument personalDetail={personalDetail} />}
       />
     </div>
   );

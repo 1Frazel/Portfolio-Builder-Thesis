@@ -1,12 +1,8 @@
 import InputFieldWrapper from "./InputFieldWrapper";
 
-const DATE_INPUT_KEY = {
-  start: "startAt",
-  end: "endsAt",
-};
-
 const DateInput = ({
-  onChange,
+  startOnChange,
+  endOnChange,
   label,
   type,
   placeholder,
@@ -14,7 +10,8 @@ const DateInput = ({
   labelClass = "",
   inputClass = "",
 }: {
-  onChange: (input: string, stateKey: string) => void;
+  startOnChange: (input: string) => void;
+  endOnChange: (input: string) => void;
   label: string;
   type: string;
   placeholder: string;
@@ -32,14 +29,14 @@ const DateInput = ({
         <input
           type={type}
           className={`bg-[#eff2f9] rounded-md ${inputClass}`}
-          onChange={(e) => onChange(e.target.value, DATE_INPUT_KEY.start)}
+          onChange={(e) => startOnChange(e.target.value)}
           placeholder={placeholder}
         />
 
         <input
           type={type}
           className={`bg-[#eff2f9] rounded-md ${inputClass}`}
-          onChange={(e) => onChange(e.target.value, DATE_INPUT_KEY.end)}
+          onChange={(e) => endOnChange(e.target.value)}
           placeholder={placeholder}
         />
       </div>

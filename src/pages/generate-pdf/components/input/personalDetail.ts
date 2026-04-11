@@ -1,5 +1,3 @@
-import type { IPersonalDetail } from "../templates/ats-template/AtsTemplate";
-
 export interface IListInput {
   id: string;
   label: string;
@@ -8,6 +6,20 @@ export interface IListInput {
   labelClass: string;
   inputClass: string;
   inputType: string;
+}
+
+export interface IPersonalDetail {
+  jobTarget: string;
+  photo: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  linkedinUrl: string;
+  postalCode: string;
+  cityState: string;
+  country: string;
+  address: string;
 }
 
 export const listPersonalDetail = [
