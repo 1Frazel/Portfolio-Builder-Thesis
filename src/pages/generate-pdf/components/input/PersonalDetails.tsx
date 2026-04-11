@@ -10,7 +10,7 @@ const PersonalDetail = ({
   onChange: DebouncedState<(value: string, key: string) => void>;
 }) => {
   return (
-    <div className="p-[16px]">
+    <div className="grow p-[16px]">
       <div className="flex justify-between items-center">
         <h1 className="font-bold">Personal Information</h1>
       </div>

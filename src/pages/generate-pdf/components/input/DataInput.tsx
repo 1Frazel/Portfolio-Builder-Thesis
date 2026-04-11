@@ -15,6 +15,7 @@ const DataInput = ({
   labelClass?: string;
   inputClass?: string;
 }) => {
+  //TODO: Upload the file into Firebase and store the url
   return (
     <div className={`flex flex-col ${containerClass}`}>
       <label htmlFor="" className={`text-sm ${labelClass}`}>

@@ -42,8 +42,8 @@ const Preview = ({
   ${widthClass} ${heightClass}`;
 
   return (
-    <>
-      <div className="flex justify-center items-center">
+    <div className="h-full flex flex-col gap-[16px] basis-1/2">
+      <div className="flex justify-center items-center grow">
         <div className={previewClass}>
           <Document
             key={render.value}
@@ -60,7 +60,7 @@ const Preview = ({
         pageAmount={pageAmount}
         setCurrentPage={setCurrentPage}
       />
-    </>
+    </div>
   );
 };
 

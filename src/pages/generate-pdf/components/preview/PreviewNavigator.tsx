@@ -8,7 +8,7 @@ const PreviewNavigator = ({
   setCurrentPage: (value: React.SetStateAction<number>) => void;
 }) => {
   return (
-    <div className="flex gap-[16px] justify-center">
+    <div className="flex gap-[16px] justify-center p-[16px] shadow-md">
       <button
         disabled={currentPage === 1}
         onClick={() => setCurrentPage((prev) => prev - 1)}
