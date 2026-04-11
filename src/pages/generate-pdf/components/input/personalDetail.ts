@@ -1,86 +1,117 @@
-import type { IAtsTemplateUser } from "../templates/ats-template/AtsTemplate";
+import type { IPersonalDetail } from "../templates/ats-template/AtsTemplate";
 
-export interface IPersonalDetail {
+export interface IListInput {
   id: string;
   label: string;
   placeholder: string;
-  customClass: string;
+  containerClass: string;
+  labelClass: string;
+  inputClass: string;
   inputType: string;
 }
 
-export const personalDetail = [
+export const listPersonalDetail = [
   {
     id: "jobTarget",
     label: "Job Target",
     placeholder: "The role you want",
-    customClass: "",
+    containerClass: "",
+    labelClass: "",
+    inputClass: "",
     inputType: "text",
   },
   {
     id: "photo",
     label: "Upload Photo",
     placeholder: "",
-    customClass: "",
+    containerClass: "",
+    labelClass: "",
+    inputClass: "",
     inputType: "file",
   },
   {
     id: "firstName",
     label: "First Name",
     placeholder: "",
-    customClass: "",
+    containerClass: "",
+    labelClass: "",
+    inputClass: "",
     inputType: "text",
   },
   {
     id: "lastName",
     label: "Last Name",
     placeholder: "",
-    customClass: "",
+    containerClass: "",
+    labelClass: "",
+    inputClass: "",
     inputType: "text",
   },
   {
     id: "email",
     label: "Email",
     placeholder: "",
-    customClass: "",
+    containerClass: "",
+    labelClass: "",
+    inputClass: "",
     inputType: "text",
   },
   {
     id: "phone",
     label: "Phone",
     placeholder: "",
-    customClass: "",
+    containerClass: "",
+    labelClass: "",
+    inputClass: "",
     inputType: "text",
   },
   {
     id: "linkedinUrl",
     label: "Linkedin URL",
     placeholder: "",
-    customClass: "",
+    containerClass: "",
+    labelClass: "",
+    inputClass: "",
     inputType: "text",
   },
   {
     id: "postalCode",
     label: "Postal Code",
     placeholder: "",
-    customClass: "",
+    containerClass: "",
+    labelClass: "",
+    inputClass: "",
     inputType: "text",
   },
   {
-    id: "address",
-    label: "Address",
+    id: "cityState",
+    label: "City, State",
     placeholder: "",
-    customClass: "",
+    containerClass: "",
+    labelClass: "",
+    inputClass: "",
     inputType: "text",
   },
   {
     id: "country",
     label: "Country",
     placeholder: "",
-    customClass: "",
+    containerClass: "",
+    labelClass: "",
+    inputClass: "",
+    inputType: "text",
+  },
+  {
+    id: "address",
+    label: "Address",
+    placeholder: "",
+    containerClass: "col-span-2",
+    labelClass: "",
+    inputClass: "",
     inputType: "text",
   },
 ];
 
 export const defaultPersonalDetail = Object.fromEntries(
-  personalDetail.map((detail) => [detail.id, ""]),
-) as unknown as IAtsTemplateUser;
+  listPersonalDetail.map((detail) => [detail.id, ""]),
+) as unknown as IPersonalDetail;
