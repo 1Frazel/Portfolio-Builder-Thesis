@@ -6,6 +6,7 @@ import { useDebouncedCallback } from "use-debounce";
 import DateInput from "./DateInput";
 import TextArea from "./TextArea";
 import InputWrapper from "./InputWrapper";
+import generatePdfHelper from "../../utils/generatePdfHelper";
 
 const DATE_INPUT_KEY = {
   start: "startAt",
@@ -23,66 +24,6 @@ const WorkSection = ({
 }) => {
   const [isShown, setIsShown] = useState(false);
 
-  const handleTextChange = useDebouncedCallback(
-    (id: number, key: string, value: string) => {
-      handleEditWorkExperience(id, key, value);
-    },
-    500,
-  );
-
-  const getInputField = (input: IListInput) => {
-    const handleChange = (value: string) => {
-      handleTextChange(experience.id, input.id, value);
-    };
-
-    if (input.inputType === "text") {
-      return (
-        <InputField
-          key={input.id}
-          onChange={handleChange}
-          label={input.label}
-          type={input.inputType}
-          placeholder={input.placeholder}
-          containerClass={input.containerClass}
-          labelClass={input.labelClass}
-          inputClass={input.inputClass}
-        />
-      );
-    }
-    if (input.inputType === "date") {
-      return (
-        <DateInput
-          key={input.id}
-          startOnChange={(value: string) => {
-            handleTextChange(experience.id, DATE_INPUT_KEY.start, value);
-          }}
-          endOnChange={(value: string) => {
-            handleTextChange(experience.id, DATE_INPUT_KEY.end, value);
-          }}
-          label={input.label}
-          type={input.inputType}
-          placeholder={input.placeholder}
-          containerClass={input.containerClass}
-          labelClass={input.labelClass}
-          inputClass={input.inputClass}
-        />
-      );
-    }
-    if (input.inputType === "textarea") {
-      return (
-        <TextArea
-          key={input.id}
-          onChange={handleChange}
-          label={input.label}
-          placeholder={input.placeholder}
-          containerClass={input.containerClass}
-          labelClass={input.labelClass}
-          inputClass={input.inputClass}
-        />
-      );
-    }
-  };
-
   return (
     <div className="shadow-md p-[16px] flex flex-col gap-[16px]">
       <WorkSectionHeader
@@ -92,7 +33,16 @@ const WorkSection = ({
       />
       {isShown && (
         <InputWrapper useGrid>
-          {listInput.map((input) => getInputField(input))}
+          {listInput.map((input) => {
+            return (
+              <WorkSectionBody
+                key={input.id}
+                experience={experience}
+                input={input}
+                handleEditWorkExperience={handleEditWorkExperience}
+              />
+            );
+          })}
         </InputWrapper>
       )}
     </div>
@@ -122,6 +72,42 @@ const WorkSectionHeader = ({
       </button>
     </InputWrapper>
   );
+};
+
+const WorkSectionBody = ({
+  experience,
+  input,
+  handleEditWorkExperience,
+}: {
+  experience: IWorkExperience;
+  input: IListInput;
+  handleEditWorkExperience: (id: number, key: string, value: string) => void;
+}) => {
+  const handleTextChange = useDebouncedCallback(
+    (id: number, key: string, value: string) => {
+      handleEditWorkExperience(id, key, value);
+    },
+    500,
+  );
+
+  const handleChange = (value: string) => {
+    handleTextChange(experience.id, input.id, value);
+  };
+
+  const startOnChange = (value: string) => {
+    handleTextChange(experience.id, DATE_INPUT_KEY.start, value);
+  };
+
+  const endOnChange = (value: string) => {
+    handleTextChange(experience.id, DATE_INPUT_KEY.end, value);
+  };
+
+  return generatePdfHelper.getInputField({
+    input,
+    handleChange,
+    startOnChange,
+    endOnChange,
+  });
 };
 
 export default WorkSection;

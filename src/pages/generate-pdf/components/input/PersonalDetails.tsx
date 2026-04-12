@@ -13,13 +13,6 @@ const PersonalDetail = ({
   personalDetail: IPersonalDetail;
   setPersonalDetail: React.Dispatch<React.SetStateAction<IPersonalDetail>>;
 }) => {
-  const handlePersonalDetailChange = useDebouncedCallback(
-    (value: string, key: string) => {
-      setPersonalDetail({ ...personalDetail, [key]: value });
-    },
-    500,
-  );
-
   return (
     <InputWrapper
       title="Personal Detail"
@@ -28,24 +21,49 @@ const PersonalDetail = ({
       containerClass="p-[16px]"
     >
       {listInput.map((input) => {
-        const handleChange = (value: string) => {
-          handlePersonalDetailChange(value, input.id);
-        };
-
         return (
-          <InputField
+          <PersonalDetailBody
             key={input.id}
-            onChange={handleChange}
-            label={input.label}
-            type={input.inputType}
-            placeholder={input.placeholder}
-            containerClass={input.containerClass}
-            labelClass={input.labelClass}
-            inputClass={input.inputClass}
+            input={input}
+            personalDetail={personalDetail}
+            setPersonalDetail={setPersonalDetail}
           />
         );
       })}
     </InputWrapper>
+  );
+};
+
+const PersonalDetailBody = ({
+  input,
+  personalDetail,
+  setPersonalDetail,
+}: {
+  input: IListInput;
+  personalDetail: IPersonalDetail;
+  setPersonalDetail: React.Dispatch<React.SetStateAction<IPersonalDetail>>;
+}) => {
+  const handlePersonalDetailChange = useDebouncedCallback(
+    (value: string, key: string) => {
+      setPersonalDetail({ ...personalDetail, [key]: value });
+    },
+    500,
+  );
+
+  const handleChange = (value: string) => {
+    handlePersonalDetailChange(value, input.id);
+  };
+
+  return (
+    <InputField
+      onChange={handleChange}
+      label={input.label}
+      type={input.inputType}
+      placeholder={input.placeholder}
+      containerClass={input.containerClass}
+      labelClass={input.labelClass}
+      inputClass={input.inputClass}
+    />
   );
 };
 
