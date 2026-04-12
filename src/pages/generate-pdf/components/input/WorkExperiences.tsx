@@ -27,6 +27,8 @@ const WorkExperiences = ({
     setWorkExperience(updatedWorkExperience);
   };
 
+  console.log(workExperiences);
+
   return (
     <InputWrapper
       title="Work Experiences"

@@ -84,7 +84,7 @@ const WorkSection = ({
   };
 
   return (
-    <div className="shadow-md p-[16px]">
+    <div className="shadow-md p-[16px] flex flex-col gap-[16px]">
       <WorkSectionHeader
         experience={experience}
         isShown={isShown}
@@ -109,17 +109,18 @@ const WorkSectionHeader = ({
   setIsShown: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   return (
-    <div className="flex justify-between items-center">
-      <div>
-        <h1>{experience.jobTitle ? experience.jobTitle : "(Not Specified)"}</h1>
-        {experience.startAt && (
-          <p>{`${experience.startAt} - ${experience.endsAt ? experience.endsAt : "Now"}`}</p>
-        )}
-      </div>
+    <InputWrapper
+      title={experience.jobTitle ? experience.jobTitle : "(Not Specified)"}
+      description={
+        experience.startAt &&
+        `${experience.startAt} - ${experience.endsAt ? experience.endsAt : "Now"}`
+      }
+      containerClass="flex items-center justify-between"
+    >
       <button onClick={() => setIsShown(!isShown)}>
         {isShown ? "Hide" : "Show"}
       </button>
-    </div>
+    </InputWrapper>
   );
 };
 

@@ -20,9 +20,13 @@ const PersonalDetail = ({
     500,
   );
 
-  console.log(listInput);
   return (
-    <InputWrapper title="Personal Detail" useGrid>
+    <InputWrapper
+      title="Personal Detail"
+      useGrid
+      childrenContainerClass="mt-[16px]"
+      containerClass="p-[16px]"
+    >
       {listInput.map((input) => {
         const handleChange = (value: string) => {
           handlePersonalDetailChange(value, input.id);
