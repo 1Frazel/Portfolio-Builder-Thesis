@@ -17,9 +17,11 @@ const DATE_INPUT_KEY = {
 const WorkSection = ({
   experience,
   handleEditWorkExperience,
+  handleDeleteWorkExperience,
 }: {
   experience: IWorkExperience;
   handleEditWorkExperience: (id: number, key: string, value: string) => void;
+  handleDeleteWorkExperience: (id: number) => void;
 }) => {
   const [isShown, setIsShown] = useState(false);
 
@@ -105,6 +107,7 @@ const WorkSection = ({
         experience={experience}
         isShown={isShown}
         setIsShown={setIsShown}
+        handleDeleteWorkExperience={handleDeleteWorkExperience}
       />
       {isShown && (
         <InputWrapper useGrid>
@@ -123,10 +126,12 @@ const WorkSectionHeader = ({
   experience,
   isShown,
   setIsShown,
+  handleDeleteWorkExperience,
 }: {
   experience: IWorkExperience;
   isShown: boolean;
   setIsShown: React.Dispatch<React.SetStateAction<boolean>>;
+  handleDeleteWorkExperience: (id: number) => void;
 }) => {
   return (
     <InputWrapper
@@ -139,6 +144,12 @@ const WorkSectionHeader = ({
     >
       <button onClick={() => setIsShown(!isShown)}>
         {isShown ? "Hide" : "Show"}
+      </button>
+      <button
+        onClick={() => handleDeleteWorkExperience(experience.id)}
+        className="absolute right-[-32px]"
+      >
+        del
       </button>
     </InputWrapper>
   );

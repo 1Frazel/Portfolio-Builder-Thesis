@@ -32,11 +32,16 @@ const WorkExperiences = ({
     ]);
   };
 
+  const handleDeleteWorkExperience = (id: number) => {
+    setWorkExperience(
+      workExperiences.filter((experience) => experience.id !== id),
+    );
+  };
   return (
     <InputWrapper
       title="Work Experiences"
       description="Show your relevant experiences"
-      childrenContainerClass="flex flex-col gap-[16px]"
+      childrenContainerClass="flex flex-col gap-[16px] relative"
     >
       {workExperiences.map((experience) => {
         return (
@@ -44,6 +49,7 @@ const WorkExperiences = ({
             key={experience.id}
             experience={experience}
             handleEditWorkExperience={handleEditWorkExperience}
+            handleDeleteWorkExperience={handleDeleteWorkExperience}
           />
         );
       })}
