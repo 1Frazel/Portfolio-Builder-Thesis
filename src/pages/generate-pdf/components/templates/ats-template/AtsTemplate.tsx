@@ -1,7 +1,6 @@
 import { useState } from "react";
 import AtsDocument from "./AtsDocument";
 
-
 import Preview from "../../preview/Preview";
 import {
   defaultPersonalDetail,
@@ -64,7 +63,7 @@ const AtsTemplate = () => {
     },
   ];
 
-  const nextSectionTitle = AtsTemplateSection[activeSectionIndex].title;
+  const nextSectionTitle = AtsTemplateSection[activeSectionIndex + 1].title;
   const nextComponent = AtsTemplateSection[activeSectionIndex].component;
   console.log({ personalDetail, workExperiences });
 
