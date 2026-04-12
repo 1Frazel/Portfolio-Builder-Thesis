@@ -2,18 +2,12 @@ import { useState } from "react";
 import AtsDocument from "./AtsDocument";
 
 import Preview from "../../preview/Preview";
-import {
-  defaultPersonalDetail,
-  listPersonalDetail,
-} from "../../input/personalDetail";
+import { defaultPersonalDetail } from "../../input/personalDetail";
 import PersonalDetail from "../../input/PersonalDetails";
 import GeneratePdfFooter from "../../footer/GeneratePdfFooter";
 import PdfDownloadBtn from "../../button/PdfDownloadBtn";
 
-import {
-  defaultWorkExperiences,
-  listWorkExperiences,
-} from "../../input/workExperience";
+import { defaultWorkExperiences } from "../../input/workExperience";
 import WorkExperiences from "../../input/WorkExperiences";
 
 const A4_SIZE = {
@@ -36,7 +30,6 @@ const AtsTemplate = () => {
       title: "Personal Information",
       component: (
         <PersonalDetail
-          listInput={listPersonalDetail}
           personalDetail={personalDetail}
           setPersonalDetail={setPersonalDetail}
         />
@@ -47,7 +40,6 @@ const AtsTemplate = () => {
       title: "Work Experiences",
       component: (
         <WorkExperiences
-          listInput={listWorkExperiences}
           workExperiences={workExperiences}
           setWorkExperience={setWorkExperiences}
         />

@@ -1,6 +1,7 @@
 import InputFieldWrapper from "./InputFieldWrapper";
 
 const TextArea = ({
+  defaultValue,
   onChange,
   label,
   placeholder,
@@ -8,9 +9,10 @@ const TextArea = ({
   labelClass = "",
   inputClass = "",
 }: {
+  defaultValue: string;
   onChange: (input: string) => void;
   label: string;
-  placeholder: string;
+  placeholder?: string;
   containerClass?: string;
   labelClass?: string;
   inputClass?: string;
@@ -23,6 +25,7 @@ const TextArea = ({
     >
       <textarea
         onChange={(e) => onChange(e.target.value)}
+        defaultValue={defaultValue}
         className={`bg-[#eff2f9] rounded-md ${inputClass}`}
         placeholder={placeholder}
       />

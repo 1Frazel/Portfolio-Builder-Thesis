@@ -1,18 +1,18 @@
 import InputFieldWrapper from "./InputFieldWrapper";
 
 const InputField = ({
+  defaultValue,
   onChange,
   label,
-  type,
-  placeholder,
+  placeholder = "",
   containerClass = "",
   labelClass = "",
   inputClass = "",
 }: {
+  defaultValue: string;
   onChange: (input: string) => void;
   label: string;
-  type: string;
-  placeholder: string;
+  placeholder?: string;
   containerClass?: string;
   labelClass?: string;
   inputClass?: string;
@@ -24,9 +24,10 @@ const InputField = ({
       labelClass={labelClass}
     >
       <input
-        type={type}
-        className={`bg-[#eff2f9] rounded-md ${inputClass}`}
+        type="text"
         onChange={(e) => onChange(e.target.value)}
+        defaultValue={defaultValue}
+        className={`bg-[#eff2f9] rounded-md ${inputClass}`}
         placeholder={placeholder}
       />
     </InputFieldWrapper>

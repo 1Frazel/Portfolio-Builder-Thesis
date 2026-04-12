@@ -1,11 +1,13 @@
 import { useState } from "react";
 import type { IWorkExperience } from "./workExperience";
-import type { IListInput } from "./personalDetail";
 
 import { useDebouncedCallback } from "use-debounce";
 
 import InputWrapper from "./InputWrapper";
-import generatePdfHelper from "../../utils/generatePdfHelper";
+
+import InputField from "./InputField";
+import DateInput from "./DateInput";
+import TextArea from "./TextArea";
 
 const DATE_INPUT_KEY = {
   start: "startAt",
@@ -13,15 +15,89 @@ const DATE_INPUT_KEY = {
 };
 
 const WorkSection = ({
-  listInput,
   experience,
   handleEditWorkExperience,
 }: {
-  listInput: IListInput[];
   experience: IWorkExperience;
   handleEditWorkExperience: (id: number, key: string, value: string) => void;
 }) => {
   const [isShown, setIsShown] = useState(false);
+
+  const handleTextChange = useDebouncedCallback(
+    (id: number, key: string, value: string) => {
+      handleEditWorkExperience(id, key, value);
+    },
+    500,
+  );
+
+  const listWorkExperiences = [
+    {
+      id: "jobTitle",
+      component: (
+        <InputField
+          defaultValue={experience.jobTitle}
+          onChange={(input: string) => {
+            handleTextChange(experience.id, "jobTitle", input);
+          }}
+          label="Job Title"
+        />
+      ),
+    },
+    {
+      id: "employer",
+      component: (
+        <InputField
+          defaultValue={experience.employer}
+          onChange={(input: string) => {
+            handleTextChange(experience.id, "employer", input);
+          }}
+          label="Employer"
+        />
+      ),
+    },
+    {
+      id: "startAndEndDate",
+      component: (
+        <DateInput
+          startDefaultValue={experience.startAt}
+          endDefaultValue={experience.endsAt}
+          startOnChange={(value: string) => {
+            handleTextChange(experience.id, DATE_INPUT_KEY.start, value);
+          }}
+          endOnChange={(value: string) => {
+            handleTextChange(experience.id, DATE_INPUT_KEY.end, value);
+          }}
+          label="Start & End Date"
+          placeholder="MM // YYYY"
+        />
+      ),
+    },
+    {
+      id: "address",
+      component: (
+        <InputField
+          defaultValue={experience.address}
+          onChange={(input: string) => {
+            handleTextChange(experience.id, "address", input);
+          }}
+          label="Address"
+        />
+      ),
+    },
+    {
+      id: "description",
+      component: (
+        <TextArea
+          defaultValue={experience.description}
+          onChange={(input: string) => {
+            handleTextChange(experience.id, "description", input);
+          }}
+          label="Description"
+        />
+      ),
+      containerClass: "col-span-2",
+    },
+  ];
 
   return (
     <div className="shadow-md p-[16px] flex flex-col gap-[16px]">
@@ -32,16 +108,11 @@ const WorkSection = ({
       />
       {isShown && (
         <InputWrapper useGrid>
-          {listInput.map((input) => {
-            return (
-              <WorkSectionBody
-                key={input.id}
-                experience={experience}
-                input={input}
-                handleEditWorkExperience={handleEditWorkExperience}
-              />
-            );
-          })}
+          {listWorkExperiences.map((list) => (
+            <div key={list.id} className={list.containerClass}>
+              {list.component}
+            </div>
+          ))}
         </InputWrapper>
       )}
     </div>
@@ -71,42 +142,6 @@ const WorkSectionHeader = ({
       </button>
     </InputWrapper>
   );
-};
-
-const WorkSectionBody = ({
-  experience,
-  input,
-  handleEditWorkExperience,
-}: {
-  experience: IWorkExperience;
-  input: IListInput;
-  handleEditWorkExperience: (id: number, key: string, value: string) => void;
-}) => {
-  const handleTextChange = useDebouncedCallback(
-    (id: number, key: string, value: string) => {
-      handleEditWorkExperience(id, key, value);
-    },
-    500,
-  );
-
-  const handleChange = (value: string) => {
-    handleTextChange(experience.id, input.id, value);
-  };
-
-  const startOnChange = (value: string) => {
-    handleTextChange(experience.id, DATE_INPUT_KEY.start, value);
-  };
-
-  const endOnChange = (value: string) => {
-    handleTextChange(experience.id, DATE_INPUT_KEY.end, value);
-  };
-
-  return generatePdfHelper.getInputField({
-    input,
-    handleChange,
-    startOnChange,
-    endOnChange,
-  });
 };
 
 export default WorkSection;

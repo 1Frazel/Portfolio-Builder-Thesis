@@ -1,20 +1,22 @@
 import InputFieldWrapper from "./InputFieldWrapper";
 
 const DateInput = ({
+  startDefaultValue,
+  endDefaultValue,
   startOnChange,
   endOnChange,
   label,
-  type,
   placeholder,
   containerClass = "",
   labelClass = "",
   inputClass = "",
 }: {
+  startDefaultValue: string;
+  endDefaultValue: string;
   startOnChange: (input: string) => void;
   endOnChange: (input: string) => void;
   label: string;
-  type: string;
-  placeholder: string;
+  placeholder?: string;
   containerClass?: string;
   labelClass?: string;
   inputClass?: string;
@@ -27,16 +29,18 @@ const DateInput = ({
     >
       <div className="flex gap-[16px] items-center">
         <input
-          type={type}
-          className={`bg-[#eff2f9] rounded-md ${inputClass}`}
+          type="date"
           onChange={(e) => startOnChange(e.target.value)}
+          defaultValue={startDefaultValue}
+          className={`bg-[#eff2f9] rounded-md ${inputClass}`}
           placeholder={placeholder}
         />
 
         <input
-          type={type}
-          className={`bg-[#eff2f9] rounded-md ${inputClass}`}
+          type="date"
           onChange={(e) => endOnChange(e.target.value)}
+          defaultValue={endDefaultValue}
+          className={`bg-[#eff2f9] rounded-md ${inputClass}`}
           placeholder={placeholder}
         />
       </div>

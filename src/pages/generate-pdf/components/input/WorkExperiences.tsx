@@ -1,15 +1,12 @@
 import InputWrapper from "./InputWrapper";
-import type { IListInput } from "./personalDetail";
-
 import type { IWorkExperience } from "./workExperience";
+
 import WorkSection from "./WorkSection";
 
 const WorkExperiences = ({
-  listInput,
   workExperiences,
   setWorkExperience,
 }: {
-  listInput: IListInput[];
   workExperiences: IWorkExperience[];
   setWorkExperience: React.Dispatch<React.SetStateAction<IWorkExperience[]>>;
 }) => {
@@ -31,12 +28,12 @@ const WorkExperiences = ({
     <InputWrapper
       title="Work Experiences"
       description="Show your relevant experiences"
+      childrenContainerClass="flex flex-col gap-[8px]"
     >
       {workExperiences.map((experience) => {
         return (
           <WorkSection
             key={experience.id}
-            listInput={listInput}
             experience={experience}
             handleEditWorkExperience={handleEditWorkExperience}
           />
