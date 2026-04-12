@@ -1,5 +1,5 @@
 import InputWrapper from "./InputWrapper";
-import type { IWorkExperience } from "./workExperience";
+import { defaultWorkExperiences, type IWorkExperience } from "./workExperience";
 
 import WorkSection from "./WorkSection";
 
@@ -24,11 +24,19 @@ const WorkExperiences = ({
     setWorkExperience(updatedWorkExperience);
   };
 
+  const handleAddMoreWorkExperiences = () => {
+    const latestId = workExperiences[workExperiences.length - 1].id;
+    setWorkExperience([
+      ...workExperiences,
+      { ...defaultWorkExperiences, id: latestId + 1 },
+    ]);
+  };
+
   return (
     <InputWrapper
       title="Work Experiences"
       description="Show your relevant experiences"
-      childrenContainerClass="flex flex-col gap-[8px]"
+      childrenContainerClass="flex flex-col gap-[16px]"
     >
       {workExperiences.map((experience) => {
         return (
@@ -39,6 +47,10 @@ const WorkExperiences = ({
           />
         );
       })}
+
+      <button onClick={handleAddMoreWorkExperiences}>
+        Add another experiences
+      </button>
     </InputWrapper>
   );
 };
