@@ -1,10 +1,9 @@
 import { useState } from "react";
 import type { IWorkExperience } from "./workExperience";
 import type { IListInput } from "./personalDetail";
-import InputField from "./InputField";
+
 import { useDebouncedCallback } from "use-debounce";
-import DateInput from "./DateInput";
-import TextArea from "./TextArea";
+
 import InputWrapper from "./InputWrapper";
 import generatePdfHelper from "../../utils/generatePdfHelper";
 
