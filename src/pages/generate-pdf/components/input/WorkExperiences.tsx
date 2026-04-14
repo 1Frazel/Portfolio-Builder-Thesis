@@ -11,7 +11,11 @@ const WorkExperiences = ({
   workExperiences: IWorkExperience[];
   setWorkExperience: React.Dispatch<React.SetStateAction<IWorkExperience[]>>;
 }) => {
-  const handleEditWorkExperience = (id: number, key: string, value: string) => {
+  const handleEditWorkExperiences = (
+    id: number,
+    key: string,
+    value: string,
+  ) => {
     const updatedWorkExperience = workExperiences.map((experience) => {
       if (experience.id === id) {
         return {
@@ -33,7 +37,7 @@ const WorkExperiences = ({
     ]);
   };
 
-  const handleDeleteWorkExperience = (id: number) => {
+  const handleDeleteWorkExperiences = (id: number) => {
     setWorkExperience(
       workExperiences.filter((experience) => experience.id !== id),
     );
@@ -50,8 +54,8 @@ const WorkExperiences = ({
           <WorkSection
             key={experience.id}
             experience={experience}
-            handleEditWorkExperience={handleEditWorkExperience}
-            handleDeleteWorkExperience={handleDeleteWorkExperience}
+            handleEditWorkExperiences={handleEditWorkExperiences}
+            handleDeleteWorkExperiences={handleDeleteWorkExperiences}
           />
         );
       })}

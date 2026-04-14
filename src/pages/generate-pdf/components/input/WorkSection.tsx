@@ -9,23 +9,18 @@ import DateInput from "./DateInput";
 import TextArea from "./TextArea";
 import { HiddenSection } from "./HiddenSectionWrapper";
 
-const DATE_INPUT_KEY = {
-  start: "startAt",
-  end: "endsAt",
-};
-
 const WorkSection = ({
   experience,
-  handleEditWorkExperience,
-  handleDeleteWorkExperience,
+  handleEditWorkExperiences,
+  handleDeleteWorkExperiences,
 }: {
   experience: IWorkExperience;
-  handleEditWorkExperience: (id: number, key: string, value: string) => void;
-  handleDeleteWorkExperience: (id: number) => void;
+  handleEditWorkExperiences: (id: number, key: string, value: string) => void;
+  handleDeleteWorkExperiences: (id: number) => void;
 }) => {
   const handleTextChange = useDebouncedCallback(
     (id: number, key: string, value: string) => {
-      handleEditWorkExperience(id, key, value);
+      handleEditWorkExperiences(id, key, value);
     },
     500,
   );
@@ -62,10 +57,10 @@ const WorkSection = ({
           startDefaultValue={experience.startAt}
           endDefaultValue={experience.endsAt}
           startOnChange={(value: string) => {
-            handleTextChange(experience.id, DATE_INPUT_KEY.start, value);
+            handleTextChange(experience.id, "startAt", value);
           }}
           endOnChange={(value: string) => {
-            handleTextChange(experience.id, DATE_INPUT_KEY.end, value);
+            handleTextChange(experience.id, "endsAt", value);
           }}
           label="Start & End Date"
           placeholder="MM // YYYY"
@@ -108,7 +103,7 @@ const WorkSection = ({
         experience.startAt &&
         `${experience.startAt} - ${experience.endsAt ? experience.endsAt : "Now"}`
       }
-      handleDelBtn={() => handleDeleteWorkExperience(experience.id)}
+      handleDelBtn={() => handleDeleteWorkExperiences(experience.id)}
     >
       <InputWrapper useGrid>
         {listWorkExperiences.map((list) => (

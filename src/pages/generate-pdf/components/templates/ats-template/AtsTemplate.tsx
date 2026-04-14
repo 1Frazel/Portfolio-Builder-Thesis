@@ -9,6 +9,8 @@ import PdfDownloadBtn from "../../button/PdfDownloadBtn";
 
 import { defaultWorkExperiences } from "../../input/workExperience";
 import WorkExperiences from "../../input/WorkExperiences";
+import { defaultEducation } from "../../input/education";
+import Education from "../../input/Education";
 
 const A4_SIZE = {
   height: "h-[841px]",
@@ -22,6 +24,7 @@ const AtsTemplate = () => {
   const [workExperiences, setWorkExperiences] = useState([
     defaultWorkExperiences,
   ]);
+  const [educations, setEducations] = useState([defaultEducation]);
   const [activeSectionIndex, setActiveSectionIndex] = useState(0);
 
   const AtsTemplateSection = [
@@ -45,7 +48,13 @@ const AtsTemplate = () => {
         />
       ),
     },
-    { id: "education", title: "Education", component: <></> },
+    {
+      id: "education",
+      title: "Education",
+      component: (
+        <Education educations={educations} setEducations={setEducations} />
+      ),
+    },
     { id: "skills", title: "Skills", component: <></> },
     { id: "profileSummary", title: "Profile Summary", component: <></> },
     {
@@ -57,7 +66,7 @@ const AtsTemplate = () => {
 
   const nextSectionTitle = AtsTemplateSection[activeSectionIndex + 1].title;
   const nextComponent = AtsTemplateSection[activeSectionIndex].component;
-  console.log({ personalDetail, workExperiences });
+  console.log({ personalDetail, workExperiences, educations });
 
   return (
     <div className="h-full w-full flex gap-[24px]">
