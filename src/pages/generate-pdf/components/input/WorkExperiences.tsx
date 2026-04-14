@@ -1,4 +1,5 @@
-import InputWrapper from "./InputWrapper";
+import { HiddenSectionWrapper } from "./HiddenSectionWrapper";
+
 import { defaultWorkExperiences, type IWorkExperience } from "./workExperience";
 
 import WorkSection from "./WorkSection";
@@ -38,10 +39,11 @@ const WorkExperiences = ({
     );
   };
   return (
-    <InputWrapper
-      title="Work Experiences"
-      description="Show your relevant experiences"
-      childrenContainerClass="flex flex-col gap-[16px] relative"
+    <HiddenSectionWrapper
+      containerTitle="Work Experiences"
+      containerDescription="Show your relevant experiences."
+      addMoreSectionTitle="Add another experiences"
+      handleAddMoreSection={handleAddMoreWorkExperiences}
     >
       {workExperiences.map((experience) => {
         return (
@@ -53,11 +55,7 @@ const WorkExperiences = ({
           />
         );
       })}
-
-      <button onClick={handleAddMoreWorkExperiences}>
-        Add another experiences
-      </button>
-    </InputWrapper>
+    </HiddenSectionWrapper>
   );
 };
 

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import type { IWorkExperience } from "./workExperience";
 
 import { useDebouncedCallback } from "use-debounce";
@@ -8,6 +7,7 @@ import InputWrapper from "./InputWrapper";
 import InputField from "./InputField";
 import DateInput from "./DateInput";
 import TextArea from "./TextArea";
+import { HiddenSection } from "./HiddenSectionWrapper";
 
 const DATE_INPUT_KEY = {
   start: "startAt",
@@ -23,8 +23,6 @@ const WorkSection = ({
   handleEditWorkExperience: (id: number, key: string, value: string) => void;
   handleDeleteWorkExperience: (id: number) => void;
 }) => {
-  const [isShown, setIsShown] = useState(false);
-
   const handleTextChange = useDebouncedCallback(
     (id: number, key: string, value: string) => {
       handleEditWorkExperience(id, key, value);
@@ -102,56 +100,24 @@ const WorkSection = ({
   ];
 
   return (
-    <div className="shadow-md p-[16px] flex flex-col gap-[16px]">
-      <WorkSectionHeader
-        experience={experience}
-        isShown={isShown}
-        setIsShown={setIsShown}
-        handleDeleteWorkExperience={handleDeleteWorkExperience}
-      />
-      {isShown && (
-        <InputWrapper useGrid>
-          {listWorkExperiences.map((list) => (
-            <div key={list.id} className={list.containerClass}>
-              {list.component}
-            </div>
-          ))}
-        </InputWrapper>
-      )}
-    </div>
-  );
-};
-
-const WorkSectionHeader = ({
-  experience,
-  isShown,
-  setIsShown,
-  handleDeleteWorkExperience,
-}: {
-  experience: IWorkExperience;
-  isShown: boolean;
-  setIsShown: React.Dispatch<React.SetStateAction<boolean>>;
-  handleDeleteWorkExperience: (id: number) => void;
-}) => {
-  return (
-    <InputWrapper
-      title={experience.jobTitle ? experience.jobTitle : "(Not Specified)"}
-      description={
+    <HiddenSection
+      headerTitle={
+        experience.jobTitle ? experience.jobTitle : "(Not Specified)"
+      }
+      headerDescription={
         experience.startAt &&
         `${experience.startAt} - ${experience.endsAt ? experience.endsAt : "Now"}`
       }
-      containerClass="flex items-center justify-between"
+      handleDelBtn={() => handleDeleteWorkExperience(experience.id)}
     >
-      <button onClick={() => setIsShown(!isShown)}>
-        {isShown ? "Hide" : "Show"}
-      </button>
-      <button
-        onClick={() => handleDeleteWorkExperience(experience.id)}
-        className="absolute right-[-32px]"
-      >
-        del
-      </button>
-    </InputWrapper>
+      <InputWrapper useGrid>
+        {listWorkExperiences.map((list) => (
+          <div key={list.id} className={list.containerClass}>
+            {list.component}
+          </div>
+        ))}
+      </InputWrapper>
+    </HiddenSection>
   );
 };
 
