@@ -15,6 +15,7 @@ import { defaultSkills } from "../../input/skill";
 import Skills from "../../input/Skills";
 import { defaultProfileSummary } from "../../input/profileSummary";
 import ProfileSummary from "../../input/ProfileSummary";
+import AdditionalSections from "../../input/AdditionalSections";
 
 const A4_SIZE = {
   height: "h-[841px]",
@@ -79,12 +80,18 @@ const AtsTemplate = () => {
     {
       id: "additionalSections",
       title: "Additional Sections",
-      component: <></>,
+      component: <AdditionalSections />,
     },
   ];
 
-  const nextSectionTitle = AtsTemplateSection[activeSectionIndex + 1].title;
+  const isNotLast = activeSectionIndex < AtsTemplateSection.length - 1;
+
+  const nextSectionTitle =
+    AtsTemplateSection[isNotLast ? activeSectionIndex + 1 : activeSectionIndex]
+      .title;
+
   const nextComponent = AtsTemplateSection[activeSectionIndex].component;
+
   console.log({
     personalDetail,
     workExperiences,
