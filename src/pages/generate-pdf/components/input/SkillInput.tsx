@@ -1,3 +1,9 @@
+interface IListSkills {
+  value: number;
+  description: string;
+  color: string;
+}
+
 const SkillInput = ({
   defaultValue,
   onChange,
@@ -8,35 +14,35 @@ const SkillInput = ({
   const listSkills = [
     {
       value: 1,
-      description: "novice",
-      title: "Novice",
+      description: "Novice",
       color: "#1fc8a6",
     },
     {
       value: 2,
-      description: "basic",
-      title: "Basic",
+      description: "Basic",
       color: "#1fc838",
     },
     {
       value: 3,
-      description: "intermediate",
-      title: "Intermediate",
+      description: "Intermediate",
       color: "#dfeb30",
     },
     {
       value: 4,
-      description: "experienced",
-      title: "Experiences",
+      description: "Experiences",
       color: "#eb8130",
     },
     {
       value: 5,
-      description: "expert",
-      title: "Expert",
+      description: "Expert",
       color: "#eb3030",
     },
   ];
+
+  const getBackgroundColor = (skill: IListSkills) => {
+    const isDefault = skill.description === defaultValue;
+    return `${isDefault ? `${skill.color}` : "#889290"}`;
+  };
 
   return (
     <div>
@@ -46,12 +52,13 @@ const SkillInput = ({
           return (
             <div key={skill.value} className="h-[70px] w-[70px]">
               <div
+                style={{ backgroundColor: `${getBackgroundColor(skill)}` }}
                 onClick={() => onChange(skill.description)}
-                className={`${skill.description === defaultValue ? `bg-[${skill.color}]` : "bg-[#889290]"} flex justify-center items-center h-full`}
+                className={`flex justify-center items-center h-full`}
               >
                 <p className="text-white">{skill.value}</p>
               </div>
-              <p className="text-xs text-center">{skill.title}</p>
+              <p className="text-xs text-center">{skill.description}</p>
             </div>
           );
         })}
