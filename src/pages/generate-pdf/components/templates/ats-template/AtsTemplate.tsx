@@ -11,6 +11,8 @@ import { defaultWorkExperiences } from "../../input/workExperience";
 import WorkExperiences from "../../input/WorkExperiences";
 import { defaultEducation } from "../../input/education";
 import Education from "../../input/Education";
+import { defaultSkills } from "../../input/skill";
+import Skills from "../../input/Skills";
 
 const A4_SIZE = {
   height: "h-[841px]",
@@ -25,6 +27,7 @@ const AtsTemplate = () => {
     defaultWorkExperiences,
   ]);
   const [educations, setEducations] = useState([defaultEducation]);
+  const [skills, setSkills] = useState([defaultSkills]);
   const [activeSectionIndex, setActiveSectionIndex] = useState(0);
 
   const AtsTemplateSection = [
@@ -55,7 +58,11 @@ const AtsTemplate = () => {
         <Education educations={educations} setEducations={setEducations} />
       ),
     },
-    { id: "skills", title: "Skills", component: <></> },
+    {
+      id: "skills",
+      title: "Skills",
+      component: <Skills skills={skills} setSkills={setSkills} />,
+    },
     { id: "profileSummary", title: "Profile Summary", component: <></> },
     {
       id: "additionalSections",
@@ -66,7 +73,7 @@ const AtsTemplate = () => {
 
   const nextSectionTitle = AtsTemplateSection[activeSectionIndex + 1].title;
   const nextComponent = AtsTemplateSection[activeSectionIndex].component;
-  console.log({ personalDetail, workExperiences, educations });
+  console.log({ personalDetail, workExperiences, educations, skills });
 
   return (
     <div className="h-full w-full flex gap-[24px]">
