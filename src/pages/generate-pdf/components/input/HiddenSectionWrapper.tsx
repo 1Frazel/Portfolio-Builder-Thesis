@@ -7,14 +7,16 @@ const HiddenSectionWrapper = ({
   containerDescription,
   childrenContainerClass = "flex flex-col gap-[16px] relative",
   addMoreSectionTitle,
+  withAddMoreSection = true,
   handleAddMoreSection,
 }: {
   children: React.ReactNode;
   containerTitle: string;
   containerDescription: string;
   childrenContainerClass?: string;
-  addMoreSectionTitle: string;
-  handleAddMoreSection: () => void;
+  addMoreSectionTitle?: string;
+  withAddMoreSection?: boolean;
+  handleAddMoreSection?: () => void;
 }) => {
   return (
     <InputWrapper
@@ -23,7 +25,9 @@ const HiddenSectionWrapper = ({
       childrenContainerClass={childrenContainerClass}
     >
       {children}
-      <button onClick={handleAddMoreSection}>{addMoreSectionTitle}</button>
+      {withAddMoreSection && addMoreSectionTitle && handleAddMoreSection && (
+        <button onClick={handleAddMoreSection}>{addMoreSectionTitle}</button>
+      )}
     </InputWrapper>
   );
 };

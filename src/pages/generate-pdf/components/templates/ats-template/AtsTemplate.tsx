@@ -13,6 +13,8 @@ import { defaultEducation } from "../../input/education";
 import Education from "../../input/Education";
 import { defaultSkills } from "../../input/skill";
 import Skills from "../../input/Skills";
+import { defaultProfileSummary } from "../../input/profileSummary";
+import ProfileSummary from "../../input/ProfileSummary";
 
 const A4_SIZE = {
   height: "h-[841px]",
@@ -28,6 +30,7 @@ const AtsTemplate = () => {
   ]);
   const [educations, setEducations] = useState([defaultEducation]);
   const [skills, setSkills] = useState([defaultSkills]);
+  const [profileSummary, setProfileSummary] = useState(defaultProfileSummary);
   const [activeSectionIndex, setActiveSectionIndex] = useState(0);
 
   const AtsTemplateSection = [
@@ -63,7 +66,16 @@ const AtsTemplate = () => {
       title: "Skills",
       component: <Skills skills={skills} setSkills={setSkills} />,
     },
-    { id: "profileSummary", title: "Profile Summary", component: <></> },
+    {
+      id: "profileSummary",
+      title: "Profile Summary",
+      component: (
+        <ProfileSummary
+          profileSummary={profileSummary}
+          setProfileSummary={setProfileSummary}
+        />
+      ),
+    },
     {
       id: "additionalSections",
       title: "Additional Sections",
@@ -73,7 +85,13 @@ const AtsTemplate = () => {
 
   const nextSectionTitle = AtsTemplateSection[activeSectionIndex + 1].title;
   const nextComponent = AtsTemplateSection[activeSectionIndex].component;
-  console.log({ personalDetail, workExperiences, educations, skills });
+  console.log({
+    personalDetail,
+    workExperiences,
+    educations,
+    skills,
+    profileSummary,
+  });
 
   return (
     <div className="h-full w-full flex gap-[24px]">
