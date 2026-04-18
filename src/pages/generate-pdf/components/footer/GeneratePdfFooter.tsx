@@ -13,11 +13,13 @@ const GeneratePdfFooter = ({
   handleNextSection: () => void;
   handlePreviousSection: () => void;
 }) => {
+  const isFirstSection = activeSectionIndex === 0;
+  const isLastSection = activeSectionIndex === sectionLength;
   return (
     <div className="flex justify-between items-center shadow-md p-[16px]">
       {children}
       <div className="flex gap-[16px]">
-        {activeSectionIndex !== 0 && (
+        {!isFirstSection && (
           <button
             onClick={handlePreviousSection}
             disabled={activeSectionIndex === 0}
@@ -25,10 +27,11 @@ const GeneratePdfFooter = ({
             Back
           </button>
         )}
-        <button
-          onClick={handleNextSection}
-          disabled={activeSectionIndex === sectionLength}
-        >{`Next: ${nextSectionTitle}`}</button>
+        {!isLastSection && (
+          <button
+            onClick={handleNextSection}
+          >{`Next: ${nextSectionTitle}`}</button>
+        )}
       </div>
     </div>
   );
