@@ -20,12 +20,7 @@ const GeneratePdfFooter = ({
       {children}
       <div className="flex gap-[16px]">
         {!isFirstSection && (
-          <button
-            onClick={handlePreviousSection}
-            disabled={activeSectionIndex === 0}
-          >
-            Back
-          </button>
+          <button onClick={handlePreviousSection}>Back</button>
         )}
         {!isLastSection && (
           <button

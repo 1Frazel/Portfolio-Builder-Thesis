@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import AtsDocument from "./AtsDocument";
 
 import Preview from "../../preview/Preview";
@@ -16,11 +16,18 @@ import Skills from "../../input/Skills";
 import { defaultProfileSummary } from "../../input/profileSummary";
 import ProfileSummary from "../../input/ProfileSummary";
 import AdditionalSections from "../../input/AdditionalSections";
+import { defaultAdditionalSections } from "../../input/additionalSections";
 
 const A4_SIZE = {
   height: "h-[841px]",
   width: "w-[595px]",
 };
+
+export interface IListSections {
+  id: string;
+  title: string;
+  component: React.ReactNode;
+}
 
 const AtsTemplate = () => {
   const [personalDetail, setPersonalDetail] = useState({
@@ -32,9 +39,27 @@ const AtsTemplate = () => {
   const [educations, setEducations] = useState([defaultEducation]);
   const [skills, setSkills] = useState([defaultSkills]);
   const [profileSummary, setProfileSummary] = useState(defaultProfileSummary);
+  const [additionalSections, setAdditionalSections] = useState(
+    defaultAdditionalSections,
+  );
+
   const [activeSectionIndex, setActiveSectionIndex] = useState(0);
 
-  const AtsTemplateSection = [
+  const listAdditionalSections = [
+    { id: "language", title: "Language", component: <></> },
+    {
+      id: "licensesOrCertifications",
+      title: "Licenses / Certifications",
+      component: <></>,
+    },
+    {
+      id: "professionalTraining",
+      title: "Professional Training",
+      component: <></>,
+    },
+  ];
+
+  const listAtsTemplateSection = [
     {
       id: "personalDetail",
       title: "Personal Information",
@@ -80,17 +105,24 @@ const AtsTemplate = () => {
     {
       id: "additionalSections",
       title: "Additional Sections",
-      component: <AdditionalSections />,
+      component: (
+        <AdditionalSections
+          additionalSections={additionalSections}
+          setAdditionalSections={setAdditionalSections}
+          listAdditionalSections={listAdditionalSections}
+        />
+      ),
     },
   ];
 
-  const isNotLast = activeSectionIndex < AtsTemplateSection.length - 1;
+  const isNotLast = activeSectionIndex < listAtsTemplateSection.length - 1;
 
   const nextSectionTitle =
-    AtsTemplateSection[isNotLast ? activeSectionIndex + 1 : activeSectionIndex]
-      .title;
+    listAtsTemplateSection[
+      isNotLast ? activeSectionIndex + 1 : activeSectionIndex
+    ].title;
 
-  const nextComponent = AtsTemplateSection[activeSectionIndex].component;
+  const nextComponent = listAtsTemplateSection[activeSectionIndex].component;
 
   console.log({
     personalDetail,
@@ -98,6 +130,7 @@ const AtsTemplate = () => {
     educations,
     skills,
     profileSummary,
+    additionalSections,
   });
 
   return (
@@ -107,7 +140,7 @@ const AtsTemplate = () => {
         <GeneratePdfFooter
           nextSectionTitle={nextSectionTitle}
           activeSectionIndex={activeSectionIndex}
-          sectionLength={AtsTemplateSection.length - 1}
+          sectionLength={listAtsTemplateSection.length - 1}
           handlePreviousSection={() =>
             setActiveSectionIndex((prev) => prev - 1)
           }

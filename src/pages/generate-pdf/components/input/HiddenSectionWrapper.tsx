@@ -12,7 +12,7 @@ const HiddenSectionWrapper = ({
 }: {
   children: React.ReactNode;
   containerTitle: string;
-  containerDescription: string;
+  containerDescription?: string;
   childrenContainerClass?: string;
   addMoreSectionTitle?: string;
   withAddMoreSection?: boolean;
