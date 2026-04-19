@@ -1,3 +1,5 @@
+import type React from "react";
+
 const GeneratePdfFooter = ({
   children,
   nextSectionTitle,
@@ -5,6 +7,8 @@ const GeneratePdfFooter = ({
   sectionLength,
   handleNextSection,
   handlePreviousSection,
+  activeAdditionalSection,
+  handleAdditionalSection,
 }: {
   children: React.ReactNode;
   nextSectionTitle: string;
@@ -12,6 +16,8 @@ const GeneratePdfFooter = ({
   sectionLength: number;
   handleNextSection: () => void;
   handlePreviousSection: () => void;
+  activeAdditionalSection: string;
+  handleAdditionalSection: () => void;
 }) => {
   const isFirstSection = activeSectionIndex === 0;
   const isLastSection = activeSectionIndex === sectionLength;
@@ -26,6 +32,11 @@ const GeneratePdfFooter = ({
           <button
             onClick={handleNextSection}
           >{`Next: ${nextSectionTitle}`}</button>
+        )}
+        {activeAdditionalSection !== "default" && isLastSection && (
+          <button onClick={handleAdditionalSection}>
+            Add another additional section
+          </button>
         )}
       </div>
     </div>

@@ -149,6 +149,8 @@ const AtsTemplate = () => {
             setActiveSectionIndex((prev) => prev - 1)
           }
           handleNextSection={() => setActiveSectionIndex((prev) => prev + 1)}
+          activeAdditionalSection={activeAdditionalSection}
+          handleAdditionalSection={() => setActiveAdditionalSection("default")}
         >
           <PdfDownloadBtn
             filename="ats-cv"
