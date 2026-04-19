@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, type JSX } from "react";
 import AtsDocument from "./AtsDocument";
 
 import Preview from "../../preview/Preview";
@@ -26,7 +26,7 @@ const A4_SIZE = {
 export interface IListSections {
   id: string;
   title: string;
-  component: React.ReactNode;
+  component: JSX.Element;
 }
 
 const AtsTemplate = () => {
@@ -44,6 +44,8 @@ const AtsTemplate = () => {
   );
 
   const [activeSectionIndex, setActiveSectionIndex] = useState(0);
+  const [activeAdditionalSection, setActiveAdditionalSection] =
+    useState("default");
 
   const listAdditionalSections = [
     { id: "language", title: "Language", component: <></> },
@@ -110,6 +112,8 @@ const AtsTemplate = () => {
           additionalSections={additionalSections}
           setAdditionalSections={setAdditionalSections}
           listAdditionalSections={listAdditionalSections}
+          activeAdditionalSection={activeAdditionalSection}
+          setActiveAdditionalSection={setActiveAdditionalSection}
         />
       ),
     },

@@ -1,3 +1,4 @@
+import type React from "react";
 import type { IListSections } from "../templates/ats-template/AtsTemplate";
 import type { IAdditionalSections } from "./additionalSections";
 import { HiddenSectionWrapper } from "./HiddenSectionWrapper";
@@ -7,12 +8,16 @@ const AdditionalSections = ({
   additionalSections,
   setAdditionalSections,
   listAdditionalSections,
+  activeAdditionalSection,
+  setActiveAdditionalSection,
 }: {
   additionalSections: IAdditionalSections[];
   setAdditionalSections: React.Dispatch<
     React.SetStateAction<IAdditionalSections[]>
   >;
   listAdditionalSections: IListSections[];
+  activeAdditionalSection: string;
+  setActiveAdditionalSection: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const handleEnableSections = (id: string, isSet: boolean) => {
     setAdditionalSections(
@@ -25,21 +30,38 @@ const AdditionalSections = ({
     );
   };
 
+  const currentActiveSections = listAdditionalSections.find(
+    (section) => section.id === activeAdditionalSection,
+  );
+
+  const currentActiveSectionsComponents = currentActiveSections ? (
+    currentActiveSections.component
+  ) : (
+    <p>Can't find the current section!...</p>
+  );
+
   return (
-    <HiddenSectionWrapper containerTitle="Additional Sections">
-      <InputWrapper useGrid>
-        {listAdditionalSections.map((list) => {
-          return (
-            <IndividualSections
-              key={list.id}
-              list={list}
-              additionalSections={additionalSections}
-              handleClick={handleEnableSections}
-            />
-          );
-        })}
-      </InputWrapper>
-    </HiddenSectionWrapper>
+    <>
+      {activeAdditionalSection === "default" ? (
+        <HiddenSectionWrapper containerTitle="Additional Sections">
+          <InputWrapper useGrid>
+            {listAdditionalSections.map((list) => {
+              return (
+                <IndividualSections
+                  key={list.id}
+                  list={list}
+                  additionalSections={additionalSections}
+                  handleClick={handleEnableSections}
+                  setActiveAdditionalSection={setActiveAdditionalSection}
+                />
+              );
+            })}
+          </InputWrapper>
+        </HiddenSectionWrapper>
+      ) : (
+        currentActiveSectionsComponents
+      )}
+    </>
   );
 };
 
@@ -47,10 +69,12 @@ const IndividualSections = ({
   list,
   additionalSections,
   handleClick,
+  setActiveAdditionalSection,
 }: {
   list: IListSections;
   additionalSections: IAdditionalSections[];
   handleClick: (id: string, isSet: boolean) => void;
+  setActiveAdditionalSection: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const isChecked =
     additionalSections.find((section) => section.id === list.id)?.isSet ??
@@ -61,7 +85,10 @@ const IndividualSections = ({
       <input
         type="checkbox"
         checked={isChecked}
-        onChange={(e) => handleClick(list.id, e.target.checked)}
+        onChange={(e) => {
+          handleClick(list.id, e.target.checked);
+          setActiveAdditionalSection(list.id);
+        }}
       />
       <p>{list.title}</p>
     </div>
