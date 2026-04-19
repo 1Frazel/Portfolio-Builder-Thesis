@@ -87,7 +87,9 @@ const IndividualSections = ({
         checked={isChecked}
         onChange={(e) => {
           handleClick(list.id, e.target.checked);
-          setActiveAdditionalSection(list.id);
+          if (e.target.checked) {
+            setActiveAdditionalSection(list.id);
+          }
         }}
       />
       <p>{list.title}</p>
