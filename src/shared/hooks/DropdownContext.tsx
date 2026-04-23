@@ -5,10 +5,7 @@ interface IDropdownContext {
   setIsShown: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const DropdownContext = createContext<IDropdownContext>({
-  isShown: false,
-  setIsShown: () => {},
-});
+const DropdownContext = createContext<IDropdownContext | undefined>(undefined);
 
 const DropdownContextProvider = ({
   children,
