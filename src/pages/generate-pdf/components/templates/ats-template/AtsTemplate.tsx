@@ -158,6 +158,7 @@ const AtsTemplate = () => {
     profileSummary,
     additionalSections,
     languages,
+    professionalTraining,
   });
 
   return (
