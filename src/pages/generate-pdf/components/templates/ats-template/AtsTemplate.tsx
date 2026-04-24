@@ -1,21 +1,9 @@
-import { type JSX } from "react";
-
 import Preview from "../../preview/Preview";
 
 import GeneratePdfFooter from "../../footer/GeneratePdfFooter";
 import PdfDownloadBtn from "../../button/PdfDownloadBtn";
 import useAtsTemplate from "../../../../../shared/hooks/useAtsTemplate";
-
-const A4_SIZE = {
-  height: "h-[841px]",
-  width: "w-[595px]",
-};
-
-export interface IListSections {
-  id: string;
-  title: string;
-  component: JSX.Element;
-}
+import { A4_SIZE } from "../../../const/generatePdfConst";
 
 const AtsTemplate = () => {
   const {

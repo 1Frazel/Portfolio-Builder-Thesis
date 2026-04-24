@@ -75,3 +75,8 @@ export const defaultLicensesCertification = {
   startAt: "",
   endsAt: "",
 };
+
+export const A4_SIZE = {
+  height: "h-[841px]",
+  width: "w-[595px]",
+};

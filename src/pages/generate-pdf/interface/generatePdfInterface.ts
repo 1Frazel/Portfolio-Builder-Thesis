@@ -1,3 +1,5 @@
+import type { JSX } from "react";
+
 export interface IProfessionalTraining {
   id: number;
   courseName: string;
@@ -64,4 +66,10 @@ export interface ILicensesCertifications {
   issuer: string;
   startAt: string;
   endsAt: string;
+}
+
+export interface IListSections {
+  id: string;
+  title: string;
+  component: JSX.Element;
 }
