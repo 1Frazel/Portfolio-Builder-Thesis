@@ -1,4 +1,4 @@
-import React, { useState, type JSX } from "react";
+import { useState, type JSX } from "react";
 import AtsDocument from "./AtsDocument";
 
 import Preview from "../../preview/Preview";
@@ -17,6 +17,8 @@ import { defaultProfileSummary } from "../../input/profileSummary";
 import ProfileSummary from "../../input/ProfileSummary";
 import AdditionalSections from "../../input/AdditionalSections";
 import { defaultAdditionalSections } from "../../input/additionalSections";
+import { defaultLanguages } from "../../input/languages";
+import Languages from "../../input/Languages";
 
 const A4_SIZE = {
   height: "h-[841px]",
@@ -42,13 +44,20 @@ const AtsTemplate = () => {
   const [additionalSections, setAdditionalSections] = useState(
     defaultAdditionalSections,
   );
+  const [languages, setLanguages] = useState([defaultLanguages]);
 
   const [activeSectionIndex, setActiveSectionIndex] = useState(0);
   const [activeAdditionalSection, setActiveAdditionalSection] =
     useState("default");
 
   const listAdditionalSections = [
-    { id: "language", title: "Language", component: <></> },
+    {
+      id: "language",
+      title: "Language",
+      component: (
+        <Languages languages={languages} setLanguages={setLanguages} />
+      ),
+    },
     {
       id: "licensesOrCertifications",
       title: "Licenses / Certifications",
@@ -135,6 +144,7 @@ const AtsTemplate = () => {
     skills,
     profileSummary,
     additionalSections,
+    languages,
   });
 
   return (
