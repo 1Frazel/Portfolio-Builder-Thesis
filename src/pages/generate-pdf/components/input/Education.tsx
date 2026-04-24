@@ -1,4 +1,5 @@
-import { defaultEducation, type IEducation } from "./education";
+import { defaultEducation } from "../../const/generatePdfConst";
+import type { IEducation } from "../../interface/generatePdfInterface";
 import EducationSection from "./EducationSection";
 import { HiddenSectionWrapper } from "./HiddenSectionWrapper";
 

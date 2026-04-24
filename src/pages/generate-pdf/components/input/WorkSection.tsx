@@ -1,5 +1,3 @@
-import type { IWorkExperience } from "./workExperience";
-
 import { useDebouncedCallback } from "use-debounce";
 
 import InputWrapper from "./InputWrapper";
@@ -8,6 +6,7 @@ import InputField from "./InputField";
 import DateInput from "./DateInput";
 import TextArea from "./TextArea";
 import { HiddenSection } from "./HiddenSectionWrapper";
+import type { IWorkExperience } from "../../interface/generatePdfInterface";
 
 const WorkSection = ({
   experience,

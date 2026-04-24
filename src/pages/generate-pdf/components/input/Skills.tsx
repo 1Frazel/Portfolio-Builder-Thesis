@@ -1,7 +1,9 @@
 import type React from "react";
-import { defaultSkills, type ISkill } from "./skill";
+
 import { HiddenSectionWrapper } from "./HiddenSectionWrapper";
 import SkillSection from "./SkillSection";
+import type { ISkill } from "../../interface/generatePdfInterface";
+import { defaultSkills } from "../../const/generatePdfConst";
 
 const Skills = ({
   skills,

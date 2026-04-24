@@ -2,23 +2,28 @@ import { useState, type JSX } from "react";
 import AtsDocument from "./AtsDocument";
 
 import Preview from "../../preview/Preview";
-import { defaultPersonalDetail } from "../../input/personalDetail";
+
 import PersonalDetail from "../../input/PersonalDetails";
 import GeneratePdfFooter from "../../footer/GeneratePdfFooter";
 import PdfDownloadBtn from "../../button/PdfDownloadBtn";
 
-import { defaultWorkExperiences } from "../../input/workExperience";
+import {
+  defaultAdditionalSections,
+  defaultEducation,
+  defaultLanguages,
+  defaultPersonalDetail,
+  defaultProfessionalTraining,
+  defaultProfileSummary,
+  defaultSkills,
+  defaultWorkExperiences,
+} from "../../../const/generatePdfConst";
+import Languages from "../../input/Languages";
+import ProfessionalTraining from "../../input/ProfessionalTraining";
 import WorkExperiences from "../../input/WorkExperiences";
-import { defaultEducation } from "../../input/education";
 import Education from "../../input/Education";
-import { defaultSkills } from "../../input/skill";
 import Skills from "../../input/Skills";
-import { defaultProfileSummary } from "../../input/profileSummary";
 import ProfileSummary from "../../input/ProfileSummary";
 import AdditionalSections from "../../input/AdditionalSections";
-import { defaultAdditionalSections } from "../../input/additionalSections";
-import { defaultLanguages } from "../../input/languages";
-import Languages from "../../input/Languages";
 
 const A4_SIZE = {
   height: "h-[841px]",
@@ -45,6 +50,9 @@ const AtsTemplate = () => {
     defaultAdditionalSections,
   );
   const [languages, setLanguages] = useState([defaultLanguages]);
+  const [professionalTraining, setProfessionalTraining] = useState([
+    defaultProfessionalTraining,
+  ]);
 
   const [activeSectionIndex, setActiveSectionIndex] = useState(0);
   const [activeAdditionalSection, setActiveAdditionalSection] =
@@ -66,7 +74,12 @@ const AtsTemplate = () => {
     {
       id: "professionalTraining",
       title: "Professional Training",
-      component: <></>,
+      component: (
+        <ProfessionalTraining
+          professionalTraining={professionalTraining}
+          setProfessionalTraining={setProfessionalTraining}
+        />
+      ),
     },
   ];
 

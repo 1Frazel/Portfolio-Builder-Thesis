@@ -1,8 +1,9 @@
 import type React from "react";
 import type { IListSections } from "../templates/ats-template/AtsTemplate";
-import type { IAdditionalSections } from "./additionalSections";
+
 import { HiddenSectionWrapper } from "./HiddenSectionWrapper";
 import InputWrapper from "./InputWrapper";
+import type { IAdditionalSections } from "../../interface/generatePdfInterface";
 
 const AdditionalSections = ({
   additionalSections,

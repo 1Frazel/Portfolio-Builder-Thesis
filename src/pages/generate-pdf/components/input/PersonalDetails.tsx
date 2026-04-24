@@ -1,8 +1,8 @@
 import { useDebouncedCallback } from "use-debounce";
 
-import type { IPersonalDetail } from "./personalDetail";
 import InputWrapper from "./InputWrapper";
 import InputField from "./InputField";
+import type { IPersonalDetail } from "../../interface/generatePdfInterface";
 
 const PersonalDetail = ({
   personalDetail,

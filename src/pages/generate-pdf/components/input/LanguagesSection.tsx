@@ -2,8 +2,9 @@ import { useDebouncedCallback } from "use-debounce";
 import { HiddenSection } from "./HiddenSectionWrapper";
 import InputField from "./InputField";
 import InputWrapper from "./InputWrapper";
-import type { ILanguages } from "./languages";
+
 import LanguageProficiencyLevel from "./LanguageProficiencyLevel";
+import type { ILanguages } from "../../interface/generatePdfInterface";
 
 const LanguagesSection = ({
   language,

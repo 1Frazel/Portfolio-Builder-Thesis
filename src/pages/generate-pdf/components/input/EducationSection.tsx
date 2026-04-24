@@ -1,10 +1,11 @@
 import { useDebouncedCallback } from "use-debounce";
-import type { IEducation } from "./education";
+
 import InputField from "./InputField";
 import DateInput from "./DateInput";
 import TextArea from "./TextArea";
 import { HiddenSection } from "./HiddenSectionWrapper";
 import InputWrapper from "./InputWrapper";
+import type { IEducation } from "../../interface/generatePdfInterface";
 
 const EducationSection = ({
   education,

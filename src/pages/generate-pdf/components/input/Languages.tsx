@@ -1,7 +1,9 @@
 import type React from "react";
 import { HiddenSectionWrapper } from "./HiddenSectionWrapper";
-import { defaultLanguages, type ILanguages } from "./languages";
+
 import LanguagesSection from "./LanguagesSection";
+import type { ILanguages } from "../../interface/generatePdfInterface";
+import { defaultLanguages } from "../../const/generatePdfConst";
 
 const Languages = ({
   languages,

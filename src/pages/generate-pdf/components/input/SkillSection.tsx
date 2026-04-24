@@ -1,9 +1,10 @@
 import { useDebouncedCallback } from "use-debounce";
 import InputField from "./InputField";
-import type { ISkill } from "./skill";
+
 import SkillInput from "./SkillInput";
 import { HiddenSection } from "./HiddenSectionWrapper";
 import InputWrapper from "./InputWrapper";
+import type { ISkill } from "../../interface/generatePdfInterface";
 
 const SkillSection = ({
   skill,

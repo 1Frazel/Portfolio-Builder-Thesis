@@ -1,6 +1,6 @@
+import { defaultWorkExperiences } from "../../const/generatePdfConst";
+import type { IWorkExperience } from "../../interface/generatePdfInterface";
 import { HiddenSectionWrapper } from "./HiddenSectionWrapper";
-
-import { defaultWorkExperiences, type IWorkExperience } from "./workExperience";
 
 import WorkSection from "./WorkSection";
 
