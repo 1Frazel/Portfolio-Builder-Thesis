@@ -57,3 +57,11 @@ export interface ILanguages {
   language: string;
   level: string;
 }
+
+export interface ILicensesCertifications {
+  id: number;
+  name: string;
+  issuer: string;
+  startAt: string;
+  endsAt: string;
+}

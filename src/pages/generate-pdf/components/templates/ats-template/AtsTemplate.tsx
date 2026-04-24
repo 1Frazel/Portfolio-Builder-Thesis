@@ -11,6 +11,7 @@ import {
   defaultAdditionalSections,
   defaultEducation,
   defaultLanguages,
+  defaultLicensesCertification,
   defaultPersonalDetail,
   defaultProfessionalTraining,
   defaultProfileSummary,
@@ -24,6 +25,7 @@ import Education from "../../input/Education";
 import Skills from "../../input/Skills";
 import ProfileSummary from "../../input/ProfileSummary";
 import AdditionalSections from "../../input/AdditionalSections";
+import LicensesCertifications from "../../input/LicencesCertifications";
 
 const A4_SIZE = {
   height: "h-[841px]",
@@ -53,6 +55,9 @@ const AtsTemplate = () => {
   const [professionalTraining, setProfessionalTraining] = useState([
     defaultProfessionalTraining,
   ]);
+  const [licensesCertifications, setLicensesCertification] = useState([
+    defaultLicensesCertification,
+  ]);
 
   const [activeSectionIndex, setActiveSectionIndex] = useState(0);
   const [activeAdditionalSection, setActiveAdditionalSection] =
@@ -69,7 +74,12 @@ const AtsTemplate = () => {
     {
       id: "licensesOrCertifications",
       title: "Licenses / Certifications",
-      component: <></>,
+      component: (
+        <LicensesCertifications
+          licensesCertifications={licensesCertifications}
+          setLicensesCertifications={setLicensesCertification}
+        />
+      ),
     },
     {
       id: "professionalTraining",
@@ -159,6 +169,7 @@ const AtsTemplate = () => {
     additionalSections,
     languages,
     professionalTraining,
+    licensesCertifications,
   });
 
   return (

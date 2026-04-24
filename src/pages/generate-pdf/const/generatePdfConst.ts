@@ -67,3 +67,11 @@ export const defaultLanguages = {
   language: "",
   level: "",
 };
+
+export const defaultLicensesCertification = {
+  id: 0,
+  name: "",
+  issuer: "",
+  startAt: "",
+  endsAt: "",
+};

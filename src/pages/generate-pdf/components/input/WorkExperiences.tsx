@@ -42,6 +42,7 @@ const WorkExperiences = ({
       workExperiences.filter((experience) => experience.id !== id),
     );
   };
+  
   return (
     <HiddenSectionWrapper
       containerTitle="Work Experiences"
