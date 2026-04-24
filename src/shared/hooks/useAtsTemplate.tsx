@@ -1,15 +1,5 @@
 import { useState } from "react";
-import {
-  defaultAdditionalSections,
-  defaultEducation,
-  defaultLanguages,
-  defaultLicensesCertification,
-  defaultPersonalDetail,
-  defaultProfessionalTraining,
-  defaultProfileSummary,
-  defaultSkills,
-  defaultWorkExperiences,
-} from "../../pages/generate-pdf/const/generatePdfConst";
+
 import Languages from "../../pages/generate-pdf/components/input/Languages";
 import LicensesCertifications from "../../pages/generate-pdf/components/input/LicencesCertifications";
 import ProfessionalTraining from "../../pages/generate-pdf/components/input/ProfessionalTraining";
@@ -20,26 +10,37 @@ import Skills from "../../pages/generate-pdf/components/input/Skills";
 import ProfileSummary from "../../pages/generate-pdf/components/input/ProfileSummary";
 import AdditionalSections from "../../pages/generate-pdf/components/input/AdditionalSections";
 import AtsDocument from "../../pages/generate-pdf/components/templates/ats-template/AtsDocument";
+import {
+  DEFAULT_ADDITIONAL_SECTIONS,
+  DEFAULT_EDUCATION,
+  DEFAULT_LANGUAGES,
+  DEFAULT_LICENSES_CERTIFICATION,
+  DEFAULT_PERSONAL_DETAIL,
+  DEFAULT_PROFESSIONAL_TRAINING,
+  DEFAULT_PROFILE_SUMMARY,
+  DEFAULT_SKILLS,
+  DEFAULT_WORK_EXPERIENCES,
+} from "../../pages/generate-pdf/const/generatePdfConst";
 
 const useAtsTemplate = () => {
   const [personalDetail, setPersonalDetail] = useState({
-    ...defaultPersonalDetail,
+    ...DEFAULT_PERSONAL_DETAIL,
   });
   const [workExperiences, setWorkExperiences] = useState([
-    defaultWorkExperiences,
+    DEFAULT_WORK_EXPERIENCES,
   ]);
-  const [educations, setEducations] = useState([defaultEducation]);
-  const [skills, setSkills] = useState([defaultSkills]);
-  const [profileSummary, setProfileSummary] = useState(defaultProfileSummary);
+  const [educations, setEducations] = useState([DEFAULT_EDUCATION]);
+  const [skills, setSkills] = useState([DEFAULT_SKILLS]);
+  const [profileSummary, setProfileSummary] = useState(DEFAULT_PROFILE_SUMMARY);
   const [additionalSections, setAdditionalSections] = useState(
-    defaultAdditionalSections,
+    DEFAULT_ADDITIONAL_SECTIONS,
   );
-  const [languages, setLanguages] = useState([defaultLanguages]);
+  const [languages, setLanguages] = useState([DEFAULT_LANGUAGES]);
   const [professionalTraining, setProfessionalTraining] = useState([
-    defaultProfessionalTraining,
+    DEFAULT_PROFESSIONAL_TRAINING,
   ]);
   const [licensesCertifications, setLicensesCertification] = useState([
-    defaultLicensesCertification,
+    DEFAULT_LICENSES_CERTIFICATION,
   ]);
 
   const [activeSectionIndex, setActiveSectionIndex] = useState(0);

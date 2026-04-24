@@ -1,4 +1,4 @@
-import { defaultWorkExperiences } from "../../const/generatePdfConst";
+import { DEFAULT_WORK_EXPERIENCES } from "../../const/generatePdfConst";
 import type { IWorkExperience } from "../../interface/generatePdfInterface";
 import { HiddenSectionWrapper } from "./HiddenSectionWrapper";
 
@@ -33,7 +33,7 @@ const WorkExperiences = ({
     const latestId = workExperiences[workExperiences.length - 1].id;
     setWorkExperience([
       ...workExperiences,
-      { ...defaultWorkExperiences, id: latestId + 1 },
+      { ...DEFAULT_WORK_EXPERIENCES, id: latestId + 1 },
     ]);
   };
 
@@ -42,7 +42,7 @@ const WorkExperiences = ({
       workExperiences.filter((experience) => experience.id !== id),
     );
   };
-  
+
   return (
     <HiddenSectionWrapper
       containerTitle="Work Experiences"

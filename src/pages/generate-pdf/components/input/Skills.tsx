@@ -3,7 +3,7 @@ import type React from "react";
 import { HiddenSectionWrapper } from "./HiddenSectionWrapper";
 import SkillSection from "./SkillSection";
 import type { ISkill } from "../../interface/generatePdfInterface";
-import { defaultSkills } from "../../const/generatePdfConst";
+import { DEFAULT_SKILLS } from "../../const/generatePdfConst";
 
 const Skills = ({
   skills,
@@ -32,7 +32,7 @@ const Skills = ({
 
   const handleAddSkills = () => {
     const latestId = skills[skills.length - 1].id;
-    setSkills([...skills, { ...defaultSkills, id: latestId + 1 }]);
+    setSkills([...skills, { ...DEFAULT_SKILLS, id: latestId + 1 }]);
   };
 
   return (

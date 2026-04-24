@@ -3,7 +3,7 @@ import { HiddenSectionWrapper } from "./HiddenSectionWrapper";
 
 import LanguagesSection from "./LanguagesSection";
 import type { ILanguages } from "../../interface/generatePdfInterface";
-import { defaultLanguages } from "../../const/generatePdfConst";
+import { DEFAULT_LANGUAGES } from "../../const/generatePdfConst";
 
 const Languages = ({
   languages,
@@ -32,7 +32,7 @@ const Languages = ({
     setLanguages([
       ...languages,
       {
-        ...defaultLanguages,
+        ...DEFAULT_LANGUAGES,
         id: latestId + 1,
       },
     ]);

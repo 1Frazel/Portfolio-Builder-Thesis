@@ -1,4 +1,4 @@
-export const defaultProfessionalTraining = {
+export const DEFAULT_PROFESSIONAL_TRAINING = {
   id: 0,
   courseName: "",
   institution: "",
@@ -6,7 +6,7 @@ export const defaultProfessionalTraining = {
   endsAt: "",
 };
 
-export const defaultWorkExperiences = {
+export const DEFAULT_WORK_EXPERIENCES = {
   id: 0,
   jobTitle: "",
   employer: "",
@@ -16,7 +16,7 @@ export const defaultWorkExperiences = {
   description: "",
 };
 
-export const defaultPersonalDetail = {
+export const DEFAULT_PERSONAL_DETAIL = {
   jobTarget: "",
   photo: "",
   firstName: "",
@@ -30,7 +30,7 @@ export const defaultPersonalDetail = {
   address: "",
 };
 
-export const defaultEducation = {
+export const DEFAULT_EDUCATION = {
   id: 0,
   school: "",
   degree: "",
@@ -40,15 +40,15 @@ export const defaultEducation = {
   description: "",
 };
 
-export const defaultSkills = {
+export const DEFAULT_SKILLS = {
   id: 0,
   name: "",
   expertise: "",
 };
 
-export const defaultProfileSummary = "";
+export const DEFAULT_PROFILE_SUMMARY = "";
 
-export const defaultAdditionalSections = [
+export const DEFAULT_ADDITIONAL_SECTIONS = [
   { id: "language", title: "Language", isSet: false },
   {
     id: "licensesOrCertifications",
@@ -62,13 +62,13 @@ export const defaultAdditionalSections = [
   },
 ];
 
-export const defaultLanguages = {
+export const DEFAULT_LANGUAGES = {
   id: 0,
   language: "",
   level: "",
 };
 
-export const defaultLicensesCertification = {
+export const DEFAULT_LICENSES_CERTIFICATION = {
   id: 0,
   name: "",
   issuer: "",

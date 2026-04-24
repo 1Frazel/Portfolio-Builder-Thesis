@@ -1,8 +1,9 @@
 import type React from "react";
 import type { ILicensesCertifications } from "../../interface/generatePdfInterface";
-import { defaultLicensesCertification } from "../../const/generatePdfConst";
+
 import { HiddenSectionWrapper } from "./HiddenSectionWrapper";
 import LicensesCertificationsSection from "./LicensesCertificationsSection";
+import { DEFAULT_LICENSES_CERTIFICATION } from "../../const/generatePdfConst";
 
 const LicensesCertifications = ({
   licensesCertifications,
@@ -37,7 +38,7 @@ const LicensesCertifications = ({
     setLicensesCertifications([
       ...licensesCertifications,
       {
-        ...defaultLicensesCertification,
+        ...DEFAULT_LICENSES_CERTIFICATION,
         id: latestId + 1,
       },
     ]);

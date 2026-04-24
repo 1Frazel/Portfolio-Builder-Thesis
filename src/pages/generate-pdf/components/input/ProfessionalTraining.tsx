@@ -1,4 +1,4 @@
-import { defaultProfessionalTraining } from "../../const/generatePdfConst";
+import { DEFAULT_PROFESSIONAL_TRAINING } from "../../const/generatePdfConst";
 import type { IProfessionalTraining } from "../../interface/generatePdfInterface";
 import { HiddenSectionWrapper } from "./HiddenSectionWrapper";
 import ProfessionalTrainingSection from "./ProfessionalTrainingSection";
@@ -36,7 +36,7 @@ const ProfessionalTraining = ({
     setProfessionalTraining([
       ...professionalTraining,
       {
-        ...defaultProfessionalTraining,
+        ...DEFAULT_PROFESSIONAL_TRAINING,
         id: latestId + 1,
       },
     ]);

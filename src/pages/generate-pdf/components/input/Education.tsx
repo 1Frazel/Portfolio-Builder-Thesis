@@ -1,4 +1,4 @@
-import { defaultEducation } from "../../const/generatePdfConst";
+import { DEFAULT_EDUCATION } from "../../const/generatePdfConst";
 import type { IEducation } from "../../interface/generatePdfInterface";
 import EducationSection from "./EducationSection";
 import { HiddenSectionWrapper } from "./HiddenSectionWrapper";
@@ -26,7 +26,7 @@ const Education = ({
 
   const handleAddEducations = () => {
     const latestId = educations[educations.length - 1].id;
-    setEducations([...educations, { ...defaultEducation, id: latestId + 1 }]);
+    setEducations([...educations, { ...DEFAULT_EDUCATION, id: latestId + 1 }]);
   };
 
   const handleDeleteEducations = (id: number) => {
