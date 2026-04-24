@@ -1,31 +1,10 @@
-import { useState, type JSX } from "react";
-import AtsDocument from "./AtsDocument";
+import { type JSX } from "react";
 
 import Preview from "../../preview/Preview";
 
-import PersonalDetail from "../../input/PersonalDetails";
 import GeneratePdfFooter from "../../footer/GeneratePdfFooter";
 import PdfDownloadBtn from "../../button/PdfDownloadBtn";
-
-import {
-  defaultAdditionalSections,
-  defaultEducation,
-  defaultLanguages,
-  defaultLicensesCertification,
-  defaultPersonalDetail,
-  defaultProfessionalTraining,
-  defaultProfileSummary,
-  defaultSkills,
-  defaultWorkExperiences,
-} from "../../../const/generatePdfConst";
-import Languages from "../../input/Languages";
-import ProfessionalTraining from "../../input/ProfessionalTraining";
-import WorkExperiences from "../../input/WorkExperiences";
-import Education from "../../input/Education";
-import Skills from "../../input/Skills";
-import ProfileSummary from "../../input/ProfileSummary";
-import AdditionalSections from "../../input/AdditionalSections";
-import LicensesCertifications from "../../input/LicencesCertifications";
+import useAtsTemplate from "../../../../../shared/hooks/useAtsTemplate";
 
 const A4_SIZE = {
   height: "h-[841px]",
@@ -39,138 +18,17 @@ export interface IListSections {
 }
 
 const AtsTemplate = () => {
-  const [personalDetail, setPersonalDetail] = useState({
-    ...defaultPersonalDetail,
-  });
-  const [workExperiences, setWorkExperiences] = useState([
-    defaultWorkExperiences,
-  ]);
-  const [educations, setEducations] = useState([defaultEducation]);
-  const [skills, setSkills] = useState([defaultSkills]);
-  const [profileSummary, setProfileSummary] = useState(defaultProfileSummary);
-  const [additionalSections, setAdditionalSections] = useState(
-    defaultAdditionalSections,
-  );
-  const [languages, setLanguages] = useState([defaultLanguages]);
-  const [professionalTraining, setProfessionalTraining] = useState([
-    defaultProfessionalTraining,
-  ]);
-  const [licensesCertifications, setLicensesCertification] = useState([
-    defaultLicensesCertification,
-  ]);
-
-  const [activeSectionIndex, setActiveSectionIndex] = useState(0);
-  const [activeAdditionalSection, setActiveAdditionalSection] =
-    useState("default");
-
-  const listAdditionalSections = [
-    {
-      id: "language",
-      title: "Language",
-      component: (
-        <Languages languages={languages} setLanguages={setLanguages} />
-      ),
-    },
-    {
-      id: "licensesOrCertifications",
-      title: "Licenses / Certifications",
-      component: (
-        <LicensesCertifications
-          licensesCertifications={licensesCertifications}
-          setLicensesCertifications={setLicensesCertification}
-        />
-      ),
-    },
-    {
-      id: "professionalTraining",
-      title: "Professional Training",
-      component: (
-        <ProfessionalTraining
-          professionalTraining={professionalTraining}
-          setProfessionalTraining={setProfessionalTraining}
-        />
-      ),
-    },
-  ];
-
-  const listAtsTemplateSection = [
-    {
-      id: "personalDetail",
-      title: "Personal Information",
-      component: (
-        <PersonalDetail
-          personalDetail={personalDetail}
-          setPersonalDetail={setPersonalDetail}
-        />
-      ),
-    },
-    {
-      id: "workExperiences",
-      title: "Work Experiences",
-      component: (
-        <WorkExperiences
-          workExperiences={workExperiences}
-          setWorkExperience={setWorkExperiences}
-        />
-      ),
-    },
-    {
-      id: "education",
-      title: "Education",
-      component: (
-        <Education educations={educations} setEducations={setEducations} />
-      ),
-    },
-    {
-      id: "skills",
-      title: "Skills",
-      component: <Skills skills={skills} setSkills={setSkills} />,
-    },
-    {
-      id: "profileSummary",
-      title: "Profile Summary",
-      component: (
-        <ProfileSummary
-          profileSummary={profileSummary}
-          setProfileSummary={setProfileSummary}
-        />
-      ),
-    },
-    {
-      id: "additionalSections",
-      title: "Additional Sections",
-      component: (
-        <AdditionalSections
-          additionalSections={additionalSections}
-          setAdditionalSections={setAdditionalSections}
-          listAdditionalSections={listAdditionalSections}
-          activeAdditionalSection={activeAdditionalSection}
-          setActiveAdditionalSection={setActiveAdditionalSection}
-        />
-      ),
-    },
-  ];
-
-  const isNotLast = activeSectionIndex < listAtsTemplateSection.length - 1;
-
-  const nextSectionTitle =
-    listAtsTemplateSection[
-      isNotLast ? activeSectionIndex + 1 : activeSectionIndex
-    ].title;
-
-  const nextComponent = listAtsTemplateSection[activeSectionIndex].component;
-
-  console.log({
-    personalDetail,
-    workExperiences,
-    educations,
-    skills,
-    profileSummary,
-    additionalSections,
-    languages,
-    professionalTraining,
-    licensesCertifications,
-  });
+  const {
+    nextComponent,
+    nextSectionTitle,
+    activeSectionIndex,
+    sectionLength,
+    handlePreviousSection,
+    handleNextSection,
+    activeAdditionalSection,
+    handleAdditionalSection,
+    docs,
+  } = useAtsTemplate();
 
   return (
     <div className="h-full w-full flex gap-[24px]">
@@ -179,25 +37,20 @@ const AtsTemplate = () => {
         <GeneratePdfFooter
           nextSectionTitle={nextSectionTitle}
           activeSectionIndex={activeSectionIndex}
-          sectionLength={listAtsTemplateSection.length - 1}
-          handlePreviousSection={() =>
-            setActiveSectionIndex((prev) => prev - 1)
-          }
-          handleNextSection={() => setActiveSectionIndex((prev) => prev + 1)}
+          sectionLength={sectionLength}
+          handlePreviousSection={handlePreviousSection}
+          handleNextSection={handleNextSection}
           activeAdditionalSection={activeAdditionalSection}
-          handleAdditionalSection={() => setActiveAdditionalSection("default")}
+          handleAdditionalSection={handleAdditionalSection}
         >
-          <PdfDownloadBtn
-            filename="ats-cv"
-            docs={<AtsDocument personalDetail={personalDetail} />}
-          />
+          <PdfDownloadBtn filename="ats-cv" docs={docs} />
         </GeneratePdfFooter>
       </div>
 
       <Preview
         heightClass={A4_SIZE.height}
         widthClass={A4_SIZE.width}
-        docs={<AtsDocument personalDetail={personalDetail} />}
+        docs={docs}
       />
     </div>
   );

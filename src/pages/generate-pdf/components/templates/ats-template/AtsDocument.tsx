@@ -1,5 +1,5 @@
 import { Document, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
-import type { IPersonalDetail } from "../../input/personalDetail";
+import type { IPersonalDetail } from "../../../interface/generatePdfInterface";
 
 const styles = StyleSheet.create({
   page: {
