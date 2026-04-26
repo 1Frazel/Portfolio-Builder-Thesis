@@ -7,16 +7,26 @@ import InputWrapper from "./InputWrapper";
 
 const LicensesCertificationsSection = ({
   license,
+  index,
+  isFirst,
+  isLast,
   handleEditLicensesCertifications,
   handleDeleteLicensesCertifications,
+  handleSectionUp,
+  handleSectionDown,
 }: {
   license: ILicensesCertifications;
+  index: number;
+  isFirst: boolean;
+  isLast: boolean;
   handleEditLicensesCertifications: (
     id: number,
     key: string,
     value: string,
   ) => void;
   handleDeleteLicensesCertifications: (id: number) => void;
+  handleSectionUp: (currentIndex: number) => void;
+  handleSectionDown: (currentIndex: number) => void;
 }) => {
   const handleTextChange = useDebouncedCallback(
     (id: number, key: string, value: string) => {
@@ -76,6 +86,11 @@ const LicensesCertificationsSection = ({
         `${license.startAt} - ${license.endsAt ? license.endsAt : "Now"}`
       }
       handleDelBtn={() => handleDeleteLicensesCertifications(license.id)}
+      handleSectionUp={handleSectionUp}
+      handleSectionDown={handleSectionDown}
+      index={index}
+      isFirst={isFirst}
+      isLast={isLast}
     >
       <InputWrapper useGrid>
         {listLicensesCertificationsSection.map((list) => {

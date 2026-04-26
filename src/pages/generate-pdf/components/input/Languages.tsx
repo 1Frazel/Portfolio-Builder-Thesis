@@ -42,19 +42,44 @@ const Languages = ({
     setLanguages(languages.filter((language) => language.id !== id));
   };
 
+  const handleSectionUp = (currentIndex: number) => {
+    const currentLanguages = [...languages];
+
+    const temporary = currentLanguages[currentIndex];
+    currentLanguages[currentIndex] = currentLanguages[currentIndex - 1];
+    currentLanguages[currentIndex - 1] = temporary;
+
+    setLanguages(currentLanguages);
+  };
+
+  const handleSectionDown = (currentIndex: number) => {
+    const currentLanguages = [...languages];
+
+    const temporary = currentLanguages[currentIndex];
+    currentLanguages[currentIndex] = currentLanguages[currentIndex + 1];
+    currentLanguages[currentIndex + 1] = temporary;
+
+    setLanguages(currentLanguages);
+  };
+
   return (
     <HiddenSectionWrapper
       containerTitle="Languages"
       addMoreSectionTitle="Add another languages"
       handleAddMoreSection={handleAddMoreLanguages}
     >
-      {languages.map((language) => {
+      {languages.map((language, index) => {
         return (
           <LanguagesSection
             key={language.id}
             language={language}
+            index={index}
+            isFirst={index === 0}
+            isLast={index === languages.length - 1}
             handleEditLanguages={handleEditLanguages}
             handleDeleteLanguages={handleDeleteLanguages}
+            handleSectionUp={handleSectionUp}
+            handleSectionDown={handleSectionDown}
           />
         );
       })}

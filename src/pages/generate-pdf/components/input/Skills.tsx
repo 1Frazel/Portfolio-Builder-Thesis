@@ -35,6 +35,26 @@ const Skills = ({
     setSkills([...skills, { ...DEFAULT_SKILLS, id: latestId + 1 }]);
   };
 
+  const handleSectionUp = (currentIndex: number) => {
+    const currentSkills = [...skills];
+
+    const temporary = currentSkills[currentIndex];
+    currentSkills[currentIndex] = currentSkills[currentIndex - 1];
+    currentSkills[currentIndex - 1] = temporary;
+
+    setSkills(currentSkills);
+  };
+
+  const handleSectionDown = (currentIndex: number) => {
+    const currentSkills = [...skills];
+
+    const temporary = currentSkills[currentIndex];
+    currentSkills[currentIndex] = currentSkills[currentIndex + 1];
+    currentSkills[currentIndex + 1] = temporary;
+
+    setSkills(currentSkills);
+  };
+
   return (
     <HiddenSectionWrapper
       containerTitle="Areas of Expertise"
@@ -42,13 +62,18 @@ const Skills = ({
       addMoreSectionTitle="Add another skills"
       handleAddMoreSection={handleAddSkills}
     >
-      {skills.map((skill) => {
+      {skills.map((skill, index) => {
         return (
           <SkillSection
             key={skill.id}
             skill={skill}
+            index={index}
+            isFirst={index === 0}
+            isLast={index === skills.length - 1}
             handleEditSkills={handleEditSkills}
             handleDeleteSkills={handleDeleteSkills}
+            handleSectionUp={handleSectionUp}
+            handleSectionDown={handleSectionDown}
           />
         );
       })}

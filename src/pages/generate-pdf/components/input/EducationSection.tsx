@@ -9,12 +9,22 @@ import type { IEducation } from "../../interface/generatePdfInterface";
 
 const EducationSection = ({
   education,
+  index,
+  isFirst,
+  isLast,
   handleEditEducations,
   handleDeleteEducations,
+  handleSectionUp,
+  handleSectionDown,
 }: {
   education: IEducation;
+  index: number;
+  isFirst: boolean;
+  isLast: boolean;
   handleEditEducations: (id: number, key: string, value: string) => void;
   handleDeleteEducations: (id: number) => void;
+  handleSectionUp: (currentIndex: number) => void;
+  handleSectionDown: (currentIndex: number) => void;
 }) => {
   const handleTextChange = useDebouncedCallback(
     (id: number, key: string, value: string) => {
@@ -100,6 +110,11 @@ const EducationSection = ({
         `${education.startAt} - ${education.endsAt ? education.endsAt : "Now"}`
       }
       handleDelBtn={() => handleDeleteEducations(education.id)}
+      handleSectionUp={handleSectionUp}
+      handleSectionDown={handleSectionDown}
+      index={index}
+      isFirst={isFirst}
+      isLast={isLast}
     >
       <InputWrapper useGrid>
         {listEducations.map((list) => (

@@ -8,12 +8,22 @@ import type { ISkill } from "../../interface/generatePdfInterface";
 
 const SkillSection = ({
   skill,
+  index,
+  isFirst,
+  isLast,
   handleEditSkills,
   handleDeleteSkills,
+  handleSectionUp,
+  handleSectionDown,
 }: {
   skill: ISkill;
+  index: number;
+  isFirst: boolean;
+  isLast: boolean;
   handleEditSkills: (id: number, key: string, value: string) => void;
   handleDeleteSkills: (id: number) => void;
+  handleSectionUp: (currentIndex: number) => void;
+  handleSectionDown: (currentIndex: number) => void;
 }) => {
   const handleTextChange = useDebouncedCallback(
     (id: number, key: string, value: string) => {
@@ -54,6 +64,11 @@ const SkillSection = ({
       headerTitle={skill.name ? skill.name : "(Not Specified)"}
       headerDescription={skill.expertise && skill.expertise}
       handleDelBtn={() => handleDeleteSkills(skill.id)}
+      handleSectionUp={handleSectionUp}
+      handleSectionDown={handleSectionDown}
+      index={index}
+      isFirst={isFirst}
+      isLast={isLast}
     >
       <InputWrapper useGrid>
         {listSkills.map((list) => {

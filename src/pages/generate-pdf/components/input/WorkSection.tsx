@@ -10,12 +10,22 @@ import type { IWorkExperience } from "../../interface/generatePdfInterface";
 
 const WorkSection = ({
   experience,
+  index,
+  isFirst,
+  isLast,
   handleEditWorkExperiences,
   handleDeleteWorkExperiences,
+  handleSectionUp,
+  handleSectionDown,
 }: {
   experience: IWorkExperience;
+  index: number;
+  isFirst: boolean;
+  isLast: boolean;
   handleEditWorkExperiences: (id: number, key: string, value: string) => void;
   handleDeleteWorkExperiences: (id: number) => void;
+  handleSectionUp: (currentIndex: number) => void;
+  handleSectionDown: (currentIndex: number) => void;
 }) => {
   const handleTextChange = useDebouncedCallback(
     (id: number, key: string, value: string) => {
@@ -103,6 +113,11 @@ const WorkSection = ({
         `${experience.startAt} - ${experience.endsAt ? experience.endsAt : "Now"}`
       }
       handleDelBtn={() => handleDeleteWorkExperiences(experience.id)}
+      handleSectionUp={handleSectionUp}
+      handleSectionDown={handleSectionDown}
+      index={index}
+      isFirst={isFirst}
+      isLast={isLast}
     >
       <InputWrapper useGrid>
         {listWorkExperiences.map((list) => (

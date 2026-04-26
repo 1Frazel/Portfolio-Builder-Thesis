@@ -7,16 +7,26 @@ import DateInput from "./DateInput";
 
 const ProfessionalTrainingSection = ({
   training,
+  index,
+  isFirst,
+  isLast,
   handleEditProfessionalTraining,
   handleDeleteProfessionalTraining,
+  handleSectionUp,
+  handleSectionDown,
 }: {
   training: IProfessionalTraining;
+  index: number;
+  isFirst: boolean;
+  isLast: boolean;
   handleEditProfessionalTraining: (
     id: number,
     key: string,
     value: string,
   ) => void;
   handleDeleteProfessionalTraining: (id: number) => void;
+  handleSectionUp: (currentIndex: number) => void;
+  handleSectionDown: (currentIndex: number) => void;
 }) => {
   const handleTextChange = useDebouncedCallback(
     (id: number, key: string, value: string) => {
@@ -79,6 +89,11 @@ const ProfessionalTrainingSection = ({
         `${training.startAt} - ${training.endsAt ? training.endsAt : "Now"}`
       }
       handleDelBtn={() => handleDeleteProfessionalTraining(training.id)}
+      handleSectionUp={handleSectionUp}
+      handleSectionDown={handleSectionDown}
+      index={index}
+      isFirst={isFirst}
+      isLast={isLast}
     >
       <InputWrapper useGrid>
         {listProfessionalTraining.map((list) => {

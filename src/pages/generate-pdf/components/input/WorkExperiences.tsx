@@ -43,6 +43,26 @@ const WorkExperiences = ({
     );
   };
 
+  const handleSectionUp = (currentIndex: number) => {
+    const currentWorks = [...workExperiences];
+
+    const temporary = currentWorks[currentIndex];
+    currentWorks[currentIndex] = currentWorks[currentIndex - 1];
+    currentWorks[currentIndex - 1] = temporary;
+
+    setWorkExperience(currentWorks);
+  };
+
+  const handleSectionDown = (currentIndex: number) => {
+    const currentWorks = [...workExperiences];
+
+    const temporary = currentWorks[currentIndex];
+    currentWorks[currentIndex] = currentWorks[currentIndex + 1];
+    currentWorks[currentIndex + 1] = temporary;
+
+    setWorkExperience(currentWorks);
+  };
+
   return (
     <HiddenSectionWrapper
       containerTitle="Work Experiences"
@@ -50,13 +70,18 @@ const WorkExperiences = ({
       addMoreSectionTitle="Add another experiences"
       handleAddMoreSection={handleAddMoreWorkExperiences}
     >
-      {workExperiences.map((experience) => {
+      {workExperiences.map((experience, index) => {
         return (
           <WorkSection
             key={experience.id}
             experience={experience}
+            index={index}
+            isFirst={index === 0}
+            isLast={index === workExperiences.length - 1}
             handleEditWorkExperiences={handleEditWorkExperiences}
             handleDeleteWorkExperiences={handleDeleteWorkExperiences}
+            handleSectionUp={handleSectionUp}
+            handleSectionDown={handleSectionDown}
           />
         );
       })}

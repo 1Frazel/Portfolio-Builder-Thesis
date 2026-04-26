@@ -48,19 +48,46 @@ const ProfessionalTraining = ({
     );
   };
 
+  const handleSectionUp = (currentIndex: number) => {
+    const currentProfessionalTraining = [...professionalTraining];
+
+    const temporary = currentProfessionalTraining[currentIndex];
+    currentProfessionalTraining[currentIndex] =
+      currentProfessionalTraining[currentIndex - 1];
+    currentProfessionalTraining[currentIndex - 1] = temporary;
+
+    setProfessionalTraining(currentProfessionalTraining);
+  };
+
+  const handleSectionDown = (currentIndex: number) => {
+    const currentProfessionalTraining = [...professionalTraining];
+
+    const temporary = currentProfessionalTraining[currentIndex];
+    currentProfessionalTraining[currentIndex] =
+      currentProfessionalTraining[currentIndex + 1];
+    currentProfessionalTraining[currentIndex + 1] = temporary;
+
+    setProfessionalTraining(currentProfessionalTraining);
+  };
+
   return (
     <HiddenSectionWrapper
       containerTitle="Professional Training"
       addMoreSectionTitle="Add another professional training"
       handleAddMoreSection={handleAddProfessionalTraining}
     >
-      {professionalTraining.map((training) => {
+      {professionalTraining.map((training, index) => {
         return (
           <ProfessionalTrainingSection
             key={training.id}
             training={training}
+            index={index}
+            isFirst={index === 0}
+            isLast={index === professionalTraining.length - 1}
             handleEditProfessionalTraining={handleEditProfessionalTraining}
             handleDeleteProfessionalTraining={handleDeleteProfessionalTraining}
+            handleSectionUp={handleSectionUp}
+            handleSectionDown={handleSectionDown}
           />
         );
       })}

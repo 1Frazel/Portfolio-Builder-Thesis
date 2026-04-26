@@ -33,6 +33,26 @@ const Education = ({
     setEducations(educations.filter((education) => education.id !== id));
   };
 
+  const handleSectionUp = (currentIndex: number) => {
+    const currentEducations = [...educations];
+
+    const temporary = currentEducations[currentIndex];
+    currentEducations[currentIndex] = currentEducations[currentIndex - 1];
+    currentEducations[currentIndex - 1] = temporary;
+
+    setEducations(currentEducations);
+  };
+
+  const handleSectionDown = (currentIndex: number) => {
+    const currentEducations = [...educations];
+
+    const temporary = currentEducations[currentIndex];
+    currentEducations[currentIndex] = currentEducations[currentIndex + 1];
+    currentEducations[currentIndex + 1] = temporary;
+
+    setEducations(currentEducations);
+  };
+
   return (
     <HiddenSectionWrapper
       containerTitle="Education"
@@ -40,13 +60,18 @@ const Education = ({
       addMoreSectionTitle="Add another education"
       handleAddMoreSection={handleAddEducations}
     >
-      {educations.map((education) => {
+      {educations.map((education, index) => {
         return (
           <EducationSection
             key={education.id}
             education={education}
+            index={index}
+            isFirst={index === 0}
+            isLast={index === educations.length - 1}
             handleEditEducations={handleEditEducations}
             handleDeleteEducations={handleDeleteEducations}
+            handleSectionUp={handleSectionUp}
+            handleSectionDown={handleSectionDown}
           />
         );
       })}

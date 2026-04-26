@@ -50,21 +50,48 @@ const LicensesCertifications = ({
     );
   };
 
+  const handleSectionUp = (currentIndex: number) => {
+    const currentLicensesCertifications = [...licensesCertifications];
+
+    const temporary = currentLicensesCertifications[currentIndex];
+    currentLicensesCertifications[currentIndex] =
+      currentLicensesCertifications[currentIndex - 1];
+    currentLicensesCertifications[currentIndex - 1] = temporary;
+
+    setLicensesCertifications(currentLicensesCertifications);
+  };
+
+  const handleSectionDown = (currentIndex: number) => {
+    const currentLicensesCertifications = [...licensesCertifications];
+
+    const temporary = currentLicensesCertifications[currentIndex];
+    currentLicensesCertifications[currentIndex] =
+      currentLicensesCertifications[currentIndex + 1];
+    currentLicensesCertifications[currentIndex + 1] = temporary;
+
+    setLicensesCertifications(currentLicensesCertifications);
+  };
+
   return (
     <HiddenSectionWrapper
       containerTitle="Licenses / Certifications"
       addMoreSectionTitle="Add another Licenses / Certifications"
       handleAddMoreSection={handleAddLicensesCertifications}
     >
-      {licensesCertifications.map((license) => {
+      {licensesCertifications.map((license, index) => {
         return (
           <LicensesCertificationsSection
             key={license.id}
             license={license}
+            index={index}
+            isFirst={index === 0}
+            isLast={index === licensesCertifications.length - 1}
             handleEditLicensesCertifications={handleEditLicensesCertifications}
             handleDeleteLicensesCertifications={
               handleDeleteLicensesCertifications
             }
+            handleSectionUp={handleSectionUp}
+            handleSectionDown={handleSectionDown}
           />
         );
       })}

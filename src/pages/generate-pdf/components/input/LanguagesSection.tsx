@@ -8,12 +8,22 @@ import type { ILanguages } from "../../interface/generatePdfInterface";
 
 const LanguagesSection = ({
   language,
+  index,
+  isFirst,
+  isLast,
   handleEditLanguages,
   handleDeleteLanguages,
+  handleSectionUp,
+  handleSectionDown,
 }: {
   language: ILanguages;
+  index: number;
+  isFirst: boolean;
+  isLast: boolean;
   handleEditLanguages: (id: number, key: string, value: string) => void;
   handleDeleteLanguages: (id: number) => void;
+  handleSectionUp: (currentIndex: number) => void;
+  handleSectionDown: (currentIndex: number) => void;
 }) => {
   const handleTextChanges = useDebouncedCallback(
     (id: number, key: string, value: string) => {
@@ -53,6 +63,11 @@ const LanguagesSection = ({
       headerTitle={language.language ? language.language : "(Not Specified)"}
       headerDescription={language.level && language.level}
       handleDelBtn={() => handleDeleteLanguages(language.id)}
+      handleSectionUp={handleSectionUp}
+      handleSectionDown={handleSectionDown}
+      index={index}
+      isFirst={isFirst}
+      isLast={isLast}
     >
       <InputWrapper useGrid>
         {listLanguages.map((list) => {
