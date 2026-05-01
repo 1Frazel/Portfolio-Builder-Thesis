@@ -4,6 +4,15 @@ import { mocks } from "../../../const/generatePdfConst";
 import Divider from "../Divider";
 
 const styles = StyleSheet.create({
+  fontHeader: {
+    fontSize: "12px",
+  },
+  fontSectionHeader: {
+    fontSize: "9px",
+  },
+  fontParagraph: {
+    fontSize: "8px",
+  },
   page: {
     backgroundColor: "#ffffff",
   },
@@ -23,6 +32,7 @@ const AtsDocument = ({
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
           <PersonalDetail />
+          <ProfileSummary />
         </View>
       </Page>
     </Document>
@@ -62,7 +72,7 @@ const PersonalDetail = () => {
     <>
       <View style={{ display: "flex", alignItems: "center", width: "100%" }}>
         <Text
-          style={{ fontWeight: "bold", fontSize: "10px" }}
+          style={[styles.fontHeader, { fontWeight: "bold" }]}
         >{`${firstName} ${lastName}, ${jobTarget}`}</Text>
       </View>
       <View
@@ -75,8 +85,30 @@ const PersonalDetail = () => {
         }}
       >
         <Text
-          style={{ fontSize: "8px" }}
+          style={styles.fontParagraph}
         >{`${address}, ${cityState} ${postalCode}, ${country}, ${phone}, ${email}`}</Text>
+      </View>
+      <Divider />
+    </>
+  );
+};
+
+const ProfileSummary = () => {
+  const profileSummary = mocks.DEFAULT_PROFILE_SUMMARY;
+
+  return (
+    <>
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          gap: "64px",
+          marginTop: "8px",
+          marginBottom: "16px",
+        }}
+      >
+        <Text style={styles.fontSectionHeader}>PROFILE</Text>
+        <Text style={styles.fontParagraph}>{profileSummary}</Text>
       </View>
       <Divider />
     </>

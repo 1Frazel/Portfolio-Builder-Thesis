@@ -96,5 +96,8 @@ export const mocks = (() => {
     address: "Somewhere random street",
   };
 
-  return { DEFAULT_PERSONAL_DETAIL };
+  const DEFAULT_PROFILE_SUMMARY =
+    "Assisting senior in developing features and bug fixing";
+
+  return { DEFAULT_PERSONAL_DETAIL, DEFAULT_PROFILE_SUMMARY };
 })();
