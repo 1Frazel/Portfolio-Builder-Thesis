@@ -42,6 +42,7 @@ const AtsDocument = ({
           <Education />
           <Skill />
           <Language />
+          <ProfessionalTraining />
         </View>
       </Page>
     </Document>
@@ -116,8 +117,8 @@ const SectionDetails = ({
   startAt: string;
   endsAt: string;
   title: string;
-  address: string;
-  description: string;
+  address?: string;
+  description?: string;
 }) => {
   return (
     <View
@@ -140,11 +141,13 @@ const SectionDetails = ({
           }}
         >
           <Text style={styles.fontParagraph}>{title}</Text>
-          <Text style={styles.fontParagraph}>{address}</Text>
+          {address && <Text style={styles.fontParagraph}>{address}</Text>}
         </View>
-        <Text style={[styles.fontParagraph, { marginTop: "8px" }]}>
-          {description}
-        </Text>
+        {description && (
+          <Text style={[styles.fontParagraph, { marginTop: "8px" }]}>
+            {description}
+          </Text>
+        )}
       </View>
     </View>
   );
@@ -233,7 +236,7 @@ const WorkExperience = () => {
               key={experience.id}
               startAt={experience.startAt}
               endsAt={experience.endsAt}
-              title={experience.jobTitle}
+              title={`${experience.jobTitle}, ${experience.employer}`}
               address={experience.address}
               description={experience.description}
             />
@@ -310,6 +313,30 @@ const Language = () => {
           })}
         </SectionContainer>
       </SectionWrapper>
+      <Divider />
+    </>
+  );
+};
+
+const ProfessionalTraining = () => {
+  const professionalTraining = mocks.DEFAULT_PROFESSIONAL_TRAINING;
+
+  return (
+    <>
+      <SectionDetailsWrapper title="COURSES">
+        <View style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+          {professionalTraining.map((training) => {
+            return (
+              <SectionDetails
+                key={training.id}
+                startAt={training.startAt}
+                endsAt={training.endsAt}
+                title={`${training.courseName}, ${training.institution}`}
+              />
+            );
+          })}
+        </View>
+      </SectionDetailsWrapper>
       <Divider />
     </>
   );

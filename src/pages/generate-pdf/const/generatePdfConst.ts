@@ -159,6 +159,23 @@ export const mocks = (() => {
     },
   ];
 
+  const DEFAULT_PROFESSIONAL_TRAINING = [
+    {
+      id: 0,
+      courseName: "Javascript Fullstack",
+      institution: "Odin Project",
+      startAt: "Jul, 2022",
+      endsAt: "May, 2026",
+    },
+    {
+      id: 1,
+      courseName: "Learning React",
+      institution: "Meta Facebook",
+      startAt: "Feb, 2025",
+      endsAt: "Feb, 2026",
+    },
+  ];
+
   return {
     DEFAULT_PERSONAL_DETAIL,
     DEFAULT_PROFILE_SUMMARY,
@@ -166,5 +183,6 @@ export const mocks = (() => {
     DEFAULT_EDUCATION,
     DEFAULT_SKILLS,
     DEFAULT_LANGUAGES,
+    DEFAULT_PROFESSIONAL_TRAINING,
   };
 })();
