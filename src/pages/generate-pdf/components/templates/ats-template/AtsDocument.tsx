@@ -2,6 +2,7 @@ import { Document, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
 import type { IPersonalDetail } from "../../../interface/generatePdfInterface";
 import { mocks } from "../../../const/generatePdfConst";
 import Divider from "../Divider";
+import type React from "react";
 
 const styles = StyleSheet.create({
   fontHeader: {
@@ -38,6 +39,7 @@ const AtsDocument = ({
           <PersonalDetail />
           <ProfileSummary />
           <WorkExperience />
+          <Education />
         </View>
       </Page>
     </Document>
@@ -106,51 +108,109 @@ const ProfileSummary = () => {
   );
 };
 
+const SectionDetails = ({
+  startAt,
+  endsAt,
+  title,
+  address,
+  description,
+}: {
+  startAt: string;
+  endsAt: string;
+  title: string;
+  address: string;
+  description: string;
+}) => {
+  return (
+    <View
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        gap: "64px",
+        width: "100%",
+      }}
+    >
+      <Text style={styles.fontParagraph}>{`${startAt} - ${endsAt}`}</Text>
+      <View style={{ width: "100%" }}>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            width: "100%",
+            justifyContent: "space-between",
+          }}
+        >
+          <Text style={styles.fontParagraph}>{title}</Text>
+          <Text style={styles.fontParagraph}>{address}</Text>
+        </View>
+        <Text style={[styles.fontParagraph, { marginTop: "8px" }]}>
+          {description}
+        </Text>
+      </View>
+    </View>
+  );
+};
+
+const SectionContainer = ({
+  children,
+  title,
+}: {
+  children: React.ReactNode;
+  title: string;
+}) => {
+  return (
+    <View style={[styles.sectionMargin, { width: "100%" }]}>
+      <Text style={[styles.fontSectionHeader, { marginBottom: "8px" }]}>
+        {title}
+      </Text>
+      {children}
+    </View>
+  );
+};
+
 const WorkExperience = () => {
   const workExperiences = mocks.DEFAULT_WORK_EXPERIENCES;
 
   return (
     <>
-      <View style={[styles.sectionMargin, { width: "100%" }]}>
-        <Text style={[styles.fontSectionHeader, { marginBottom: "8px" }]}>
-          EMPLOYMENT HISTORY
-        </Text>
+      <SectionContainer title="EMPLOYMENT HISTORY">
         {workExperiences.map((experience) => {
           return (
-            <View
+            <SectionDetails
               key={experience.id}
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                gap: "64px",
-                width: "100%",
-              }}
-            >
-              <Text
-                style={styles.fontParagraph}
-              >{`${experience.startAt} - ${experience.endsAt}`}</Text>
-              <View style={{ width: "100%" }}>
-                <View
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    width: "100%",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Text style={styles.fontParagraph}>
-                    {experience.jobTitle}
-                  </Text>
-                  <Text style={styles.fontParagraph}>{experience.address}</Text>
-                </View>
-                <Text style={[styles.fontParagraph, { marginTop: "8px" }]}>
-                  {experience.description}
-                </Text>
-              </View>
-            </View>
+              startAt={experience.startAt}
+              endsAt={experience.endsAt}
+              title={experience.jobTitle}
+              address={experience.address}
+              description={experience.description}
+            />
           );
         })}
-      </View>
+      </SectionContainer>
+      <Divider />
+    </>
+  );
+};
+
+const Education = () => {
+  const educations = mocks.DEFAULT_EDUCATION;
+
+  return (
+    <>
+      <SectionContainer title="EDUCATION">
+        {educations.map((education) => {
+          return (
+            <SectionDetails
+              key={education.id}
+              startAt={education.startAt}
+              endsAt={education.endsAt}
+              title={`${education.degree}, ${education.school}`}
+              address={education.city}
+              description={education.description}
+            />
+          );
+        })}
+      </SectionContainer>
       <Divider />
     </>
   );

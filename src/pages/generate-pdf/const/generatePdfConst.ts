@@ -111,9 +111,22 @@ export const mocks = (() => {
     },
   ];
 
+  const DEFAULT_EDUCATION = [
+    {
+      id: 0,
+      school: "University",
+      degree: "Computer Science",
+      startAt: "Feb, 2022",
+      endsAt: "Feb, 2026",
+      city: "Jakarta",
+      description: "Graduated with honors",
+    },
+  ];
+
   return {
     DEFAULT_PERSONAL_DETAIL,
     DEFAULT_PROFILE_SUMMARY,
     DEFAULT_WORK_EXPERIENCES,
+    DEFAULT_EDUCATION,
   };
 })();
