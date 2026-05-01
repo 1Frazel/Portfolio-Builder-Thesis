@@ -40,6 +40,7 @@ const AtsDocument = ({
           <ProfileSummary />
           <WorkExperience />
           <Education />
+          <Skill />
         </View>
       </Page>
     </Document>
@@ -85,24 +86,40 @@ const PersonalDetail = () => {
   );
 };
 
+const SectionWrapper = ({
+  children,
+  title,
+}: {
+  children: React.ReactNode;
+  title?: string;
+}) => {
+  return (
+    <View
+      style={[
+        styles.sectionMargin,
+        {
+          display: "flex",
+          flexDirection: "row",
+          width: "100%",
+        },
+      ]}
+    >
+      <Text style={[styles.fontSectionHeader, { width: "20%" }]}>{title}</Text>
+      {children}
+    </View>
+  );
+};
+
 const ProfileSummary = () => {
   const profileSummary = mocks.DEFAULT_PROFILE_SUMMARY;
 
   return (
     <>
-      <View
-        style={[
-          styles.sectionMargin,
-          {
-            display: "flex",
-            flexDirection: "row",
-            gap: "64px",
-          },
-        ]}
-      >
-        <Text style={styles.fontSectionHeader}>PROFILE</Text>
-        <Text style={styles.fontParagraph}>{profileSummary}</Text>
-      </View>
+      <SectionWrapper title="PROFILE">
+        <Text style={[styles.fontParagraph, { width: "80%" }]}>
+          {profileSummary}
+        </Text>
+      </SectionWrapper>
       <Divider />
     </>
   );
@@ -126,12 +143,13 @@ const SectionDetails = ({
       style={{
         display: "flex",
         flexDirection: "row",
-        gap: "64px",
         width: "100%",
       }}
     >
-      <Text style={styles.fontParagraph}>{`${startAt} - ${endsAt}`}</Text>
-      <View style={{ width: "100%" }}>
+      <Text
+        style={[styles.fontParagraph, { width: "20%" }]}
+      >{`${startAt} - ${endsAt}`}</Text>
+      <View style={{ width: "80%" }}>
         <View
           style={{
             display: "flex",
@@ -151,7 +169,7 @@ const SectionDetails = ({
   );
 };
 
-const SectionContainer = ({
+const SectionDetailsWrapper = ({
   children,
   title,
 }: {
@@ -173,7 +191,7 @@ const WorkExperience = () => {
 
   return (
     <>
-      <SectionContainer title="EMPLOYMENT HISTORY">
+      <SectionDetailsWrapper title="EMPLOYMENT HISTORY">
         {workExperiences.map((experience) => {
           return (
             <SectionDetails
@@ -186,7 +204,7 @@ const WorkExperience = () => {
             />
           );
         })}
-      </SectionContainer>
+      </SectionDetailsWrapper>
       <Divider />
     </>
   );
@@ -197,7 +215,7 @@ const Education = () => {
 
   return (
     <>
-      <SectionContainer title="EDUCATION">
+      <SectionDetailsWrapper title="EDUCATION">
         {educations.map((education) => {
           return (
             <SectionDetails
@@ -210,7 +228,47 @@ const Education = () => {
             />
           );
         })}
-      </SectionContainer>
+      </SectionDetailsWrapper>
+      <Divider />
+    </>
+  );
+};
+
+const Skill = () => {
+  const skills = mocks.DEFAULT_SKILLS;
+
+  return (
+    <>
+      <SectionWrapper title="SKILLS">
+        {/* react-pdf doesn't support grid: https://github.com/diegomura/react-pdf/issues/1207 */}
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            width: "80%",
+            flexWrap: "wrap",
+            rowGap: "8px",
+            columnGap: "24px",
+          }}
+        >
+          {skills.map((skill) => {
+            return (
+              <View
+                key={skill.id}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  width: "47%",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Text style={styles.fontParagraph}>{skill.name}</Text>
+                <Text style={styles.fontParagraph}>{skill.expertise}</Text>
+              </View>
+            );
+          })}
+        </View>
+      </SectionWrapper>
       <Divider />
     </>
   );

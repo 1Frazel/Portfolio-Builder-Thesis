@@ -123,10 +123,29 @@ export const mocks = (() => {
     },
   ];
 
+  const DEFAULT_SKILLS = [
+    {
+      id: 0,
+      name: "Javascript",
+      expertise: "Skillful",
+    },
+    {
+      id: 1,
+      name: "Typescript",
+      expertise: "Expert",
+    },
+    {
+      id: 2,
+      name: "React",
+      expertise: "Experienced",
+    },
+  ];
+
   return {
     DEFAULT_PERSONAL_DETAIL,
     DEFAULT_PROFILE_SUMMARY,
     DEFAULT_WORK_EXPERIENCES,
     DEFAULT_EDUCATION,
+    DEFAULT_SKILLS,
   };
 })();
