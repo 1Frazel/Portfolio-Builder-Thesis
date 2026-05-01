@@ -13,6 +13,10 @@ const styles = StyleSheet.create({
   fontParagraph: {
     fontSize: "8px",
   },
+  sectionMargin: {
+    marginTop: "8px",
+    marginBottom: "16px",
+  },
   page: {
     backgroundColor: "#ffffff",
   },
@@ -33,6 +37,7 @@ const AtsDocument = ({
         <View style={styles.section}>
           <PersonalDetail />
           <ProfileSummary />
+          <WorkExperience />
         </View>
       </Page>
     </Document>
@@ -42,31 +47,15 @@ const AtsDocument = ({
 const PersonalDetail = () => {
   const {
     jobTarget,
-    photo,
     firstName,
     lastName,
     email,
     phone,
-    linkedinUrl,
     postalCode,
     cityState,
     country,
     address,
   } = mocks.DEFAULT_PERSONAL_DETAIL;
-
-  console.log({
-    jobTarget,
-    photo,
-    firstName,
-    lastName,
-    email,
-    phone,
-    linkedinUrl,
-    postalCode,
-    cityState,
-    country,
-    address,
-  });
 
   return (
     <>
@@ -76,13 +65,14 @@ const PersonalDetail = () => {
         >{`${firstName} ${lastName}, ${jobTarget}`}</Text>
       </View>
       <View
-        style={{
-          marginTop: "8px",
-          display: "flex",
-          alignItems: "center",
-          width: "100%",
-          marginBottom: "16px",
-        }}
+        style={[
+          styles.sectionMargin,
+          {
+            display: "flex",
+            alignItems: "center",
+            width: "100%",
+          },
+        ]}
       >
         <Text
           style={styles.fontParagraph}
@@ -99,16 +89,67 @@ const ProfileSummary = () => {
   return (
     <>
       <View
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          gap: "64px",
-          marginTop: "8px",
-          marginBottom: "16px",
-        }}
+        style={[
+          styles.sectionMargin,
+          {
+            display: "flex",
+            flexDirection: "row",
+            gap: "64px",
+          },
+        ]}
       >
         <Text style={styles.fontSectionHeader}>PROFILE</Text>
         <Text style={styles.fontParagraph}>{profileSummary}</Text>
+      </View>
+      <Divider />
+    </>
+  );
+};
+
+const WorkExperience = () => {
+  const workExperiences = mocks.DEFAULT_WORK_EXPERIENCES;
+
+  return (
+    <>
+      <View style={[styles.sectionMargin, { width: "100%" }]}>
+        <Text style={[styles.fontSectionHeader, { marginBottom: "8px" }]}>
+          EMPLOYMENT HISTORY
+        </Text>
+        {workExperiences.map((experience) => {
+          return (
+            <View
+              key={experience.id}
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "64px",
+                width: "100%",
+              }}
+            >
+              <Text
+                style={styles.fontParagraph}
+              >{`${experience.startAt} - ${experience.endsAt}`}</Text>
+              <View style={{ width: "100%" }}>
+                <View
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    width: "100%",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Text style={styles.fontParagraph}>
+                    {experience.jobTitle}
+                  </Text>
+                  <Text style={styles.fontParagraph}>{experience.address}</Text>
+                </View>
+                <Text style={[styles.fontParagraph, { marginTop: "8px" }]}>
+                  {experience.description}
+                </Text>
+              </View>
+            </View>
+          );
+        })}
       </View>
       <Divider />
     </>

@@ -99,5 +99,21 @@ export const mocks = (() => {
   const DEFAULT_PROFILE_SUMMARY =
     "Assisting senior in developing features and bug fixing";
 
-  return { DEFAULT_PERSONAL_DETAIL, DEFAULT_PROFILE_SUMMARY };
+  const DEFAULT_WORK_EXPERIENCES = [
+    {
+      id: 0,
+      jobTitle: "Frontend developer intern",
+      employer: "Company",
+      startAt: "Feb, 2025",
+      endsAt: "Feb, 2026",
+      address: "Jakarta",
+      description: "Creating and adding new features",
+    },
+  ];
+
+  return {
+    DEFAULT_PERSONAL_DETAIL,
+    DEFAULT_PROFILE_SUMMARY,
+    DEFAULT_WORK_EXPERIENCES,
+  };
 })();
