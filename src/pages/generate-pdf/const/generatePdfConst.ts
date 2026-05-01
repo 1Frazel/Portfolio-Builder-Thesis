@@ -141,11 +141,30 @@ export const mocks = (() => {
     },
   ];
 
+  const DEFAULT_LANGUAGES = [
+    {
+      id: 0,
+      name: "English",
+      expertise: "Highly Proficient",
+    },
+    {
+      id: 1,
+      name: "Indonesia",
+      expertise: "Native Speaker",
+    },
+    {
+      id: 2,
+      name: "React",
+      expertise: "Intermediate",
+    },
+  ];
+
   return {
     DEFAULT_PERSONAL_DETAIL,
     DEFAULT_PROFILE_SUMMARY,
     DEFAULT_WORK_EXPERIENCES,
     DEFAULT_EDUCATION,
     DEFAULT_SKILLS,
+    DEFAULT_LANGUAGES,
   };
 })();
