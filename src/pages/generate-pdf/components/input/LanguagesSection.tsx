@@ -37,9 +37,9 @@ const LanguagesSection = ({
       id: "languages",
       component: (
         <InputField
-          defaultValue={language.language}
+          defaultValue={language.name}
           onChange={(input: string) => {
-            handleTextChanges(language.id, "language", input);
+            handleTextChanges(language.id, "name", input);
           }}
           label="Languages"
         />
@@ -49,9 +49,9 @@ const LanguagesSection = ({
       id: "level",
       component: (
         <LanguageProficiencyLevel
-          selectedSkill={language.level}
+          selectedSkill={language.expertise}
           handleClick={(input) =>
-            handleTextChanges(language.id, "level", input)
+            handleTextChanges(language.id, "expertise", input)
           }
         />
       ),
@@ -60,8 +60,8 @@ const LanguagesSection = ({
 
   return (
     <HiddenSection
-      headerTitle={language.language ? language.language : "(Not Specified)"}
-      headerDescription={language.level && language.level}
+      headerTitle={language.name ? language.name : "(Not Specified)"}
+      headerDescription={language.expertise && language.expertise}
       handleDelBtn={() => handleDeleteLanguages(language.id)}
       handleSectionUp={handleSectionUp}
       handleSectionDown={handleSectionDown}

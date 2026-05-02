@@ -56,8 +56,8 @@ export interface IAdditionalSections {
 
 export interface ILanguages {
   id: number;
-  language: string;
-  level: string;
+  name: string;
+  expertise: string;
 }
 
 export interface ILicensesCertifications {

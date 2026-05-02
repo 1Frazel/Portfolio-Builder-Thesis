@@ -64,8 +64,8 @@ export const DEFAULT_ADDITIONAL_SECTIONS = [
 
 export const DEFAULT_LANGUAGES = {
   id: 0,
-  language: "",
-  level: "",
+  name: "",
+  expertise: "",
 };
 
 export const DEFAULT_LICENSES_CERTIFICATION = {
@@ -194,6 +194,6 @@ export const mocks = (() => {
     DEFAULT_SKILLS,
     DEFAULT_LANGUAGES,
     DEFAULT_PROFESSIONAL_TRAINING,
-    DEFAULT_LICENSES_CERTIFICATION
+    DEFAULT_LICENSES_CERTIFICATION,
   };
 })();
