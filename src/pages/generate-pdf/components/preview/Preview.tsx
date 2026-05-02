@@ -14,12 +14,9 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 
 const Preview = ({
   docs,
-  widthClass = "",
-  heightClass = "",
 }: {
   docs: JSX.Element;
-  widthClass: string;
-  heightClass: string;
+
   customClass?: string;
 }) => {
   const [pageAmount, setPageAmount] = useState(0);
@@ -37,12 +34,12 @@ const Preview = ({
     setCurrentPage((prev) => Math.min(prev, document.numPages));
   };
 
-  const previewClass = `shadow-md flex 
-  justify-center items-center rounded-md
-  ${widthClass} ${heightClass}`;
+  const previewClass = `shadow-lg flex 
+  justify-center items-center rounded-[16px]
+  h-fit w-fit`;
 
   return (
-    <div className="h-full flex flex-col gap-[16px] basis-1/2">
+    <div className="h-full flex flex-col gap-[16px] basis-1/2 py-[16px] overflow-auto">
       <div className="flex justify-center items-center grow">
         <div className={previewClass}>
           <Document
@@ -50,7 +47,7 @@ const Preview = ({
             file={render.value}
             onLoadSuccess={onDocumentLoad}
           >
-            <Page key={currentPage} pageNumber={currentPage} />
+            <Page key={currentPage} pageNumber={currentPage} scale={1.25} />
           </Document>
         </div>
       </div>

@@ -3,7 +3,6 @@ import Preview from "../../preview/Preview";
 import GeneratePdfFooter from "../../footer/GeneratePdfFooter";
 import PdfDownloadBtn from "../../button/PdfDownloadBtn";
 import useAtsTemplate from "../../../../../shared/hooks/useAtsTemplate";
-import { A4_SIZE } from "../../../const/generatePdfConst";
 
 const AtsTemplate = () => {
   const {
@@ -35,11 +34,7 @@ const AtsTemplate = () => {
         </GeneratePdfFooter>
       </div>
 
-      <Preview
-        heightClass={A4_SIZE.height}
-        widthClass={A4_SIZE.width}
-        docs={docs}
-      />
+      <Preview docs={docs} />
     </div>
   );
 };
