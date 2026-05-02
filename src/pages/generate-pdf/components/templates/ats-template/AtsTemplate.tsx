@@ -18,7 +18,7 @@ const AtsTemplate = () => {
   } = useAtsTemplate({ useMock: true });
 
   return (
-    <div className="h-full w-full flex gap-[24px]">
+    <div className="h-full w-full flex gap-[24px] px-[24px]">
       <div className="flex flex-col gap-[8px] basis-1/2">
         {nextComponent}
         <GeneratePdfFooter

@@ -35,7 +35,7 @@ const Preview = ({
   };
 
   const previewClass = `shadow-lg flex 
-  justify-center items-center rounded-[16px]
+  justify-center items-center
   h-fit w-fit`;
 
   return (

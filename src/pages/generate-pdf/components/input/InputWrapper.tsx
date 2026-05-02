@@ -15,20 +15,24 @@ const InputWrapper = ({
   containerClass?: string;
   childrenContainerClass?: string;
 }) => {
+  const wrapperClass = `
+  ${containerClass ? containerClass : ""}
+  ${isGrow ? "grow" : ""}
+   `;
+
+  const childrenClass = `
+  ${useGrid ? "grid grid-cols-2 gap-[16px]" : ""} 
+  ${childrenContainerClass ? childrenContainerClass : ""}
+  `;
+
   return (
-    <div
-      className={`${containerClass ? containerClass : ""} ${isGrow ? "grow" : ""}`}
-    >
+    <div className={wrapperClass}>
       <div>
         {title && <h1 className="font-bold">{title}</h1>}
         {description && <p>{description}</p>}
       </div>
 
-      <div
-        className={`${useGrid ? "grid grid-cols-2 gap-[16px]" : ""} ${childrenContainerClass ? childrenContainerClass : ""}`}
-      >
-        {children}
-      </div>
+      <div className={childrenClass}>{children}</div>
     </div>
   );
 };

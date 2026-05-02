@@ -149,10 +149,10 @@ const PersonalDetail = ({
 
   return (
     <InputWrapper
-      title="Personal Detail"
+      title="Personal Information"
       useGrid
-      childrenContainerClass="mt-[16px]"
-      containerClass="p-[16px]"
+      childrenContainerClass="mt-[24px]"
+      containerClass="shadow-lg px-[64px] pt-[32px] rounded-[16px]"
     >
       {listPersonalDetail.map((list) => (
         <div key={list.id} className={list.containerClass}>
