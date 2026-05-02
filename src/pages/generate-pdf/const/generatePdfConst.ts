@@ -176,6 +176,16 @@ export const mocks = (() => {
     },
   ];
 
+  const DEFAULT_LICENSES_CERTIFICATION = [
+    {
+      id: 0,
+      name: "Introduction to React",
+      issuer: "Coursera",
+      startAt: "March, 2025",
+      endsAt: "March, 2027",
+    },
+  ];
+
   return {
     DEFAULT_PERSONAL_DETAIL,
     DEFAULT_PROFILE_SUMMARY,
@@ -184,5 +194,6 @@ export const mocks = (() => {
     DEFAULT_SKILLS,
     DEFAULT_LANGUAGES,
     DEFAULT_PROFESSIONAL_TRAINING,
+    DEFAULT_LICENSES_CERTIFICATION
   };
 })();

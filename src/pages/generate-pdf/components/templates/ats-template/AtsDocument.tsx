@@ -22,6 +22,7 @@ const AtsDocument = ({
           <Skill />
           <Language />
           <ProfessionalTraining />
+          <LicensesCertifications />
         </View>
       </Page>
     </Document>
@@ -190,6 +191,30 @@ const ProfessionalTraining = () => {
                 startAt={training.startAt}
                 endsAt={training.endsAt}
                 title={`${training.courseName}, ${training.institution}`}
+              />
+            );
+          })}
+        </View>
+      </SectionDetailsWrapper>
+      <Divider />
+    </>
+  );
+};
+
+const LicensesCertifications = () => {
+  const licensesCertifications = mocks.DEFAULT_LICENSES_CERTIFICATION;
+
+  return (
+    <>
+      <SectionDetailsWrapper title="LICENSES">
+        <View style={{ display: "flex", flexDirection: "row", gap: "16px" }}>
+          {licensesCertifications.map((license) => {
+            return (
+              <SectionDetails
+                key={license.id}
+                startAt={license.startAt}
+                endsAt={license.endsAt}
+                title={`${license.name}, ${license.issuer}`}
               />
             );
           })}
