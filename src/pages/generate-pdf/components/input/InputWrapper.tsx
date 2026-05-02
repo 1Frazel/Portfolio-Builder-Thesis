@@ -6,6 +6,7 @@ const InputWrapper = ({
   isGrow = true,
   containerClass = "",
   childrenContainerClass = "",
+  gapClass = "gap-[16px]",
 }: {
   children: React.ReactNode;
   title?: string;
@@ -14,6 +15,7 @@ const InputWrapper = ({
   isGrow?: boolean;
   containerClass?: string;
   childrenContainerClass?: string;
+  gapClass?: string;
 }) => {
   const wrapperClass = `
   ${containerClass ? containerClass : ""}
@@ -21,7 +23,7 @@ const InputWrapper = ({
    `;
 
   const childrenClass = `
-  ${useGrid ? "grid grid-cols-2 gap-[16px]" : ""} 
+  ${useGrid ? `grid grid-cols-2 ${gapClass}` : ""} 
   ${childrenContainerClass ? childrenContainerClass : ""}
   `;
 

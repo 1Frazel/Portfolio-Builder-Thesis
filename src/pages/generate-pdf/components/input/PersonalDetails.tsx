@@ -109,6 +109,19 @@ const PersonalDetail = ({
       ),
     },
     {
+      id: "address",
+      component: (
+        <InputField
+          defaultValue={personalDetail.address}
+          onChange={(input: string) => {
+            handlePersonalDetailChange(input, "address");
+          }}
+          label="Address"
+        />
+      ),
+      containerClass: "col-span-2",
+    },
+    {
       id: "cityState",
       component: (
         <InputField
@@ -132,19 +145,6 @@ const PersonalDetail = ({
         />
       ),
     },
-    {
-      id: "address",
-      component: (
-        <InputField
-          defaultValue={personalDetail.address}
-          onChange={(input: string) => {
-            handlePersonalDetailChange(input, "address");
-          }}
-          label="Address"
-        />
-      ),
-      containerClass: "col-span-2",
-    },
   ];
 
   return (
@@ -153,6 +153,7 @@ const PersonalDetail = ({
       useGrid
       childrenContainerClass="mt-[24px]"
       containerClass="shadow-lg px-[64px] pt-[32px] rounded-[16px]"
+      gapClass="gap-x-[32px] gap-y-[24px]"
     >
       {listPersonalDetail.map((list) => (
         <div key={list.id} className={list.containerClass}>
