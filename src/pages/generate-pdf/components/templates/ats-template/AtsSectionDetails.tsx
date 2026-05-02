@@ -38,7 +38,9 @@ const SectionDetails = ({
           {address && <Text style={atsStyles.fontParagraph}>{address}</Text>}
         </View>
         {description && (
-          <Text style={[atsStyles.fontParagraph, { marginTop: "8px" }]}>
+          <Text
+            style={[atsStyles.fontDescriptionParagraph, { marginTop: "8px" }]}
+          >
             {description}
           </Text>
         )}

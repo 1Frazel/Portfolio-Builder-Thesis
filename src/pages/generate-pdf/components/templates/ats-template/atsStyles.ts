@@ -10,6 +10,9 @@ const atsStyles = StyleSheet.create({
   fontParagraph: {
     fontSize: "8px",
   },
+  fontDescriptionParagraph: {
+    fontSize: "7px",
+  },
   sectionMargin: {
     marginTop: "8px",
     marginBottom: "16px",
