@@ -20,28 +20,41 @@ import {
   DEFAULT_PROFILE_SUMMARY,
   DEFAULT_SKILLS,
   DEFAULT_WORK_EXPERIENCES,
+  mocks,
 } from "../../pages/generate-pdf/const/generatePdfConst";
 
-const useAtsTemplate = () => {
-  const [personalDetail, setPersonalDetail] = useState({
-    ...DEFAULT_PERSONAL_DETAIL,
-  });
-  const [workExperiences, setWorkExperiences] = useState([
-    DEFAULT_WORK_EXPERIENCES,
-  ]);
-  const [educations, setEducations] = useState([DEFAULT_EDUCATION]);
-  const [skills, setSkills] = useState([DEFAULT_SKILLS]);
-  const [profileSummary, setProfileSummary] = useState(DEFAULT_PROFILE_SUMMARY);
+const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
+  const [personalDetail, setPersonalDetail] = useState(
+    useMock ? mocks.DEFAULT_PERSONAL_DETAIL : DEFAULT_PERSONAL_DETAIL,
+  );
+  const [workExperiences, setWorkExperiences] = useState(
+    useMock ? mocks.DEFAULT_WORK_EXPERIENCES : [DEFAULT_WORK_EXPERIENCES],
+  );
+  const [educations, setEducations] = useState(
+    useMock ? mocks.DEFAULT_EDUCATION : [DEFAULT_EDUCATION],
+  );
+  const [skills, setSkills] = useState(
+    useMock ? mocks.DEFAULT_SKILLS : [DEFAULT_SKILLS],
+  );
+  const [profileSummary, setProfileSummary] = useState(
+    useMock ? mocks.DEFAULT_PROFILE_SUMMARY : DEFAULT_PROFILE_SUMMARY,
+  );
   const [additionalSections, setAdditionalSections] = useState(
     DEFAULT_ADDITIONAL_SECTIONS,
   );
-  const [languages, setLanguages] = useState([DEFAULT_LANGUAGES]);
-  const [professionalTraining, setProfessionalTraining] = useState([
-    DEFAULT_PROFESSIONAL_TRAINING,
-  ]);
-  const [licensesCertifications, setLicensesCertification] = useState([
-    DEFAULT_LICENSES_CERTIFICATION,
-  ]);
+  const [languages, setLanguages] = useState(
+    useMock ? mocks.DEFAULT_LANGUAGES : [DEFAULT_LANGUAGES],
+  );
+  const [professionalTraining, setProfessionalTraining] = useState(
+    useMock
+      ? mocks.DEFAULT_PROFESSIONAL_TRAINING
+      : [DEFAULT_PROFESSIONAL_TRAINING],
+  );
+  const [licensesCertifications, setLicensesCertification] = useState(
+    useMock
+      ? mocks.DEFAULT_LICENSES_CERTIFICATION
+      : [DEFAULT_LICENSES_CERTIFICATION],
+  );
 
   const [activeSectionIndex, setActiveSectionIndex] = useState(0);
   const [activeAdditionalSection, setActiveAdditionalSection] =

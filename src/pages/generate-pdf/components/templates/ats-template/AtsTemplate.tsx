@@ -16,7 +16,7 @@ const AtsTemplate = () => {
     activeAdditionalSection,
     handleAdditionalSection,
     docs,
-  } = useAtsTemplate();
+  } = useAtsTemplate({ useMock: true });
 
   return (
     <div className="h-full w-full flex gap-[24px]">
