@@ -1,6 +1,14 @@
 import { Document, Page, Text, View } from "@react-pdf/renderer";
-import type { IPersonalDetail } from "../../../interface/generatePdfInterface";
-import { mocks } from "../../../const/generatePdfConst";
+import type {
+  IEducation,
+  ILanguages,
+  ILicensesCertifications,
+  IPersonalDetail,
+  IProfessionalTraining,
+  ISkill,
+  IWorkExperience,
+} from "../../../interface/generatePdfInterface";
+
 import Divider from "../Divider";
 import { Section, SectionContainer, SectionWrapper } from "./AtsSection";
 import { SectionDetails, SectionDetailsWrapper } from "./AtsSectionDetails";
@@ -8,28 +16,48 @@ import atsStyles from "./atsStyles";
 
 const AtsDocument = ({
   personalDetail,
+  profileSummary,
+  workExperiences,
+  educations,
+  skills,
+  languages,
+  professionalTraining,
+  licensesCertifications,
 }: {
   personalDetail: IPersonalDetail;
+  profileSummary: string;
+  workExperiences: IWorkExperience[];
+  educations: IEducation[];
+  skills: ISkill[];
+  languages: ILanguages[];
+  professionalTraining: IProfessionalTraining[];
+  licensesCertifications: ILicensesCertifications[];
 }) => {
   return (
     <Document>
       <Page size="A4" style={atsStyles.page}>
         <View style={atsStyles.section}>
-          <PersonalDetail />
-          <ProfileSummary />
-          <WorkExperience />
-          <Education />
-          <Skill />
-          <Language />
-          <ProfessionalTraining />
-          <LicensesCertifications />
+          <PersonalDetail personalDetail={personalDetail} />
+          <ProfileSummary profileSummary={profileSummary} />
+          <WorkExperience workExperiences={workExperiences} />
+          <Education educations={educations} />
+          <Skill skills={skills} />
+          <Language languages={languages} />
+          <ProfessionalTraining professionalTraining={professionalTraining} />
+          <LicensesCertifications
+            licensesCertifications={licensesCertifications}
+          />
         </View>
       </Page>
     </Document>
   );
 };
 
-const PersonalDetail = () => {
+const PersonalDetail = ({
+  personalDetail,
+}: {
+  personalDetail: IPersonalDetail;
+}) => {
   const {
     jobTarget,
     firstName,
@@ -40,7 +68,7 @@ const PersonalDetail = () => {
     cityState,
     country,
     address,
-  } = mocks.DEFAULT_PERSONAL_DETAIL;
+  } = personalDetail;
 
   return (
     <>
@@ -68,9 +96,7 @@ const PersonalDetail = () => {
   );
 };
 
-const ProfileSummary = () => {
-  const profileSummary = mocks.DEFAULT_PROFILE_SUMMARY;
-
+const ProfileSummary = ({ profileSummary }: { profileSummary: string }) => {
   return (
     <>
       <SectionWrapper title="PROFILE">
@@ -83,9 +109,11 @@ const ProfileSummary = () => {
   );
 };
 
-const WorkExperience = () => {
-  const workExperiences = mocks.DEFAULT_WORK_EXPERIENCES;
-
+const WorkExperience = ({
+  workExperiences,
+}: {
+  workExperiences: IWorkExperience[];
+}) => {
   return (
     <>
       <SectionDetailsWrapper title="EMPLOYMENT HISTORY">
@@ -107,9 +135,7 @@ const WorkExperience = () => {
   );
 };
 
-const Education = () => {
-  const educations = mocks.DEFAULT_EDUCATION;
-
+const Education = ({ educations }: { educations: IEducation[] }) => {
   return (
     <>
       <SectionDetailsWrapper title="EDUCATION">
@@ -131,9 +157,7 @@ const Education = () => {
   );
 };
 
-const Skill = () => {
-  const skills = mocks.DEFAULT_SKILLS;
-
+const Skill = ({ skills }: { skills: ISkill[] }) => {
   return (
     <>
       <SectionWrapper title="SKILLS">
@@ -154,9 +178,7 @@ const Skill = () => {
   );
 };
 
-const Language = () => {
-  const languages = mocks.DEFAULT_LANGUAGES;
-
+const Language = ({ languages }: { languages: ILanguages[] }) => {
   return (
     <>
       <SectionWrapper title="LANGUAGES">
@@ -177,9 +199,11 @@ const Language = () => {
   );
 };
 
-const ProfessionalTraining = () => {
-  const professionalTraining = mocks.DEFAULT_PROFESSIONAL_TRAINING;
-
+const ProfessionalTraining = ({
+  professionalTraining,
+}: {
+  professionalTraining: IProfessionalTraining[];
+}) => {
   return (
     <>
       <SectionDetailsWrapper title="COURSES">
@@ -201,9 +225,11 @@ const ProfessionalTraining = () => {
   );
 };
 
-const LicensesCertifications = () => {
-  const licensesCertifications = mocks.DEFAULT_LICENSES_CERTIFICATION;
-
+const LicensesCertifications = ({
+  licensesCertifications,
+}: {
+  licensesCertifications: ILicensesCertifications[];
+}) => {
   return (
     <>
       <SectionDetailsWrapper title="LICENSES">

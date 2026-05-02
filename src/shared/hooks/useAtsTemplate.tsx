@@ -178,7 +178,18 @@ const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
     handleNextSection: () => setActiveSectionIndex((prev) => prev + 1),
     activeAdditionalSection,
     handleAdditionalSection: () => setActiveAdditionalSection("default"),
-    docs: <AtsDocument personalDetail={personalDetail} />,
+    docs: (
+      <AtsDocument
+        personalDetail={personalDetail}
+        profileSummary={profileSummary}
+        workExperiences={workExperiences}
+        educations={educations}
+        skills={skills}
+        languages={languages}
+        professionalTraining={professionalTraining}
+        licensesCertifications={licensesCertifications}
+      />
+    ),
   };
 };
 
