@@ -1,0 +1,194 @@
+export const DEFAULT_PROFESSIONAL_TRAINING = {
+  id: 0,
+  courseName: "",
+  institution: "",
+  startAt: "",
+  endsAt: "",
+};
+
+export const DEFAULT_WORK_EXPERIENCES = {
+  id: 0,
+  jobTitle: "",
+  employer: "",
+  startAt: "",
+  endsAt: "",
+  address: "",
+  description: "",
+};
+
+export const DEFAULT_PERSONAL_DETAIL = {
+  jobTarget: "",
+  photo: "",
+  firstName: "",
+  lastName: "",
+  email: "",
+  phone: "",
+  linkedinUrl: "",
+  postalCode: "",
+  cityState: "",
+  country: "",
+  address: "",
+};
+
+export const DEFAULT_EDUCATION = {
+  id: 0,
+  school: "",
+  degree: "",
+  startAt: "",
+  endsAt: "",
+  city: "",
+  description: "",
+};
+
+export const DEFAULT_SKILLS = {
+  id: 0,
+  name: "",
+  expertise: "",
+};
+
+export const DEFAULT_PROFILE_SUMMARY = "";
+
+export const DEFAULT_ADDITIONAL_SECTIONS = [
+  { id: "language", title: "Language", isSet: false },
+  {
+    id: "licensesOrCertifications",
+    title: "Licenses / Certifications",
+    isSet: false,
+  },
+  {
+    id: "professionalTraining",
+    title: "Professional Training",
+    isSet: false,
+  },
+];
+
+export const DEFAULT_LANGUAGES = {
+  id: 0,
+  name: "",
+  expertise: "",
+};
+
+export const DEFAULT_LICENSES_CERTIFICATION = {
+  id: 0,
+  name: "",
+  issuer: "",
+  startAt: "",
+  endsAt: "",
+};
+
+export const mocks = (() => {
+  const DEFAULT_PERSONAL_DETAIL = {
+    jobTarget: "Front End Developer",
+    photo: "",
+    firstName: "John",
+    lastName: "Doe",
+    email: "JohnDoe@mail.net",
+    phone: "123456789",
+    linkedinUrl: "https://us.linkedin.com/en/johnDoe",
+    postalCode: "54334",
+    cityState: "City, State Some Random  Street",
+    country: "USA",
+    address: "Somewhere random street",
+  };
+
+  const DEFAULT_PROFILE_SUMMARY =
+    "Assisting senior in developing features and bug fixing";
+
+  const DEFAULT_WORK_EXPERIENCES = [
+    {
+      id: 0,
+      jobTitle: "Frontend developer intern",
+      employer: "Company",
+      startAt: "Feb, 2025",
+      endsAt: "Feb, 2026",
+      address: "Jakarta",
+      description: "Creating and adding new features",
+    },
+  ];
+
+  const DEFAULT_EDUCATION = [
+    {
+      id: 0,
+      school: "University",
+      degree: "Computer Science",
+      startAt: "Feb, 2022",
+      endsAt: "Feb, 2026",
+      city: "Jakarta",
+      description: "Graduated with honors",
+    },
+  ];
+
+  const DEFAULT_SKILLS = [
+    {
+      id: 0,
+      name: "Javascript",
+      expertise: "Skillful",
+    },
+    {
+      id: 1,
+      name: "Typescript",
+      expertise: "Expert",
+    },
+    {
+      id: 2,
+      name: "React",
+      expertise: "Experienced",
+    },
+  ];
+
+  const DEFAULT_LANGUAGES = [
+    {
+      id: 0,
+      name: "English",
+      expertise: "Highly Proficient",
+    },
+    {
+      id: 1,
+      name: "Indonesia",
+      expertise: "Native Speaker",
+    },
+    {
+      id: 2,
+      name: "React",
+      expertise: "Intermediate",
+    },
+  ];
+
+  const DEFAULT_PROFESSIONAL_TRAINING = [
+    {
+      id: 0,
+      courseName: "Javascript Fullstack",
+      institution: "Odin Project",
+      startAt: "Jul, 2022",
+      endsAt: "May, 2026",
+    },
+    {
+      id: 1,
+      courseName: "Learning React",
+      institution: "Meta Facebook",
+      startAt: "Feb, 2025",
+      endsAt: "Feb, 2026",
+    },
+  ];
+
+  const DEFAULT_LICENSES_CERTIFICATION = [
+    {
+      id: 0,
+      name: "Introduction to React",
+      issuer: "Coursera",
+      startAt: "March, 2025",
+      endsAt: "March, 2027",
+    },
+  ];
+
+  return {
+    DEFAULT_PERSONAL_DETAIL,
+    DEFAULT_PROFILE_SUMMARY,
+    DEFAULT_WORK_EXPERIENCES,
+    DEFAULT_EDUCATION,
+    DEFAULT_SKILLS,
+    DEFAULT_LANGUAGES,
+    DEFAULT_PROFESSIONAL_TRAINING,
+    DEFAULT_LICENSES_CERTIFICATION,
+  };
+})();

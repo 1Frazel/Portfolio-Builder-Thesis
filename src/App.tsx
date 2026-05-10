@@ -1,11 +1,7 @@
-import "./App.css";
+import Home from "./pages/home/Home";
 
 function App() {
-  return (
-    <>
-      <div className="text-red-500 underline">Hello World!</div>
-    </>
-  );
+  return <Home />;
 }
 
 export default App;
