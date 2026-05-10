@@ -1,11 +1,7 @@
-import AtsTemplate from "./pages/generate-pdf/components/templates/ats-template/AtsTemplate";
+import Home from "./pages/home/Home";
 
 function App() {
-  return (
-    <div className="h-screen w-screen flex px-[8px] py-[4px]">
-      <AtsTemplate />
-    </div>
-  );
+  return <Home />;
 }
 
 export default App;
