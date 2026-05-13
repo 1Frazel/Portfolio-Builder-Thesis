@@ -10,7 +10,12 @@ const Header = () => {
     {
       id: "creation",
       title: "Creation",
-      path: "creation",
+      path: "/creation",
+    },
+    {
+      id: "checker",
+      title: "Resume Checker",
+      path: "/checker",
     },
   ];
 
