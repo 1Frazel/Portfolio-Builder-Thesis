@@ -1,8 +1,5 @@
-interface IListSkills {
-  value: number;
-  description: string;
-  color: string;
-}
+import InputFieldWrapper from "./InputFieldWrapper";
+import ResponsiveDropdown from "../../../../shared/components/ResponsiveDropdown";
 
 const SkillInput = ({
   defaultValue,
@@ -13,57 +10,36 @@ const SkillInput = ({
 }) => {
   const listSkills = [
     {
-      value: 1,
-      description: "Novice",
-      color: "#1fc8a6",
+      label: "Novice",
+      value: "Novice",
     },
     {
-      value: 2,
-      description: "Basic",
-      color: "#1fc838",
+      label: "Basic",
+      value: "Basic",
     },
     {
-      value: 3,
-      description: "Intermediate",
-      color: "#dfeb30",
+      label: "Intermediate",
+      value: "Intermediate",
     },
     {
-      value: 4,
-      description: "Experiences",
-      color: "#eb8130",
+      label: "Experienced",
+      value: "Experienced",
     },
     {
-      value: 5,
-      description: "Expert",
-      color: "#eb3030",
+      label: "Expert",
+      value: "Expert",
     },
   ];
 
-  const getBackgroundColor = (skill: IListSkills) => {
-    const isDefault = skill.description === defaultValue;
-    return `${isDefault ? `${skill.color}` : "#889290"}`;
-  };
-
   return (
-    <div>
-      <p>Skills Expertise</p>
-      <div className="flex items-center gap-[16px]">
-        {listSkills.map((skill) => {
-          return (
-            <div key={skill.value} className="h-[70px] w-[70px]">
-              <div
-                style={{ backgroundColor: `${getBackgroundColor(skill)}` }}
-                onClick={() => onChange(skill.description)}
-                className={`flex justify-center items-center h-full`}
-              >
-                <p className="text-white">{skill.value}</p>
-              </div>
-              <p className="text-xs text-center">{skill.description}</p>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+    <InputFieldWrapper label="Skills Expertise">
+      <ResponsiveDropdown
+        options={listSkills}
+        value={defaultValue}
+        placeholder="Select expertise"
+        onChange={onChange}
+      />
+    </InputFieldWrapper>
   );
 };
 

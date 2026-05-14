@@ -58,7 +58,6 @@ const SkillSection = ({
           }}
         />
       ),
-      containerClass: "sm:col-span-2",
     },
   ];
 
@@ -76,11 +75,7 @@ const SkillSection = ({
     >
       <div className="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2">
         {listSkills.map((list) => {
-          return (
-            <div key={list.id} className={list.containerClass}>
-              {list.component}
-            </div>
-          );
+          return <div key={list.id}>{list.component}</div>;
         })}
       </div>
     </ExpandableSectionItem>

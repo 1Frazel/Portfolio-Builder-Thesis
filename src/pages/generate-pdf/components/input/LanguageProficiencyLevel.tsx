@@ -1,6 +1,5 @@
-import Dropdown from "../../../../shared/components/Dropdown";
-import { DropdownContextProvider } from "../../../../shared/hooks/DropdownContext";
 import InputFieldWrapper from "./InputFieldWrapper";
+import ResponsiveDropdown from "../../../../shared/components/ResponsiveDropdown";
 
 const LanguageProficiencyLevel = ({
   selectedSkill,
@@ -9,29 +8,22 @@ const LanguageProficiencyLevel = ({
   selectedSkill: string;
   handleClick: (input: string) => void;
 }) => {
-  const proficiencyList = ["Native", "Proficient", "Basic"];
+  const proficiencyList = [
+    { label: "Basic", value: "Basic" },
+    { label: "Conversational", value: "Conversational" },
+    { label: "Professional", value: "Professional" },
+    { label: "Fluent", value: "Fluent" },
+    { label: "Native", value: "Native" },
+  ];
 
   return (
     <InputFieldWrapper label="Level">
-      <DropdownContextProvider>
-        <Dropdown>
-          <Dropdown.Trigger>
-            {selectedSkill ? selectedSkill : "Select Level"}
-          </Dropdown.Trigger>
-          <Dropdown.MenuItem>
-            {proficiencyList.map((list) => {
-              return (
-                <Dropdown.MenuItems
-                  key={list}
-                  handleClick={() => handleClick(list)}
-                >
-                  {list}
-                </Dropdown.MenuItems>
-              );
-            })}
-          </Dropdown.MenuItem>
-        </Dropdown>
-      </DropdownContextProvider>
+      <ResponsiveDropdown
+        options={proficiencyList}
+        value={selectedSkill}
+        placeholder="Select Level"
+        onChange={handleClick}
+      />
     </InputFieldWrapper>
   );
 };
