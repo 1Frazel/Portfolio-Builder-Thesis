@@ -1,6 +1,6 @@
 import { DEFAULT_WORK_EXPERIENCES } from "../../const/generatePdfConst";
 import type { IWorkExperience } from "../../interface/generatePdfInterface";
-import { HiddenSectionWrapper } from "./HiddenSectionWrapper";
+import { ExpandableSectionContainer } from "./ExpandableSectionContainer";
 
 import WorkSection from "./WorkSection";
 
@@ -64,11 +64,10 @@ const WorkExperiences = ({
   };
 
   return (
-    <HiddenSectionWrapper
-      containerTitle="Work Experiences"
-      containerDescription="Show your relevant experiences."
-      addMoreSectionTitle="Add another experiences"
-      handleAddMoreSection={handleAddMoreWorkExperiences}
+    <ExpandableSectionContainer
+      title="Work Experiences"
+      addButtonTitle="Add another experiences"
+      onAdd={handleAddMoreWorkExperiences}
     >
       {workExperiences.map((experience, index) => {
         return (
@@ -85,7 +84,7 @@ const WorkExperiences = ({
           />
         );
       })}
-    </HiddenSectionWrapper>
+    </ExpandableSectionContainer>
   );
 };
 
