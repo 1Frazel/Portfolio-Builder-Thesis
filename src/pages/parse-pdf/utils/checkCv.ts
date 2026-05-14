@@ -26,6 +26,7 @@ interface SectionData {
   keyword: string;
   content: string;
   hasContent: boolean;
+  status: "missing" | "header-only" | "complete";
 }
 
 // STEP 1: Find all keyword positions in text
@@ -106,24 +107,56 @@ const parseSections = (
 
   for (const sectionName in SECTION_KEYWORDS) {
     const found = matches[sectionName];
+    const sectionContent = content[sectionName] || "";
+    const hasContent = !!found && hasContentText(sectionContent);
 
     parsed[sectionName] = {
       exists: !!found,
       keyword: found?.keyword || "",
-      content: content[sectionName] || "",
-      hasContent: found ? hasContentText(content[sectionName] || "") : false,
+      content: sectionContent,
+      hasContent,
+      status: !found ? "missing" : hasContent ? "complete" : "header-only",
     };
   }
 
   return parsed;
 };
 
+const calculateScore = (sections: Record<string, SectionData>): number => {
+  const sectionCount = Object.keys(SECTION_KEYWORDS).length;
+  const completeCount = Object.values(sections).filter(
+    (section) => section.status === "complete",
+  ).length;
+
+  return Math.round((completeCount / sectionCount) * 100);
+};
+
+const buildRecommendations = (
+  sections: Record<string, SectionData>,
+): string[] => {
+  const recommendations: string[] = [];
+
+  for (const sectionName in sections) {
+    const section = sections[sectionName];
+
+    if (section.status === "missing") {
+      recommendations.push(
+        `Add a ${sectionName} section with relevant details.`,
+      );
+    } else if (section.status === "header-only") {
+      recommendations.push(
+        `Add content under ${sectionName}, not just the header.`,
+      );
+    }
+  }
+
+  return recommendations;
+};
+
 const detectSections = (text: string): Record<string, SectionData> => {
   const matchedKeyword = findAllKeywords(text);
   const contentBetweenKeyword = extractSectionContent(text, matchedKeyword);
-  const sectionData = parseSections(matchedKeyword, contentBetweenKeyword);
-  console.log({ matchedKeyword, contentBetweenKeyword, sectionData });
-  return sectionData;
+  return parseSections(matchedKeyword, contentBetweenKeyword);
 };
 
 const extractTextFromPdf = async (
@@ -151,10 +184,15 @@ const checkCv = async (fileUrl: string) => {
   const pdfDocument = await pdfjsLib.getDocument(fileUrl).promise;
   const rawText = await extractTextFromPdf(pdfDocument);
   const sections = detectSections(rawText);
+  const score = calculateScore(sections);
+  const recommendations = buildRecommendations(sections);
+  console.log({ score, recommendations, rawText, sections });
 
   return {
     rawText,
     sections,
+    score,
+    recommendations,
   };
 };
 
