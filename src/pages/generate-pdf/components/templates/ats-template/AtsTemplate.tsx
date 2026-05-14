@@ -1,7 +1,6 @@
 import Preview from "../../preview/Preview";
 
 import GeneratePdfFooter from "../../footer/GeneratePdfFooter";
-import PdfDownloadBtn from "../../button/PdfDownloadBtn";
 import useAtsTemplate from "../../../../../shared/hooks/useAtsTemplate";
 import Header from "../../../../../shared/components/Header";
 import useIsMobile from "../../../../../shared/hooks/useIsMobile";
@@ -68,9 +67,7 @@ const AtsTemplate = () => {
                 handleNextSection={handleNextSection}
                 activeAdditionalSection={activeAdditionalSection}
                 handleAdditionalSection={handleAdditionalSection}
-              >
-                <PdfDownloadBtn filename="ats-cv" docs={docs} />
-              </GeneratePdfFooter>
+              />
             </div>
           ) : (
             <div className="w-full">
@@ -90,9 +87,7 @@ const AtsTemplate = () => {
                 handleNextSection={handleNextSection}
                 activeAdditionalSection={activeAdditionalSection}
                 handleAdditionalSection={handleAdditionalSection}
-              >
-                <PdfDownloadBtn filename="ats-cv" docs={docs} />
-              </GeneratePdfFooter>
+              />
             </div>
 
             <div className="w-full md:basis-1/2">
