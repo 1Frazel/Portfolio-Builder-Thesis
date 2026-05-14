@@ -1,7 +1,7 @@
 import type React from "react";
 
-import { HiddenSectionWrapper } from "./HiddenSectionWrapper";
 import SkillSection from "./SkillSection";
+import { ExpandableSectionContainer } from "./ExpandableSectionContainer";
 import type { ISkill } from "../../interface/generatePdfInterface";
 import { DEFAULT_SKILLS } from "../../const/generatePdfConst";
 
@@ -56,11 +56,11 @@ const Skills = ({
   };
 
   return (
-    <HiddenSectionWrapper
-      containerTitle="Areas of Expertise"
-      containerDescription="Choose important skills that show you fit the position"
-      addMoreSectionTitle="Add another skills"
-      handleAddMoreSection={handleAddSkills}
+    <ExpandableSectionContainer
+      title="Areas of Expertise"
+      description="Choose important skills that show you fit the position"
+      addButtonTitle="Add another skills"
+      onAdd={handleAddSkills}
     >
       {skills.map((skill, index) => {
         return (
@@ -77,7 +77,7 @@ const Skills = ({
           />
         );
       })}
-    </HiddenSectionWrapper>
+    </ExpandableSectionContainer>
   );
 };
 

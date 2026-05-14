@@ -1,7 +1,7 @@
 import { DEFAULT_EDUCATION } from "../../const/generatePdfConst";
 import type { IEducation } from "../../interface/generatePdfInterface";
 import EducationSection from "./EducationSection";
-import { HiddenSectionWrapper } from "./HiddenSectionWrapper";
+import { ExpandableSectionContainer } from "./ExpandableSectionContainer";
 
 const Education = ({
   educations,
@@ -54,11 +54,11 @@ const Education = ({
   };
 
   return (
-    <HiddenSectionWrapper
-      containerTitle="Education"
-      containerDescription="A varied education on your resume sums up the value that your learnings and background will bring to the job."
-      addMoreSectionTitle="Add another education"
-      handleAddMoreSection={handleAddEducations}
+    <ExpandableSectionContainer
+      title="Education"
+      description="A varied education on your resume sums up the value that your learnings and background will bring to the job."
+      addButtonTitle="Add another education"
+      onAdd={handleAddEducations}
     >
       {educations.map((education, index) => {
         return (
@@ -75,7 +75,7 @@ const Education = ({
           />
         );
       })}
-    </HiddenSectionWrapper>
+    </ExpandableSectionContainer>
   );
 };
 
