@@ -13,7 +13,7 @@ const ParsePdf = () => {
   };
 
   return (
-    <div className="h-screen w-screen px-[16px] py-[8px]">
+    <div className="h-full w-full overflow-hidden">
       <Header />
       <div>
         <FileInput
