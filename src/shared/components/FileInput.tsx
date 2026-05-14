@@ -7,7 +7,7 @@ const FileInput = ({
 }: {
   title: string;
   acceptedFormat: string;
-  handleClick: (file: File) => void;
+  handleClick: (fileUrl: string) => void;
 }) => {
   const [fileName, setFileName] = useState("");
 
@@ -17,7 +17,8 @@ const FileInput = ({
     if (!currentFiles) return;
 
     const newFiles = currentFiles[0];
-    handleClick(newFiles);
+    const fileUrl = URL.createObjectURL(newFiles);
+    handleClick(fileUrl);
     setFileName(newFiles.name);
   };
 
