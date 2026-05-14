@@ -1,6 +1,6 @@
 import { DEFAULT_PROFESSIONAL_TRAINING } from "../../const/generatePdfConst";
 import type { IProfessionalTraining } from "../../interface/generatePdfInterface";
-import { HiddenSectionWrapper } from "./HiddenSectionWrapper";
+import { ExpandableSectionContainer } from "./ExpandableSectionContainer";
 import ProfessionalTrainingSection from "./ProfessionalTrainingSection";
 
 const ProfessionalTraining = ({
@@ -71,10 +71,10 @@ const ProfessionalTraining = ({
   };
 
   return (
-    <HiddenSectionWrapper
-      containerTitle="Professional Training"
-      addMoreSectionTitle="Add another professional training"
-      handleAddMoreSection={handleAddProfessionalTraining}
+    <ExpandableSectionContainer
+      title="Professional Training"
+      addButtonTitle="Add another professional training"
+      onAdd={handleAddProfessionalTraining}
     >
       {professionalTraining.map((training, index) => {
         return (
@@ -91,7 +91,7 @@ const ProfessionalTraining = ({
           />
         );
       })}
-    </HiddenSectionWrapper>
+    </ExpandableSectionContainer>
   );
 };
 

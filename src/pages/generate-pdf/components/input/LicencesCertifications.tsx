@@ -1,9 +1,9 @@
 import type React from "react";
 import type { ILicensesCertifications } from "../../interface/generatePdfInterface";
 
-import { HiddenSectionWrapper } from "./HiddenSectionWrapper";
 import LicensesCertificationsSection from "./LicensesCertificationsSection";
 import { DEFAULT_LICENSES_CERTIFICATION } from "../../const/generatePdfConst";
+import { ExpandableSectionContainer } from "./ExpandableSectionContainer";
 
 const LicensesCertifications = ({
   licensesCertifications,
@@ -73,10 +73,10 @@ const LicensesCertifications = ({
   };
 
   return (
-    <HiddenSectionWrapper
-      containerTitle="Licenses / Certifications"
-      addMoreSectionTitle="Add another Licenses / Certifications"
-      handleAddMoreSection={handleAddLicensesCertifications}
+    <ExpandableSectionContainer
+      title="Licenses / Certifications"
+      addButtonTitle="Add another license / certification"
+      onAdd={handleAddLicensesCertifications}
     >
       {licensesCertifications.map((license, index) => {
         return (
@@ -95,7 +95,7 @@ const LicensesCertifications = ({
           />
         );
       })}
-    </HiddenSectionWrapper>
+    </ExpandableSectionContainer>
   );
 };
 

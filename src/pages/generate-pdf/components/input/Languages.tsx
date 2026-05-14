@@ -1,5 +1,5 @@
 import type React from "react";
-import { HiddenSectionWrapper } from "./HiddenSectionWrapper";
+import { ExpandableSectionContainer } from "./ExpandableSectionContainer";
 
 import LanguagesSection from "./LanguagesSection";
 import type { ILanguages } from "../../interface/generatePdfInterface";
@@ -63,10 +63,10 @@ const Languages = ({
   };
 
   return (
-    <HiddenSectionWrapper
-      containerTitle="Languages"
-      addMoreSectionTitle="Add another languages"
-      handleAddMoreSection={handleAddMoreLanguages}
+    <ExpandableSectionContainer
+      title="Languages"
+      addButtonTitle="Add another language"
+      onAdd={handleAddMoreLanguages}
     >
       {languages.map((language, index) => {
         return (
@@ -83,7 +83,7 @@ const Languages = ({
           />
         );
       })}
-    </HiddenSectionWrapper>
+    </ExpandableSectionContainer>
   );
 };
 
