@@ -21,7 +21,7 @@ interface KeywordMatch {
   position: number;
 }
 
-interface SectionData {
+export interface SectionData {
   exists: boolean;
   keyword: string;
   content: string;
