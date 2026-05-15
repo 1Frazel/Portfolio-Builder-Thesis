@@ -62,35 +62,41 @@ const Preview = ({
     setCurrentPage((prev) => Math.min(prev, document.numPages));
   };
 
-  const previewClass = `shadow-lg flex 
-  justify-center items-center
-  h-fit w-fit`;
+  const isMobile = viewportWidth < 768;
+
+  const previewClass = `flex justify-center ${
+    isMobile ? "w-[792px] max-w-full" : "min-h-[1120px] w-[792px] max-w-full"
+  }`;
 
   return (
-    <div className="h-full flex flex-col gap-[16px] py-[16px] overflow-auto w-full">
-      <div className="flex justify-center items-center grow min-h-0">
-        <div className={previewClass}>
-          <Document
-            key={render.value}
-            file={render.value}
-            onLoadSuccess={onDocumentLoad}
-            loading={null}
-          >
-            <Page
-              key={currentPage}
-              pageNumber={currentPage}
-              scale={scale}
+    <div className="h-full flex flex-col w-full overflow-hidden py-[16px]">
+      <div className="flex-1 min-h-0 overflow-auto">
+        <div className="flex justify-center items-center px-2 pb-4">
+          <div className={previewClass}>
+            <Document
+              key={render.value}
+              file={render.value}
+              onLoadSuccess={onDocumentLoad}
               loading={null}
-            />
-          </Document>
+            >
+              <Page
+                key={currentPage}
+                pageNumber={currentPage}
+                scale={scale}
+                loading={null}
+              />
+            </Document>
+          </div>
         </div>
       </div>
 
-      <PreviewNavigator
-        currentPage={currentPage}
-        pageAmount={pageAmount}
-        setCurrentPage={setCurrentPage}
-      />
+      <div className="bottom-0 z-10 flex justify-center py-3 ">
+        <PreviewNavigator
+          currentPage={currentPage}
+          pageAmount={pageAmount}
+          setCurrentPage={setCurrentPage}
+        />
+      </div>
     </div>
   );
 };
