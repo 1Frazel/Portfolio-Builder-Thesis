@@ -75,9 +75,9 @@ const AtsTemplate = () => {
             </div>
           )
         ) : (
-          // Desktop: show both editor and preview
+          // Desktop: show both editor and preview with equal, proportional sizing
           <>
-            <div className="flex flex-col gap-4 w-full md:basis-1/2">
+            <div className="flex flex-col gap-4 w-full md:flex-1 md:min-w-0">
               {nextComponent}
               <GeneratePdfFooter
                 nextSectionTitle={nextSectionTitle}
@@ -90,7 +90,7 @@ const AtsTemplate = () => {
               />
             </div>
 
-            <div className="w-full md:basis-1/2">
+            <div className="w-full md:flex-1 md:min-w-0">
               <Preview docs={docs} />
             </div>
           </>
