@@ -65,7 +65,8 @@ const Languages = ({
   return (
     <ExpandableSectionContainer
       title="Languages"
-      addButtonTitle="Add another language"
+      addButtonTitle="Add another languages"
+      description="Specify any foreign languages you are proficient in, along with your exact fluency level (e.g., Native, Professional, Basic). This is highly valuable for multinational companies or roles requiring diverse communication."
       onAdd={handleAddMoreLanguages}
     >
       {languages.map((language, index) => {

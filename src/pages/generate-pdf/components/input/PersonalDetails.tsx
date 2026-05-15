@@ -35,10 +35,7 @@ const PersonalDetail = ({
         />
       ),
     },
-    {
-      id: "photo",
-      component: <>wip</>,
-    },
+
     {
       id: "firstName",
       component: (
@@ -118,6 +115,19 @@ const PersonalDetail = ({
       ),
     },
     {
+      id: "cityState",
+      component: (
+        <InputField
+          defaultValue={personalDetail.cityState}
+          onChange={(input: string) => {
+            handlePersonalDetailChange(input, "cityState");
+          }}
+          label="City, State"
+          inputClass={fieldInputClass}
+        />
+      ),
+    },
+    {
       id: "address",
       component: (
         <InputField
@@ -130,19 +140,6 @@ const PersonalDetail = ({
         />
       ),
       containerClass: "sm:col-span-2",
-    },
-    {
-      id: "cityState",
-      component: (
-        <InputField
-          defaultValue={personalDetail.cityState}
-          onChange={(input: string) => {
-            handlePersonalDetailChange(input, "cityState");
-          }}
-          label="City, State"
-          inputClass={fieldInputClass}
-        />
-      ),
     },
     {
       id: "country",
@@ -166,6 +163,10 @@ const PersonalDetail = ({
           <h1 className="text-lg font-semibold text-slate-900">
             Personal Information
           </h1>
+          <p className="mt-2 max-w-2xl text-sm leading-5 text-slate-600 sm:text-base">
+            Add your personal and contact details so employers can easily
+            identify and reach you.
+          </p>
         </div>
       </div>
 

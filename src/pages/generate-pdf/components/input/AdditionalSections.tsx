@@ -49,7 +49,7 @@ const AdditionalSections = ({
       {activeAdditionalSection === "default" ? (
         <ExpandableSectionContainer
           title="Additional Sections"
-          description="Include supplementary information that adds value to your candidacy, such as professional certifications and Trainings, or foreign language proficiencies"
+          description="Include supplementary information that adds value to your candidacy, such as professional certifications and Trainings, or foreign language proficiencies."
         >
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {listAdditionalSections.map((list) => (

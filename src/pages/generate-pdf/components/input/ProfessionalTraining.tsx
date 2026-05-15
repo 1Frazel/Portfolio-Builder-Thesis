@@ -74,6 +74,7 @@ const ProfessionalTraining = ({
     <ExpandableSectionContainer
       title="Professional Training"
       addButtonTitle="Add another professional training"
+      description="Detail any non-degree educational programs, corporate training, or specialized workshops you have completed. Focus on training that directly aligns with your career goals and adds tangible value to your skill set."
       onAdd={handleAddProfessionalTraining}
     >
       {professionalTraining.map((training, index) => {

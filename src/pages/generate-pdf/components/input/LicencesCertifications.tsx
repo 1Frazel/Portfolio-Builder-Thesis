@@ -75,7 +75,8 @@ const LicensesCertifications = ({
   return (
     <ExpandableSectionContainer
       title="Licenses / Certifications"
-      addButtonTitle="Add another license / certification"
+      addButtonTitle="Add another licenses / certifications"
+      description="List official credentials or industry-recognized licenses that validate your professional qualifications. Include the name of the certification, the issuing authority, and the date of acquisition or expiration to establish immediate credibility."
       onAdd={handleAddLicensesCertifications}
     >
       {licensesCertifications.map((license, index) => {

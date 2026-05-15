@@ -20,7 +20,7 @@ const ProfileSummary = ({
   return (
     <ExpandableSectionContainer
       title="Profile Summary"
-      description="Mention the roles and things you did in the past."
+      description="Write a concise, compelling overview of your professional identity. Highlight your core expertise, key accomplishments, and immediate career objectives in three to four sentences."
     >
       <TextArea
         defaultValue={profileSummary}

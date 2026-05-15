@@ -56,7 +56,7 @@ const Education = ({
   return (
     <ExpandableSectionContainer
       title="Education"
-      description="A varied education on your resume sums up the value that your learnings and background will bring to the job."
+      description="List your academic background, starting with your most recent or highest degree. Include relevant coursework, academic honors, or organizational involvement if you have limited professional experience."
       addButtonTitle="Add another education"
       onAdd={handleAddEducations}
     >

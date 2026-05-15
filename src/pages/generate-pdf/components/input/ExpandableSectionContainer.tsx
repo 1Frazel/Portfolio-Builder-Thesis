@@ -37,7 +37,7 @@ const ExpandableSectionContainer = ({
   childrenContainerClass = "mt-6 flex flex-col gap-4 sm:gap-5",
 }: ExpandableSectionContainerProps) => {
   return (
-    <section className="rounded-2xl border border-slate-200 bg-white px-4 py-5 shadow-lg sm:px-6 lg:px-8">
+    <section className="rounded-2xl border border-slate-200 bg-white px-4 py-5 shadow-lg sm:px-6 lg:px-8 h-full">
       <h2 className="text-[32px] font-bold leading-tight text-slate-900 sm:text-[36px]">
         {title}
       </h2>

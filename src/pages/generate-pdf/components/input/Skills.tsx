@@ -58,7 +58,7 @@ const Skills = ({
   return (
     <ExpandableSectionContainer
       title="Areas of Expertise"
-      description="Choose important skills that show you fit the position"
+      description="Highlight technical abilities, industry-specific tools, and relevant soft skills. Prioritize keywords that align directly with the requirements of the roles you are targeting to maximize ATS compatibility."
       addButtonTitle="Add another skills"
       onAdd={handleAddSkills}
     >

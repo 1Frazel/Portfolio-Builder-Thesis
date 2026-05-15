@@ -66,6 +66,7 @@ const WorkExperiences = ({
   return (
     <ExpandableSectionContainer
       title="Work Experiences"
+      description="Detail your professional history in reverse chronological order. Focus on quantifiable achievements, specific responsibilities, and the direct impact you made in your previous roles."
       addButtonTitle="Add another experiences"
       onAdd={handleAddMoreWorkExperiences}
     >
