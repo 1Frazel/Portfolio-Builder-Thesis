@@ -176,6 +176,7 @@ const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
     sectionLength: listAtsTemplateSection.length - 1,
     handlePreviousSection: () => setActiveSectionIndex((prev) => prev - 1),
     handleNextSection: () => setActiveSectionIndex((prev) => prev + 1),
+    setActiveSectionIndex,
     activeAdditionalSection,
     handleAdditionalSection: () => setActiveAdditionalSection("default"),
     docs: (
@@ -190,6 +191,10 @@ const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
         licensesCertifications={licensesCertifications}
       />
     ),
+    listAtsTemplateSection: listAtsTemplateSection.map((section) => ({
+      id: section.id,
+      title: section.title,
+    })),
   };
 };
 

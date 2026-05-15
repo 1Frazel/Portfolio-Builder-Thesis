@@ -1,6 +1,7 @@
 import Preview from "../../preview/Preview";
 
 import GeneratePdfFooter from "../../footer/GeneratePdfFooter";
+import ProgressBar from "../../ProgressBar";
 import useAtsTemplate from "../../../../../shared/hooks/useAtsTemplate";
 import Header from "../../../../../shared/components/Header";
 import useIsMobile from "../../../../../shared/hooks/useIsMobile";
@@ -14,9 +15,11 @@ const AtsTemplate = () => {
     sectionLength,
     handlePreviousSection,
     handleNextSection,
+    setActiveSectionIndex,
     activeAdditionalSection,
     handleAdditionalSection,
     docs,
+    listAtsTemplateSection,
   } = useAtsTemplate({ useMock: true });
 
   // mode: 'edit' | 'preview' — controls mobile view
@@ -55,6 +58,18 @@ const AtsTemplate = () => {
             </button>
           </div>
         </div>
+      )}
+
+      {!isMobile && (
+        <ProgressBar
+          steps={listAtsTemplateSection}
+          currentStepIndex={activeSectionIndex}
+          onStepClick={(index) => {
+            if (index >= 0 && index <= activeSectionIndex + 1) {
+              setActiveSectionIndex(index);
+            }
+          }}
+        />
       )}
 
       <div className="h-full w-full flex flex-col md:flex-row gap-6 md:gap-[24px] px-0 md:px-[24px] py-4">
