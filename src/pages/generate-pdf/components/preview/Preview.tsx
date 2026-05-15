@@ -69,7 +69,7 @@ const Preview = ({
   }`;
 
   return (
-    <div className="h-full flex flex-col w-full overflow-hidden py-[16px]">
+    <div className="h-full flex flex-col w-full overflow-hidden pb-[16px]">
       <div className="flex-1 min-h-0 overflow-auto">
         <div className="flex justify-center items-center px-2 pb-4">
           <div className={previewClass}>

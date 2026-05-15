@@ -30,79 +30,84 @@ const ProgressBar = ({
   onStepClick?: (stepIndex: number) => void;
 }) => {
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 py-4">
-      <div className="flex items-center justify-center gap-0 overflow-x-auto pb-2">
-        {steps.map((step, index) => (
-          <div key={step.id} className="flex items-center gap-0 flex-shrink-0">
-            {/* Step box */}
-            <button
-              onClick={() => onStepClick?.(index)}
-              className={`relative flex h-[42px] w-[42px] items-center justify-center rounded-[10px] transition-all duration-200 flex-shrink-0 ${
-                index < currentStepIndex
-                  ? "bg-[#2951A3] hover:bg-blue-700"
-                  : index === currentStepIndex
-                    ? "bg-[#2951A3]"
-                    : "bg-[#889290]"
-              }`}
-            >
-              {index < currentStepIndex ? (
-                <CheckmarkIcon />
-              ) : (
-                <div
-                  className={`h-[19px] w-[19px] rounded-[5px] ${
-                    index === currentStepIndex ? "bg-white" : "bg-white"
-                  }`}
-                />
-              )}
-            </button>
-
-            {/* Connector line - not after last step */}
-            {index < steps.length - 1 && (
-              <svg
-                width="70"
-                height="3"
-                viewBox="0 0 70 3"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="flex-shrink-0"
-              >
-                <path
-                  d="M0 1.5H70"
-                  stroke={index < currentStepIndex ? "#2951A3" : "#889290"}
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeDasharray="10 5"
-                />
-              </svg>
-            )}
-          </div>
-        ))}
-      </div>
-
-      {/* Step titles below */}
-      <div className="mt-3 flex items-start justify-center gap-0 overflow-x-auto">
-        <div className="flex gap-0 flex-shrink-0">
+    <div className="w-full px-4 py-4">
+      <div className="mx-auto w-full max-w-4xl bg-white rounded-2xl shadow-lg px-4 py-3">
+        <div className="flex items-center justify-center gap-0 overflow-x-auto pb-2">
           {steps.map((step, index) => (
             <div
               key={step.id}
               className="flex items-center gap-0 flex-shrink-0"
             >
-              <div className="text-center w-[42px]">
-                <p
-                  className={`text-xs font-medium transition-colors duration-200 ${
-                    index === currentStepIndex
-                      ? "text-[#2951A3]"
-                      : index < currentStepIndex
-                        ? "text-[#2951A3]"
-                        : "text-[#889290]"
-                  }`}
+              {/* Step box */}
+              <button
+                onClick={() => onStepClick?.(index)}
+                className={`relative flex h-[42px] w-[42px] items-center justify-center rounded-[10px] transition-all duration-200 flex-shrink-0 ${
+                  index < currentStepIndex
+                    ? "bg-[#2951A3] hover:bg-blue-700"
+                    : index === currentStepIndex
+                      ? "bg-[#2951A3]"
+                      : "bg-[#889290]"
+                }`}
+              >
+                {index < currentStepIndex ? (
+                  <CheckmarkIcon />
+                ) : (
+                  <div
+                    className={`h-[19px] w-[19px] rounded-[5px] ${
+                      index === currentStepIndex ? "bg-white" : "bg-white"
+                    }`}
+                  />
+                )}
+              </button>
+
+              {/* Connector line - not after last step */}
+              {index < steps.length - 1 && (
+                <svg
+                  width="70"
+                  height="3"
+                  viewBox="0 0 70 3"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="flex-shrink-0"
                 >
-                  {step.title}
-                </p>
-              </div>
-              {index < steps.length - 1 && <div className="w-[70px]" />}
+                  <path
+                    d="M0 1.5H70"
+                    stroke={index < currentStepIndex ? "#2951A3" : "#889290"}
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeDasharray="10 5"
+                  />
+                </svg>
+              )}
             </div>
           ))}
+        </div>
+
+        {/* Step titles below */}
+        <div className="mt-3 flex items-start justify-center gap-0 overflow-x-auto">
+          <div className="flex gap-0 flex-shrink-0">
+            {steps.map((step, index) => (
+              <div
+                key={step.id}
+                className="flex items-center gap-0 flex-shrink-0"
+              >
+                <div className="text-center w-[42px]">
+                  <p
+                    className={`text-xs font-medium transition-colors duration-200 ${
+                      index === currentStepIndex
+                        ? "text-[#2951A3]"
+                        : index < currentStepIndex
+                          ? "text-[#2951A3]"
+                          : "text-[#889290]"
+                    }`}
+                  >
+                    {step.title}
+                  </p>
+                </div>
+                {index < steps.length - 1 && <div className="w-[70px]" />}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
