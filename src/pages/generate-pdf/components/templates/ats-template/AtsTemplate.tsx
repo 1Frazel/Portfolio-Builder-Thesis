@@ -29,27 +29,31 @@ const AtsTemplate = () => {
 
       {/* Mobile mode toggle: visible only on mobile via hook */}
       {isMobile && (
-        <div className="flex items-center justify-center gap-4 mt-4">
-          <button
-            onClick={() => setMode("edit")}
-            className={`px-4 py-2 rounded-full border ${
-              mode === "edit"
-                ? "bg-white text-blue-700 shadow"
-                : "bg-transparent"
-            }`}
-          >
-            Edit
-          </button>
-          <button
-            onClick={() => setMode("preview")}
-            className={`px-4 py-2 rounded-full border ${
-              mode === "preview"
-                ? "bg-white text-blue-700 shadow"
-                : "bg-transparent"
-            }`}
-          >
-            Preview
-          </button>
+        <div className="mx-auto mt-4 w-[min(92vw,330px)] rounded-full bg-[#2951A3] p-1 shadow-sm">
+          <div className="grid grid-cols-2 gap-1">
+            <button
+              type="button"
+              onClick={() => setMode("edit")}
+              className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                mode === "edit"
+                  ? "bg-white text-[#2951A3] shadow"
+                  : "bg-transparent text-white"
+              }`}
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              onClick={() => setMode("preview")}
+              className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                mode === "preview"
+                  ? "bg-white text-[#2951A3] shadow"
+                  : "bg-transparent text-white"
+              }`}
+            >
+              Preview
+            </button>
+          </div>
         </div>
       )}
 
