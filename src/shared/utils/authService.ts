@@ -5,7 +5,7 @@ import {
   onAuthStateChanged,
   type User,
 } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth } from "./firebase";
 
 export async function signInWithGoogle(): Promise<User> {
   const provider = new GoogleAuthProvider();
