@@ -139,7 +139,15 @@ const MobileHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
       {isShowNav && (
         <div className="fixed inset-0 bg-[#D9D9D9] z-30 flex flex-col gap-4 p-4 pt-20">
           <div className="p-4 flex bg-[#FFFFFF] rounded-md flex items-center gap-4 ">
-            <Profile />
+            {user && user.photoURL ? (
+              <img
+                src={user.photoURL}
+                alt="avatar"
+                className="w-10 h-10 rounded-full"
+              />
+            ) : (
+              <Profile />
+            )}
             {user ? (
               <div className="flex flex-col">
                 <p className="text-xl text-[#2951A3] text-bold">
