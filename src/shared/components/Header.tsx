@@ -47,19 +47,34 @@ const Header = () => {
 };
 
 const DesktopHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
-  const { user, handleLogin, handleLogout } = useAuth();
+  const { user, handleLogin, handleLogout, loading } = useAuth();
 
+  console.log(user);
   return (
     <div className="bg-[#2951A3] p-2 md:px-[64px] md:py-[32px]">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-[16px]">
           <HomeIcon />
           {listHeader.map((header) => {
+            const isCreation = header.id === "creation";
+            if (isCreation && !user) {
+              return (
+                <button
+                  key={header.id}
+                  title="Sign in to create resumes"
+                  onClick={() => handleLogin()}
+                  className="text-white text-xs md:text-base opacity-60 cursor-pointer"
+                >
+                  {header.title}
+                </button>
+              );
+            }
+
             return (
               <Link
                 key={header.id}
                 to={header.path}
-                className="text-white text-xs md:text-base"
+                className={`text-white text-xs md:text-base ${isCreation && loading ? "opacity-50 pointer-events-none" : ""}`}
               >
                 {header.title}
               </Link>
@@ -69,6 +84,13 @@ const DesktopHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
         <div className="flex items-center md:gap-4">
           {user ? (
             <div className="flex items-center gap-3">
+              {user.photoURL ? (
+                <img
+                  src={user.photoURL}
+                  alt="avatar"
+                  className="w-8 h-8 rounded-full"
+                />
+              ) : null}
               <p className="text-white text-sm">
                 {user.displayName ?? user.email}
               </p>
@@ -80,7 +102,7 @@ const DesktopHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
             </div>
           ) : (
             <Button
-              text="Sign In"
+              text={loading ? "Loading..." : "Sign In"}
               buttonClass="text-white bg-[#FF9900]"
               handleClick={() => handleLogin()}
             />
@@ -140,16 +162,34 @@ const MobileHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
             <div className="border-b border-gray-200 py-2">
               <p className="text-xl text-[#2951A3] text-bold">Explore</p>
             </div>
-            {listHeader.map((header) => (
-              <Link
-                key={header.id}
-                to={header.path}
-                className="text-xl text-[#2951A3] text-bold"
-                onClick={handleNavClose}
-              >
-                {header.title}
-              </Link>
-            ))}
+            {listHeader.map((header) => {
+              const isCreation = header.id === "creation";
+              if (isCreation && !user) {
+                return (
+                  <button
+                    key={header.id}
+                    onClick={() => {
+                      handleNavClose();
+                      handleLogin();
+                    }}
+                    className="text-xl text-[#2951A3] text-bold opacity-60"
+                  >
+                    {header.title}
+                  </button>
+                );
+              }
+
+              return (
+                <Link
+                  key={header.id}
+                  to={header.path}
+                  className="text-xl text-[#2951A3] text-bold"
+                  onClick={handleNavClose}
+                >
+                  {header.title}
+                </Link>
+              );
+            })}
           </nav>
         </div>
       )}

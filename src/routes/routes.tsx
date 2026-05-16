@@ -4,6 +4,7 @@ import AtsTemplate from "../pages/generate-pdf/components/templates/ats-template
 import ParsePdf from "../pages/parse-pdf/ParsePdf";
 import CVList from "../pages/generation/CVList";
 import TemplateSelection from "../pages/generation/TemplateSelection";
+import RequireAuth from "../shared/hooks/RequireAuth";
 
 const routes = [
   {
@@ -13,19 +14,35 @@ const routes = [
   },
   {
     path: "creation",
-    element: <CVList />,
+    element: (
+      <RequireAuth>
+        <CVList />
+      </RequireAuth>
+    ),
   },
   {
     path: "creation/template-selection",
-    element: <TemplateSelection />,
+    element: (
+      <RequireAuth>
+        <TemplateSelection />
+      </RequireAuth>
+    ),
   },
   {
     path: "creation/edit",
-    element: <AtsTemplate />,
+    element: (
+      <RequireAuth>
+        <AtsTemplate />
+      </RequireAuth>
+    ),
   },
   {
     path: "creation/edit/:id",
-    element: <AtsTemplate />,
+    element: (
+      <RequireAuth>
+        <AtsTemplate />
+      </RequireAuth>
+    ),
   },
   {
     path: "checker",
