@@ -135,12 +135,8 @@ const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
           setSkills={setSkills}
           profileSummary={formData.profileSummary}
           setProfileSummary={setProfileSummary}
-          languages={formData.languages}
-          setLanguages={setLanguages}
-          professionalTraining={formData.professionalTraining}
-          setProfessionalTraining={setProfessionalTraining}
-          licensesCertifications={formData.licensesCertifications}
-          setLicensesCertifications={setLicensesCertifications}
+          additionalSections={formData.additionalSections}
+          listAdditionalSections={listAdditionalSections}
         />
       ),
     },

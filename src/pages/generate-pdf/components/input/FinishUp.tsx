@@ -1,21 +1,17 @@
-import type React from "react";
+import React from "react";
 
 import Education from "./Education";
-import Languages from "./Languages";
-import LicensesCertifications from "./LicencesCertifications";
 import PersonalDetail from "./PersonalDetails";
 import ProfileSummary from "./ProfileSummary";
-import ProfessionalTraining from "./ProfessionalTraining";
 import Skills from "./Skills";
 import WorkExperiences from "./WorkExperiences";
 import type {
+  IAdditionalSections,
   IEducation,
-  ILanguages,
-  ILicensesCertifications,
   IPersonalDetail,
-  IProfessionalTraining,
   ISkill,
   IWorkExperience,
+  IListSections,
 } from "../../interface/generatePdfInterface";
 
 const FinishUp = ({
@@ -29,12 +25,8 @@ const FinishUp = ({
   setSkills,
   profileSummary,
   setProfileSummary,
-  languages,
-  setLanguages,
-  professionalTraining,
-  setProfessionalTraining,
-  licensesCertifications,
-  setLicensesCertifications,
+  additionalSections,
+  listAdditionalSections,
 }: {
   personalDetail: IPersonalDetail;
   setPersonalDetail: React.Dispatch<React.SetStateAction<IPersonalDetail>>;
@@ -46,17 +38,14 @@ const FinishUp = ({
   setSkills: React.Dispatch<React.SetStateAction<ISkill[]>>;
   profileSummary: string;
   setProfileSummary: React.Dispatch<React.SetStateAction<string>>;
-  languages: ILanguages[];
-  setLanguages: React.Dispatch<React.SetStateAction<ILanguages[]>>;
-  professionalTraining: IProfessionalTraining[];
-  setProfessionalTraining: React.Dispatch<
-    React.SetStateAction<IProfessionalTraining[]>
-  >;
-  licensesCertifications: ILicensesCertifications[];
-  setLicensesCertifications: React.Dispatch<
-    React.SetStateAction<ILicensesCertifications[]>
-  >;
+  additionalSections: IAdditionalSections[];
+  listAdditionalSections: IListSections[];
 }) => {
+  const selectedAdditionalSections = listAdditionalSections.filter(
+    (section) =>
+      additionalSections.find((item) => item.id === section.id)?.isSet ?? false,
+  );
+
   return (
     <div className="flex h-[calc(100vh-220px)] min-h-0 flex-col overflow-hidden p-2">
       <div className="min-h-0 flex-1 space-y-4 overflow-auto">
@@ -81,21 +70,17 @@ const FinishUp = ({
           setProfileSummary={setProfileSummary}
           summaryMode
         />
-        <Languages
-          languages={languages}
-          setLanguages={setLanguages}
-          summaryMode
-        />
-        <LicensesCertifications
-          licensesCertifications={licensesCertifications}
-          setLicensesCertifications={setLicensesCertifications}
-          summaryMode
-        />
-        <ProfessionalTraining
-          professionalTraining={professionalTraining}
-          setProfessionalTraining={setProfessionalTraining}
-          summaryMode
-        />
+        {selectedAdditionalSections.length > 0 ? (
+          selectedAdditionalSections.map((section) => (
+            <React.Fragment key={section.id}>
+              {React.cloneElement(section.component, { summaryMode: true })}
+            </React.Fragment>
+          ))
+        ) : (
+          <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-4 py-5 text-sm text-slate-500">
+            No additional sections were selected.
+          </div>
+        )}
       </div>
     </div>
   );
