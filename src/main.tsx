@@ -4,13 +4,16 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import routes from "./routes/routes.tsx";
 import { AuthProvider } from "./shared/hooks/AuthContext.tsx";
+import { ToastProvider } from "./shared/hooks/ToastContext";
 
 const router = createBrowserRouter(routes);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <ToastProvider>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </ToastProvider>
   </StrictMode>,
 );

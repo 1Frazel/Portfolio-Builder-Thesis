@@ -62,7 +62,8 @@ const DesktopHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
                 <button
                   key={header.id}
                   title="Sign in to create resumes"
-                  onClick={() => handleLogin()}
+                  onClick={() => !loading && handleLogin()}
+                  aria-disabled={loading}
                   className="text-white text-xs md:text-base opacity-60 cursor-pointer"
                 >
                   {header.title}
@@ -105,6 +106,8 @@ const DesktopHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
               text={loading ? "Loading..." : "Sign In"}
               buttonClass="text-white bg-[#FF9900]"
               handleClick={() => handleLogin()}
+              disabled={loading}
+              isLoading={loading}
             />
           )}
         </div>
@@ -115,7 +118,7 @@ const DesktopHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
 
 const MobileHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
   const [isShowNav, setIsShowNav] = useState(false);
-  const { user, handleLogin, handleLogout } = useAuth();
+  const { user, handleLogin, handleLogout, loading } = useAuth();
 
   const handleNavClose = () => {
     setIsShowNav(false);
@@ -151,10 +154,38 @@ const MobileHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
               </div>
             ) : (
               <button
-                onClick={() => handleLogin()}
-                className="text-xl text-[#2951A3] text-bold"
+                onClick={() => !loading && handleLogin()}
+                disabled={loading}
+                aria-disabled={loading}
+                className={`text-xl text-[#2951A3] text-bold ${loading ? "opacity-60 pointer-events-none" : ""}`}
               >
-                Sign In
+                {loading ? (
+                  <span className="flex items-center gap-2">
+                    <svg
+                      className="animate-spin h-4 w-4 text-[#2951A3]"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                      ></path>
+                    </svg>
+                    Sign In
+                  </span>
+                ) : (
+                  "Sign In"
+                )}
               </button>
             )}
           </div>
@@ -169,11 +200,37 @@ const MobileHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
                   <button
                     key={header.id}
                     onClick={() => {
-                      handleNavClose();
-                      handleLogin();
+                      if (!loading) {
+                        handleNavClose();
+                        handleLogin();
+                      }
                     }}
-                    className="text-xl text-[#2951A3] text-bold opacity-60"
+                    disabled={loading}
+                    aria-disabled={loading}
+                    className={`flex items-center gap-2 text-xl text-[#2951A3] text-bold ${loading ? "opacity-60 pointer-events-none" : "opacity-60"}`}
                   >
+                    {loading && (
+                      <svg
+                        className="animate-spin h-4 w-4 text-[#2951A3]"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                        ></path>
+                      </svg>
+                    )}
                     {header.title}
                   </button>
                 );

@@ -2,10 +2,12 @@ import { useEffect, useState, type ReactNode } from "react";
 import type { User } from "firebase/auth";
 import { logout, onAuthChange, signInWithGoogle } from "../utils/authService";
 import { AuthContext } from "./useAuth";
+import { useToast } from "./useToast";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const { showToast } = useToast();
 
   useEffect(() => {
     const unsubscribe = onAuthChange((u) => {
@@ -17,8 +19,29 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const handleLogin = async () => {
     setLoading(true);
+    // immediate feedback and prevent duplicate clicks
+    showToast("Opening Google sign-in…", "info");
     try {
       await signInWithGoogle();
+      showToast("Signed in successfully", "success");
+    } catch (err: unknown) {
+      const code = (
+        err && typeof err === "object" && "code" in err
+          ? (err as { code?: string }).code
+          : undefined
+      ) as string | undefined;
+      const msg =
+        (err && typeof err === "object" && "message" in err
+          ? ((err as { message?: string }).message ?? String(err))
+          : String(err)) || "Failed to sign in";
+      if (
+        code === "auth/popup-closed-by-user" ||
+        code === "auth/cancelled-popup-request"
+      ) {
+        showToast("Sign-in cancelled", "error");
+      } else {
+        showToast(msg, "error");
+      }
     } finally {
       setLoading(false);
     }
