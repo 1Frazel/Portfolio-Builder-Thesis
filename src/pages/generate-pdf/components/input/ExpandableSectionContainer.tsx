@@ -40,9 +40,13 @@ const ExpandableSectionContainer = ({
 }: ExpandableSectionContainerProps) => {
   const [isContentVisible, setIsContentVisible] = useState(true);
   const shouldShowContent = !summaryMode || isContentVisible;
+  const sectionClassName =
+    summaryMode && !isContentVisible
+      ? "rounded-2xl border border-slate-200 bg-white px-4 py-5 shadow-lg sm:px-6 lg:px-8"
+      : "flex h-[calc(100vh-220px)] min-h-0 flex-col rounded-2xl border border-slate-200 bg-white px-4 py-5 shadow-lg sm:px-6 lg:px-8 overflow-hidden";
 
   return (
-    <section className="flex h-[calc(100vh-220px)] min-h-0 flex-col rounded-2xl border border-slate-200 bg-white px-4 py-5 shadow-lg sm:px-6 lg:px-8 overflow-hidden">
+    <section className={sectionClassName}>
       <div className="flex items-start justify-between gap-3">
         <h2 className="text-[32px] font-bold leading-tight text-slate-900 sm:text-[36px]">
           {title}
