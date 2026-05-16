@@ -10,51 +10,22 @@ import Skills from "../../pages/generate-pdf/components/input/Skills";
 import ProfileSummary from "../../pages/generate-pdf/components/input/ProfileSummary";
 import AdditionalSections from "../../pages/generate-pdf/components/input/AdditionalSections";
 import AtsDocument from "../../pages/generate-pdf/components/templates/ats-template/AtsDocument";
-import {
-  DEFAULT_ADDITIONAL_SECTIONS,
-  DEFAULT_EDUCATION,
-  DEFAULT_LANGUAGES,
-  DEFAULT_LICENSES_CERTIFICATION,
-  DEFAULT_PERSONAL_DETAIL,
-  DEFAULT_PROFESSIONAL_TRAINING,
-  DEFAULT_PROFILE_SUMMARY,
-  DEFAULT_SKILLS,
-  DEFAULT_WORK_EXPERIENCES,
-  mocks,
-} from "../../pages/generate-pdf/const/generatePdfConst";
+import { useFormData } from "./useFormData";
+import FinishUp from "../../pages/generate-pdf/components/input/FinishUp";
 
 const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
-  const [personalDetail, setPersonalDetail] = useState(
-    useMock ? mocks.DEFAULT_PERSONAL_DETAIL : DEFAULT_PERSONAL_DETAIL,
-  );
-  const [workExperiences, setWorkExperiences] = useState(
-    useMock ? mocks.DEFAULT_WORK_EXPERIENCES : [DEFAULT_WORK_EXPERIENCES],
-  );
-  const [educations, setEducations] = useState(
-    useMock ? mocks.DEFAULT_EDUCATION : [DEFAULT_EDUCATION],
-  );
-  const [skills, setSkills] = useState(
-    useMock ? mocks.DEFAULT_SKILLS : [DEFAULT_SKILLS],
-  );
-  const [profileSummary, setProfileSummary] = useState(
-    useMock ? mocks.DEFAULT_PROFILE_SUMMARY : DEFAULT_PROFILE_SUMMARY,
-  );
-  const [additionalSections, setAdditionalSections] = useState(
-    DEFAULT_ADDITIONAL_SECTIONS,
-  );
-  const [languages, setLanguages] = useState(
-    useMock ? mocks.DEFAULT_LANGUAGES : [DEFAULT_LANGUAGES],
-  );
-  const [professionalTraining, setProfessionalTraining] = useState(
-    useMock
-      ? mocks.DEFAULT_PROFESSIONAL_TRAINING
-      : [DEFAULT_PROFESSIONAL_TRAINING],
-  );
-  const [licensesCertifications, setLicensesCertification] = useState(
-    useMock
-      ? mocks.DEFAULT_LICENSES_CERTIFICATION
-      : [DEFAULT_LICENSES_CERTIFICATION],
-  );
+  const {
+    formData,
+    setLanguages,
+    setWorkExperiences,
+    setEducations,
+    setSkills,
+    setProfileSummary,
+    setPersonalDetail,
+    setAdditionalSections,
+    setProfessionalTraining,
+    setLicensesCertifications,
+  } = useFormData({ useMock });
 
   const [activeSectionIndex, setActiveSectionIndex] = useState(0);
   const [activeAdditionalSection, setActiveAdditionalSection] =
@@ -65,7 +36,7 @@ const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
       id: "language",
       title: "Language",
       component: (
-        <Languages languages={languages} setLanguages={setLanguages} />
+        <Languages languages={formData.languages} setLanguages={setLanguages} />
       ),
     },
     {
@@ -73,8 +44,8 @@ const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
       title: "Licenses / Certifications",
       component: (
         <LicensesCertifications
-          licensesCertifications={licensesCertifications}
-          setLicensesCertifications={setLicensesCertification}
+          licensesCertifications={formData.licensesCertifications}
+          setLicensesCertifications={setLicensesCertifications}
         />
       ),
     },
@@ -83,7 +54,7 @@ const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
       title: "Professional Training",
       component: (
         <ProfessionalTraining
-          professionalTraining={professionalTraining}
+          professionalTraining={formData.professionalTraining}
           setProfessionalTraining={setProfessionalTraining}
         />
       ),
@@ -96,7 +67,7 @@ const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
       title: "Personal Information",
       component: (
         <PersonalDetail
-          personalDetail={personalDetail}
+          personalDetail={formData.personalDetail}
           setPersonalDetail={setPersonalDetail}
         />
       ),
@@ -106,7 +77,7 @@ const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
       title: "Work Experiences",
       component: (
         <WorkExperiences
-          workExperiences={workExperiences}
+          workExperiences={formData.workExperiences}
           setWorkExperience={setWorkExperiences}
         />
       ),
@@ -115,20 +86,23 @@ const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
       id: "education",
       title: "Education",
       component: (
-        <Education educations={educations} setEducations={setEducations} />
+        <Education
+          educations={formData.educations}
+          setEducations={setEducations}
+        />
       ),
     },
     {
       id: "skills",
       title: "Skills",
-      component: <Skills skills={skills} setSkills={setSkills} />,
+      component: <Skills skills={formData.skills} setSkills={setSkills} />,
     },
     {
       id: "profileSummary",
       title: "Profile Summary",
       component: (
         <ProfileSummary
-          profileSummary={profileSummary}
+          profileSummary={formData.profileSummary}
           setProfileSummary={setProfileSummary}
         />
       ),
@@ -138,11 +112,31 @@ const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
       title: "Additional Sections",
       component: (
         <AdditionalSections
-          additionalSections={additionalSections}
+          additionalSections={formData.additionalSections}
           setAdditionalSections={setAdditionalSections}
           listAdditionalSections={listAdditionalSections}
           activeAdditionalSection={activeAdditionalSection}
           setActiveAdditionalSection={setActiveAdditionalSection}
+        />
+      ),
+    },
+    {
+      id: "finishUp",
+      title: "Finish Up",
+      component: (
+        <FinishUp
+          personalDetail={formData.personalDetail}
+          setPersonalDetail={setPersonalDetail}
+          workExperiences={formData.workExperiences}
+          setWorkExperiences={setWorkExperiences}
+          educations={formData.educations}
+          setEducations={setEducations}
+          skills={formData.skills}
+          setSkills={setSkills}
+          profileSummary={formData.profileSummary}
+          setProfileSummary={setProfileSummary}
+          additionalSections={formData.additionalSections}
+          listAdditionalSections={listAdditionalSections}
         />
       ),
     },
@@ -157,18 +151,6 @@ const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
 
   const nextComponent = listAtsTemplateSection[activeSectionIndex].component;
 
-  console.log({
-    personalDetail,
-    workExperiences,
-    educations,
-    skills,
-    profileSummary,
-    additionalSections,
-    languages,
-    professionalTraining,
-    licensesCertifications,
-  });
-
   return {
     nextComponent,
     nextSectionTitle,
@@ -176,20 +158,25 @@ const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
     sectionLength: listAtsTemplateSection.length - 1,
     handlePreviousSection: () => setActiveSectionIndex((prev) => prev - 1),
     handleNextSection: () => setActiveSectionIndex((prev) => prev + 1),
+    setActiveSectionIndex,
     activeAdditionalSection,
     handleAdditionalSection: () => setActiveAdditionalSection("default"),
     docs: (
       <AtsDocument
-        personalDetail={personalDetail}
-        profileSummary={profileSummary}
-        workExperiences={workExperiences}
-        educations={educations}
-        skills={skills}
-        languages={languages}
-        professionalTraining={professionalTraining}
-        licensesCertifications={licensesCertifications}
+        personalDetail={formData.personalDetail}
+        profileSummary={formData.profileSummary}
+        workExperiences={formData.workExperiences}
+        educations={formData.educations}
+        skills={formData.skills}
+        languages={formData.languages}
+        professionalTraining={formData.professionalTraining}
+        licensesCertifications={formData.licensesCertifications}
       />
     ),
+    listAtsTemplateSection: listAtsTemplateSection.map((section) => ({
+      id: section.id,
+      title: section.title,
+    })),
   };
 };
 

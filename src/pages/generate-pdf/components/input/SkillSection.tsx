@@ -2,8 +2,7 @@ import { useDebouncedCallback } from "use-debounce";
 import InputField from "./InputField";
 
 import SkillInput from "./SkillInput";
-import { HiddenSection } from "./HiddenSectionWrapper";
-import InputWrapper from "./InputWrapper";
+import { ExpandableSectionItem } from "./ExpandableSectionContainer";
 import type { ISkill } from "../../interface/generatePdfInterface";
 
 const SkillSection = ({
@@ -32,6 +31,9 @@ const SkillSection = ({
     500,
   );
 
+  const fieldInputClass =
+    "w-full rounded-md border border-slate-200 bg-slate-100 px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100";
+
   const listSkills = [
     {
       id: "name",
@@ -42,6 +44,7 @@ const SkillSection = ({
             handleTextChange(skill.id, "name", input);
           }}
           label="Name"
+          inputClass={fieldInputClass}
         />
       ),
     },
@@ -55,31 +58,27 @@ const SkillSection = ({
           }}
         />
       ),
-      containerClass: "col-span-2",
     },
   ];
 
   return (
-    <HiddenSection
-      headerTitle={skill.name ? skill.name : "(Not Specified)"}
-      headerDescription={skill.expertise && skill.expertise}
-      handleDelBtn={() => handleDeleteSkills(skill.id)}
-      handleSectionUp={handleSectionUp}
-      handleSectionDown={handleSectionDown}
+    <ExpandableSectionItem
+      title={skill.name ? skill.name : "(Not Specified)"}
+      description={skill.expertise && skill.expertise}
+      onDelete={() => handleDeleteSkills(skill.id)}
+      onMoveUp={handleSectionUp}
+      onMoveDown={handleSectionDown}
       index={index}
       isFirst={isFirst}
       isLast={isLast}
+      defaultExpanded={index === 0}
     >
-      <InputWrapper useGrid>
+      <div className="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2">
         {listSkills.map((list) => {
-          return (
-            <div key={list.id} className={list.containerClass}>
-              {list.component}
-            </div>
-          );
+          return <div key={list.id}>{list.component}</div>;
         })}
-      </InputWrapper>
-    </HiddenSection>
+      </div>
+    </ExpandableSectionItem>
   );
 };
 

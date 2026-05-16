@@ -1,16 +1,18 @@
 import type React from "react";
 
-import { HiddenSectionWrapper } from "./HiddenSectionWrapper";
 import SkillSection from "./SkillSection";
+import { ExpandableSectionContainer } from "./ExpandableSectionContainer";
 import type { ISkill } from "../../interface/generatePdfInterface";
 import { DEFAULT_SKILLS } from "../../const/generatePdfConst";
 
 const Skills = ({
   skills,
   setSkills,
+  summaryMode = false,
 }: {
   skills: ISkill[];
   setSkills: React.Dispatch<React.SetStateAction<ISkill[]>>;
+  summaryMode?: boolean;
 }) => {
   const handleEditSkills = (id: number, key: string, value: string) => {
     const newSkills = skills.map((skill) => {
@@ -56,11 +58,12 @@ const Skills = ({
   };
 
   return (
-    <HiddenSectionWrapper
-      containerTitle="Areas of Expertise"
-      containerDescription="Choose important skills that show you fit the position"
-      addMoreSectionTitle="Add another skills"
-      handleAddMoreSection={handleAddSkills}
+    <ExpandableSectionContainer
+      title="Areas of Expertise"
+      description="Highlight technical abilities, industry-specific tools, and relevant soft skills. Prioritize keywords that align directly with the requirements of the roles you are targeting to maximize ATS compatibility."
+      addButtonTitle="Add another skills"
+      onAdd={handleAddSkills}
+      summaryMode={summaryMode}
     >
       {skills.map((skill, index) => {
         return (
@@ -77,7 +80,7 @@ const Skills = ({
           />
         );
       })}
-    </HiddenSectionWrapper>
+    </ExpandableSectionContainer>
   );
 };
 

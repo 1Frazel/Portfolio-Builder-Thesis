@@ -1,16 +1,18 @@
 import { DEFAULT_PROFESSIONAL_TRAINING } from "../../const/generatePdfConst";
 import type { IProfessionalTraining } from "../../interface/generatePdfInterface";
-import { HiddenSectionWrapper } from "./HiddenSectionWrapper";
+import { ExpandableSectionContainer } from "./ExpandableSectionContainer";
 import ProfessionalTrainingSection from "./ProfessionalTrainingSection";
 
 const ProfessionalTraining = ({
   professionalTraining,
   setProfessionalTraining,
+  summaryMode = false,
 }: {
   professionalTraining: IProfessionalTraining[];
   setProfessionalTraining: React.Dispatch<
     React.SetStateAction<IProfessionalTraining[]>
   >;
+  summaryMode?: boolean;
 }) => {
   const handleEditProfessionalTraining = (
     id: number,
@@ -71,10 +73,12 @@ const ProfessionalTraining = ({
   };
 
   return (
-    <HiddenSectionWrapper
-      containerTitle="Professional Training"
-      addMoreSectionTitle="Add another professional training"
-      handleAddMoreSection={handleAddProfessionalTraining}
+    <ExpandableSectionContainer
+      title="Professional Training"
+      addButtonTitle="Add another professional training"
+      description="Detail any non-degree educational programs, corporate training, or specialized workshops you have completed. Focus on training that directly aligns with your career goals and adds tangible value to your skill set."
+      onAdd={handleAddProfessionalTraining}
+      summaryMode={summaryMode}
     >
       {professionalTraining.map((training, index) => {
         return (
@@ -91,7 +95,7 @@ const ProfessionalTraining = ({
           />
         );
       })}
-    </HiddenSectionWrapper>
+    </ExpandableSectionContainer>
   );
 };
 

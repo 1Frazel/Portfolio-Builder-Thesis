@@ -1,14 +1,16 @@
 import { DEFAULT_EDUCATION } from "../../const/generatePdfConst";
 import type { IEducation } from "../../interface/generatePdfInterface";
 import EducationSection from "./EducationSection";
-import { HiddenSectionWrapper } from "./HiddenSectionWrapper";
+import { ExpandableSectionContainer } from "./ExpandableSectionContainer";
 
 const Education = ({
   educations,
   setEducations,
+  summaryMode = false,
 }: {
   educations: IEducation[];
   setEducations: React.Dispatch<React.SetStateAction<IEducation[]>>;
+  summaryMode?: boolean;
 }) => {
   const handleEditEducations = (id: number, key: string, value: string) => {
     const updatedWorkExperiences = educations.map((education) => {
@@ -54,11 +56,12 @@ const Education = ({
   };
 
   return (
-    <HiddenSectionWrapper
-      containerTitle="Education"
-      containerDescription="A varied education on your resume sums up the value that your learnings and background will bring to the job."
-      addMoreSectionTitle="Add another education"
-      handleAddMoreSection={handleAddEducations}
+    <ExpandableSectionContainer
+      title="Education"
+      description="List your academic background, starting with your most recent or highest degree. Include relevant coursework, academic honors, or organizational involvement if you have limited professional experience."
+      addButtonTitle="Add another education"
+      onAdd={handleAddEducations}
+      summaryMode={summaryMode}
     >
       {educations.map((education, index) => {
         return (
@@ -75,7 +78,7 @@ const Education = ({
           />
         );
       })}
-    </HiddenSectionWrapper>
+    </ExpandableSectionContainer>
   );
 };
 

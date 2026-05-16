@@ -1,5 +1,5 @@
 import { pdf } from "@react-pdf/renderer";
-import { useState, type JSX } from "react";
+import { useState, useEffect, type JSX } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
@@ -21,6 +21,34 @@ const Preview = ({
 }) => {
   const [pageAmount, setPageAmount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [viewportWidth, setViewportWidth] = useState(() => {
+    if (typeof window === "undefined") return 1024;
+    return window.innerWidth;
+  });
+
+  const calculateScale = (width: number): number => {
+    if (width < 400) return 0.55;
+    if (width < 600) return 0.4 + ((width - 400) / 200) * 0.15;
+    if (width < 768) return 0.5 + ((width - 600) / 168) * 0.2;
+    if (width < 1024) return 0.55 + ((width - 768) / 256) * 0.3;
+    if (width < 1100) return 0.6 + ((width - 1024) / 76) * 0.04;
+    if (width < 1180) return 0.7 + ((width - 1100) / 80) * 0.04;
+    if (width < 1280) return 0.8 + ((width - 1180) / 100) * 0.04;
+    if (width < 1360) return 0.85 + ((width - 1280) / 80) * 0.05; // 1.25 to 1.30
+    if (width < 1480) return 0.9 + ((width - 1360) / 120) * 0.05; // 1.30 to 1.35
+    return 1.25;
+  };
+
+  const scale = calculateScale(viewportWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setViewportWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const render = useAsync(async () => {
     const blob = await pdf(docs).toBlob();
@@ -34,29 +62,41 @@ const Preview = ({
     setCurrentPage((prev) => Math.min(prev, document.numPages));
   };
 
-  const previewClass = `shadow-lg flex 
-  justify-center items-center
-  h-fit w-fit`;
+  const isMobile = viewportWidth < 768;
+
+  const previewClass = `flex justify-center ${
+    isMobile ? "w-[792px] max-w-full" : "w-[792px] max-w-full"
+  }`;
 
   return (
-    <div className="h-full flex flex-col gap-[16px] basis-1/2 py-[16px] overflow-auto">
-      <div className="flex justify-center items-center grow">
-        <div className={previewClass}>
-          <Document
-            key={render.value}
-            file={render.value}
-            onLoadSuccess={onDocumentLoad}
-          >
-            <Page key={currentPage} pageNumber={currentPage} scale={1.25} />
-          </Document>
+    <div className="h-full flex flex-col w-full overflow-hidden pb-[16px]">
+      <div className="flex-1 min-h-0 overflow-auto">
+        <div className="flex justify-center items-center px-2 pb-4">
+          <div className={previewClass}>
+            <Document
+              key={render.value}
+              file={render.value}
+              onLoadSuccess={onDocumentLoad}
+              loading={null}
+            >
+              <Page
+                key={currentPage}
+                pageNumber={currentPage}
+                scale={scale}
+                loading={null}
+              />
+            </Document>
+          </div>
         </div>
       </div>
 
-      <PreviewNavigator
-        currentPage={currentPage}
-        pageAmount={pageAmount}
-        setCurrentPage={setCurrentPage}
-      />
+      <div className="bottom-0 z-10 flex justify-center py-3 ">
+        <PreviewNavigator
+          currentPage={currentPage}
+          pageAmount={pageAmount}
+          setCurrentPage={setCurrentPage}
+        />
+      </div>
     </div>
   );
 };

@@ -1,11 +1,9 @@
 import { useDebouncedCallback } from "use-debounce";
 
-import InputWrapper from "./InputWrapper";
-
 import InputField from "./InputField";
 import DateInput from "./DateInput";
 import TextArea from "./TextArea";
-import { HiddenSection } from "./HiddenSectionWrapper";
+import { ExpandableSectionItem } from "./ExpandableSectionContainer";
 import type { IWorkExperience } from "../../interface/generatePdfInterface";
 
 const WorkSection = ({
@@ -34,6 +32,9 @@ const WorkSection = ({
     500,
   );
 
+  const fieldInputClass =
+    "w-full rounded-md border border-slate-200 bg-slate-100 px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100";
+
   const listWorkExperiences = [
     {
       id: "jobTitle",
@@ -44,6 +45,7 @@ const WorkSection = ({
             handleTextChange(experience.id, "jobTitle", input);
           }}
           label="Job Title"
+          inputClass={fieldInputClass}
         />
       ),
     },
@@ -56,6 +58,7 @@ const WorkSection = ({
             handleTextChange(experience.id, "employer", input);
           }}
           label="Employer"
+          inputClass={fieldInputClass}
         />
       ),
     },
@@ -73,6 +76,7 @@ const WorkSection = ({
           }}
           label="Start & End Date"
           placeholder="MM // YYYY"
+          inputClass={fieldInputClass}
         />
       ),
     },
@@ -85,6 +89,7 @@ const WorkSection = ({
             handleTextChange(experience.id, "address", input);
           }}
           label="Address"
+          inputClass={fieldInputClass}
         />
       ),
     },
@@ -97,36 +102,36 @@ const WorkSection = ({
             handleTextChange(experience.id, "description", input);
           }}
           label="Description"
+          inputClass={fieldInputClass}
         />
       ),
-      containerClass: "col-span-2",
+      containerClass: "sm:col-span-2",
     },
   ];
 
   return (
-    <HiddenSection
-      headerTitle={
-        experience.jobTitle ? experience.jobTitle : "(Not Specified)"
-      }
-      headerDescription={
+    <ExpandableSectionItem
+      title={experience.jobTitle ? experience.jobTitle : "(Not Specified)"}
+      description={
         experience.startAt &&
         `${experience.startAt} - ${experience.endsAt ? experience.endsAt : "Now"}`
       }
-      handleDelBtn={() => handleDeleteWorkExperiences(experience.id)}
-      handleSectionUp={handleSectionUp}
-      handleSectionDown={handleSectionDown}
+      onDelete={() => handleDeleteWorkExperiences(experience.id)}
+      onMoveUp={handleSectionUp}
+      onMoveDown={handleSectionDown}
       index={index}
       isFirst={isFirst}
       isLast={isLast}
+      defaultExpanded={index === 0}
     >
-      <InputWrapper useGrid>
+      <div className="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2">
         {listWorkExperiences.map((list) => (
           <div key={list.id} className={list.containerClass}>
             {list.component}
           </div>
         ))}
-      </InputWrapper>
-    </HiddenSection>
+      </div>
+    </ExpandableSectionItem>
   );
 };
 

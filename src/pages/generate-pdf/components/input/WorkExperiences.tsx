@@ -1,15 +1,17 @@
 import { DEFAULT_WORK_EXPERIENCES } from "../../const/generatePdfConst";
 import type { IWorkExperience } from "../../interface/generatePdfInterface";
-import { HiddenSectionWrapper } from "./HiddenSectionWrapper";
+import { ExpandableSectionContainer } from "./ExpandableSectionContainer";
 
 import WorkSection from "./WorkSection";
 
 const WorkExperiences = ({
   workExperiences,
   setWorkExperience,
+  summaryMode = false,
 }: {
   workExperiences: IWorkExperience[];
   setWorkExperience: React.Dispatch<React.SetStateAction<IWorkExperience[]>>;
+  summaryMode?: boolean;
 }) => {
   const handleEditWorkExperiences = (
     id: number,
@@ -64,11 +66,12 @@ const WorkExperiences = ({
   };
 
   return (
-    <HiddenSectionWrapper
-      containerTitle="Work Experiences"
-      containerDescription="Show your relevant experiences."
-      addMoreSectionTitle="Add another experiences"
-      handleAddMoreSection={handleAddMoreWorkExperiences}
+    <ExpandableSectionContainer
+      title="Work Experiences"
+      description="Detail your professional history in reverse chronological order. Focus on quantifiable achievements, specific responsibilities, and the direct impact you made in your previous roles."
+      addButtonTitle="Add another experiences"
+      onAdd={handleAddMoreWorkExperiences}
+      summaryMode={summaryMode}
     >
       {workExperiences.map((experience, index) => {
         return (
@@ -85,7 +88,7 @@ const WorkExperiences = ({
           />
         );
       })}
-    </HiddenSectionWrapper>
+    </ExpandableSectionContainer>
   );
 };
 

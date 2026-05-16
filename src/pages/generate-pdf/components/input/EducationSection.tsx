@@ -3,8 +3,7 @@ import { useDebouncedCallback } from "use-debounce";
 import InputField from "./InputField";
 import DateInput from "./DateInput";
 import TextArea from "./TextArea";
-import { HiddenSection } from "./HiddenSectionWrapper";
-import InputWrapper from "./InputWrapper";
+import { ExpandableSectionItem } from "./ExpandableSectionContainer";
 import type { IEducation } from "../../interface/generatePdfInterface";
 
 const EducationSection = ({
@@ -33,6 +32,9 @@ const EducationSection = ({
     500,
   );
 
+  const fieldInputClass =
+    "w-full rounded-md border border-slate-200 bg-slate-100 px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100";
+
   const listEducations = [
     {
       id: "school",
@@ -43,6 +45,7 @@ const EducationSection = ({
             handleTextChange(education.id, "school", input)
           }
           label="School"
+          inputClass={fieldInputClass}
         />
       ),
     },
@@ -55,6 +58,7 @@ const EducationSection = ({
             handleTextChange(education.id, "degree", input)
           }
           label="Degree"
+          inputClass={fieldInputClass}
         />
       ),
     },
@@ -72,6 +76,7 @@ const EducationSection = ({
           }}
           label="Start & End Date"
           placeholder="MM // YYYY"
+          inputClass={fieldInputClass}
         />
       ),
     },
@@ -84,6 +89,7 @@ const EducationSection = ({
             handleTextChange(education.id, "city", input)
           }
           label="City"
+          inputClass={fieldInputClass}
         />
       ),
     },
@@ -96,34 +102,36 @@ const EducationSection = ({
             handleTextChange(education.id, "description", input);
           }}
           label="Description"
+          inputClass={fieldInputClass}
         />
       ),
-      containerClass: "col-span-2",
+      containerClass: "sm:col-span-2",
     },
   ];
 
   return (
-    <HiddenSection
-      headerTitle={education.school ? education.school : "(Not Specified)"}
-      headerDescription={
+    <ExpandableSectionItem
+      title={education.school ? education.school : "(Not Specified)"}
+      description={
         education.startAt &&
         `${education.startAt} - ${education.endsAt ? education.endsAt : "Now"}`
       }
-      handleDelBtn={() => handleDeleteEducations(education.id)}
-      handleSectionUp={handleSectionUp}
-      handleSectionDown={handleSectionDown}
+      onDelete={() => handleDeleteEducations(education.id)}
+      onMoveUp={handleSectionUp}
+      onMoveDown={handleSectionDown}
       index={index}
       isFirst={isFirst}
       isLast={isLast}
+      defaultExpanded={index === 0}
     >
-      <InputWrapper useGrid>
+      <div className="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2">
         {listEducations.map((list) => (
           <div key={list.id} className={list.containerClass}>
             {list.component}
           </div>
         ))}
-      </InputWrapper>
-    </HiddenSection>
+      </div>
+    </ExpandableSectionItem>
   );
 };
 

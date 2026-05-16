@@ -1,18 +1,20 @@
 import type React from "react";
 import type { ILicensesCertifications } from "../../interface/generatePdfInterface";
 
-import { HiddenSectionWrapper } from "./HiddenSectionWrapper";
 import LicensesCertificationsSection from "./LicensesCertificationsSection";
 import { DEFAULT_LICENSES_CERTIFICATION } from "../../const/generatePdfConst";
+import { ExpandableSectionContainer } from "./ExpandableSectionContainer";
 
 const LicensesCertifications = ({
   licensesCertifications,
   setLicensesCertifications,
+  summaryMode = false,
 }: {
   licensesCertifications: ILicensesCertifications[];
   setLicensesCertifications: React.Dispatch<
     React.SetStateAction<ILicensesCertifications[]>
   >;
+  summaryMode?: boolean;
 }) => {
   const handleEditLicensesCertifications = (
     id: number,
@@ -73,10 +75,12 @@ const LicensesCertifications = ({
   };
 
   return (
-    <HiddenSectionWrapper
-      containerTitle="Licenses / Certifications"
-      addMoreSectionTitle="Add another Licenses / Certifications"
-      handleAddMoreSection={handleAddLicensesCertifications}
+    <ExpandableSectionContainer
+      title="Licenses / Certifications"
+      addButtonTitle="Add another licenses / certifications"
+      description="List official credentials or industry-recognized licenses that validate your professional qualifications. Include the name of the certification, the issuing authority, and the date of acquisition or expiration to establish immediate credibility."
+      onAdd={handleAddLicensesCertifications}
+      summaryMode={summaryMode}
     >
       {licensesCertifications.map((license, index) => {
         return (
@@ -95,7 +99,7 @@ const LicensesCertifications = ({
           />
         );
       })}
-    </HiddenSectionWrapper>
+    </ExpandableSectionContainer>
   );
 };
 

@@ -1,5 +1,5 @@
 import type React from "react";
-import { HiddenSectionWrapper } from "./HiddenSectionWrapper";
+import { ExpandableSectionContainer } from "./ExpandableSectionContainer";
 
 import LanguagesSection from "./LanguagesSection";
 import type { ILanguages } from "../../interface/generatePdfInterface";
@@ -8,9 +8,11 @@ import { DEFAULT_LANGUAGES } from "../../const/generatePdfConst";
 const Languages = ({
   languages,
   setLanguages,
+  summaryMode = false,
 }: {
   languages: ILanguages[];
   setLanguages: React.Dispatch<React.SetStateAction<ILanguages[]>>;
+  summaryMode?: boolean;
 }) => {
   const handleEditLanguages = (id: number, key: string, value: string) => {
     setLanguages(
@@ -63,10 +65,12 @@ const Languages = ({
   };
 
   return (
-    <HiddenSectionWrapper
-      containerTitle="Languages"
-      addMoreSectionTitle="Add another languages"
-      handleAddMoreSection={handleAddMoreLanguages}
+    <ExpandableSectionContainer
+      title="Languages"
+      addButtonTitle="Add another languages"
+      description="Specify any foreign languages you are proficient in, along with your exact fluency level (e.g., Native, Professional, Basic). This is highly valuable for multinational companies or roles requiring diverse communication."
+      onAdd={handleAddMoreLanguages}
+      summaryMode={summaryMode}
     >
       {languages.map((language, index) => {
         return (
@@ -83,7 +87,7 @@ const Languages = ({
           />
         );
       })}
-    </HiddenSectionWrapper>
+    </ExpandableSectionContainer>
   );
 };
 
