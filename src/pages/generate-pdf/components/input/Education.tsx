@@ -6,9 +6,11 @@ import { ExpandableSectionContainer } from "./ExpandableSectionContainer";
 const Education = ({
   educations,
   setEducations,
+  summaryMode = false,
 }: {
   educations: IEducation[];
   setEducations: React.Dispatch<React.SetStateAction<IEducation[]>>;
+  summaryMode?: boolean;
 }) => {
   const handleEditEducations = (id: number, key: string, value: string) => {
     const updatedWorkExperiences = educations.map((education) => {
@@ -59,6 +61,7 @@ const Education = ({
       description="List your academic background, starting with your most recent or highest degree. Include relevant coursework, academic honors, or organizational involvement if you have limited professional experience."
       addButtonTitle="Add another education"
       onAdd={handleAddEducations}
+      summaryMode={summaryMode}
     >
       {educations.map((education, index) => {
         return (

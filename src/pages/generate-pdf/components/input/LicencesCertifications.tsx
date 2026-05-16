@@ -8,11 +8,13 @@ import { ExpandableSectionContainer } from "./ExpandableSectionContainer";
 const LicensesCertifications = ({
   licensesCertifications,
   setLicensesCertifications,
+  summaryMode = false,
 }: {
   licensesCertifications: ILicensesCertifications[];
   setLicensesCertifications: React.Dispatch<
     React.SetStateAction<ILicensesCertifications[]>
   >;
+  summaryMode?: boolean;
 }) => {
   const handleEditLicensesCertifications = (
     id: number,
@@ -78,6 +80,7 @@ const LicensesCertifications = ({
       addButtonTitle="Add another licenses / certifications"
       description="List official credentials or industry-recognized licenses that validate your professional qualifications. Include the name of the certification, the issuing authority, and the date of acquisition or expiration to establish immediate credibility."
       onAdd={handleAddLicensesCertifications}
+      summaryMode={summaryMode}
     >
       {licensesCertifications.map((license, index) => {
         return (

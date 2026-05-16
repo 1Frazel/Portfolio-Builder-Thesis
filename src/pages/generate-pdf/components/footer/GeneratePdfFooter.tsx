@@ -17,6 +17,7 @@ const GeneratePdfFooter = ({
 }) => {
   const isFirstSection = activeSectionIndex === 0;
   const isLastSection = activeSectionIndex === sectionLength;
+  const isFinishUpStep = nextSectionTitle === "Finish Up";
 
   const primaryButtonClass =
     "inline-flex min-h-10 w-full items-center justify-center rounded-md bg-[#3057b5] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#274a9f] focus:outline-none focus:ring-2 focus:ring-[#3057b5]/30 sm:w-auto sm:min-w-[196px]";
@@ -34,17 +35,24 @@ const GeneratePdfFooter = ({
             Back
           </button>
         )}
-        {!isLastSection && (
-          <button onClick={handleNextSection} className={primaryButtonClass}>
-            {`Next up, ${nextSectionTitle}`}
-          </button>
-        )}
-        {activeAdditionalSection !== "default" && isLastSection && (
+
+        {activeAdditionalSection !== "default" && isFinishUpStep ? (
           <button
             onClick={handleAdditionalSection}
             className={secondaryButtonClass}
           >
-            Add another additional section
+            Add Another Additional Section
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              if (!isLastSection) handleNextSection();
+            }}
+            className={primaryButtonClass}
+          >
+            {isFinishUpStep
+              ? "Finish Your Resume"
+              : `Next up, ${nextSectionTitle}`}
           </button>
         )}
       </div>

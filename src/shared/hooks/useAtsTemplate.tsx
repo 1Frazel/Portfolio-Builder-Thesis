@@ -11,6 +11,7 @@ import ProfileSummary from "../../pages/generate-pdf/components/input/ProfileSum
 import AdditionalSections from "../../pages/generate-pdf/components/input/AdditionalSections";
 import AtsDocument from "../../pages/generate-pdf/components/templates/ats-template/AtsDocument";
 import { useFormData } from "./useFormData";
+import FinishUp from "../../pages/generate-pdf/components/input/FinishUp";
 
 const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
   const {
@@ -116,6 +117,30 @@ const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
           listAdditionalSections={listAdditionalSections}
           activeAdditionalSection={activeAdditionalSection}
           setActiveAdditionalSection={setActiveAdditionalSection}
+        />
+      ),
+    },
+    {
+      id: "finishUp",
+      title: "Finish Up",
+      component: (
+        <FinishUp
+          personalDetail={formData.personalDetail}
+          setPersonalDetail={setPersonalDetail}
+          workExperiences={formData.workExperiences}
+          setWorkExperiences={setWorkExperiences}
+          educations={formData.educations}
+          setEducations={setEducations}
+          skills={formData.skills}
+          setSkills={setSkills}
+          profileSummary={formData.profileSummary}
+          setProfileSummary={setProfileSummary}
+          languages={formData.languages}
+          setLanguages={setLanguages}
+          professionalTraining={formData.professionalTraining}
+          setProfessionalTraining={setProfessionalTraining}
+          licensesCertifications={formData.licensesCertifications}
+          setLicensesCertifications={setLicensesCertifications}
         />
       ),
     },

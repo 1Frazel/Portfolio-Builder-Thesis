@@ -1,4 +1,5 @@
 import { useDebouncedCallback } from "use-debounce";
+import { ExpandableSectionContainer } from "./ExpandableSectionContainer";
 
 import InputField from "./InputField";
 import type { IPersonalDetail } from "../../interface/generatePdfInterface";
@@ -6,9 +7,11 @@ import type { IPersonalDetail } from "../../interface/generatePdfInterface";
 const PersonalDetail = ({
   personalDetail,
   setPersonalDetail,
+  summaryMode = false,
 }: {
   personalDetail: IPersonalDetail;
   setPersonalDetail: React.Dispatch<React.SetStateAction<IPersonalDetail>>;
+  summaryMode?: boolean;
 }) => {
   const handlePersonalDetailChange = useDebouncedCallback(
     (value: string, key: string) => {
@@ -155,6 +158,24 @@ const PersonalDetail = ({
       ),
     },
   ];
+
+  if (summaryMode) {
+    return (
+      <ExpandableSectionContainer
+        title="Personal Information"
+        description="Add your personal and contact details so employers can easily identify and reach you."
+        summaryMode
+      >
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-x-5 sm:gap-y-4">
+          {listPersonalDetail.map((list) => (
+            <div key={list.id} className={list.containerClass}>
+              {list.component}
+            </div>
+          ))}
+        </div>
+      </ExpandableSectionContainer>
+    );
+  }
 
   return (
     <section className="rounded-2xl border border-slate-200 bg-white px-4 py-5 shadow-lg sm:px-6 lg:px-8 lg:py-6 h-full">

@@ -65,7 +65,7 @@ const Preview = ({
   const isMobile = viewportWidth < 768;
 
   const previewClass = `flex justify-center ${
-    isMobile ? "w-[792px] max-w-full" : "min-h-[1120px] w-[792px] max-w-full"
+    isMobile ? "w-[792px] max-w-full" : "w-[792px] max-w-full"
   }`;
 
   return (

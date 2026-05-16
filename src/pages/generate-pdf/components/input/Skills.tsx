@@ -8,9 +8,11 @@ import { DEFAULT_SKILLS } from "../../const/generatePdfConst";
 const Skills = ({
   skills,
   setSkills,
+  summaryMode = false,
 }: {
   skills: ISkill[];
   setSkills: React.Dispatch<React.SetStateAction<ISkill[]>>;
+  summaryMode?: boolean;
 }) => {
   const handleEditSkills = (id: number, key: string, value: string) => {
     const newSkills = skills.map((skill) => {
@@ -61,6 +63,7 @@ const Skills = ({
       description="Highlight technical abilities, industry-specific tools, and relevant soft skills. Prioritize keywords that align directly with the requirements of the roles you are targeting to maximize ATS compatibility."
       addButtonTitle="Add another skills"
       onAdd={handleAddSkills}
+      summaryMode={summaryMode}
     >
       {skills.map((skill, index) => {
         return (

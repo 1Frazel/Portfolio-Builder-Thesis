@@ -7,9 +7,11 @@ import WorkSection from "./WorkSection";
 const WorkExperiences = ({
   workExperiences,
   setWorkExperience,
+  summaryMode = false,
 }: {
   workExperiences: IWorkExperience[];
   setWorkExperience: React.Dispatch<React.SetStateAction<IWorkExperience[]>>;
+  summaryMode?: boolean;
 }) => {
   const handleEditWorkExperiences = (
     id: number,
@@ -69,6 +71,7 @@ const WorkExperiences = ({
       description="Detail your professional history in reverse chronological order. Focus on quantifiable achievements, specific responsibilities, and the direct impact you made in your previous roles."
       addButtonTitle="Add another experiences"
       onAdd={handleAddMoreWorkExperiences}
+      summaryMode={summaryMode}
     >
       {workExperiences.map((experience, index) => {
         return (

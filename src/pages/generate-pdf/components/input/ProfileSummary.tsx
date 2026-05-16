@@ -6,9 +6,11 @@ import { useDebouncedCallback } from "use-debounce";
 const ProfileSummary = ({
   profileSummary,
   setProfileSummary,
+  summaryMode = false,
 }: {
   profileSummary: string;
   setProfileSummary: React.Dispatch<React.SetStateAction<string>>;
+  summaryMode?: boolean;
 }) => {
   const handleEditProfileSummary = useDebouncedCallback((input) => {
     setProfileSummary(input);
@@ -21,6 +23,7 @@ const ProfileSummary = ({
     <ExpandableSectionContainer
       title="Profile Summary"
       description="Write a concise, compelling overview of your professional identity. Highlight your core expertise, key accomplishments, and immediate career objectives in three to four sentences."
+      summaryMode={summaryMode}
     >
       <TextArea
         defaultValue={profileSummary}

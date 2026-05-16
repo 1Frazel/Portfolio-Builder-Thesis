@@ -7,6 +7,7 @@ type ExpandableSectionContainerProps = {
   addButtonTitle?: string;
   onAdd?: () => void;
   childrenContainerClass?: string;
+  summaryMode?: boolean;
 };
 
 type ExpandableSectionItemProps = {
@@ -35,21 +36,45 @@ const ExpandableSectionContainer = ({
   addButtonTitle,
   onAdd,
   childrenContainerClass = "mt-6 flex flex-col gap-4 sm:gap-5",
+  summaryMode = false,
 }: ExpandableSectionContainerProps) => {
+  const [isContentVisible, setIsContentVisible] = useState(true);
+  const shouldShowContent = !summaryMode || isContentVisible;
+
   return (
-    <section className="rounded-2xl border border-slate-200 bg-white px-4 py-5 shadow-lg sm:px-6 lg:px-8 h-full">
-      <h2 className="text-[32px] font-bold leading-tight text-slate-900 sm:text-[36px]">
-        {title}
-      </h2>
-      {description && (
+    <section className="flex h-[calc(100vh-220px)] min-h-0 flex-col rounded-2xl border border-slate-200 bg-white px-4 py-5 shadow-lg sm:px-6 lg:px-8 overflow-hidden">
+      <div className="flex items-start justify-between gap-3">
+        <h2 className="text-[32px] font-bold leading-tight text-slate-900 sm:text-[36px]">
+          {title}
+        </h2>
+        {summaryMode && (
+          <button
+            type="button"
+            onClick={() => setIsContentVisible((prev) => !prev)}
+            className="inline-flex min-h-9 items-center rounded-md border border-slate-200 bg-white px-3 py-1.5 text-sm font-semibold text-[#3057b5] transition hover:bg-[#eef3ff]"
+            aria-label={
+              isContentVisible ? `Collapse ${title}` : `Expand ${title}`
+            }
+          >
+            {isContentVisible ? "Hide" : "Show"}
+          </button>
+        )}
+      </div>
+      {shouldShowContent && description && (
         <p className="mt-2 max-w-2xl text-sm leading-5 text-slate-600 sm:text-base">
           {description}
         </p>
       )}
 
-      <div className={childrenContainerClass}>{children}</div>
+      {shouldShowContent && (
+        <div
+          className={`${childrenContainerClass} min-h-0 flex-1 overflow-auto`}
+        >
+          {children}
+        </div>
+      )}
 
-      {addButtonTitle && onAdd && (
+      {shouldShowContent && addButtonTitle && onAdd && (
         <button
           type="button"
           onClick={onAdd}
