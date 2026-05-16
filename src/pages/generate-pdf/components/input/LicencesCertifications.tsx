@@ -36,7 +36,9 @@ const LicensesCertifications = ({
 
   const handleAddLicensesCertifications = () => {
     const latestId =
-      licensesCertifications[licensesCertifications.length - 1].id;
+      licensesCertifications.length > 0
+        ? licensesCertifications[licensesCertifications.length - 1].id
+        : 0;
     setLicensesCertifications([
       ...licensesCertifications,
       {

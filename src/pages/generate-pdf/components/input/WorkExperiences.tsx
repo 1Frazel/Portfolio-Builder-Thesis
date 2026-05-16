@@ -32,7 +32,10 @@ const WorkExperiences = ({
   };
 
   const handleAddMoreWorkExperiences = () => {
-    const latestId = workExperiences[workExperiences.length - 1].id;
+    const latestId =
+      workExperiences.length > 0
+        ? workExperiences[workExperiences.length - 1].id
+        : 0;
     setWorkExperience([
       ...workExperiences,
       { ...DEFAULT_WORK_EXPERIENCES, id: latestId + 1 },

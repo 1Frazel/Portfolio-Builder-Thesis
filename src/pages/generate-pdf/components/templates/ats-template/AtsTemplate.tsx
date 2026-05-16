@@ -90,6 +90,7 @@ const AtsTemplate = () => {
                 handleNextSection={handleNextSection}
                 activeAdditionalSection={activeAdditionalSection}
                 handleAdditionalSection={handleAdditionalSection}
+                docs={docs}
               />
             </div>
           ) : (
@@ -110,6 +111,7 @@ const AtsTemplate = () => {
                 handleNextSection={handleNextSection}
                 activeAdditionalSection={activeAdditionalSection}
                 handleAdditionalSection={handleAdditionalSection}
+                docs={docs}
               />
             </div>
 

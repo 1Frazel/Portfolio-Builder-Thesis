@@ -27,7 +27,8 @@ const Education = ({
   };
 
   const handleAddEducations = () => {
-    const latestId = educations[educations.length - 1].id;
+    const latestId =
+      educations.length > 0 ? educations[educations.length - 1].id : 0;
     setEducations([...educations, { ...DEFAULT_EDUCATION, id: latestId + 1 }]);
   };
 

@@ -1,3 +1,6 @@
+import type { ReactElement } from "react";
+import PdfDownloadBtn from "../button/PdfDownloadBtn";
+
 const GeneratePdfFooter = ({
   nextSectionTitle,
   activeSectionIndex,
@@ -6,6 +9,7 @@ const GeneratePdfFooter = ({
   handlePreviousSection,
   activeAdditionalSection,
   handleAdditionalSection,
+  docs,
 }: {
   nextSectionTitle: string;
   activeSectionIndex: number;
@@ -14,10 +18,10 @@ const GeneratePdfFooter = ({
   handlePreviousSection: () => void;
   activeAdditionalSection: string;
   handleAdditionalSection: () => void;
+  docs?: ReactElement;
 }) => {
   const isFirstSection = activeSectionIndex === 0;
   const isLastSection = activeSectionIndex === sectionLength;
-  const isFinishUpStep = nextSectionTitle === "Finish Up";
 
   const primaryButtonClass =
     "inline-flex min-h-10 w-full items-center justify-center rounded-md bg-[#3057b5] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#274a9f] focus:outline-none focus:ring-2 focus:ring-[#3057b5]/30 sm:w-auto sm:min-w-[196px]";
@@ -36,13 +40,15 @@ const GeneratePdfFooter = ({
           </button>
         )}
 
-        {activeAdditionalSection !== "default" && isFinishUpStep ? (
+        {activeAdditionalSection !== "default" && isLastSection ? (
           <button
             onClick={handleAdditionalSection}
             className={secondaryButtonClass}
           >
             Add Another Additional Section
           </button>
+        ) : isLastSection && docs ? (
+          <PdfDownloadBtn filename="resume.pdf" docs={docs} />
         ) : (
           <button
             onClick={() => {
@@ -50,9 +56,7 @@ const GeneratePdfFooter = ({
             }}
             className={primaryButtonClass}
           >
-            {isFinishUpStep
-              ? "Finish Your Resume"
-              : `Next up, ${nextSectionTitle}`}
+            {`Next up, ${nextSectionTitle}`}
           </button>
         )}
       </div>

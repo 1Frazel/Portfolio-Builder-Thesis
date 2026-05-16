@@ -33,7 +33,10 @@ const ProfessionalTraining = ({
   };
 
   const handleAddProfessionalTraining = () => {
-    const latestId = professionalTraining[professionalTraining.length - 1].id;
+    const latestId =
+      professionalTraining.length > 0
+        ? professionalTraining[professionalTraining.length - 1].id
+        : 0;
 
     setProfessionalTraining([
       ...professionalTraining,
