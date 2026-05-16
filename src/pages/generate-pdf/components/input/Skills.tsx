@@ -33,7 +33,7 @@ const Skills = ({
   };
 
   const handleAddSkills = () => {
-    const latestId = skills[skills.length - 1].id;
+    const latestId = skills.length > 0 ? skills[skills.length - 1].id : 0;
     setSkills([...skills, { ...DEFAULT_SKILLS, id: latestId + 1 }]);
   };
 

@@ -29,7 +29,8 @@ const Languages = ({
   };
 
   const handleAddMoreLanguages = () => {
-    const latestId = languages[languages.length - 1].id;
+    const latestId =
+      languages.length > 0 ? languages[languages.length - 1].id : 0;
 
     setLanguages([
       ...languages,
