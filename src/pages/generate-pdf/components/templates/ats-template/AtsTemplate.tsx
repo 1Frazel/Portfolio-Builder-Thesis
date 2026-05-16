@@ -65,7 +65,11 @@ const AtsTemplate = () => {
           steps={listAtsTemplateSection}
           currentStepIndex={activeSectionIndex}
           onStepClick={(index) => {
-            if (index >= 0 && index <= activeSectionIndex + 1) {
+            if (
+              index >= 0 &&
+              index <= activeSectionIndex + 1 &&
+              index !== sectionLength
+            ) {
               setActiveSectionIndex(index);
             }
           }}
