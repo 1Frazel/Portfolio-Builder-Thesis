@@ -16,6 +16,7 @@ import FinishUp from "../../pages/generate-pdf/components/input/FinishUp";
 const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
   const {
     formData,
+    setFormData,
     setLanguages,
     setWorkExperiences,
     setEducations,
@@ -151,6 +152,7 @@ const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
 
   const nextComponent = listAtsTemplateSection[activeSectionIndex].component;
 
+  console.log(formData);
   return {
     nextComponent,
     nextSectionTitle,
@@ -178,6 +180,7 @@ const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
       id: section.id,
       title: section.title,
     })),
+    setFormData,
   };
 };
 

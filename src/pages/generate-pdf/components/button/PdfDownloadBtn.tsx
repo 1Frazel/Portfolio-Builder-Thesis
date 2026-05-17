@@ -1,5 +1,5 @@
 import { pdf } from "@react-pdf/renderer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { JSX } from "react";
 import { useNavigate } from "react-router";
 import { useToast } from "../../../../shared/hooks/useToast";
@@ -12,18 +12,26 @@ const PdfDownloadBtn = ({
   className = "",
   formData,
   template,
+  resumeId,
+  initialTitle = "",
 }: {
   filename: string;
   docs: JSX.Element;
   className?: string;
   formData?: FormData;
   template: string;
+  resumeId?: string;
+  initialTitle?: string;
 }) => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState(initialTitle);
   const [isSaving, setIsSaving] = useState(false);
   const { showToast } = useToast();
+
+  useEffect(() => {
+    setTitle(initialTitle);
+  }, [initialTitle]);
 
   const handleSaveAndDownload = async () => {
     if (!formData) {
@@ -38,7 +46,7 @@ const PdfDownloadBtn = ({
 
     try {
       setIsSaving(true);
-      await saveCV(title, template, formData);
+      await saveCV(title, template, formData, resumeId);
 
       // generate PDF blob and trigger download
       const blob = await pdf(docs).toBlob();
