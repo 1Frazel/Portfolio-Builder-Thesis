@@ -20,6 +20,7 @@ const AtsTemplate = () => {
     handleAdditionalSection,
     docs,
     listAtsTemplateSection,
+    formData,
   } = useAtsTemplate({ useMock: true });
 
   // mode: 'edit' | 'preview' — controls mobile view
@@ -91,6 +92,7 @@ const AtsTemplate = () => {
                 activeAdditionalSection={activeAdditionalSection}
                 handleAdditionalSection={handleAdditionalSection}
                 docs={docs}
+                formData={formData}
               />
             </div>
           ) : (
@@ -112,6 +114,7 @@ const AtsTemplate = () => {
                 activeAdditionalSection={activeAdditionalSection}
                 handleAdditionalSection={handleAdditionalSection}
                 docs={docs}
+                formData={formData}
               />
             </div>
 

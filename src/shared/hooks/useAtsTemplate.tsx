@@ -155,6 +155,7 @@ const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
     nextComponent,
     nextSectionTitle,
     activeSectionIndex,
+    formData,
     sectionLength: listAtsTemplateSection.length - 1,
     handlePreviousSection: () => setActiveSectionIndex((prev) => prev - 1),
     handleNextSection: () => setActiveSectionIndex((prev) => prev + 1),
