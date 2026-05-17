@@ -17,8 +17,10 @@ const AtsTemplate = () => {
   const [searchParams] = useSearchParams();
   // Development-only toggle: set true manually when you want mock data
   const USE_MOCK_DATA = false;
-  const selectedTemplate = searchParams.get("template") || "ats";
   const { showToast } = useToast();
+  const [selectedTemplate, setSelectedTemplate] = useState(
+    searchParams.get("template") || "ats",
+  );
 
   const {
     nextComponent,
@@ -34,7 +36,7 @@ const AtsTemplate = () => {
     listAtsTemplateSection,
     formData,
     setFormData,
-  } = useAtsTemplate({ useMock: USE_MOCK_DATA });
+  } = useAtsTemplate({ useMock: USE_MOCK_DATA, template: selectedTemplate });
 
   const [initialResumeTitle, setInitialResumeTitle] = useState("");
   const [isLoadingCurrentCV, setIsLoadingCurrentCV] = useState(
@@ -54,6 +56,7 @@ const AtsTemplate = () => {
         const cv = await getCV(resumeId);
         setFormData(cv.data);
         setInitialResumeTitle(cv.title);
+        setSelectedTemplate(cv.template || "ats");
       } catch (err) {
         const message =
           err instanceof Error ? err.message : "Failed to load resume";

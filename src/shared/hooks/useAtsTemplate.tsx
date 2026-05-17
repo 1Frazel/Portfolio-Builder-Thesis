@@ -13,7 +13,13 @@ import AtsDocument from "../../pages/generate-pdf/components/templates/ats-templ
 import { useFormData } from "./useFormData";
 import FinishUp from "../../pages/generate-pdf/components/input/FinishUp";
 
-const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
+const useAtsTemplate = ({
+  useMock,
+  template,
+}: {
+  useMock: boolean;
+  template: string;
+}) => {
   const {
     formData,
     setFormData,
@@ -152,7 +158,12 @@ const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
 
   const nextComponent = listAtsTemplateSection[activeSectionIndex].component;
 
-  console.log(formData);
+  const templateDocumentMap: Record<string, typeof AtsDocument> = {
+    ats: AtsDocument,
+  };
+
+  const SelectedDocument = templateDocumentMap[template] ?? AtsDocument;
+
   return {
     nextComponent,
     nextSectionTitle,
@@ -165,7 +176,7 @@ const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
     activeAdditionalSection,
     handleAdditionalSection: () => setActiveAdditionalSection("default"),
     docs: (
-      <AtsDocument
+      <SelectedDocument
         personalDetail={formData.personalDetail}
         profileSummary={formData.profileSummary}
         workExperiences={formData.workExperiences}
