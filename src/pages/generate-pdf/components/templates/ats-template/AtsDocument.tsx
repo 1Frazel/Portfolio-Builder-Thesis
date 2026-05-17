@@ -10,6 +10,7 @@ import type {
 } from "../../../interface/generatePdfInterface";
 
 import Divider from "../Divider";
+import dayjs from "dayjs";
 import { Section, SectionContainer, SectionWrapper } from "./AtsSection";
 import { SectionDetails, SectionDetailsWrapper } from "./AtsSectionDetails";
 import atsStyles from "./atsStyles";
@@ -96,6 +97,15 @@ const PersonalDetail = ({
   );
 };
 
+const formatDate = (date?: string) => {
+  if (!date) return "";
+  try {
+    return dayjs(date).format("MMM, YYYY");
+  } catch {
+    return date;
+  }
+};
+
 const ProfileSummary = ({ profileSummary }: { profileSummary: string }) => {
   return (
     <>
@@ -121,8 +131,8 @@ const WorkExperience = ({
           return (
             <SectionDetails
               key={experience.id}
-              startAt={experience.startAt}
-              endsAt={experience.endsAt}
+              startAt={formatDate(experience.startAt)}
+              endsAt={formatDate(experience.endsAt)}
               title={`${experience.jobTitle}, ${experience.employer}`}
               address={experience.address}
               description={experience.description}
@@ -143,8 +153,8 @@ const Education = ({ educations }: { educations: IEducation[] }) => {
           return (
             <SectionDetails
               key={education.id}
-              startAt={education.startAt}
-              endsAt={education.endsAt}
+              startAt={formatDate(education.startAt)}
+              endsAt={formatDate(education.endsAt)}
               title={`${education.degree}, ${education.school}`}
               address={education.city}
               description={education.description}
@@ -212,8 +222,8 @@ const ProfessionalTraining = ({
             return (
               <SectionDetails
                 key={training.id}
-                startAt={training.startAt}
-                endsAt={training.endsAt}
+                startAt={formatDate(training.startAt)}
+                endsAt={formatDate(training.endsAt)}
                 title={`${training.courseName}, ${training.institution}`}
               />
             );
@@ -238,8 +248,8 @@ const LicensesCertifications = ({
             return (
               <SectionDetails
                 key={license.id}
-                startAt={license.startAt}
-                endsAt={license.endsAt}
+                startAt={formatDate(license.startAt)}
+                endsAt={formatDate(license.endsAt)}
                 title={`${license.name}, ${license.issuer}`}
               />
             );
