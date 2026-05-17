@@ -90,7 +90,7 @@ const Home = () => {
       <Header />
 
       <main>
-        <section className="border-b border-[#2951A3]/20 bg-white">
+        <section className="bg-gradient-to-b from-white via-[#fbfcff] to-[#eef3ff]">
           <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-10 sm:px-6 lg:flex-row lg:items-center lg:px-8 lg:py-20">
             <div className="flex-1 pt-2 lg:pt-0">
               <div className="max-w-xl">
@@ -111,7 +111,33 @@ const Home = () => {
                     disabled={loading}
                     className="rounded-2xl bg-[#2951A3] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#1f3f82] disabled:cursor-not-allowed disabled:opacity-70"
                   >
-                    Create Now!
+                    {loading ? (
+                      <span className="flex items-center gap-2">
+                        <svg
+                          className="h-4 w-4 animate-spin text-white"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          />
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                          />
+                        </svg>
+                        Loading...
+                      </span>
+                    ) : (
+                      "Create Now!"
+                    )}
                   </button>
                   <button
                     type="button"
@@ -220,40 +246,42 @@ const Home = () => {
           </div>
         </section>
 
-        <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
-          <div className="max-w-2xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#2951A3]">
-              How it works
-            </p>
-            <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">
-              Few steps to a finished resume.
-            </h2>
-          </div>
+        <section className="bg-gradient-to-b from-[#eef3ff] via-white to-[#eef3ff]">
+          <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+            <div className="max-w-2xl">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#2951A3]">
+                How it works
+              </p>
+              <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">
+                Few steps to a finished resume.
+              </h2>
+            </div>
 
-          <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
-            {steps.map((step, index) => (
-              <div
-                key={step.number}
-                className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#2951A3] text-sm font-bold text-white">
-                    0{index + 1}
+            <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
+              {steps.map((step, index) => (
+                <div
+                  key={step.number}
+                  className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#2951A3] text-sm font-bold text-white">
+                      0{index + 1}
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#2951A3]">
+                        {step.number}
+                      </p>
+                      <h3 className="text-xl font-bold text-slate-900">
+                        {step.title}
+                      </h3>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#2951A3]">
-                      {step.number}
-                    </p>
-                    <h3 className="text-xl font-bold text-slate-900">
-                      {step.title}
-                    </h3>
-                  </div>
+                  <p className="mt-4 text-sm leading-6 text-slate-600">
+                    {step.description}
+                  </p>
                 </div>
-                <p className="mt-4 text-sm leading-6 text-slate-600">
-                  {step.description}
-                </p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </section>
       </main>
