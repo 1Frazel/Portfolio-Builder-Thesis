@@ -6,8 +6,12 @@ import useAtsTemplate from "../../../../../shared/hooks/useAtsTemplate";
 import Header from "../../../../../shared/components/Header";
 import useIsMobile from "../../../../../shared/hooks/useIsMobile";
 import { useState } from "react";
+import { useSearchParams } from "react-router";
 
 const AtsTemplate = () => {
+  const [searchParams] = useSearchParams();
+  const selectedTemplate = searchParams.get("template") || "ats";
+
   const {
     nextComponent,
     nextSectionTitle,
@@ -93,6 +97,7 @@ const AtsTemplate = () => {
                 handleAdditionalSection={handleAdditionalSection}
                 docs={docs}
                 formData={formData}
+                template={selectedTemplate}
               />
             </div>
           ) : (
@@ -115,6 +120,7 @@ const AtsTemplate = () => {
                 handleAdditionalSection={handleAdditionalSection}
                 docs={docs}
                 formData={formData}
+                template={selectedTemplate}
               />
             </div>
 

@@ -12,6 +12,7 @@ const GeneratePdfFooter = ({
   handleAdditionalSection,
   docs,
   formData,
+  template,
 }: {
   nextSectionTitle: string;
   activeSectionIndex: number;
@@ -22,6 +23,7 @@ const GeneratePdfFooter = ({
   handleAdditionalSection: () => void;
   docs?: ReactElement;
   formData: FormData;
+  template: string;
 }) => {
   const isFirstSection = activeSectionIndex === 0;
   const isLastSection = activeSectionIndex === sectionLength;
@@ -55,6 +57,7 @@ const GeneratePdfFooter = ({
             filename="resume.pdf"
             docs={docs}
             formData={formData}
+            template={template}
           />
         ) : (
           <button

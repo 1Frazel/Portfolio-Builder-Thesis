@@ -1,6 +1,7 @@
 import { pdf } from "@react-pdf/renderer";
 import { useState } from "react";
 import type { JSX } from "react";
+import { useNavigate } from "react-router";
 import { useToast } from "../../../../shared/hooks/useToast";
 import { saveCV } from "../../../../shared/utils/cvService";
 import type { FormData } from "../../../../shared/hooks/useFormData";
@@ -10,12 +11,15 @@ const PdfDownloadBtn = ({
   docs,
   className = "",
   formData,
+  template,
 }: {
   filename: string;
   docs: JSX.Element;
   className?: string;
   formData?: FormData;
+  template: string;
 }) => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [isSaving, setIsSaving] = useState(false);
@@ -34,7 +38,7 @@ const PdfDownloadBtn = ({
 
     try {
       setIsSaving(true);
-      await saveCV(title, "ats", formData);
+      await saveCV(title, template, formData);
 
       // generate PDF blob and trigger download
       const blob = await pdf(docs).toBlob();
@@ -49,6 +53,7 @@ const PdfDownloadBtn = ({
 
       showToast("Resume saved successfully!", "success");
       setIsOpen(false);
+      navigate("/creation");
     } catch (err) {
       const message =
         err instanceof Error ? err.message : "Failed to save resume";
