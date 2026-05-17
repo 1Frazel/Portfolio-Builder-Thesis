@@ -14,6 +14,16 @@ import dayjs from "dayjs";
 import { Section, SectionContainer, SectionWrapper } from "./AtsSection";
 import { SectionDetails, SectionDetailsWrapper } from "./AtsSectionDetails";
 import atsStyles from "./atsStyles";
+import {
+  DEFAULT_EDUCATION,
+  DEFAULT_LICENSES_CERTIFICATION,
+  DEFAULT_PROFESSIONAL_TRAINING,
+  DEFAULT_SKILLS,
+  DEFAULT_WORK_EXPERIENCES,
+  DEFAULT_LANGUAGES,
+  DEFAULT_PROFILE_SUMMARY,
+  DEFAULT_PERSONAL_DETAIL,
+} from "../../../const/generatePdfConst";
 
 const AtsDocument = ({
   personalDetail,
@@ -38,7 +48,9 @@ const AtsDocument = ({
     <Document>
       <Page size="A4" style={atsStyles.page}>
         <View style={atsStyles.section}>
-          <PersonalDetail personalDetail={personalDetail} />
+          {isDifferent(personalDetail, DEFAULT_PERSONAL_DETAIL) && (
+            <PersonalDetail personalDetail={personalDetail} />
+          )}
           <ProfileSummary profileSummary={profileSummary} />
           <WorkExperience workExperiences={workExperiences} />
           <Education educations={educations} />
@@ -97,6 +109,14 @@ const PersonalDetail = ({
   );
 };
 
+const isDifferent = <T,>(value: T, defaultValue: T) => {
+  try {
+    return JSON.stringify(value) !== JSON.stringify(defaultValue);
+  } catch {
+    return Boolean(value) !== Boolean(defaultValue);
+  }
+};
+
 const formatDate = (date?: string) => {
   if (!date) return "";
   try {
@@ -107,6 +127,8 @@ const formatDate = (date?: string) => {
 };
 
 const ProfileSummary = ({ profileSummary }: { profileSummary: string }) => {
+  if (!isDifferent(profileSummary, DEFAULT_PROFILE_SUMMARY)) return null;
+
   return (
     <>
       <SectionWrapper title="PROFILE">
@@ -124,6 +146,9 @@ const WorkExperience = ({
 }: {
   workExperiences: IWorkExperience[];
 }) => {
+  const defaultWork = [DEFAULT_WORK_EXPERIENCES];
+  if (!isDifferent(workExperiences, defaultWork)) return null;
+
   return (
     <>
       <SectionDetailsWrapper title="EMPLOYMENT HISTORY">
@@ -146,6 +171,9 @@ const WorkExperience = ({
 };
 
 const Education = ({ educations }: { educations: IEducation[] }) => {
+  const defaultEd = [DEFAULT_EDUCATION];
+  if (!isDifferent(educations, defaultEd)) return null;
+
   return (
     <>
       <SectionDetailsWrapper title="EDUCATION">
@@ -168,6 +196,9 @@ const Education = ({ educations }: { educations: IEducation[] }) => {
 };
 
 const Skill = ({ skills }: { skills: ISkill[] }) => {
+  const defaultSkills = [DEFAULT_SKILLS];
+  if (!isDifferent(skills, defaultSkills)) return null;
+
   return (
     <>
       <SectionWrapper title="SKILLS">
@@ -189,6 +220,9 @@ const Skill = ({ skills }: { skills: ISkill[] }) => {
 };
 
 const Language = ({ languages }: { languages: ILanguages[] }) => {
+  const defaultLang = [DEFAULT_LANGUAGES];
+  if (!isDifferent(languages, defaultLang)) return null;
+
   return (
     <>
       <SectionWrapper title="LANGUAGES">
@@ -214,6 +248,9 @@ const ProfessionalTraining = ({
 }: {
   professionalTraining: IProfessionalTraining[];
 }) => {
+  const defaultProf = [DEFAULT_PROFESSIONAL_TRAINING];
+  if (!isDifferent(professionalTraining, defaultProf)) return null;
+
   return (
     <>
       <SectionDetailsWrapper title="COURSES">
@@ -238,6 +275,9 @@ const LicensesCertifications = ({
 }: {
   licensesCertifications: ILicensesCertifications[];
 }) => {
+  const defaultLic = [DEFAULT_LICENSES_CERTIFICATION];
+  if (!isDifferent(licensesCertifications, defaultLic)) return null;
+
   return (
     <>
       <SectionDetailsWrapper title="LICENSES">
