@@ -4,6 +4,7 @@ import Header from "../../shared/components/Header";
 import { useToast } from "../../shared/hooks/useToast";
 import { deleteCV, getUserCVs } from "../../shared/utils/cvService";
 import type { CVDocument } from "../../shared/utils/cvService";
+import PreviewDownloadBtn from "./PreviewDownloadBtn";
 
 const CVList = () => {
   const navigate = useNavigate();
@@ -110,9 +111,7 @@ const CVList = () => {
                   >
                     Edit
                   </button>
-                  <button className="flex-1 rounded-md border border-[#2951A3] px-4 py-2 text-sm font-semibold text-[#2951A3] transition hover:bg-[#eef3ff]">
-                    Preview
-                  </button>
+                  <PreviewDownloadBtn cv={cv} />
                 </div>
                 <button
                   onClick={() => handleDeleteCV(cv.resumeId)}
