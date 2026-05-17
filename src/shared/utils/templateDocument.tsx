@@ -1,5 +1,6 @@
 import type { JSX } from "react";
 import AtsDocument from "../../pages/generate-pdf/components/templates/ats-template/AtsDocument";
+import ProfessionalDocument from "../../pages/generate-pdf/components/templates/professional-template/ProfessionalDocument";
 import type { FormData } from "../hooks/useFormData";
 
 type TemplateDocumentProps = {
@@ -17,6 +18,7 @@ type TemplateDocumentComponent = (props: TemplateDocumentProps) => JSX.Element;
 
 const templateDocumentMap: Record<string, TemplateDocumentComponent> = {
   ats: AtsDocument,
+  professional: ProfessionalDocument,
 };
 
 export const normalizeTemplateKey = (template?: string): string =>
