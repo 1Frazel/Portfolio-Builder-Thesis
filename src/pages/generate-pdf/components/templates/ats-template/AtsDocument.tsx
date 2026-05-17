@@ -85,15 +85,25 @@ const PersonalDetail = ({
 
   return (
     <>
-      <View style={{ display: "flex", alignItems: "center", width: "100%" }}>
+      <View
+        style={{
+          display: "flex",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
         <Text
-          style={[atsStyles.fontHeader, { fontWeight: "bold" }]}
+          style={[
+            atsStyles.fontHeader,
+            { fontWeight: "bold", textAlign: "center" },
+          ]}
         >{`${firstName} ${lastName}, ${jobTarget}`}</Text>
       </View>
       <View
         style={[
-          atsStyles.sectionMargin,
           {
+            marginTop: "6px",
+            marginBottom: "10px",
             display: "flex",
             alignItems: "center",
             width: "100%",
@@ -101,7 +111,7 @@ const PersonalDetail = ({
         ]}
       >
         <Text
-          style={atsStyles.fontParagraph}
+          style={[atsStyles.fontParagraph, { textAlign: "center" }]}
         >{`${address}, ${cityState} ${postalCode}, ${country}, ${phone}, ${email}`}</Text>
       </View>
       <Divider />
@@ -134,7 +144,7 @@ const ProfileSummary = ({ profileSummary }: { profileSummary: string }) => {
   return (
     <>
       <SectionWrapper title="PROFILE">
-        <Text style={[atsStyles.fontParagraph, { width: "80%" }]}>
+        <Text style={[atsStyles.fontParagraph, { width: "78%" }]}>
           {profileSummary}
         </Text>
       </SectionWrapper>
@@ -294,7 +304,6 @@ const LicensesCertifications = ({
           );
         })}
       </SectionDetailsWrapper>
-      <Divider />
     </>
   );
 };
