@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { pdf } from "@react-pdf/renderer";
-import AtsDocument from "../generate-pdf/components/templates/ats-template/AtsDocument";
 import { useToast } from "../../shared/hooks/useToast";
 import type { CVDocument } from "../../shared/utils/cvService";
+import { buildTemplateDocument } from "../../shared/utils/templateDocument";
 
 const PreviewDownloadBtn = ({ cv }: { cv: CVDocument }) => {
   const { showToast } = useToast();
@@ -13,39 +13,24 @@ const PreviewDownloadBtn = ({ cv }: { cv: CVDocument }) => {
     setIsPreparing(true);
 
     try {
-      if (!cv.template || cv.template === "ats") {
-        const doc = (
-          <AtsDocument
-            personalDetail={cv.data.personalDetail}
-            profileSummary={cv.data.profileSummary}
-            workExperiences={cv.data.workExperiences}
-            educations={cv.data.educations}
-            skills={cv.data.skills}
-            languages={cv.data.languages}
-            professionalTraining={cv.data.professionalTraining}
-            licensesCertifications={cv.data.licensesCertifications}
-          />
-        );
+      const doc = buildTemplateDocument(cv.template, cv.data);
 
-        const blob = await pdf(doc).toBlob();
-        const url = URL.createObjectURL(blob);
+      const blob = await pdf(doc).toBlob();
+      const url = URL.createObjectURL(blob);
 
-        // Open in new tab
-        window.open(url, "_blank");
+      // Open in new tab
+      window.open(url, "_blank");
 
-        // Trigger download
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `${(cv.title || "resume").replace(/\s+/g, "_")}.pdf`;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
+      // Trigger download
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${(cv.title || "resume").replace(/\s+/g, "_")}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
 
-        // Revoke URL after a while
-        setTimeout(() => URL.revokeObjectURL(url), 20000);
-      } else {
-        showToast("Preview for this template is not supported yet", "warning");
-      }
+      // Revoke URL after a while
+      setTimeout(() => URL.revokeObjectURL(url), 20000);
     } catch (err) {
       const message =
         err instanceof Error ? err.message : "Failed to prepare preview";
