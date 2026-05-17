@@ -100,7 +100,7 @@ export const mocks = (() => {
       jobTitle: "Senior Frontend Engineer",
       employer: "BrightApps Inc.",
       startAt: "June, 2021",
-      endsAt: "Present",
+      endsAt: "",
       address: "San Francisco, CA",
       description:
         "Led development of the company design system, improved performance by 30%, and mentored junior engineers. Collaborated with product and design to ship features used by 200k+ monthly users.",

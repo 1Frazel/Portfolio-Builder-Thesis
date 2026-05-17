@@ -117,8 +117,10 @@ const isDifferent = <T,>(value: T, defaultValue: T) => {
   }
 };
 
-const formatDate = (date?: string) => {
-  if (!date) return "";
+const formatDate = (date?: string, isEnd = false) => {
+  if (!date) return isEnd ? "Present" : "";
+  if (typeof date === "string" && date.trim().toLowerCase() === "present")
+    return "Present";
   try {
     return dayjs(date).format("MMM, YYYY");
   } catch {
@@ -157,7 +159,7 @@ const WorkExperience = ({
             <SectionDetails
               key={experience.id}
               startAt={formatDate(experience.startAt)}
-              endsAt={formatDate(experience.endsAt)}
+              endsAt={formatDate(experience.endsAt, true)}
               title={`${experience.jobTitle}, ${experience.employer}`}
               address={experience.address}
               description={experience.description}
@@ -182,7 +184,7 @@ const Education = ({ educations }: { educations: IEducation[] }) => {
             <SectionDetails
               key={education.id}
               startAt={formatDate(education.startAt)}
-              endsAt={formatDate(education.endsAt)}
+              endsAt={formatDate(education.endsAt, true)}
               title={`${education.degree}, ${education.school}`}
               address={education.city}
               description={education.description}
@@ -259,7 +261,7 @@ const ProfessionalTraining = ({
             <SectionDetails
               key={training.id}
               startAt={formatDate(training.startAt)}
-              endsAt={formatDate(training.endsAt)}
+              endsAt={formatDate(training.endsAt, true)}
               title={`${training.courseName}, ${training.institution}`}
             />
           );
@@ -286,7 +288,7 @@ const LicensesCertifications = ({
             <SectionDetails
               key={license.id}
               startAt={formatDate(license.startAt)}
-              endsAt={formatDate(license.endsAt)}
+              endsAt={formatDate(license.endsAt, true)}
               title={`${license.name}, ${license.issuer}`}
             />
           );
