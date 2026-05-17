@@ -46,7 +46,7 @@ const PdfDownloadBtn = ({
 
     try {
       setIsSaving(true);
-      await saveCV(title, template, formData, resumeId);
+      // await saveCV(title, template, formData, resumeId);
 
       // generate PDF blob and trigger download
       const blob = await pdf(docs).toBlob();
