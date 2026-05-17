@@ -1,5 +1,6 @@
 import type { ReactElement } from "react";
 import PdfDownloadBtn from "../button/PdfDownloadBtn";
+import type { FormData } from "../../../../shared/hooks/useFormData";
 
 const GeneratePdfFooter = ({
   nextSectionTitle,
@@ -10,6 +11,10 @@ const GeneratePdfFooter = ({
   activeAdditionalSection,
   handleAdditionalSection,
   docs,
+  formData,
+  template,
+  resumeId,
+  initialTitle,
 }: {
   nextSectionTitle: string;
   activeSectionIndex: number;
@@ -19,6 +24,10 @@ const GeneratePdfFooter = ({
   activeAdditionalSection: string;
   handleAdditionalSection: () => void;
   docs?: ReactElement;
+  formData: FormData;
+  template: string;
+  resumeId?: string;
+  initialTitle?: string;
 }) => {
   const isFirstSection = activeSectionIndex === 0;
   const isLastSection = activeSectionIndex === sectionLength;
@@ -40,7 +49,7 @@ const GeneratePdfFooter = ({
           </button>
         )}
 
-        {activeAdditionalSection !== "default" && isLastSection ? (
+        {activeAdditionalSection !== "default" ? (
           <button
             onClick={handleAdditionalSection}
             className={secondaryButtonClass}
@@ -48,7 +57,14 @@ const GeneratePdfFooter = ({
             Add Another Additional Section
           </button>
         ) : isLastSection && docs ? (
-          <PdfDownloadBtn filename="resume.pdf" docs={docs} />
+          <PdfDownloadBtn
+            filename="resume.pdf"
+            docs={docs}
+            formData={formData}
+            template={template}
+            resumeId={resumeId}
+            initialTitle={initialTitle}
+          />
         ) : (
           <button
             onClick={() => {

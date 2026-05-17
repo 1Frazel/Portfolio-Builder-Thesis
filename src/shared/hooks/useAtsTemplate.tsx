@@ -9,13 +9,20 @@ import Education from "../../pages/generate-pdf/components/input/Education";
 import Skills from "../../pages/generate-pdf/components/input/Skills";
 import ProfileSummary from "../../pages/generate-pdf/components/input/ProfileSummary";
 import AdditionalSections from "../../pages/generate-pdf/components/input/AdditionalSections";
-import AtsDocument from "../../pages/generate-pdf/components/templates/ats-template/AtsDocument";
 import { useFormData } from "./useFormData";
 import FinishUp from "../../pages/generate-pdf/components/input/FinishUp";
+import { buildTemplateDocument } from "../utils/templateDocument";
 
-const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
+const useAtsTemplate = ({
+  useMock,
+  template,
+}: {
+  useMock: boolean;
+  template: string;
+}) => {
   const {
     formData,
+    setFormData,
     setLanguages,
     setWorkExperiences,
     setEducations,
@@ -155,28 +162,19 @@ const useAtsTemplate = ({ useMock }: { useMock: boolean }) => {
     nextComponent,
     nextSectionTitle,
     activeSectionIndex,
+    formData,
     sectionLength: listAtsTemplateSection.length - 1,
     handlePreviousSection: () => setActiveSectionIndex((prev) => prev - 1),
     handleNextSection: () => setActiveSectionIndex((prev) => prev + 1),
     setActiveSectionIndex,
     activeAdditionalSection,
     handleAdditionalSection: () => setActiveAdditionalSection("default"),
-    docs: (
-      <AtsDocument
-        personalDetail={formData.personalDetail}
-        profileSummary={formData.profileSummary}
-        workExperiences={formData.workExperiences}
-        educations={formData.educations}
-        skills={formData.skills}
-        languages={formData.languages}
-        professionalTraining={formData.professionalTraining}
-        licensesCertifications={formData.licensesCertifications}
-      />
-    ),
+    docs: buildTemplateDocument(template, formData),
     listAtsTemplateSection: listAtsTemplateSection.map((section) => ({
       id: section.id,
       title: section.title,
     })),
+    setFormData,
   };
 };
 

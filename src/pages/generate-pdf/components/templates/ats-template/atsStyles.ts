@@ -2,27 +2,36 @@ import { StyleSheet } from "@react-pdf/renderer";
 
 const atsStyles = StyleSheet.create({
   fontHeader: {
-    fontSize: "12px",
+    fontSize: "13.5px",
+    lineHeight: 1.2,
   },
   fontSectionHeader: {
-    fontSize: "9px",
+    fontSize: "10px",
+    letterSpacing: "1.3px",
+    lineHeight: 1.1,
   },
   fontParagraph: {
-    fontSize: "8px",
+    fontSize: "8.5px",
+    lineHeight: 1.35,
   },
   fontDescriptionParagraph: {
-    fontSize: "7px",
+    fontSize: "7.5px",
+    lineHeight: 1.35,
   },
   sectionMargin: {
-    marginTop: "8px",
-    marginBottom: "16px",
+    marginTop: "10px",
+    marginBottom: "12px",
   },
   page: {
     backgroundColor: "#ffffff",
+    margin: 0,
+    paddingTop: "30px",
+    paddingHorizontal: "34px",
+    paddingBottom: "28px",
   },
   section: {
-    margin: 10,
-    padding: 10,
+    margin: 0,
+    padding: 0,
   },
 });
 

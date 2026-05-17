@@ -38,6 +38,7 @@ export interface FormData {
 
 export interface UseFormDataReturn {
   formData: FormData;
+  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
   setLanguages: React.Dispatch<React.SetStateAction<ILanguages[]>>;
   setWorkExperiences: React.Dispatch<React.SetStateAction<IWorkExperience[]>>;
   setEducations: React.Dispatch<React.SetStateAction<IEducation[]>>;
@@ -172,6 +173,7 @@ export const useFormData = ({
 
   return {
     formData,
+    setFormData,
     setLanguages,
     setWorkExperiences,
     setEducations,

@@ -3,6 +3,7 @@ import type { User } from "firebase/auth";
 import { logout, onAuthChange, signInWithGoogle } from "../utils/authService";
 import { AuthContext } from "./useAuth";
 import { useToast } from "./useToast";
+import { ensureUserDocument } from "../utils/cvService";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -13,9 +14,36 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const unsubscribe = onAuthChange((u) => {
       setUser(u);
       setLoading(false);
+
+      if (u) {
+        void ensureUserDocument().catch((err: unknown) => {
+          const code =
+            err && typeof err === "object" && "code" in err
+              ? String((err as { code?: string }).code ?? "")
+              : "";
+
+          if (
+            code === "permission-denied" ||
+            code === "firestore/permission-denied" ||
+            (err instanceof Error &&
+              /permission|insufficient/i.test(err.message))
+          ) {
+            console.warn(
+              "Skipping user profile initialization due to Firestore permissions.",
+            );
+            return;
+          }
+
+          const message =
+            err instanceof Error
+              ? err.message
+              : "Failed to initialize user profile";
+          showToast(message, "error");
+        });
+      }
     });
     return unsubscribe;
-  }, []);
+  }, [showToast]);
 
   const handleLogin = async () => {
     setLoading(true);

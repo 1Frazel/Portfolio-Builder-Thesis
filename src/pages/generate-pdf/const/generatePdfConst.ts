@@ -78,106 +78,102 @@ export const DEFAULT_LICENSES_CERTIFICATION = {
 
 export const mocks = (() => {
   const DEFAULT_PERSONAL_DETAIL = {
-    jobTarget: "Front End Developer",
+    jobTarget: "Senior Frontend Engineer",
     photo: "",
-    firstName: "John",
-    lastName: "Doe",
-    email: "JohnDoe@mail.net",
-    phone: "123456789",
-    linkedinUrl: "https://us.linkedin.com/en/johnDoe",
-    postalCode: "54334",
-    cityState: "City, State Some Random  Street",
+    firstName: "Jane",
+    lastName: "Anderson",
+    email: "jane.anderson@example.com",
+    phone: "+1 (415) 555-0132",
+    linkedinUrl: "https://www.linkedin.com/in/jane-anderson",
+    postalCode: "94105",
+    cityState: "San Francisco, CA",
     country: "USA",
-    address: "Somewhere random street",
+    address: "123 Market St, Apt 45",
   };
 
   const DEFAULT_PROFILE_SUMMARY =
-    "Assisting senior in developing features and bug fixing";
+    "Product-focused frontend engineer with 5+ years building accessible, performant React applications. Experienced with component libraries, TypeScript, and cross-functional collaboration to deliver customer-facing features.";
 
   const DEFAULT_WORK_EXPERIENCES = [
     {
       id: 0,
-      jobTitle: "Frontend developer intern",
-      employer: "Company",
-      startAt: "Feb, 2025",
-      endsAt: "Feb, 2026",
-      address: "Jakarta",
-      description: "Creating and adding new features",
+      jobTitle: "Senior Frontend Engineer",
+      employer: "BrightApps Inc.",
+      startAt: "June, 2021",
+      endsAt: "",
+      address: "San Francisco, CA",
+      description:
+        "Led development of the company design system, improved performance by 30%, and mentored junior engineers. Collaborated with product and design to ship features used by 200k+ monthly users.",
+    },
+    {
+      id: 1,
+      jobTitle: "Frontend Engineer",
+      employer: "Spark Digital",
+      startAt: "September, 2018",
+      endsAt: "May, 2021",
+      address: "Oakland, CA",
+      description:
+        "Built responsive React applications, implemented client-side routing, and integrated RESTful APIs. Wrote unit and integration tests to improve reliability.",
     },
   ];
 
   const DEFAULT_EDUCATION = [
     {
       id: 0,
-      school: "University",
-      degree: "Computer Science",
-      startAt: "Feb, 2022",
-      endsAt: "Feb, 2026",
-      city: "Jakarta",
-      description: "Graduated with honors",
+      school: "State University",
+      degree: "B.S. in Computer Science",
+      startAt: "September, 2014",
+      endsAt: "June, 2018",
+      city: "San Francisco, CA",
+      description:
+        "Graduated Cum Laude. Relevant coursework: Data Structures, Web Development, Human-Computer Interaction.",
     },
   ];
 
   const DEFAULT_SKILLS = [
-    {
-      id: 0,
-      name: "Javascript",
-      expertise: "Skillful",
-    },
-    {
-      id: 1,
-      name: "Typescript",
-      expertise: "Expert",
-    },
-    {
-      id: 2,
-      name: "React",
-      expertise: "Experienced",
-    },
+    { id: 0, name: "JavaScript", expertise: "Expert" },
+    { id: 1, name: "TypeScript", expertise: "Expert" },
+    { id: 2, name: "React", expertise: "Expert" },
+    { id: 3, name: "CSS / Tailwind", expertise: "Experienced" },
+    { id: 4, name: "Testing (Jest, RTL)", expertise: "Intermediate" },
   ];
 
   const DEFAULT_LANGUAGES = [
-    {
-      id: 0,
-      name: "English",
-      expertise: "Highly Proficient",
-    },
-    {
-      id: 1,
-      name: "Indonesia",
-      expertise: "Native Speaker",
-    },
-    {
-      id: 2,
-      name: "React",
-      expertise: "Intermediate",
-    },
+    { id: 0, name: "English", expertise: "Native" },
+    { id: 1, name: "Spanish", expertise: "Professional" },
   ];
 
   const DEFAULT_PROFESSIONAL_TRAINING = [
     {
       id: 0,
-      courseName: "Javascript Fullstack",
-      institution: "Odin Project",
-      startAt: "Jul, 2022",
-      endsAt: "May, 2026",
+      courseName: "Advanced React Patterns",
+      institution: "Frontend Masters",
+      startAt: "March, 2020",
+      endsAt: "April, 2020",
     },
     {
       id: 1,
-      courseName: "Learning React",
-      institution: "Meta Facebook",
-      startAt: "Feb, 2025",
-      endsAt: "Feb, 2026",
+      courseName: "Performance Optimization for Web",
+      institution: "Udacity",
+      startAt: "August, 2019",
+      endsAt: "October, 2019",
     },
   ];
 
   const DEFAULT_LICENSES_CERTIFICATION = [
     {
       id: 0,
-      name: "Introduction to React",
+      name: "AWS Certified Developer – Associate",
+      issuer: "Amazon Web Services",
+      startAt: "June, 2022",
+      endsAt: "June, 2025",
+    },
+    {
+      id: 1,
+      name: "React - The Complete Guide (Certification)",
       issuer: "Coursera",
-      startAt: "March, 2025",
-      endsAt: "March, 2027",
+      startAt: "November, 2020",
+      endsAt: "January, 2021",
     },
   ];
 

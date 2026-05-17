@@ -1,5 +1,6 @@
 import { Text, View } from "@react-pdf/renderer";
 import atsStyles from "./atsStyles";
+import React from "react";
 
 const SectionWrapper = ({
   children,
@@ -16,10 +17,16 @@ const SectionWrapper = ({
           display: "flex",
           flexDirection: "row",
           width: "100%",
+          alignItems: "flex-start",
         },
       ]}
     >
-      <Text style={[atsStyles.fontSectionHeader, { width: "20%" }]}>
+      <Text
+        style={[
+          atsStyles.fontSectionHeader,
+          { width: "22%", paddingRight: "8px" },
+        ]}
+      >
         {title}
       </Text>
       {children}
@@ -29,18 +36,44 @@ const SectionWrapper = ({
 
 const SectionContainer = ({ children }: { children: React.ReactNode }) => {
   /* react-pdf doesn't support grid: https://github.com/diegomura/react-pdf/issues/1207 */
+  const items = React.Children.toArray(children);
+  const rows: React.ReactNode[][] = [];
+
+  for (let index = 0; index < items.length; index += 2) {
+    rows.push(items.slice(index, index + 2));
+  }
+
   return (
     <View
       style={{
         display: "flex",
-        flexDirection: "row",
-        width: "80%",
-        flexWrap: "wrap",
-        rowGap: "8px",
-        columnGap: "24px",
+        flexDirection: "column",
+        width: "78%",
       }}
     >
-      {children}
+      {rows.map((row, rowIndex) => (
+        <View
+          key={`section-row-${rowIndex}`}
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            width: "100%",
+            marginBottom: "6px",
+          }}
+        >
+          {row.map((item, itemIndex) => (
+            <View
+              key={`section-item-${rowIndex}-${itemIndex}`}
+              style={{
+                width: "50%",
+                paddingRight: itemIndex === 0 ? "12px" : "0px",
+              }}
+            >
+              {item}
+            </View>
+          ))}
+        </View>
+      ))}
     </View>
   );
 };
@@ -51,8 +84,9 @@ const Section = ({ name, level }: { name: string; level: string }) => {
       style={{
         display: "flex",
         flexDirection: "row",
-        width: "47%",
+        width: "100%",
         justifyContent: "space-between",
+        alignItems: "center",
       }}
     >
       <Text style={atsStyles.fontParagraph}>{name}</Text>

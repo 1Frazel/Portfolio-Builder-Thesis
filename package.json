@@ -13,6 +13,7 @@
     "@react-pdf/renderer": "^4.3.2",
     "@tailwindcss/vite": "^4.2.1",
     "antd": "^6.3.7",
+    "dayjs": "^1.11.20",
     "firebase": "^12.13.0",
     "package": "^1.0.1",
     "pdfjs-dist": "5.4.296",

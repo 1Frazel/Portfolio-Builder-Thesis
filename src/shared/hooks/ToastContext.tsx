@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useCallback, useMemo, useState, type ReactNode } from "react";
 import { ToastContext, type Toast } from "./useToast";
 
 const typeConfig: Record<
@@ -18,16 +18,21 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
     setToasts((s) => s.filter((t) => t.id !== id));
   };
 
-  const showToast = (message: string, type: Toast["type"] = "info") => {
-    const id = `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
-    const t: Toast = { id, message, type };
-    setToasts((s) => [...s, t]);
-    // auto-dismiss
-    setTimeout(() => removeToast(id), 5000);
-  };
+  const showToast = useCallback(
+    (message: string, type: Toast["type"] = "info") => {
+      const id = `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+      const t: Toast = { id, message, type };
+      setToasts((s) => [...s, t]);
+      // auto-dismiss
+      setTimeout(() => removeToast(id), 5000);
+    },
+    [],
+  );
+
+  const contextValue = useMemo(() => ({ showToast }), [showToast]);
 
   return (
-    <ToastContext.Provider value={{ showToast }}>
+    <ToastContext.Provider value={contextValue}>
       {children}
       <div className="fixed top-4 right-4 z-50 flex flex-col gap-3">
         {toasts.map((t) => {

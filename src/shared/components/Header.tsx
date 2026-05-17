@@ -49,7 +49,6 @@ const Header = () => {
 const DesktopHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
   const { user, handleLogin, handleLogout, loading } = useAuth();
 
-  console.log(user);
   return (
     <div className="bg-[#2951A3] p-2 md:px-[64px] md:py-[32px]">
       <div className="flex items-center justify-between">

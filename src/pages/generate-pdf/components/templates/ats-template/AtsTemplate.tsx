@@ -4,10 +4,24 @@ import GeneratePdfFooter from "../../footer/GeneratePdfFooter";
 import ProgressBar from "../../ProgressBar";
 import useAtsTemplate from "../../../../../shared/hooks/useAtsTemplate";
 import Header from "../../../../../shared/components/Header";
+import LoadingPage from "../../../../../shared/components/LoadingPage";
 import useIsMobile from "../../../../../shared/hooks/useIsMobile";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams, useSearchParams } from "react-router";
+import { useToast } from "../../../../../shared/hooks/useToast";
+import { getCV } from "../../../../../shared/utils/cvService";
 
 const AtsTemplate = () => {
+  const navigate = useNavigate();
+  const { id: resumeId } = useParams<{ id: string }>();
+  const [searchParams] = useSearchParams();
+  // Development-only toggle: set true manually when you want mock data
+  const USE_MOCK_DATA = true;
+  const { showToast } = useToast();
+  const [selectedTemplate, setSelectedTemplate] = useState(
+    searchParams.get("template") || "ats",
+  );
+
   const {
     nextComponent,
     nextSectionTitle,
@@ -20,11 +34,49 @@ const AtsTemplate = () => {
     handleAdditionalSection,
     docs,
     listAtsTemplateSection,
-  } = useAtsTemplate({ useMock: true });
+    formData,
+    setFormData,
+  } = useAtsTemplate({ useMock: USE_MOCK_DATA, template: selectedTemplate });
+
+  const [initialResumeTitle, setInitialResumeTitle] = useState("");
+  const [isLoadingCurrentCV, setIsLoadingCurrentCV] = useState(
+    Boolean(resumeId),
+  );
+
+  useEffect(() => {
+    const loadExistingCV = async () => {
+      if (!resumeId) {
+        setIsLoadingCurrentCV(false);
+        return;
+      }
+
+      setIsLoadingCurrentCV(true);
+
+      try {
+        const cv = await getCV(resumeId);
+        setFormData(cv.data);
+        setInitialResumeTitle(cv.title);
+        setSelectedTemplate(cv.template || "ats");
+      } catch (err) {
+        const message =
+          err instanceof Error ? err.message : "Failed to load resume";
+        showToast(message, "error");
+        navigate("/creation");
+      } finally {
+        setIsLoadingCurrentCV(false);
+      }
+    };
+
+    loadExistingCV();
+  }, [navigate, resumeId, setFormData, showToast]);
 
   // mode: 'edit' | 'preview' — controls mobile view
   const [mode, setMode] = useState<"edit" | "preview">("edit");
   const isMobile = useIsMobile();
+
+  if (isLoadingCurrentCV) {
+    return <LoadingPage message="Fetching current CV data..." />;
+  }
 
   return (
     <div className="min-h-screen w-full bg-gray-50">
@@ -91,6 +143,10 @@ const AtsTemplate = () => {
                 activeAdditionalSection={activeAdditionalSection}
                 handleAdditionalSection={handleAdditionalSection}
                 docs={docs}
+                formData={formData}
+                template={selectedTemplate}
+                resumeId={resumeId}
+                initialTitle={initialResumeTitle}
               />
             </div>
           ) : (
@@ -112,6 +168,10 @@ const AtsTemplate = () => {
                 activeAdditionalSection={activeAdditionalSection}
                 handleAdditionalSection={handleAdditionalSection}
                 docs={docs}
+                formData={formData}
+                template={selectedTemplate}
+                resumeId={resumeId}
+                initialTitle={initialResumeTitle}
               />
             </div>
 

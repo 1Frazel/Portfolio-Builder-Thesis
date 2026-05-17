@@ -29,7 +29,6 @@ const Trigger = ({ children }: { children: React.ReactNode }) => {
 const MenuItem = ({ children }: { children: React.ReactNode }) => {
   const { isShown } = useDropdownContext();
 
-  console.log(isShown);
   if (isShown) {
     return (
       <div className="absolute bg-[#eff2f9] rounded-md px-[16px] py-[8px]">

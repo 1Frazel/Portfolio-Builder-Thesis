@@ -10,9 +10,20 @@ import type {
 } from "../../../interface/generatePdfInterface";
 
 import Divider from "../Divider";
+import dayjs from "dayjs";
 import { Section, SectionContainer, SectionWrapper } from "./AtsSection";
 import { SectionDetails, SectionDetailsWrapper } from "./AtsSectionDetails";
 import atsStyles from "./atsStyles";
+import {
+  DEFAULT_EDUCATION,
+  DEFAULT_LICENSES_CERTIFICATION,
+  DEFAULT_PROFESSIONAL_TRAINING,
+  DEFAULT_SKILLS,
+  DEFAULT_WORK_EXPERIENCES,
+  DEFAULT_LANGUAGES,
+  DEFAULT_PROFILE_SUMMARY,
+  DEFAULT_PERSONAL_DETAIL,
+} from "../../../const/generatePdfConst";
 
 const AtsDocument = ({
   personalDetail,
@@ -37,7 +48,9 @@ const AtsDocument = ({
     <Document>
       <Page size="A4" style={atsStyles.page}>
         <View style={atsStyles.section}>
-          <PersonalDetail personalDetail={personalDetail} />
+          {isDifferent(personalDetail, DEFAULT_PERSONAL_DETAIL) && (
+            <PersonalDetail personalDetail={personalDetail} />
+          )}
           <ProfileSummary profileSummary={profileSummary} />
           <WorkExperience workExperiences={workExperiences} />
           <Education educations={educations} />
@@ -72,15 +85,25 @@ const PersonalDetail = ({
 
   return (
     <>
-      <View style={{ display: "flex", alignItems: "center", width: "100%" }}>
+      <View
+        style={{
+          display: "flex",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
         <Text
-          style={[atsStyles.fontHeader, { fontWeight: "bold" }]}
+          style={[
+            atsStyles.fontHeader,
+            { fontWeight: "bold", textAlign: "center" },
+          ]}
         >{`${firstName} ${lastName}, ${jobTarget}`}</Text>
       </View>
       <View
         style={[
-          atsStyles.sectionMargin,
           {
+            marginTop: "6px",
+            marginBottom: "10px",
             display: "flex",
             alignItems: "center",
             width: "100%",
@@ -88,7 +111,7 @@ const PersonalDetail = ({
         ]}
       >
         <Text
-          style={atsStyles.fontParagraph}
+          style={[atsStyles.fontParagraph, { textAlign: "center" }]}
         >{`${address}, ${cityState} ${postalCode}, ${country}, ${phone}, ${email}`}</Text>
       </View>
       <Divider />
@@ -96,11 +119,32 @@ const PersonalDetail = ({
   );
 };
 
+const isDifferent = <T,>(value: T, defaultValue: T) => {
+  try {
+    return JSON.stringify(value) !== JSON.stringify(defaultValue);
+  } catch {
+    return Boolean(value) !== Boolean(defaultValue);
+  }
+};
+
+const formatDate = (date?: string, isEnd = false) => {
+  if (!date) return isEnd ? "Present" : "";
+  if (typeof date === "string" && date.trim().toLowerCase() === "present")
+    return "Present";
+  try {
+    return dayjs(date).format("MMM, YYYY");
+  } catch {
+    return date;
+  }
+};
+
 const ProfileSummary = ({ profileSummary }: { profileSummary: string }) => {
+  if (!isDifferent(profileSummary, DEFAULT_PROFILE_SUMMARY)) return null;
+
   return (
     <>
       <SectionWrapper title="PROFILE">
-        <Text style={[atsStyles.fontParagraph, { width: "80%" }]}>
+        <Text style={[atsStyles.fontParagraph, { width: "78%" }]}>
           {profileSummary}
         </Text>
       </SectionWrapper>
@@ -114,6 +158,9 @@ const WorkExperience = ({
 }: {
   workExperiences: IWorkExperience[];
 }) => {
+  const defaultWork = [DEFAULT_WORK_EXPERIENCES];
+  if (!isDifferent(workExperiences, defaultWork)) return null;
+
   return (
     <>
       <SectionDetailsWrapper title="EMPLOYMENT HISTORY">
@@ -121,8 +168,8 @@ const WorkExperience = ({
           return (
             <SectionDetails
               key={experience.id}
-              startAt={experience.startAt}
-              endsAt={experience.endsAt}
+              startAt={formatDate(experience.startAt)}
+              endsAt={formatDate(experience.endsAt, true)}
               title={`${experience.jobTitle}, ${experience.employer}`}
               address={experience.address}
               description={experience.description}
@@ -136,6 +183,9 @@ const WorkExperience = ({
 };
 
 const Education = ({ educations }: { educations: IEducation[] }) => {
+  const defaultEd = [DEFAULT_EDUCATION];
+  if (!isDifferent(educations, defaultEd)) return null;
+
   return (
     <>
       <SectionDetailsWrapper title="EDUCATION">
@@ -143,8 +193,8 @@ const Education = ({ educations }: { educations: IEducation[] }) => {
           return (
             <SectionDetails
               key={education.id}
-              startAt={education.startAt}
-              endsAt={education.endsAt}
+              startAt={formatDate(education.startAt)}
+              endsAt={formatDate(education.endsAt, true)}
               title={`${education.degree}, ${education.school}`}
               address={education.city}
               description={education.description}
@@ -158,6 +208,9 @@ const Education = ({ educations }: { educations: IEducation[] }) => {
 };
 
 const Skill = ({ skills }: { skills: ISkill[] }) => {
+  const defaultSkills = [DEFAULT_SKILLS];
+  if (!isDifferent(skills, defaultSkills)) return null;
+
   return (
     <>
       <SectionWrapper title="SKILLS">
@@ -179,6 +232,9 @@ const Skill = ({ skills }: { skills: ISkill[] }) => {
 };
 
 const Language = ({ languages }: { languages: ILanguages[] }) => {
+  const defaultLang = [DEFAULT_LANGUAGES];
+  if (!isDifferent(languages, defaultLang)) return null;
+
   return (
     <>
       <SectionWrapper title="LANGUAGES">
@@ -204,21 +260,22 @@ const ProfessionalTraining = ({
 }: {
   professionalTraining: IProfessionalTraining[];
 }) => {
+  const defaultProf = [DEFAULT_PROFESSIONAL_TRAINING];
+  if (!isDifferent(professionalTraining, defaultProf)) return null;
+
   return (
     <>
       <SectionDetailsWrapper title="COURSES">
-        <View style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-          {professionalTraining.map((training) => {
-            return (
-              <SectionDetails
-                key={training.id}
-                startAt={training.startAt}
-                endsAt={training.endsAt}
-                title={`${training.courseName}, ${training.institution}`}
-              />
-            );
-          })}
-        </View>
+        {professionalTraining.map((training) => {
+          return (
+            <SectionDetails
+              key={training.id}
+              startAt={formatDate(training.startAt)}
+              endsAt={formatDate(training.endsAt, true)}
+              title={`${training.courseName}, ${training.institution}`}
+            />
+          );
+        })}
       </SectionDetailsWrapper>
       <Divider />
     </>
@@ -230,23 +287,23 @@ const LicensesCertifications = ({
 }: {
   licensesCertifications: ILicensesCertifications[];
 }) => {
+  const defaultLic = [DEFAULT_LICENSES_CERTIFICATION];
+  if (!isDifferent(licensesCertifications, defaultLic)) return null;
+
   return (
     <>
       <SectionDetailsWrapper title="LICENSES">
-        <View style={{ display: "flex", flexDirection: "row", gap: "16px" }}>
-          {licensesCertifications.map((license) => {
-            return (
-              <SectionDetails
-                key={license.id}
-                startAt={license.startAt}
-                endsAt={license.endsAt}
-                title={`${license.name}, ${license.issuer}`}
-              />
-            );
-          })}
-        </View>
+        {licensesCertifications.map((license) => {
+          return (
+            <SectionDetails
+              key={license.id}
+              startAt={formatDate(license.startAt)}
+              endsAt={formatDate(license.endsAt, true)}
+              title={`${license.name}, ${license.issuer}`}
+            />
+          );
+        })}
       </SectionDetailsWrapper>
-      <Divider />
     </>
   );
 };

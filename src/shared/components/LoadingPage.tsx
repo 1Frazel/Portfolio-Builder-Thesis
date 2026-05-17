@@ -1,6 +1,6 @@
 import Header from "./Header";
 
-const LoadingPage = () => {
+const LoadingPage = ({ message = "Loading..." }: { message?: string }) => {
   return (
     <div className="min-h-screen w-full bg-gray-50 flex flex-col">
       {/* Header with all buttons disabled */}
@@ -36,7 +36,7 @@ const LoadingPage = () => {
           </svg>
 
           {/* Loading text */}
-          <p className="text-lg font-semibold text-[#2951A3]">Loading...</p>
+          <p className="text-lg font-semibold text-[#2951A3]">{message}</p>
         </div>
       </div>
     </div>
