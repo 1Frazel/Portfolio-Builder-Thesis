@@ -217,18 +217,16 @@ const ProfessionalTraining = ({
   return (
     <>
       <SectionDetailsWrapper title="COURSES">
-        <View style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-          {professionalTraining.map((training) => {
-            return (
-              <SectionDetails
-                key={training.id}
-                startAt={formatDate(training.startAt)}
-                endsAt={formatDate(training.endsAt)}
-                title={`${training.courseName}, ${training.institution}`}
-              />
-            );
-          })}
-        </View>
+        {professionalTraining.map((training) => {
+          return (
+            <SectionDetails
+              key={training.id}
+              startAt={formatDate(training.startAt)}
+              endsAt={formatDate(training.endsAt)}
+              title={`${training.courseName}, ${training.institution}`}
+            />
+          );
+        })}
       </SectionDetailsWrapper>
       <Divider />
     </>
@@ -243,18 +241,16 @@ const LicensesCertifications = ({
   return (
     <>
       <SectionDetailsWrapper title="LICENSES">
-        <View style={{ display: "flex", flexDirection: "row", gap: "16px" }}>
-          {licensesCertifications.map((license) => {
-            return (
-              <SectionDetails
-                key={license.id}
-                startAt={formatDate(license.startAt)}
-                endsAt={formatDate(license.endsAt)}
-                title={`${license.name}, ${license.issuer}`}
-              />
-            );
-          })}
-        </View>
+        {licensesCertifications.map((license) => {
+          return (
+            <SectionDetails
+              key={license.id}
+              startAt={formatDate(license.startAt)}
+              endsAt={formatDate(license.endsAt)}
+              title={`${license.name}, ${license.issuer}`}
+            />
+          );
+        })}
       </SectionDetailsWrapper>
       <Divider />
     </>

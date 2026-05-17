@@ -1,3 +1,4 @@
+import React from "react";
 import { Text, View } from "@react-pdf/renderer";
 import atsStyles from "./atsStyles";
 
@@ -61,7 +62,13 @@ const SectionDetailsWrapper = ({
       <Text style={[atsStyles.fontSectionHeader, { marginBottom: "8px" }]}>
         {title}
       </Text>
-      {children}
+      <View style={{ display: "flex", flexDirection: "column" }}>
+        {React.Children.map(children, (child) => (
+          <View style={{ marginBottom: "8px", marginRight: "16px" }}>
+            {child}
+          </View>
+        ))}
+      </View>
     </View>
   );
 };
