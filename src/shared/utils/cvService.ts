@@ -31,6 +31,7 @@ export async function ensureUserDocument(): Promise<void> {
   const snapshot = await getDoc(userRef);
   if (!snapshot.exists()) {
     await setDoc(userRef, {
+      userId: user.uid,
       email: user.email || "",
       displayName: user.displayName || "",
       photoURL: user.photoURL || "",
