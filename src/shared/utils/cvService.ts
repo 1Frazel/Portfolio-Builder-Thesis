@@ -7,7 +7,6 @@ import {
   deleteDoc,
   query,
   where,
-  orderBy,
   Timestamp,
 } from "firebase/firestore";
 import { firestore, auth } from "./firebase";
@@ -108,15 +107,18 @@ export async function getUserCVs(): Promise<CVDocument[]> {
   const q = query(
     collection(firestore, "resumes"),
     where("userId", "==", user.uid),
-    orderBy("updatedAt", "desc"),
   );
 
   try {
     const snapshot = await getDocs(q);
-    return snapshot.docs.map((d) => ({
-      resumeId: d.id,
-      ...(d.data() as Omit<CVDocument, "resumeId">),
-    })) as CVDocument[];
+    return snapshot.docs
+      .map((d) => ({
+        resumeId: d.id,
+        ...(d.data() as Omit<CVDocument, "resumeId">),
+      }))
+      .sort(
+        (left, right) => right.updatedAt.toMillis() - left.updatedAt.toMillis(),
+      );
   } catch (err) {
     if (err instanceof Error)
       throw new Error(`Failed to load CVs: ${err.message}`);
