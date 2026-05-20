@@ -51,7 +51,7 @@ const FileInput = ({
       </label>
     </div>
     <p className="text-sm text-gray-500 text-center mt-4">
-      Uploaded file: {fileName}
+      {fileName}
     </p>
   </div>
   );

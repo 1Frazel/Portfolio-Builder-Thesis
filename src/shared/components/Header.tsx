@@ -247,7 +247,7 @@ const MobileHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
                 <Link
                   key={header.id}
                   to={header.path}
-                  className="text-xl text-[#2951A3] text-bold"
+                  className="text-lg text-black font-normal"
                   onClick={handleNavClose}
                 >
                   {header.title}

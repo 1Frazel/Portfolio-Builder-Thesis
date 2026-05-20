@@ -43,7 +43,7 @@ const ExpandableSectionContainer = ({
   const sectionClassName =
     summaryMode && !isContentVisible
       ? "rounded-2xl border border-slate-200 bg-white px-4 py-5 shadow-lg sm:px-6 lg:px-8"
-      : "flex h-[calc(100vh-220px)] min-h-0 flex-col rounded-2xl border border-slate-200 bg-white px-4 py-5 shadow-lg sm:px-6 lg:px-8 overflow-hidden";
+      : "flex h-[calc(100vh-140px)] min-h-0 flex-col rounded-2xl border border-slate-200 bg-white px-4 py-5 shadow-lg sm:px-6 lg:px-8 overflow-hidden";
 
   return (
     <section className={sectionClassName}>
