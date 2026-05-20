@@ -64,18 +64,8 @@ const ParsePdf = () => {
             <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 md:p-8 bg-white flex flex-col items-center justify-center min-h-64">
               {/* File Icon */}
               <div className="mb-4">
-                <svg
-                  className="w-16 h-16 md:w-20 md:h-20 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-                  />
+                <svg width="109" height="139" viewBox="0 0 109 139" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path opacity="0.5" d="M106.5 47.1667L61.9286 2.5H2.5V136.5H106.5V47.1667ZM61.9286 2.5V47.1667H106.5M47.0714 17.3889H14.3857M47.0714 32.2778H14.3857M47.0714 47.1667H14.3857M14.3857 62.0556H94.6143M14.3857 76.9444H94.6143M14.3857 91.8333H94.6143M14.3857 106.722H94.6143M14.3857 121.611H94.6143" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
 
@@ -86,12 +76,12 @@ const ParsePdf = () => {
               <p className="text-center text-gray-500 text-xs md:text-sm mb-6">
                 (PDF only)
               </p>
-
               {/* File Input */}
               <FileInput
                 title="Upload"
                 acceptedFormat=".pdf"
                 handleClick={handleChange}
+                disabled={isLoading}
               />
             </div>
           </div>
