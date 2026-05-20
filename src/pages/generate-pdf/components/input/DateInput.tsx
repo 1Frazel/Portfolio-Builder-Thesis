@@ -36,18 +36,14 @@ const DateInput = ({
 }) => {
   const [startDate, setStartDate] = useState<string>(startDefaultValue);
   const [endDate, setEndDate] = useState<string>(endDefaultValue);
-  const [error, setError] = useState<string | null>(null);
-
   const validateDates = (start: string, end: string) => {
     if (start && end) {
       const startDayjs = dayjs(start, DATE_FORMAT);
       const endDayjs = dayjs(end, DATE_FORMAT);
       if (startDayjs.isAfter(endDayjs)) {
-        setError("Start date cannot be after end date");
         return;
       }
     }
-    setError(null);
   };
 
   const handleStartChange = (selectedDate: Dayjs | null) => {
