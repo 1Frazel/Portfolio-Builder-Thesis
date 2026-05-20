@@ -27,7 +27,7 @@ const FileInput = ({
   };
 
   return (
-    <div className="flex-col justify-center items-center gap-4">
+    <div className="flex flex-col justify-center items-center gap-4">
       <div
         className={`flex items-center gap-[16px] w-60 h-10 rounded-lg justify-center ${
           disabled ? "bg-slate-400 cursor-not-allowed" : "bg-[#2951A3]"
