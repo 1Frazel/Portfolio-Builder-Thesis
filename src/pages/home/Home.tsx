@@ -2,6 +2,11 @@ import { useNavigate } from "react-router";
 import Header from "../../shared/components/Header";
 import { useAuth } from "../../shared/hooks/useAuth";
 import firstSectionImage from "../../assets/firstsection.png";
+import {
+  GatekeeperIcon,
+  VisibilityIcon,
+  FormattingIcon,
+} from "../../icons/ImportanceCardIcons";
 
 const steps = [
   {
@@ -50,16 +55,19 @@ const importanceCards = [
     title: "Passing the First Gatekeeper",
     description:
       "Over 90% of large companies use an ATS. If your CV is not ATS-friendly, it might be automatically rejected and discarded before a human recruiter ever gets the chance to read it.",
+    icon: GatekeeperIcon,
   },
   {
     title: "Maximizing Your Visibility",
     description:
       "A well-structured ATS CV ensures that your most important qualifications and achievements are accurately read by the system, significantly increasing your chances of getting shortlisted for an interview.",
+    icon: VisibilityIcon,
   },
   {
     title: "Preventing Formatting Errors",
     description:
       "Complex designs, graphics, tables, or unusual fonts can confuse the system. Using an ATS-optimized format guarantees your data is extracted flawlessly without losing critical information during the parsing process.",
+    icon: FormattingIcon,
   },
 ];
 
@@ -226,8 +234,8 @@ const Home = () => {
                 >
                   <div className="grid grid-cols-1 gap-6 md:grid-cols-[180px_1fr] md:items-center md:p-2">
                     <div className="flex justify-center md:justify-start">
-                      <div className="flex h-28 w-28 items-center justify-center rounded-3xl border-4 border-[#2951A3] bg-[#f4f7ff]">
-                        <div className="h-12 w-12 rounded-full bg-[#2951A3]/15" />
+                      <div className="flex h-30 w-30 items-center justify-center">
+                        <card.icon />
                       </div>
                     </div>
 
