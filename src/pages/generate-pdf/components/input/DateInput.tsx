@@ -65,7 +65,7 @@ const DateInput = ({
       return false;
     }
     const end = dayjs(endDate, DATE_FORMAT);
-    return current && current.isAfter(end, 'month');
+    return current.isAfter(end, "month");
   };
 
   const disabledEndDate = (current: Dayjs) => {
@@ -73,7 +73,7 @@ const DateInput = ({
       return false;
     }
     const start = dayjs(startDate, DATE_FORMAT);
-    return current && current.isBefore(start, 'month');
+    return current.isBefore(start, "month");
   };
 
   const defaultInputClass =
