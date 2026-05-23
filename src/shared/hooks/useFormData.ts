@@ -61,8 +61,6 @@ export const useFormData = ({
 }: {
   useMock: boolean;
 }): UseFormDataReturn => {
-  useMock = false;
-
   const [formData, setFormData] = useState<FormData>({
     personalDetail: useMock
       ? mocks.DEFAULT_PERSONAL_DETAIL
