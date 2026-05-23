@@ -4,14 +4,18 @@ const FileInput = ({
   title,
   acceptedFormat,
   handleClick,
+  disabled = false,
 }: {
   title: string;
   acceptedFormat: string;
   handleClick: (fileUrl: string) => void;
+  disabled?: boolean;
 }) => {
   const [fileName, setFileName] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (disabled) return;
+
     const currentFiles = e.target.files;
 
     if (!currentFiles) return;
@@ -23,19 +27,33 @@ const FileInput = ({
   };
 
   return (
-    <div className="flex items-center gap-[16px]">
-      <label htmlFor="fileUpload">
+    <div className="flex flex-col justify-center items-center gap-4">
+      <div
+        className={`flex items-center gap-[16px] w-60 h-10 rounded-lg justify-center ${
+          disabled ? "bg-slate-400 cursor-not-allowed" : "bg-[#2951A3]"
+        }`}
+      >
+      <label
+        htmlFor="fileUpload"
+        className={disabled ? "cursor-not-allowed" : "cursor-pointer"}
+      >
         <input
           id="fileUpload"
           type="file"
           className="hidden"
           accept={acceptedFormat}
+          disabled={disabled}
           onChange={handleChange}
         />
-        {title}
+        <p className="text-white text-center">
+          {title}
+        </p>
       </label>
-      {fileName}
     </div>
+    <p className="text-sm text-gray-500 text-center mt-4">
+      {fileName}
+    </p>
+  </div>
   );
 };
 

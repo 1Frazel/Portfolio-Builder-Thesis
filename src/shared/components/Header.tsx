@@ -7,12 +7,47 @@ import { useState } from "react";
 import HomeCancel from "../../icons/HomeCancel";
 import Profile from "../../icons/Profile";
 import { useAuth } from "../hooks/useAuth";
+import { useTranslation } from "react-i18next";
 
 interface IListHeader {
   id: string;
-  title: string;
+  titleKey: string;
   path: string;
 }
+
+const LanguageSwitcher = ({ className = "" }: { className?: string }) => {
+  const { i18n } = useTranslation("common");
+  const isIndonesian = i18n.resolvedLanguage?.startsWith("id");
+
+  return (
+    <div className={`shrink-0 rounded-full bg-black/20 p-1 shadow-sm ${className}`}>
+      <div className="grid grid-cols-2 gap-1">
+        <button
+          type="button"
+          onClick={() => void i18n.changeLanguage("id")}
+          className={`rounded-full px-3 py-1.5 text-[0.65rem] sm:px-4 sm:py-2 sm:text-xs md:text-sm font-semibold transition ${
+            isIndonesian
+              ? "bg-white text-[#2951A3] shadow"
+              : "bg-transparent text-white hover:bg-white/10"
+          }`}
+        >
+          Indonesia
+        </button>
+        <button
+          type="button"
+          onClick={() => void i18n.changeLanguage("en")}
+          className={`rounded-full px-3 py-1.5 text-[0.65rem] sm:px-4 sm:py-2 sm:text-xs md:text-sm font-semibold transition ${
+            !isIndonesian
+              ? "bg-white text-[#2951A3] shadow"
+              : "bg-transparent text-white hover:bg-white/10"
+          }`}
+        >
+          English
+        </button>
+      </div>
+    </div>
+  );
+};
 
 const Header = () => {
   const isMobile = useIsMobile();
@@ -20,17 +55,17 @@ const Header = () => {
   const listHeader = [
     {
       id: "home",
-      title: "Home",
+      titleKey: "nav.home",
       path: "/",
     },
     {
       id: "creation",
-      title: "Creation",
+      titleKey: "nav.creation",
       path: "/creation",
     },
     {
       id: "checker",
-      title: "Resume Checker",
+      titleKey: "nav.checker",
       path: "/checker",
     },
   ];
@@ -48,6 +83,7 @@ const Header = () => {
 
 const DesktopHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
   const { user, handleLogin, handleLogout, loading } = useAuth();
+  const { t } = useTranslation("common");
 
   return (
     <div className="bg-[#2951A3] p-2 md:px-[64px] md:py-[32px]">
@@ -56,16 +92,18 @@ const DesktopHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
           <HomeIcon />
           {listHeader.map((header) => {
             const isCreation = header.id === "creation";
+            const headerTitle = t(header.titleKey);
+
             if (isCreation && !user) {
               return (
                 <button
                   key={header.id}
-                  title="Sign in to create resumes"
+                  title={t("auth.signInToCreateResumes")}
                   onClick={() => !loading && handleLogin()}
                   aria-disabled={loading}
                   className="text-white text-xs md:text-base opacity-60 cursor-pointer"
                 >
-                  {header.title}
+                  {headerTitle}
                 </button>
               );
             }
@@ -76,7 +114,7 @@ const DesktopHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
                 to={header.path}
                 className={`text-white text-xs md:text-base ${isCreation && loading ? "opacity-50 pointer-events-none" : ""}`}
               >
-                {header.title}
+                {headerTitle}
               </Link>
             );
           })}
@@ -95,20 +133,21 @@ const DesktopHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
                 {user.displayName ?? user.email}
               </p>
               <Button
-                text="Sign Out"
+                text={t("auth.signOut")}
                 buttonClass="text-white bg-[#FF9900]"
                 handleClick={() => handleLogout()}
               />
             </div>
           ) : (
             <Button
-              text={loading ? "Loading..." : "Sign In"}
+              text={loading ? t("loading") : t("auth.signIn")}
               buttonClass="text-white bg-[#FF9900]"
               handleClick={() => handleLogin()}
               disabled={loading}
               isLoading={loading}
             />
           )}
+          <LanguageSwitcher className="ml-0 md:ml-3" />
         </div>
       </div>
     </div>
@@ -118,6 +157,7 @@ const DesktopHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
 const MobileHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
   const [isShowNav, setIsShowNav] = useState(false);
   const { user, handleLogin, handleLogout, loading } = useAuth();
+  const { t } = useTranslation("common");
 
   const handleNavClose = () => {
     setIsShowNav(false);
@@ -127,12 +167,15 @@ const MobileHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
     <>
       <div className="bg-[#2951A3] px-4 py-4 flex items-center justify-between relative z-40">
         <HomeIcon />
-        <button
-          onClick={() => setIsShowNav(!isShowNav)}
-          className="cursor-pointer"
-        >
-          {isShowNav ? <HomeCancel /> : <HomeNav />}
-        </button>
+        <div className="flex items-center gap-3">
+          <LanguageSwitcher />
+          <button
+            onClick={() => setIsShowNav(!isShowNav)}
+            className="cursor-pointer"
+          >
+            {isShowNav ? <HomeCancel /> : <HomeNav />}
+          </button>
+        </div>
       </div>
 
       {isShowNav && (
@@ -156,7 +199,7 @@ const MobileHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
                   onClick={() => handleLogout()}
                   className="text-sm text-[#2951A3]"
                 >
-                  Sign Out
+                  {t("auth.signOut")}
                 </button>
               </div>
             ) : (
@@ -188,20 +231,22 @@ const MobileHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
                         d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
                       ></path>
                     </svg>
-                    Sign In
+                    {t("auth.signIn")}
                   </span>
                 ) : (
-                  "Sign In"
+                  t("auth.signIn")
                 )}
               </button>
             )}
           </div>
           <nav className="flex flex-col gap-4 p-4 bg-[#FFFFFF] rounded-md">
             <div className="border-b border-gray-200 py-2">
-              <p className="text-xl text-[#2951A3] text-bold">Explore</p>
+              <p className="text-xl text-[#2951A3] text-bold">{t("navigation.explore")}</p>
             </div>
             {listHeader.map((header) => {
               const isCreation = header.id === "creation";
+              const headerTitle = t(header.titleKey);
+
               if (isCreation && !user) {
                 return (
                   <button
@@ -238,7 +283,7 @@ const MobileHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
                         ></path>
                       </svg>
                     )}
-                    {header.title}
+                      {headerTitle}
                   </button>
                 );
               }
@@ -247,10 +292,10 @@ const MobileHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
                 <Link
                   key={header.id}
                   to={header.path}
-                  className="text-xl text-[#2951A3] text-bold"
+                  className="text-lg text-black font-normal"
                   onClick={handleNavClose}
                 >
-                  {header.title}
+                  {headerTitle}
                 </Link>
               );
             })}

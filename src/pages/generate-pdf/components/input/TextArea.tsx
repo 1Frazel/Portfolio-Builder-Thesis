@@ -26,7 +26,7 @@ const TextArea = ({
       <textarea
         onChange={(e) => onChange(e.target.value)}
         defaultValue={defaultValue}
-        className={`bg-[#eff2f9] rounded-md ${inputClass}`}
+        className={`bg-[#eff2f9] rounded-md h-[150px] ${inputClass}`}
         placeholder={placeholder}
       />
     </InputFieldWrapper>

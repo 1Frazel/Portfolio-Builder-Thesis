@@ -105,7 +105,7 @@ const WorkSection = ({
           inputClass={fieldInputClass}
         />
       ),
-      containerClass: "sm:col-span-2",
+      containerClass: "sm:col-span-2 ",
     },
   ];
 

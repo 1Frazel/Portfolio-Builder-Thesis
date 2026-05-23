@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import routes from "./routes/routes.tsx";
 import { AuthProvider } from "./shared/hooks/AuthContext.tsx";
 import { ToastProvider } from "./shared/hooks/ToastContext";
+import './i18n'
 
 const router = createBrowserRouter(routes);
 

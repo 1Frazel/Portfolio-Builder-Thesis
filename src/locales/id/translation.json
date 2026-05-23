@@ -1,0 +1,89 @@
+{
+    "common": {
+        "loading": "Memuat...",
+        "nav": {
+            "home": "Beranda",
+            "creation": "Pembuatan",
+            "checker": "Pemeriksa CV"
+        },
+        "auth": {
+            "signIn": "Masuk",
+            "signOut": "Keluar",
+            "signInToCreateResumes": "Masuk untuk membuat CV"
+        },
+        "navigation": {
+            "explore": "Jelajahi"
+        },
+        "languageSwitcher": {
+            "switchToEnglish": "Ganti ke Bahasa Inggris",
+            "switchToIndonesian": "Ganti ke Bahasa Indonesia"
+        }
+    },
+    "homepage": {
+        "hero": {
+            "sentence1": "Buat",
+            "sentence2": "CV",
+            "sentence2Highlight": "ramah ATS",
+            "sentence3": "dalam satu klik.",
+            "button1": "Buat sekarang!",
+            "button2": "Pelajari lebih lanjut",
+            "imageAlt": "Pratinjau pembuat CV"
+        },
+        "atsSection": {
+            "label": "Apa itu ATS?"
+        },
+        "atsCards": {
+            "digitalAssistant": {
+                "title": "Asisten Digital HR",
+                "description": "Applicant Tracking System (ATS) adalah aplikasi perangkat lunak yang digunakan oleh perekrut dan perusahaan untuk mengelola proses perekrutan dan mengatur volume besar lamaran kerja secara efisien."
+            },
+            "automatedScanner": {
+                "title": "Pemindai Otomatis",
+                "description": "Sistem ini bertindak sebagai filter digital yang membaca, mengurai, dan mengekstrak teks mentah dari CV Anda. Sistem secara otomatis mengelompokkan informasi Anda ke dalam bagian seperti pengalaman kerja, pendidikan, dan keahlian."
+            },
+            "keywordMatcher": {
+                "title": "Pencocok Kata Kunci",
+                "description": "Sistem menilai dan memberi peringkat CV Anda berdasarkan seberapa baik data yang diekstrak cocok dengan kata kunci, keahlian, dan kualifikasi yang tercantum dalam deskripsi pekerjaan."
+            }
+        },
+        "importanceSection": {
+            "label": "Mengapa ATS Penting untuk Curriculum Vitae?",
+            "title": "Buat CV yang terlihat, terbaca, dan lolos seleksi."
+        },
+        "importanceCards": {
+            "gatekeeper": {
+                "title": "Lolos dari Penjaga Pertama",
+                "description": "Lebih dari 90% perusahaan besar menggunakan ATS. Jika CV Anda tidak ramah ATS, CV tersebut bisa otomatis ditolak dan diabaikan sebelum perekrut manusia sempat membacanya."
+            },
+            "visibility": {
+                "title": "Meningkatkan Visibilitas",
+                "description": "CV ATS yang terstruktur dengan baik memastikan kualifikasi dan pencapaian terpenting Anda terbaca dengan akurat oleh sistem, sehingga meningkatkan peluang Anda masuk ke tahap wawancara."
+            },
+            "formatting": {
+                "title": "Mencegah Kesalahan Format",
+                "description": "Desain yang rumit, grafis, tabel, atau font yang tidak umum dapat membingungkan sistem. Format yang dioptimalkan untuk ATS memastikan data Anda diekstrak dengan benar tanpa kehilangan informasi penting selama proses parsing."
+            }
+        },
+        "stepsSection": {
+            "label": "Cara kerja",
+            "title": "Beberapa langkah menuju CV yang selesai."
+        },
+        "steps": {
+            "first": {
+                "number": "Pertama",
+                "title": "Pilih template",
+                "description": "Mulailah dengan layout yang ramah ATS atau profesional sesuai gaya Anda."
+            },
+            "second": {
+                "number": "Kedua",
+                "title": "Isi detail Anda",
+                "description": "Tambahkan pengalaman, pendidikan, keahlian, dan ringkasan dalam alur yang terarah."
+            },
+            "third": {
+                "number": "Ketiga",
+                "title": "Unduh dan bagikan",
+                "description": "Pratinjau CV Anda, lakukan penyesuaian, lalu ekspor CV final yang rapi."
+            }
+        }
+    }
+}
