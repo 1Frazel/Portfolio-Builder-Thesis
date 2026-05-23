@@ -1,0 +1,89 @@
+{
+    "common": {
+        "loading": "Loading...",
+        "nav": {
+            "home": "Home",
+            "creation": "Creation",
+            "checker": "Resume Checker"
+        },
+        "auth": {
+            "signIn": "Sign In",
+            "signOut": "Sign Out",
+            "signInToCreateResumes": "Sign in to create resumes"
+        },
+        "navigation": {
+            "explore": "Explore"
+        },
+        "languageSwitcher": {
+            "switchToEnglish": "Switch to English",
+            "switchToIndonesian": "Switch to Indonesian"
+        }
+    },
+    "homepage": {
+        "hero": {
+            "sentence1": "Build your",
+            "sentence2": "own",
+            "sentence2Highlight": "ATS friendly Resume",
+            "sentence3": "In one click.",
+            "button1": "Create now!",
+            "button2": "Learn about it",
+            "imageAlt": "Resume builder preview"
+        },
+        "atsSection": {
+            "label": "What is ATS?"
+        },
+        "atsCards": {
+            "digitalAssistant": {
+                "title": "HR Digital Assistant",
+                "description": "An Applicant Tracking System (ATS) is a software application used by recruiters and employers to manage the hiring process and organize large volumes of job applications efficiently."
+            },
+            "automatedScanner": {
+                "title": "The Automated Scanner",
+                "description": "It acts as a digital filter that reads, parses, and extracts raw text from your resume. The system automatically categorizes your information into sections like work experience, education, and skills."
+            },
+            "keywordMatcher": {
+                "title": "The Keyword Matcher",
+                "description": "The system scores and ranks your resume based on how well your extracted data matches the specific keywords, skills, and qualifications outlined in the employer's job description."
+            }
+        },
+        "importanceSection": {
+            "label": "Why ATS Important for Curriculum Vitae?",
+            "title": "Write a CV that gets seen, read, and shortlisted."
+        },
+        "importanceCards": {
+            "gatekeeper": {
+                "title": "Passing the First Gatekeeper",
+                "description": "Over 90% of large companies use an ATS. If your CV is not ATS-friendly, it might be automatically rejected and discarded before a human recruiter ever gets the chance to read it."
+            },
+            "visibility": {
+                "title": "Maximizing Your Visibility",
+                "description": "A well-structured ATS CV ensures that your most important qualifications and achievements are accurately read by the system, significantly increasing your chances of getting shortlisted for an interview."
+            },
+            "formatting": {
+                "title": "Preventing Formatting Errors",
+                "description": "Complex designs, graphics, tables, or unusual fonts can confuse the system. Using an ATS-optimized format guarantees your data is extracted flawlessly without losing critical information during the parsing process."
+            }
+        },
+        "stepsSection": {
+            "label": "How it works",
+            "title": "Few steps to a finished resume."
+        },
+        "steps": {
+            "first": {
+                "number": "First",
+                "title": "Choose a template",
+                "description": "Start with an ATS-friendly or professional layout that fits your style."
+            },
+            "second": {
+                "number": "Second",
+                "title": "Fill in your details",
+                "description": "Add your experience, education, skills, and summary in a guided flow."
+            },
+            "third": {
+                "number": "Third",
+                "title": "Download and share",
+                "description": "Preview your resume, make adjustments, and export a polished final CV."
+            }
+        }
+    }
+}

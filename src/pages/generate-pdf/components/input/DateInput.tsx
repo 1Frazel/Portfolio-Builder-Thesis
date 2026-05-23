@@ -1,5 +1,4 @@
-﻿import { useState } from "react";
-import { DatePicker } from "antd";
+﻿import { DatePicker } from "antd";
 import dayjs, { type Dayjs } from "dayjs";
 
 import InputFieldWrapper from "./InputFieldWrapper";
@@ -34,46 +33,31 @@ const DateInput = ({
   labelClass?: string;
   inputClass?: string;
 }) => {
-  const [startDate, setStartDate] = useState<string>(startDefaultValue);
-  const [endDate, setEndDate] = useState<string>(endDefaultValue);
-  const validateDates = (start: string, end: string) => {
-    if (start && end) {
-      const startDayjs = dayjs(start, DATE_FORMAT);
-      const endDayjs = dayjs(end, DATE_FORMAT);
-      if (startDayjs.isAfter(endDayjs)) {
-        return;
-      }
-    }
-  };
+  const startDate = toPickerDefaultValue(startDefaultValue);
+  const endDate = toPickerDefaultValue(endDefaultValue);
 
   const handleStartChange = (selectedDate: Dayjs | null) => {
     const formattedDate = selectedDate ? selectedDate.format(DATE_FORMAT) : "";
-    setStartDate(formattedDate);
     startOnChange(formattedDate);
-    validateDates(formattedDate, endDate);
   };
 
   const handleEndChange = (selectedDate: Dayjs | null) => {
     const formattedDate = selectedDate ? selectedDate.format(DATE_FORMAT) : "";
-    setEndDate(formattedDate);
     endOnChange(formattedDate);
-    validateDates(startDate, formattedDate);
   };
 
   const disabledStartDate = (current: Dayjs) => {
     if (!endDate) {
       return false;
     }
-    const end = dayjs(endDate, DATE_FORMAT);
-    return current.isAfter(end, "month");
+    return current.isAfter(endDate, "month");
   };
 
   const disabledEndDate = (current: Dayjs) => {
     if (!startDate) {
       return false;
     }
-    const start = dayjs(startDate, DATE_FORMAT);
-    return current.isBefore(start, "month");
+    return current.isBefore(startDate, "month");
   };
 
   const defaultInputClass =
@@ -91,7 +75,7 @@ const DateInput = ({
         <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-2 sm:gap-4">
           <DatePicker
             onChange={handleStartChange}
-            defaultValue={toPickerDefaultValue(startDefaultValue)}
+            value={startDate}
             format={DATE_FORMAT}
             picker="month"
             className={composedInputClass}
@@ -101,7 +85,7 @@ const DateInput = ({
 
           <DatePicker
             onChange={handleEndChange}
-            defaultValue={toPickerDefaultValue(endDefaultValue)}
+            value={endDate}
             format={DATE_FORMAT}
             picker="month"
             className={composedInputClass}
