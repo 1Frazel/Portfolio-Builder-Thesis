@@ -44,28 +44,26 @@ const ProfessionalDocument = ({
   return (
     <Document>
       <Page size="A4" style={professionalStyles.page}>
-        <View style={professionalStyles.root}>
-          <View style={professionalStyles.sidebar}>
-            {isDifferent(personalDetail, DEFAULT_PERSONAL_DETAIL) && (
-              <SidebarPersonalDetail personalDetail={personalDetail} />
-            )}
-            {isDifferent(skills, [DEFAULT_SKILLS]) && (
-              <SidebarSkillSection skills={skills} />
-            )}
-            {isDifferent(languages, [DEFAULT_LANGUAGES]) && (
-              <SidebarLanguageSection languages={languages} />
-            )}
-          </View>
+        <View fixed style={professionalStyles.sidebar}>
+          {isDifferent(personalDetail, DEFAULT_PERSONAL_DETAIL) && (
+            <SidebarPersonalDetail personalDetail={personalDetail} />
+          )}
+          {isDifferent(skills, [DEFAULT_SKILLS]) && (
+            <SidebarSkillSection skills={skills} />
+          )}
+          {isDifferent(languages, [DEFAULT_LANGUAGES]) && (
+            <SidebarLanguageSection languages={languages} />
+          )}
+        </View>
 
-          <View style={professionalStyles.content}>
-            <MainProfileSummary profileSummary={profileSummary} />
-            <MainWorkExperience workExperiences={workExperiences} />
-            <MainEducation educations={educations} />
-            <MainProfessionalTraining
-              professionalTraining={professionalTraining}
-            />
-            <MainLicenses licensesCertifications={licensesCertifications} />
-          </View>
+        <View style={professionalStyles.content}>
+          <MainProfileSummary profileSummary={profileSummary} />
+          <MainWorkExperience workExperiences={workExperiences} />
+          <MainEducation educations={educations} />
+          <MainProfessionalTraining
+            professionalTraining={professionalTraining}
+          />
+          <MainLicenses licensesCertifications={licensesCertifications} />
         </View>
       </Page>
     </Document>
@@ -90,7 +88,7 @@ const SidebarPersonalDetail = ({
   } = personalDetail;
 
   return (
-    <>
+    <View wrap={false}>
       <Text style={professionalStyles.name}>{`${firstName} ${lastName}`}</Text>
       <Text style={professionalStyles.jobTarget}>{jobTarget}</Text>
 
@@ -103,13 +101,13 @@ const SidebarPersonalDetail = ({
       <Text style={professionalStyles.linkText}>{email}</Text>
 
       <View style={professionalStyles.sidebarDivider} />
-    </>
+    </View>
   );
 };
 
 const SidebarSkillSection = ({ skills }: { skills: ISkill[] }) => {
   return (
-    <>
+    <View wrap={false}>
       <Text style={professionalStyles.sidebarHeading}>Skills</Text>
       <View style={professionalStyles.oneColumnList}>
         {skills.map((skill) => (
@@ -119,13 +117,13 @@ const SidebarSkillSection = ({ skills }: { skills: ISkill[] }) => {
         ))}
       </View>
       <View style={professionalStyles.sidebarDivider} />
-    </>
+    </View>
   );
 };
 
 const SidebarLanguageSection = ({ languages }: { languages: ILanguages[] }) => {
   return (
-    <>
+    <View wrap={false}>
       <Text style={professionalStyles.sidebarHeading}>Languages</Text>
       <View style={professionalStyles.oneColumnList}>
         {languages.map((language) => (
@@ -134,7 +132,7 @@ const SidebarLanguageSection = ({ languages }: { languages: ILanguages[] }) => {
           </View>
         ))}
       </View>
-    </>
+    </View>
   );
 };
 
