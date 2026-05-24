@@ -2,6 +2,8 @@ import type { ReactElement } from "react";
 import PdfDownloadBtn from "../button/PdfDownloadBtn";
 import type { FormData } from "../../../../shared/hooks/useFormData";
 
+import { useTranslation } from "react-i18next";
+
 const GeneratePdfFooter = ({
   nextSectionTitle,
   activeSectionIndex,
@@ -29,6 +31,7 @@ const GeneratePdfFooter = ({
   resumeId?: string;
   initialTitle?: string;
 }) => {
+  const { t } = useTranslation("creationPage");
   const isFirstSection = activeSectionIndex === 0;
   const isLastSection = activeSectionIndex === sectionLength;
 
@@ -45,7 +48,7 @@ const GeneratePdfFooter = ({
             onClick={handlePreviousSection}
             className={secondaryButtonClass}
           >
-            Back
+            {t("general.back", "Back")}
           </button>
         )}
 
@@ -54,7 +57,7 @@ const GeneratePdfFooter = ({
             onClick={handleAdditionalSection}
             className={secondaryButtonClass}
           >
-            Add Another Additional Section
+            {t("additionalSectionLanguages.addAnotherSectionButton", "Add Another Additional Section")}
           </button>
         ) : isLastSection && docs ? (
           <PdfDownloadBtn
@@ -72,7 +75,7 @@ const GeneratePdfFooter = ({
             }}
             className={primaryButtonClass}
           >
-            {`Next up, ${nextSectionTitle}`}
+            {nextSectionTitle}
           </button>
         )}
       </div>

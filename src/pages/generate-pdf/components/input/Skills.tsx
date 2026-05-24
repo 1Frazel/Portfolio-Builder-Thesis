@@ -1,4 +1,5 @@
 import type React from "react";
+import { useTranslation } from "react-i18next";
 
 import SkillSection from "./SkillSection";
 import { ExpandableSectionContainer } from "./ExpandableSectionContainer";
@@ -14,6 +15,8 @@ const Skills = ({
   setSkills: React.Dispatch<React.SetStateAction<ISkill[]>>;
   summaryMode?: boolean;
 }) => {
+  const { t } = useTranslation("creationPage");
+
   const handleEditSkills = (id: number, key: string, value: string) => {
     const newSkills = skills.map((skill) => {
       if (skill.id === id) {
@@ -59,9 +62,9 @@ const Skills = ({
 
   return (
     <ExpandableSectionContainer
-      title="Areas of Expertise"
-      description="Highlight technical abilities, industry-specific tools, and relevant soft skills. Prioritize keywords that align directly with the requirements of the roles you are targeting to maximize ATS compatibility."
-      addButtonTitle="Add another skills"
+      title={t("skills.title")}
+      description={t("skills.description")}
+      addButtonTitle={t("skills.addButton")}
       onAdd={handleAddSkills}
       summaryMode={summaryMode}
     >

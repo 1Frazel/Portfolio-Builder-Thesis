@@ -1,4 +1,5 @@
 import { useDebouncedCallback } from "use-debounce";
+import { useTranslation } from "react-i18next";
 import type { IProfessionalTraining } from "../../interface/generatePdfInterface";
 import { ExpandableSectionItem } from "./ExpandableSectionContainer";
 import InputField from "./InputField";
@@ -27,6 +28,8 @@ const ProfessionalTrainingSection = ({
   handleSectionUp: (currentIndex: number) => void;
   handleSectionDown: (currentIndex: number) => void;
 }) => {
+  const { t } = useTranslation("creationPage");
+
   const handleTextChange = useDebouncedCallback(
     (id: number, key: string, value: string) => {
       handleEditProfessionalTraining(id, key, value);
@@ -46,7 +49,7 @@ const ProfessionalTrainingSection = ({
           onChange={(input: string) => {
             handleTextChange(training.id, "courseName", input);
           }}
-          label="Course Name"
+          label={t("additionalSectionProfessionalTraining.labels.courseName")}
           inputClass={fieldInputClass}
         />
       ),
@@ -59,7 +62,7 @@ const ProfessionalTrainingSection = ({
           onChange={(input: string) => {
             handleTextChange(training.id, "institution", input);
           }}
-          label="Institution"
+          label={t("additionalSectionProfessionalTraining.labels.institution", "Institution")}
           inputClass={fieldInputClass}
         />
       ),
@@ -76,8 +79,8 @@ const ProfessionalTrainingSection = ({
           endOnChange={(value: string) => {
             handleTextChange(training.id, "endsAt", value);
           }}
-          label="Start & End Date"
-          placeholder="MM // YYYY"
+          label={t("additionalSectionProfessionalTraining.labels.startEndDate", "Start & End Date")}
+          placeholder={t("additionalSectionProfessionalTraining.labels.placeholder", "MM // YYYY")}
           inputClass={fieldInputClass}
         />
       ),
@@ -86,10 +89,10 @@ const ProfessionalTrainingSection = ({
 
   return (
     <ExpandableSectionItem
-      title={training.courseName ? training.courseName : "(Not Specified)"}
+      title={training.courseName ? training.courseName : t("additionalSectionProfessionalTraining.default", "(Not Specified)")}
       description={
         training.startAt &&
-        `${training.startAt} - ${training.endsAt ? training.endsAt : "Now"}`
+        `${training.startAt} - ${training.endsAt ? training.endsAt : t("general.now", "Now")}`
       }
       onDelete={() => handleDeleteProfessionalTraining(training.id)}
       onMoveUp={handleSectionUp}

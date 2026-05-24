@@ -1,4 +1,5 @@
 import type React from "react";
+import { useTranslation } from "react-i18next";
 import type { ILicensesCertifications } from "../../interface/generatePdfInterface";
 
 import LicensesCertificationsSection from "./LicensesCertificationsSection";
@@ -16,6 +17,8 @@ const LicensesCertifications = ({
   >;
   summaryMode?: boolean;
 }) => {
+  const { t } = useTranslation("creationPage");
+
   const handleEditLicensesCertifications = (
     id: number,
     key: string,
@@ -78,9 +81,9 @@ const LicensesCertifications = ({
 
   return (
     <ExpandableSectionContainer
-      title="Licenses / Certifications"
-      addButtonTitle="Add another licenses / certifications"
-      description="List official credentials or industry-recognized licenses that validate your professional qualifications. Include the name of the certification, the issuing authority, and the date of acquisition or expiration to establish immediate credibility."
+      title={t("additionalSectionLicensesCertifications.title")}
+      addButtonTitle={t("additionalSectionLicensesCertifications.addButton", "Add another licenses / certifications")}
+      description={t("additionalSectionLicensesCertifications.description")}
       onAdd={handleAddLicensesCertifications}
       summaryMode={summaryMode}
     >

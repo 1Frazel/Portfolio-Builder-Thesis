@@ -1,4 +1,5 @@
 import type React from "react";
+import { useTranslation } from "react-i18next";
 import { ExpandableSectionContainer } from "./ExpandableSectionContainer";
 
 import LanguagesSection from "./LanguagesSection";
@@ -14,6 +15,8 @@ const Languages = ({
   setLanguages: React.Dispatch<React.SetStateAction<ILanguages[]>>;
   summaryMode?: boolean;
 }) => {
+  const { t } = useTranslation("creationPage");
+
   const handleEditLanguages = (id: number, key: string, value: string) => {
     setLanguages(
       languages.map((language) => {
@@ -67,9 +70,9 @@ const Languages = ({
 
   return (
     <ExpandableSectionContainer
-      title="Languages"
-      addButtonTitle="Add another languages"
-      description="Specify any foreign languages you are proficient in, along with your exact fluency level (e.g., Native, Professional, Basic). This is highly valuable for multinational companies or roles requiring diverse communication."
+      title={t("additionalSectionLanguages.title")}
+      addButtonTitle={t("additionalSectionLanguages.addButton")}
+      description={t("additionalSectionLanguages.description")}
       onAdd={handleAddMoreLanguages}
       summaryMode={summaryMode}
     >

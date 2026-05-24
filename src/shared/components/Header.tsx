@@ -8,6 +8,7 @@ import HomeCancel from "../../icons/HomeCancel";
 import Profile from "../../icons/Profile";
 import { useAuth } from "../hooks/useAuth";
 import { useTranslation } from "react-i18next";
+import resumeezLogo from "../../assets/ResumeezLogo.png";
 
 interface IListHeader {
   id: string;
@@ -19,12 +20,17 @@ const LanguageSwitcher = ({ className = "" }: { className?: string }) => {
   const { i18n } = useTranslation("common");
   const isIndonesian = i18n.resolvedLanguage?.startsWith("id");
 
+  const handleLanguageChange = async (language: "id" | "en") => {
+    await i18n.changeLanguage(language);
+    window.location.reload();
+  };
+
   return (
     <div className={`shrink-0 rounded-full bg-black/20 p-1 shadow-sm ${className}`}>
       <div className="grid grid-cols-2 gap-1">
         <button
           type="button"
-          onClick={() => void i18n.changeLanguage("id")}
+          onClick={() => void handleLanguageChange("id")}
           className={`rounded-full px-3 py-1.5 text-[0.65rem] sm:px-4 sm:py-2 sm:text-xs md:text-sm font-semibold transition ${
             isIndonesian
               ? "bg-white text-[#2951A3] shadow"
@@ -35,7 +41,7 @@ const LanguageSwitcher = ({ className = "" }: { className?: string }) => {
         </button>
         <button
           type="button"
-          onClick={() => void i18n.changeLanguage("en")}
+          onClick={() => void handleLanguageChange("en")}
           className={`rounded-full px-3 py-1.5 text-[0.65rem] sm:px-4 sm:py-2 sm:text-xs md:text-sm font-semibold transition ${
             !isIndonesian
               ? "bg-white text-[#2951A3] shadow"
@@ -120,6 +126,7 @@ const DesktopHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
           })}
         </div>
         <div className="flex items-center md:gap-4">
+          <LanguageSwitcher className="ml-0 md:ml-3" />
           {user ? (
             <div className="flex items-center gap-3">
               {user.photoURL ? (
@@ -147,12 +154,22 @@ const DesktopHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
               isLoading={loading}
             />
           )}
-          <LanguageSwitcher className="ml-0 md:ml-3" />
         </div>
       </div>
     </div>
   );
 };
+
+  const MobileLogo = () => {
+    return (
+      <img 
+        src={resumeezLogo}
+        alt="Resumeez Logo"
+        width={120} 
+        height={80}
+      />
+    );
+  };
 
 const MobileHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
   const [isShowNav, setIsShowNav] = useState(false);
@@ -166,7 +183,9 @@ const MobileHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
   return (
     <>
       <div className="bg-[#2951A3] px-4 py-4 flex items-center justify-between relative z-40">
-        <HomeIcon />
+        <a href="/">
+          <MobileLogo />
+        </a>
         <div className="flex items-center gap-3">
           <LanguageSwitcher />
           <button
@@ -197,7 +216,7 @@ const MobileHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
                 </p>
                 <button
                   onClick={() => handleLogout()}
-                  className="text-sm text-[#2951A3]"
+                  className="text-sm text-[#2951A3] text-left"
                 >
                   {t("auth.signOut")}
                 </button>
@@ -241,7 +260,7 @@ const MobileHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
           </div>
           <nav className="flex flex-col gap-4 p-4 bg-[#FFFFFF] rounded-md">
             <div className="border-b border-gray-200 py-2">
-              <p className="text-xl text-[#2951A3] text-bold">{t("navigation.explore")}</p>
+              <p className="text-xl text-black text-bold">{t("navigation.explore")}</p>
             </div>
             {listHeader.map((header) => {
               const isCreation = header.id === "creation";
@@ -292,7 +311,7 @@ const MobileHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
                 <Link
                   key={header.id}
                   to={header.path}
-                  className="text-lg text-black font-normal"
+                  className="text-sm text-[#2951A3] font-normal"
                   onClick={handleNavClose}
                 >
                   {headerTitle}

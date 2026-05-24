@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useDebouncedCallback } from "use-debounce";
 
 import InputField from "./InputField";
@@ -25,6 +26,7 @@ const WorkSection = ({
   handleSectionUp: (currentIndex: number) => void;
   handleSectionDown: (currentIndex: number) => void;
 }) => {
+  const { t } = useTranslation("creationPage");
   const handleTextChange = useDebouncedCallback(
     (id: number, key: string, value: string) => {
       handleEditWorkExperiences(id, key, value);
@@ -44,7 +46,7 @@ const WorkSection = ({
           onChange={(input: string) => {
             handleTextChange(experience.id, "jobTitle", input);
           }}
-          label="Job Title"
+          label={t("workExperience.labels.jobTitle")}
           inputClass={fieldInputClass}
         />
       ),
@@ -57,7 +59,7 @@ const WorkSection = ({
           onChange={(input: string) => {
             handleTextChange(experience.id, "employer", input);
           }}
-          label="Employer"
+          label={t("workExperience.labels.employer")}
           inputClass={fieldInputClass}
         />
       ),
@@ -74,8 +76,8 @@ const WorkSection = ({
           endOnChange={(value: string) => {
             handleTextChange(experience.id, "endsAt", value);
           }}
-          label="Start & End Date"
-          placeholder="MM // YYYY"
+          label={t("workExperience.labels.startEndDate")}
+          placeholder={t("workExperience.labels.placeholder")}
           inputClass={fieldInputClass}
         />
       ),
@@ -88,7 +90,7 @@ const WorkSection = ({
           onChange={(input: string) => {
             handleTextChange(experience.id, "address", input);
           }}
-          label="Address"
+          label={t("workExperience.labels.address")}
           inputClass={fieldInputClass}
         />
       ),
@@ -101,7 +103,7 @@ const WorkSection = ({
           onChange={(input: string) => {
             handleTextChange(experience.id, "description", input);
           }}
-          label="Description"
+          label={t("workExperience.labels.description")}
           inputClass={fieldInputClass}
         />
       ),
@@ -111,7 +113,7 @@ const WorkSection = ({
 
   return (
     <ExpandableSectionItem
-      title={experience.jobTitle ? experience.jobTitle : "(Not Specified)"}
+      title={experience.jobTitle ? experience.jobTitle : t("workExperience.defaultJobTitle", "(Not Specified)")}
       description={
         experience.startAt &&
         `${experience.startAt} - ${experience.endsAt ? experience.endsAt : "Now"}`

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import InputFieldWrapper from "./InputFieldWrapper";
 import ResponsiveDropdown from "../../../../shared/components/ResponsiveDropdown";
 
@@ -8,20 +9,22 @@ const LanguageProficiencyLevel = ({
   selectedSkill: string;
   handleClick: (input: string) => void;
 }) => {
+  const { t } = useTranslation("creationPage");
+
   const proficiencyList = [
-    { label: "Basic", value: "Basic" },
-    { label: "Conversational", value: "Conversational" },
-    { label: "Professional", value: "Professional" },
-    { label: "Fluent", value: "Fluent" },
-    { label: "Native", value: "Native" },
+    { label: t("additionalSectionLanguages.levels.basic", "Basic"), value: "Basic" },
+    { label: t("additionalSectionLanguages.levels.conversational", "Conversational"), value: "Conversational" },
+    { label: t("additionalSectionLanguages.levels.professional", "Professional"), value: "Professional" },
+    { label: t("additionalSectionLanguages.levels.fluent", "Fluent"), value: "Fluent" },
+    { label: t("additionalSectionLanguages.levels.native", "Native"), value: "Native" },
   ];
 
   return (
-    <InputFieldWrapper label="Level">
+    <InputFieldWrapper label={t("additionalSectionLanguages.labels.level", "Level")}>
       <ResponsiveDropdown
         options={proficiencyList}
         value={selectedSkill}
-        placeholder="Select Level"
+        placeholder={t("additionalSectionLanguages.placeholder", "Select Level")}
         onChange={handleClick}
       />
     </InputFieldWrapper>

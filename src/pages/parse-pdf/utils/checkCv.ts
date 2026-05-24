@@ -1,4 +1,5 @@
 import * as pdfjsLib from "pdfjs-dist";
+import i18n from "../../../i18n";
 
 // https://github.com/wojtekmaj/react-pdf/blob/main/packages/react-pdf/README.md#configure-pdfjs-worker
 // https://stackoverflow.com/a/63486898/7699841
@@ -135,17 +136,18 @@ const buildRecommendations = (
   sections: Record<string, SectionData>,
 ): string[] => {
   const recommendations: string[] = [];
+  const t = i18n.getFixedT(null, "resumeCheckerPage");
 
   for (const sectionName in sections) {
     const section = sections[sectionName];
 
     if (section.status === "missing") {
       recommendations.push(
-        `Add a ${sectionName} section with relevant details.`,
+        t("recommendations.missingSection", { sectionName }),
       );
     } else if (section.status === "header-only") {
       recommendations.push(
-        `Add content under ${sectionName}, not just the header.`,
+        t("recommendations.headerOnlySection", { sectionName }),
       );
     }
   }

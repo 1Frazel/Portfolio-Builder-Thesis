@@ -1,89 +1,326 @@
 {
-    "common": {
-        "loading": "Memuat...",
-        "nav": {
-            "home": "Beranda",
-            "creation": "Pembuatan",
-            "checker": "Pemeriksa CV"
+  "common": {
+    "loading": "Memuat...",
+    "nav": {
+      "home": "Beranda",
+      "creation": "Buat CV",
+      "checker": "Cek Skor ATS"
+    },
+    "auth": {
+      "signIn": "Masuk",
+      "signOut": "Keluar",
+      "signInToCreateResumes": "Masuk untuk mulai membuat CV"
+    },
+    "navigation": {
+      "explore": "Jelajahi"
+    },
+    "languageSwitcher": {
+      "switchToEnglish": "Ganti ke Bahasa Inggris",
+      "switchToIndonesian": "Ganti ke Bahasa Indonesia"
+    }
+  },
+  "homepage": {
+    "hero": {
+      "sentence1": "Buat",
+      "sentence2": "CV",
+      "sentence2Highlight": "berstandar ATS",
+      "sentence3": "hanya dengan satu klik.",
+      "button1": "Buat Sekarang!",
+      "button2": "Pelajari Lebih Lanjut",
+      "imageAlt": "Pratinjau pembuat CV"
+    },
+    "atsSection": {
+      "label": "Apa itu ATS?"
+    },
+    "atsCards": {
+      "digitalAssistant": {
+        "title": "Asisten Digital Rekruter",
+        "description": "Applicant Tracking System (ATS) adalah perangkat lunak yang digunakan HRD dan perusahaan untuk menyaring, mengelola, dan menyeleksi ribuan lamaran kerja secara otomatis dan efisien."
+      },
+      "automatedScanner": {
+        "title": "Pemindai Cerdas",
+        "description": "Bekerja sebagai filter digital yang membaca dan mengekstrak teks dari CV Anda, lalu mengelompokkannya ke dalam kategori seperti pengalaman kerja, pendidikan, dan keahlian."
+      },
+      "keywordMatcher": {
+        "title": "Pencocok Kata Kunci",
+        "description": "Sistem ini memberikan skor pada CV Anda berdasarkan tingkat kecocokan antara data diri Anda dengan kata kunci dan kualifikasi yang dicari pada lowongan pekerjaan."
+      }
+    },
+    "importanceSection": {
+      "label": "Mengapa CV ATS Sangat Penting?",
+      "title": "Buat CV yang mudah dibaca mesin dan disukai rekruter."
+    },
+    "importanceCards": {
+      "gatekeeper": {
+        "title": "Lolos Seleksi Awal",
+        "description": "Lebih dari 90% perusahaan besar menggunakan ATS. Jika CV Anda tidak ramah ATS, lamaran Anda bisa otomatis gugur sebelum sempat dilihat oleh HRD."
+      },
+      "visibility": {
+        "title": "Tampil Lebih Menonjol",
+        "description": "Struktur ATS yang rapi memastikan seluruh kualifikasi dan pencapaian Anda terbaca sempurna oleh sistem, memperbesar peluang Anda untuk dipanggil wawancara."
+      },
+      "formatting": {
+        "title": "Bebas Error Format",
+        "description": "Desain rumit, tabel, atau grafis bisa membuat sistem kebingungan. Format ATS menjamin data Anda terekstrak 100% tanpa ada informasi penting yang hilang."
+      }
+    },
+    "stepsSection": {
+      "label": "Cara Kerja",
+      "title": "Tiga langkah mudah menuju CV profesional."
+    },
+    "steps": {
+      "first": {
+        "number": "Langkah 1",
+        "title": "Pilih Template",
+        "description": "Gunakan tata letak berstandar ATS yang bersih, profesional, dan siap pakai."
+      },
+      "second": {
+        "number": "Langkah 2",
+        "title": "Lengkapi Profil",
+        "description": "Masukkan pengalaman, pendidikan, keahlian, dan ringkasan diri Anda ke dalam form."
+      },
+      "third": {
+        "number": "Langkah 3",
+        "title": "Unduh & Lamar",
+        "description": "Lihat pratinjau CV Anda secara langsung, lalu unduh dalam format PDF kualitas tinggi."
+      }
+    }
+  },
+  "creationPage": {
+    "main": {
+      "title": "CV Saya",
+      "description": "Kelola semua CV Anda di satu tempat.",
+      "createButton": "Buat CV Baru",
+      "loading": "Memuat daftar CV...",
+      "empty": "Anda belum memiliki CV. Klik tombol di atas untuk membuat CV pertama Anda!",
+      "previewButton": {
+        "preview": "Pratinjau",
+        "failed": "Gagal memuat pratinjau. Silakan coba lagi nanti.",
+        "loading": "Menyiapkan pratinjau..."
+      },
+      "cvList": {
+        "lastModified": "Terakhir Diubah",
+        "editButton": "Edit",
+        "deleteButton": "Hapus",
+        "failedToLoad": "Gagal memuat daftar CV. Silakan periksa koneksi Anda.",
+        "confirmDelete": "Yakin ingin menghapus CV ini? Tindakan ini tidak dapat dibatalkan.",
+        "resumeDeleted": "CV berhasil dihapus.",
+        "failedToDelete": "Gagal menghapus CV. Silakan coba lagi."
+      }
+    },
+    "templateSelection": {
+      "title": "Pilih Template CV",
+      "description": "Tentukan desain awal untuk CV Anda.",
+      "atsDescription": "Desain bersih dan lugas yang dioptimalkan khusus untuk sistem ATS. Menggunakan struktur satu kolom dan hierarki teks yang jelas agar dokumen Anda mudah diekstrak oleh mesin rekruter. Pilihan paling aman untuk melamar ke perusahaan korporat multinasional.",
+      "professionalDescription": "CV modern dengan struktur visual yang tegas dan aksen warna yang bisa disesuaikan. Mempertahankan kompatibilitas ATS namun menggunakan tata letak bilah sisi (sidebar) untuk menonjolkan keahlian dan kontak. Cocok untuk Anda yang menginginkan keseimbangan antara profesionalisme dan estetika.",
+      "previewButton": "Lihat Detail",
+      "selectButton": "Gunakan Template Ini",
+      "backButton": "← Kembali ke CV Saya",
+      "preview": "Pratinjau",
+      "close": "Tutup",
+      "template": {
+        "ats": {
+            "description": "Tata letak CV yang bersih dan lugas, dirancang khusus untuk tingkat keterbacaan ATS yang maksimal. Template ini menggunakan struktur satu kolom, gaya minimalis, dan hierarki bagian yang jelas untuk memastikan semua informasi mudah diekstrak oleh sistem rekruter. Pilihan tepat bagi Anda yang mengutamakan kompatibilitas dan kesederhanaan.",
+            "modalDesc": "Bersih, padat, dan dioptimalkan untuk pemindaian ATS."
         },
-        "auth": {
-            "signIn": "Masuk",
-            "signOut": "Keluar",
-            "signInToCreateResumes": "Masuk untuk membuat CV"
-        },
-        "navigation": {
-            "explore": "Jelajahi"
-        },
-        "languageSwitcher": {
-            "switchToEnglish": "Ganti ke Bahasa Inggris",
-            "switchToIndonesian": "Ganti ke Bahasa Indonesia"
+        "professional": {
+            "description": "CV modern dengan struktur visual yang rapi dan aksen warna yang dapat disesuaikan untuk memperkuat keterbacaan dan personal branding. Tetap mempertahankan standar ATS, template ini menggunakan tata letak bilah sisi (sidebar) untuk menyusun informasi penting seperti keahlian dan kontak dengan lebih efektif. Cocok bagi Anda yang menginginkan keseimbangan antara kesan profesional dan estetika visual.",
+            "modalDesc": "Tata letak dua kolom yang elegan dengan profil di bilah sisi."
+        }
         }
     },
-    "homepage": {
-        "hero": {
-            "sentence1": "Buat",
-            "sentence2": "CV",
-            "sentence2Highlight": "ramah ATS",
-            "sentence3": "dalam satu klik.",
-            "button1": "Buat sekarang!",
-            "button2": "Pelajari lebih lanjut",
-            "imageAlt": "Pratinjau pembuat CV"
-        },
-        "atsSection": {
-            "label": "Apa itu ATS?"
-        },
-        "atsCards": {
-            "digitalAssistant": {
-                "title": "Asisten Digital HR",
-                "description": "Applicant Tracking System (ATS) adalah aplikasi perangkat lunak yang digunakan oleh perekrut dan perusahaan untuk mengelola proses perekrutan dan mengatur volume besar lamaran kerja secara efisien."
-            },
-            "automatedScanner": {
-                "title": "Pemindai Otomatis",
-                "description": "Sistem ini bertindak sebagai filter digital yang membaca, mengurai, dan mengekstrak teks mentah dari CV Anda. Sistem secara otomatis mengelompokkan informasi Anda ke dalam bagian seperti pengalaman kerja, pendidikan, dan keahlian."
-            },
-            "keywordMatcher": {
-                "title": "Pencocok Kata Kunci",
-                "description": "Sistem menilai dan memberi peringkat CV Anda berdasarkan seberapa baik data yang diekstrak cocok dengan kata kunci, keahlian, dan kualifikasi yang tercantum dalam deskripsi pekerjaan."
-            }
-        },
-        "importanceSection": {
-            "label": "Mengapa ATS Penting untuk Curriculum Vitae?",
-            "title": "Buat CV yang terlihat, terbaca, dan lolos seleksi."
-        },
-        "importanceCards": {
-            "gatekeeper": {
-                "title": "Lolos dari Penjaga Pertama",
-                "description": "Lebih dari 90% perusahaan besar menggunakan ATS. Jika CV Anda tidak ramah ATS, CV tersebut bisa otomatis ditolak dan diabaikan sebelum perekrut manusia sempat membacanya."
-            },
-            "visibility": {
-                "title": "Meningkatkan Visibilitas",
-                "description": "CV ATS yang terstruktur dengan baik memastikan kualifikasi dan pencapaian terpenting Anda terbaca dengan akurat oleh sistem, sehingga meningkatkan peluang Anda masuk ke tahap wawancara."
-            },
-            "formatting": {
-                "title": "Mencegah Kesalahan Format",
-                "description": "Desain yang rumit, grafis, tabel, atau font yang tidak umum dapat membingungkan sistem. Format yang dioptimalkan untuk ATS memastikan data Anda diekstrak dengan benar tanpa kehilangan informasi penting selama proses parsing."
-            }
-        },
-        "stepsSection": {
-            "label": "Cara kerja",
-            "title": "Beberapa langkah menuju CV yang selesai."
-        },
-        "steps": {
-            "first": {
-                "number": "Pertama",
-                "title": "Pilih template",
-                "description": "Mulailah dengan layout yang ramah ATS atau profesional sesuai gaya Anda."
-            },
-            "second": {
-                "number": "Kedua",
-                "title": "Isi detail Anda",
-                "description": "Tambahkan pengalaman, pendidikan, keahlian, dan ringkasan dalam alur yang terarah."
-            },
-            "third": {
-                "number": "Ketiga",
-                "title": "Unduh dan bagikan",
-                "description": "Pratinjau CV Anda, lakukan penyesuaian, lalu ekspor CV final yang rapi."
-            }
-        }
+    "personalInfo": {
+      "title": "Informasi Pribadi",
+      "description": "Masukkan informasi dasar dan kontak agar rekruter mudah menghubungi Anda.",
+      "labels": {
+        "jobTitle": "Posisi Pekerjaan",
+        "firstName": "Nama Depan",
+        "lastName": "Nama Belakang",
+        "phone": "Nomor Telepon",
+        "linkedin": "URL LinkedIn",
+        "postal": "Kode Pos",
+        "cityState": "Kota, Provinsi",
+        "address": "Alamat Lengkap",
+        "country": "Negara",
+        "placeholder": "Misal: Frontend Developer"
+      },
+      "nextButton": "Selanjutnya: Pengalaman Kerja"
+    },
+    "workExperience": {
+      "title": "Pengalaman Kerja",
+      "description": "Tuliskan riwayat pekerjaan Anda dari yang paling baru. Fokus pada tanggung jawab utama dan pencapaian yang bisa diukur dengan angka.",
+      "defaultJobTitle": "(Posisi Belum Diisi)",
+      "labels": {
+        "jobTitle": "Posisi / Jabatan",
+        "employer": "Nama Perusahaan",
+        "startEndDate": "Bulan & Tahun Bekerja",
+        "address": "Lokasi",
+        "description": "Deskripsi Pekerjaan",
+        "placeholder": "BB / TTTT"
+      },
+      "addButton": "+ Tambah Pengalaman",
+      "nextButton": "Selanjutnya: Pendidikan",
+      "backButton": "Kembali"
+    },
+    "education": {
+      "title": "Pendidikan",
+      "description": "Cantumkan latar belakang akademik Anda. Jika Anda baru lulus (Fresh Graduate), Anda bisa menambahkan aktivitas organisasi atau nilai IPK di bagian deskripsi.",
+      "defaultDegree": "(Gelar Belum Diisi)",
+      "labels": {
+        "degree": "Gelar / Jurusan",
+        "institution": "Nama Institusi / Universitas",
+        "startEndDate": "Bulan & Tahun Studi",
+        "city": "Kota",
+        "description": "Deskripsi Tambahan",
+        "placeholder": "BB / TTTT"
+      },
+      "addButton": "+ Tambah Pendidikan",
+      "nextButton": "Selanjutnya: Keahlian",
+      "backButton": "Kembali"
+    },
+    "skills": {
+      "title": "Keahlian",
+      "description": "Masukkan kemampuan teknis (hard skills), tools yang Anda kuasai, dan keterampilan interpersonal (soft skills). Gunakan kata kunci yang sesuai dengan lowongan pekerjaan.",
+      "defaultJobTitle": "(Keahlian Belum Diisi)",
+      "labels": {
+        "skillName": "Nama Keahlian",
+        "skillExpertise": "Tingkat Kemahiran"
+      },
+      "placeholderExpertise": "Pilih tingkat kemahiran",
+      "addButton": "+ Tambah Keahlian",
+      "nextButton": "Selanjutnya: Ringkasan Profil",
+      "backButton": "Kembali",
+      "levels": {
+        "novice": "Pemula",
+        "basic": "Dasar",
+        "intermediate": "Menengah",
+        "experienced": "Mahir",
+        "expert": "Ahli"
+      }
+    },
+    "profileSummary": {
+      "title": "Ringkasan Profil",
+      "description": "Tuliskan deskripsi singkat mengenai diri Anda dalam 3-4 kalimat. Fokus pada siapa Anda, apa keahlian utama Anda, dan apa nilai tambah yang bisa Anda berikan ke perusahaan.",
+      "labels": {
+        "description": "Deskripsi Diri"
+      },
+      "nextButton": "Selanjutnya: Bagian Tambahan",
+      "backButton": "Kembali"
+    },
+    "additionalSections": {
+      "title": "Bagian Tambahan (Opsional)",
+      "description": "Perkuat CV Anda dengan menyertakan sertifikasi, pelatihan, atau kemampuan bahasa asing yang relevan dengan pekerjaan yang dilamar.",
+      "labels": {
+        "language": "Bahasa",
+        "licensesCertifications": "Lisensi & Sertifikasi",
+        "professionalTraining": "Pelatihan Profesional"
+      },
+      "backButton": "Kembali",
+      "nextButton": "Selanjutnya: Selesai",
+      "empty": "Belum ada bagian tambahan yang dipilih.",
+      "notFound": "Bagian tidak ditemukan."
+    },
+    "additionalSectionLanguages": {
+      "title": "Bahasa",
+      "description": "Cantumkan bahasa asing yang Anda kuasai beserta tingkat kefasihannya. Ini akan menjadi nilai plus untuk melamar di perusahaan multinasional.",
+      "default": "(Bahasa Belum Diisi)",
+      "labels": {
+        "name": "Bahasa",
+        "selectLevel": "Tingkat Kefasihan",
+        "level": "Tingkat Kefasihan"
+      },
+      "addButton": "+ Tambah Bahasa",
+      "backButton": "Kembali",
+      "addAnotherSectionButton": "Kembali ke Pilihan Bagian",
+      "levels": {
+        "basic": "Dasar",
+        "conversational": "Percakapan Umum",
+        "professional": "Profesional",
+        "fluent": "Sangat Fasih",
+        "native": "Penutur Asli (Native)"
+      },
+      "placeholder": "Pilih Tingkat"
+    },
+    "additionalSectionLicensesCertifications": {
+      "title": "Lisensi & Sertifikasi",
+      "description": "Tunjukkan bukti kualifikasi Anda. Masukkan nama sertifikasi yang diakui industri beserta institusi penerbitnya untuk menambah kredibilitas.",
+      "default": "(Sertifikasi Belum Diisi)",
+      "labels": {
+        "certificationName": "Nama Sertifikasi",
+        "issuer": "Institusi Penerbit",
+        "startEndDate": "Tanggal Dikeluarkan & Kedaluwarsa",
+        "placeholder": "BB / TTTT"
+      },
+      "addButton": "+ Tambah Sertifikasi",
+      "backButton": "Kembali",
+      "addAnotherSectionButton": "Kembali ke Pilihan Bagian"
+    },
+    "additionalSectionProfessionalTraining": {
+      "title": "Pelatihan Profesional",
+      "description": "Cantumkan kelas *bootcamp*, *workshop*, atau pelatihan intensif yang pernah Anda ikuti untuk menunjang kompetensi karir Anda.",
+      "default": "(Pelatihan Belum Diisi)",
+      "labels": {
+        "courseName": "Nama Pelatihan",
+        "institution": "Penyelenggara",
+        "startEndDate": "Periode Pelatihan",
+        "placeholder": "BB / TTTT"
+      },
+      "addButton": "+ Tambah Pelatihan",
+      "backButton": "Kembali",
+      "addAnotherSectionButton": "Kembali ke Pilihan Bagian"
+    },
+    "saveModal": {
+      "title": "Simpan CV",
+      "placeholder": "Misal: CV Frontend Dev 2026",
+      "cancelButton": "Batal",
+      "saveButton": "Simpan",
+      "savingButton": "Menyimpan..."
+    },
+    "finishUp": {
+      "title": "Selesai",
+      "hideButton": "Sembunyikan",
+      "backButton": "Kembali",
+      "finishButton": "Selesaikan CV",
+      "emptyAdditionalSection": "Tidak ada bagian tambahan yang dimasukkan."
+    },
+    "general": {
+      "now": "Sekarang",
+      "back": "Kembali",
+      "hide": "Sembunyikan",
+      "show": "Tampilkan"
     }
+  },
+  "resumeCheckerPage": {
+    "uploadBox": {
+      "uploadText": "Unggah file CV Anda di sini",
+      "pdfOnly": "(Hanya mendukung format PDF)",
+      "uploadButton": "Pilih File PDF"
+    },
+    "header": {
+      "title": "Pengecek Skor ATS",
+      "description": "Simulasikan CV Anda dengan mesin parser kami. Sistem akan mengekstrak data Anda untuk memastikan tidak ada bagian penting yang gagal terbaca atau hilang. Pastikan skor CV Anda aman sebelum dikirim ke HRD."
+    },
+    "recommendations": {
+      "title": "Rekomendasi Perbaikan:",
+      "missingSection": "Kami tidak menemukan bagian '{{sectionName}}'. Pastikan Anda menggunakan judul bagian yang umum.",
+      "headerOnlySection": "Bagian '{{sectionName}}' terdeteksi, namun isinya tidak dapat terbaca. Hindari penggunaan tabel atau kolom."
+    },
+    "results": {
+      "title": "Hasil Analisis CV",
+      "analyzing": "Sedang memindai dokumen Anda...",
+      "missingText": "Bagian ini tidak terdeteksi oleh sistem.",
+      "headerOnlyText": "Judul terdeteksi, tetapi konten tidak terbaca.",
+      "uploadPrompt": "Unggah CV untuk melihat hasil.",
+      "scoreText": "Skor Kelayakan ATS"
+    },
+    "sectionNames": {
+      "personalInfo": "Informasi Pribadi",
+      "experience": "Pengalaman Kerja",
+      "education": "Pendidikan",
+      "skills": "Keahlian",
+      "languages": "Bahasa",
+      "certifications": "Sertifikasi",
+      "default": "Bagian Lainnya"
+    }
+  }
 }
