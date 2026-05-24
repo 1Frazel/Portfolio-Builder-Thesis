@@ -1,9 +1,9 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import HomeIcon from "../../icons/HomeIcon";
 import Button from "./Button";
 import useIsMobile from "../hooks/useIsMobile";
 import HomeNav from "../../icons/HomeNav";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import HomeCancel from "../../icons/HomeCancel";
 import Profile from "../../icons/Profile";
 import { useAuth } from "../hooks/useAuth";
@@ -16,13 +16,31 @@ interface IListHeader {
   path: string;
 }
 
+const STICKY_PATHS = new Set(["/", "/checker"]);
+const STICKY_TRIGGER_PX = 300;
+
+const stickySlideDownStyle = `
+  @keyframes headerSlideDown {
+    from {
+      transform: translate3d(0, -18px, 0);
+      opacity: 0.96;
+    }
+
+    to {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
+`;
+
 const LanguageSwitcher = ({ className = "" }: { className?: string }) => {
   const { i18n } = useTranslation("common");
   const isIndonesian = i18n.resolvedLanguage?.startsWith("id");
+  const isEnglish = i18n.resolvedLanguage?.startsWith("en");
 
   const handleLanguageChange = async (language: "id" | "en") => {
     await i18n.changeLanguage(language);
-    window.location.reload();
+    globalThis.location.reload();
   };
 
   return (
@@ -43,7 +61,7 @@ const LanguageSwitcher = ({ className = "" }: { className?: string }) => {
           type="button"
           onClick={() => void handleLanguageChange("en")}
           className={`rounded-full px-3 py-1.5 text-[0.65rem] sm:px-4 sm:py-2 sm:text-xs md:text-sm font-semibold transition ${
-            !isIndonesian
+            isEnglish
               ? "bg-white text-[#2951A3] shadow"
               : "bg-transparent text-white hover:bg-white/10"
           }`}
@@ -57,6 +75,11 @@ const LanguageSwitcher = ({ className = "" }: { className?: string }) => {
 
 const Header = () => {
   const isMobile = useIsMobile();
+  const location = useLocation();
+  const [showStickyHeader, setShowStickyHeader] = useState(false);
+  const [playStickyAnimation, setPlayStickyAnimation] = useState(false);
+  const stickyAnimationTimerRef = useRef<number | null>(null);
+  const isStickyPage = STICKY_PATHS.has(location.pathname);
 
   const listHeader = [
     {
@@ -76,25 +99,108 @@ const Header = () => {
     },
   ];
 
+  useEffect(() => {
+    if (!isStickyPage) {
+      setShowStickyHeader(false);
+      setPlayStickyAnimation(false);
+
+      if (stickyAnimationTimerRef.current !== null) {
+        globalThis.clearTimeout(stickyAnimationTimerRef.current);
+        stickyAnimationTimerRef.current = null;
+      }
+
+      return;
+    }
+
+    const updateStickyState = () => {
+      const currentScrollY = globalThis.scrollY;
+
+      if (!showStickyHeader && currentScrollY > STICKY_TRIGGER_PX) {
+        setShowStickyHeader(true);
+        setPlayStickyAnimation(true);
+
+        if (stickyAnimationTimerRef.current !== null) {
+          globalThis.clearTimeout(stickyAnimationTimerRef.current);
+        }
+
+        stickyAnimationTimerRef.current = globalThis.setTimeout(() => {
+          setPlayStickyAnimation(false);
+          stickyAnimationTimerRef.current = null;
+        }, 450);
+
+        return;
+      }
+
+      if (showStickyHeader && currentScrollY <= 0) {
+        setShowStickyHeader(false);
+        setPlayStickyAnimation(false);
+
+        if (stickyAnimationTimerRef.current !== null) {
+          globalThis.clearTimeout(stickyAnimationTimerRef.current);
+          stickyAnimationTimerRef.current = null;
+        }
+      }
+    };
+
+    updateStickyState();
+    globalThis.addEventListener("scroll", updateStickyState, { passive: true });
+
+    return () => {
+      globalThis.removeEventListener("scroll", updateStickyState);
+
+      if (stickyAnimationTimerRef.current !== null) {
+        globalThis.clearTimeout(stickyAnimationTimerRef.current);
+        stickyAnimationTimerRef.current = null;
+      }
+    };
+  }, [isStickyPage, showStickyHeader]);
+
   return (
     <>
+      {isStickyPage ? <style>{stickySlideDownStyle}</style> : null}
       {isMobile ? (
-        <MobileHeader listHeader={listHeader} />
+        <MobileHeader
+          listHeader={listHeader}
+          isStickyPage={isStickyPage}
+          showStickyHeader={showStickyHeader}
+          playStickyAnimation={playStickyAnimation}
+        />
       ) : (
-        <DesktopHeader listHeader={listHeader} />
+        <DesktopHeader
+          listHeader={listHeader}
+          isStickyPage={isStickyPage}
+          showStickyHeader={showStickyHeader}
+          playStickyAnimation={playStickyAnimation}
+        />
       )}
     </>
   );
 };
 
-const DesktopHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
+const DesktopHeader = ({
+  listHeader,
+  isStickyPage,
+  showStickyHeader,
+  playStickyAnimation,
+}: {
+  listHeader: IListHeader[];
+  isStickyPage: boolean;
+  showStickyHeader: boolean;
+  playStickyAnimation: boolean;
+}) => {
   const { user, handleLogin, handleLogout, loading } = useAuth();
   const { t } = useTranslation("common");
+  const stickyHeaderClass = isStickyPage && showStickyHeader
+    ? "fixed left-0 right-0 top-0 z-50"
+    : "relative z-40";
 
   return (
-    <div className="bg-[#2951A3] p-2 md:px-[64px] md:py-[32px]">
+    <div
+      className={`${stickyHeaderClass} bg-[#2951A3] p-2 md:px-16 md:py-8 ${showStickyHeader ? "shadow-lg" : ""}`}
+      style={showStickyHeader && playStickyAnimation ? { animation: "headerSlideDown 450ms cubic-bezier(0.16, 1, 0.3, 1)" } : undefined}
+    >
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-[16px]">
+        <div className="flex items-center gap-4">
           <HomeIcon />
           {listHeader.map((header) => {
             const isCreation = header.id === "creation";
@@ -171,10 +277,23 @@ const DesktopHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
     );
   };
 
-const MobileHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
+const MobileHeader = ({
+  listHeader,
+  isStickyPage,
+  showStickyHeader,
+  playStickyAnimation,
+}: {
+  listHeader: IListHeader[];
+  isStickyPage: boolean;
+  showStickyHeader: boolean;
+  playStickyAnimation: boolean;
+}) => {
   const [isShowNav, setIsShowNav] = useState(false);
   const { user, handleLogin, handleLogout, loading } = useAuth();
   const { t } = useTranslation("common");
+  const stickyHeaderClass = isStickyPage && showStickyHeader
+    ? "fixed left-0 right-0 top-0 z-50"
+    : "relative z-40";
 
   const handleNavClose = () => {
     setIsShowNav(false);
@@ -182,7 +301,10 @@ const MobileHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
 
   return (
     <>
-      <div className="bg-[#2951A3] px-4 py-4 flex items-center justify-between relative z-40">
+      <div
+        className={`${stickyHeaderClass} bg-[#2951A3] px-4 py-4 flex items-center justify-between ${showStickyHeader ? "shadow-lg" : ""}`}
+        style={showStickyHeader && playStickyAnimation ? { animation: "headerSlideDown 450ms cubic-bezier(0.16, 1, 0.3, 1)" } : undefined}
+      >
         <a href="/">
           <MobileLogo />
         </a>
@@ -199,8 +321,8 @@ const MobileHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
 
       {isShowNav && (
         <div className="fixed inset-0 bg-[#D9D9D9] z-30 flex flex-col gap-4 p-4 pt-20">
-          <div className="p-4 flex bg-[#FFFFFF] rounded-md flex items-center gap-4 ">
-            {user && user.photoURL ? (
+          <div className="p-4 bg-[#FFFFFF] rounded-md flex items-center gap-4">
+            {user?.photoURL ? (
               <img
                 src={user.photoURL}
                 alt="avatar"
@@ -278,7 +400,7 @@ const MobileHeader = ({ listHeader }: { listHeader: IListHeader[] }) => {
                     }}
                     disabled={loading}
                     aria-disabled={loading}
-                    className={`flex items-center gap-2 text-xl text-[#2951A3] text-bold ${loading ? "opacity-60 pointer-events-none" : "opacity-60"}`}
+                    className={`flex items-center gap-2 text-sm text-[#2951A3] text-bold ${loading ? "opacity-60 pointer-events-none" : "opacity-60"}`}
                   >
                     {loading && (
                       <svg
