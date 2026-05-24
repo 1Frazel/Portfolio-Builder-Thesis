@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 type ExpandableSectionContainerProps = {
   children: React.ReactNode;
@@ -38,6 +39,7 @@ const ExpandableSectionContainer = ({
   childrenContainerClass = "mt-6 flex flex-col gap-4 sm:gap-5",
   summaryMode = false,
 }: ExpandableSectionContainerProps) => {
+  const { t } = useTranslation("creationPage");
   const [isContentVisible, setIsContentVisible] = useState(true);
   const shouldShowContent = !summaryMode || isContentVisible;
   const sectionClassName =
@@ -60,7 +62,7 @@ const ExpandableSectionContainer = ({
               isContentVisible ? `Collapse ${title}` : `Expand ${title}`
             }
           >
-            {isContentVisible ? "Hide" : "Show"}
+            {isContentVisible ? t("general.hide") : t("general.show")}
           </button>
         )}
       </div>

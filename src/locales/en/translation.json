@@ -1,89 +1,325 @@
 {
-    "common": {
-        "loading": "Loading...",
-        "nav": {
-            "home": "Home",
-            "creation": "Creation",
-            "checker": "Resume Checker"
-        },
-        "auth": {
-            "signIn": "Sign In",
-            "signOut": "Sign Out",
-            "signInToCreateResumes": "Sign in to create resumes"
-        },
-        "navigation": {
-            "explore": "Explore"
-        },
-        "languageSwitcher": {
-            "switchToEnglish": "Switch to English",
-            "switchToIndonesian": "Switch to Indonesian"
-        }
+  "common": {
+    "loading": "Loading...",
+    "nav": {
+      "home": "Home",
+      "creation": "Creation",
+      "checker": "Resume Checker"
     },
-    "homepage": {
-        "hero": {
-            "sentence1": "Build your",
-            "sentence2": "own",
-            "sentence2Highlight": "ATS friendly Resume",
-            "sentence3": "In one click.",
-            "button1": "Create now!",
-            "button2": "Learn about it",
-            "imageAlt": "Resume builder preview"
-        },
-        "atsSection": {
-            "label": "What is ATS?"
-        },
-        "atsCards": {
-            "digitalAssistant": {
-                "title": "HR Digital Assistant",
-                "description": "An Applicant Tracking System (ATS) is a software application used by recruiters and employers to manage the hiring process and organize large volumes of job applications efficiently."
-            },
-            "automatedScanner": {
-                "title": "The Automated Scanner",
-                "description": "It acts as a digital filter that reads, parses, and extracts raw text from your resume. The system automatically categorizes your information into sections like work experience, education, and skills."
-            },
-            "keywordMatcher": {
-                "title": "The Keyword Matcher",
-                "description": "The system scores and ranks your resume based on how well your extracted data matches the specific keywords, skills, and qualifications outlined in the employer's job description."
-            }
-        },
-        "importanceSection": {
-            "label": "Why ATS Important for Curriculum Vitae?",
-            "title": "Write a CV that gets seen, read, and shortlisted."
-        },
-        "importanceCards": {
-            "gatekeeper": {
-                "title": "Passing the First Gatekeeper",
-                "description": "Over 90% of large companies use an ATS. If your CV is not ATS-friendly, it might be automatically rejected and discarded before a human recruiter ever gets the chance to read it."
-            },
-            "visibility": {
-                "title": "Maximizing Your Visibility",
-                "description": "A well-structured ATS CV ensures that your most important qualifications and achievements are accurately read by the system, significantly increasing your chances of getting shortlisted for an interview."
-            },
-            "formatting": {
-                "title": "Preventing Formatting Errors",
-                "description": "Complex designs, graphics, tables, or unusual fonts can confuse the system. Using an ATS-optimized format guarantees your data is extracted flawlessly without losing critical information during the parsing process."
-            }
-        },
-        "stepsSection": {
-            "label": "How it works",
-            "title": "Few steps to a finished resume."
-        },
-        "steps": {
-            "first": {
-                "number": "First",
-                "title": "Choose a template",
-                "description": "Start with an ATS-friendly or professional layout that fits your style."
-            },
-            "second": {
-                "number": "Second",
-                "title": "Fill in your details",
-                "description": "Add your experience, education, skills, and summary in a guided flow."
-            },
-            "third": {
-                "number": "Third",
-                "title": "Download and share",
-                "description": "Preview your resume, make adjustments, and export a polished final CV."
-            }
-        }
+    "auth": {
+      "signIn": "Sign In",
+      "signOut": "Sign Out",
+      "signInToCreateResumes": "Sign in to create resumes"
+    },
+    "navigation": {
+      "explore": "Explore"
+    },
+    "languageSwitcher": {
+      "switchToEnglish": "Switch to English",
+      "switchToIndonesian": "Switch to Indonesian"
     }
+  },
+  "homepage": {
+    "hero": {
+      "sentence1": "Build your",
+      "sentence2": "own",
+      "sentence2Highlight": "ATS friendly Resume",
+      "sentence3": "In one click.",
+      "button1": "Create now!",
+      "button2": "Learn about it",
+      "imageAlt": "Resume builder preview"
+    },
+    "atsSection": {
+      "label": "What is ATS?"
+    },
+    "atsCards": {
+      "digitalAssistant": {
+        "title": "HR Digital Assistant",
+        "description": "An Applicant Tracking System (ATS) is a software application used by recruiters and employers to manage the hiring process and organize large volumes of job applications efficiently."
+      },
+      "automatedScanner": {
+        "title": "The Automated Scanner",
+        "description": "It acts as a digital filter that reads, parses, and extracts raw text from your resume. The system automatically categorizes your information into sections like work experience, education, and skills."
+      },
+      "keywordMatcher": {
+        "title": "The Keyword Matcher",
+        "description": "The system scores and ranks your resume based on how well your extracted data matches the specific keywords, skills, and qualifications outlined in the employer's job description."
+      }
+    },
+    "importanceSection": {
+      "label": "Why ATS Important for Curriculum Vitae?",
+      "title": "Write a CV that gets seen, read, and shortlisted."
+    },
+    "importanceCards": {
+      "gatekeeper": {
+        "title": "Passing the First Gatekeeper",
+        "description": "Over 90% of large companies use an ATS. If your CV is not ATS-friendly, it might be automatically rejected and discarded before a human recruiter ever gets the chance to read it."
+      },
+      "visibility": {
+        "title": "Maximizing Your Visibility",
+        "description": "A well-structured ATS CV ensures that your most important qualifications and achievements are accurately read by the system, significantly increasing your chances of getting shortlisted for an interview."
+      },
+      "formatting": {
+        "title": "Preventing Formatting Errors",
+        "description": "Complex designs, graphics, tables, or unusual fonts can confuse the system. Using an ATS-optimized format guarantees your data is extracted flawlessly without losing critical information during the parsing process."
+      }
+    },
+    "stepsSection": {
+      "label": "How it works",
+      "title": "Few steps to a finished resume."
+    },
+    "steps": {
+      "first": {
+        "number": "First",
+        "title": "Choose a template",
+        "description": "Start with an ATS-friendly or professional layout that fits your style."
+      },
+      "second": {
+        "number": "Second",
+        "title": "Fill in your details",
+        "description": "Add your experience, education, skills, and summary in a guided flow."
+      },
+      "third": {
+        "number": "Third",
+        "title": "Download and share",
+        "description": "Preview your resume, make adjustments, and export a polished final CV."
+      }
+    }
+  },
+  "creationPage": {
+    "main": {
+      "title": "My Resumes",
+      "description": "Manage your resumes in one place.",
+      "createButton": "Create New Resume",
+      "loading": "Loading your resumes...",
+      "empty": "No resumes created yet. Click 'Create New Resume' to get started.",
+      "previewButton": {
+        "preview": "Preview",
+        "failed": "Failed to load preview. Please try again later.",
+        "loading": "Loading preview..."
+      },
+      "cvList": {
+        "lastModified": "Last Modified",
+        "editButton": "Edit",
+        "deleteButton": "Delete",
+        "failedToLoad": "Failed to load your resumes. Please try again later.",
+        "confirmDelete": "Are you sure you want to delete this resume? This action cannot be undone.",
+        "resumeDeleted": "Resume deleted successfully.",
+        "failedToDelete": "Failed to delete the resume. Please try again later."
+      }
+    },
+    "templateSelection": {
+      "title": "Select a Resume Template",
+      "description": "Choose a template to start creating your resume",
+      "atsDescription": "A clean and straightforward resume layout designed for maximum ATS readability. This template uses a single-column structure, minimal styling, and clear section hierarchy to ensure all information is easily parsed by applicant tracking systems. Ideal for users who prioritize compatibility and simplicity.",
+      "professionalDescription": "A modern and visually structured resume with a customizable color accent to enhance readability and personal branding. While maintaining ATS compatibility, this template introduces a sidebar layout to organize key information such as skills and contact details more effectively. Suitable for users who want a balance between professionalism and visual appeal.",
+      "previewButton": "Preview",
+      "selectButton": "Select Template",
+      "backButton": "← Back to My Resumes",
+      "preview": "Preview",
+      "close": "Close",
+      "template": {
+        "ats": {
+            "description": "A clean and straightforward resume layout designed for maximum ATS readability. This template uses a single-column structure, minimal styling, and clear section hierarchy to ensure all information is easily parsed by applicant tracking systems. Ideal for users who prioritize compatibility and simplicity.",
+            "modalDesc": "Clean, compact, and optimized for ATS parsing."
+        },
+        "professional": {
+            "description": "A modern and visually structured resume with a customizable color accent to enhance readability and personal branding. While maintaining ATS compatibility, this template introduces a sidebar layout to organize key information such as skills and contact details more effectively. Suitable for users who want a balance between professionalism and visual appeal.",
+            "modalDesc": "A polished two-column layout with a sidebar profile."
+      }
+    }
+    },
+    "personalInfo": {
+      "title": "Personal Information",
+      "description": "Add your personal and contact details so employers can easily identify and reach you.",
+      "labels": {
+        "jobTitle": "Job Target",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "phone": "Phone Number",
+        "linkedin": "LinkedIn URL",
+        "postal": "Postal Code",
+        "cityState": "City, State",
+        "address": "Address",
+        "country": "Country",
+        "placeholder": "The role you want"
+      },
+      "nextButton": "Next up, Work Experience"
+    },
+    "workExperience": {
+      "title": "Work Experience",
+      "description": "Detail your professional history in reverse chronological order. Focus on quantifiable achievements, specific responsibilities, and the direct impact you made in your previous roles.",
+      "defaultJobTitle": "(Not Specified)",
+      "labels": {
+        "jobTitle": "Job Title",
+        "employer": "Employer",
+        "startEndDate": "Start&End Date",
+        "address": "Address",
+        "description": "Description",
+        "placeholder": "MM // YYYY"
+      },
+      "addButton": "Add another experience",
+      "nextButton": "Next up, Education",
+      "backButton": "Back"
+    },
+    "education": {
+      "title": "Education",
+      "description": "List your academic background, starting with your most recent or highest degree. Include relevant coursework, academic honors, or organizational involvement if you have limited professional experience.",
+      "defaultDegree": "(Not Specified)",
+      "labels": {
+        "degree": "Degree",
+        "institution": "School",
+        "startEndDate": "Start&End Date",
+        "city": "City",
+        "description": "Description",
+        "placeholder": "MM // YYYY"
+      },
+      "addButton": "Add another educations",
+      "nextButton": "Next up, Skills",
+      "backButton": "Back"
+    },
+    "skills": {
+      "title": "Areas of Expertise",
+      "description": "Highlight technical abilities, industry-specific tools, and relevant soft skills. Prioritize keywords that align directly with the requirements of the roles you are targeting to maximize ATS compatibility.",
+      "defaultJobTitle": "(Not Specified)",
+      "labels": {
+        "skillName": "Skill Name",
+        "skillExpertise": "Skill Expertise"
+      },
+      "placeholderExpertise": "Select expertise level",
+      "addButton": "Add another skills",
+      "nextButton": "Next up, Profile Summary",
+      "backButton": "Back",
+      "levels": {
+        "novice": "Novice",
+        "basic": "Basic",
+        "intermediate": "Intermediate",
+        "experienced": "Experienced",
+        "expert": "Expert"
+      }
+    },
+    "profileSummary": {
+      "title": "Profile Summary",
+      "description": "Write a concise, compelling overview of your professional identity. Highlight your core expertise, key accomplishments, and immediate career objectives in three to four sentences.",
+      "labels": {
+        "description": "Description"
+      },
+      "nextButton": "Next up, Additional Sections",
+      "backButton": "Back"
+    },
+    "additionalSections": {
+      "title": "Additional Sections",
+      "description": "Include supplementary information that adds value to your candidacy, such as professional certifications and Trainings, or foreign language proficiencies.",
+      "labels": {
+        "language": "Language",
+        "licensesCertifications": "Licenses / Certifications",
+        "professionalTraining": "Professional Training"
+      },
+      "backButton": "Back",
+      "nextButton": "Next up, Finish Up",
+      "empty": "No additional sections were selected.",
+      "notFound": "Can't find the current section!..."
+    },
+    "additionalSectionLanguages": {
+      "title": "Languages",
+      "description": "Specify any foreign languages you are proficient in, along with your exact fluency level (e.g., Native, Professional, Basic). This is highly valuable for multinational companies or roles requiring diverse communication.",
+      "default": "(Not Specified)",
+      "labels": {
+        "name": "Languages",
+        "selectLevel": "Select Level",
+        "level": "Level"
+      },
+      "addButton": "Add another languages",
+      "backButton": "Back",
+      "addAnotherSectionButton": "Add Another Additional Section",
+      "levels": {
+        "basic": "Basic",
+        "conversational": "Conversational",
+        "professional": "Professional",
+        "fluent": "Fluent",
+        "native": "Native"
+      },
+      "placeholder": "Select Level"
+    },
+    "additionalSectionLicensesCertifications": {
+      "title": "Licenses / Certifications",
+      "description": "List official credentials or industry-recognized licenses that validate your professional qualifications. Include the name of the certification, the issuing authority, and the date of acquisition or expiration to establish immediate credibility.",
+      "default": "(Not Specified)",
+      "labels": {
+        "certificationName": "Certification Name",
+        "issuer": "Issuer",
+        "startEndDate": "Start & End Date",
+        "placeholder": "MM // YYYY"
+      },
+      "addButton": "Add another licenses / certifications",
+      "backButton": "Back",
+      "addAnotherSectionButton": "Add Another Additional Section"
+    },
+    "additionalSectionProfessionalTraining": {
+      "title": "Professional Training",
+      "description": "Detail any non-degree educational programs, corporate training, or specialized workshops you have completed. Focus on training that directly aligns with your career goals and adds tangible value to your skill set.",
+      "default": "(Not Specified)",
+      "labels": {
+        "courseName": "Course Name",
+        "institution": "Institution",
+        "startEndDate": "Start & End Date",
+        "placeholder": "MM // YYYY"
+      },
+      "addButton": "Add another professional training",
+      "backButton": "Back",
+      "addAnotherSectionButton": "Add Another Additional Section"
+    },
+    "saveModal": {
+      "title": "Save Your Resume",
+      "placeholder": "e.g., Software Engineer Resume",
+      "cancelButton": "Cancel",
+      "saveButton": "Save",
+      "savingButton": "Saving..."
+    },
+    "finishUp": {
+      "hideButton": "Hide",
+      "backButton": "Back",
+      "finishButton": "Finish your resume",
+      "emptyAdditionalSection": "No additional section were added."
+    },
+    "general": {
+      "now": "Now",
+      "back": "Back",
+      "hide": "Hide",
+      "show": "Show"
+    }
+  },
+  "resumeCheckerPage": {
+    "uploadBox": {
+      "uploadText": "Upload your resume here",
+      "pdfOnly": "(PDF only)",
+      "uploadButton": "Upload"
+    },
+    "header": {
+      "title": "Resume Checker",
+      "description": "Test your resume against our ATS parsing engine. Upload your PDF to verify that all essential sections are correctly formatted and machine-readable. Our system will flag any missing or unreadable categories, ensuring your qualifications are flawlessly extracted before you submit your application."
+    },
+    "recommendations": {
+      "title": "Recommendations:",
+      "missingSection": "Add a {{sectionName}} section with relevant details.",
+      "headerOnlySection": "Add content under {{sectionName}}, not just the header."
+    },
+    "results": {
+      "title": "Checking Result",
+      "analyzing": "Analyzing your resume...",
+      "missingText": "This section is not detected",
+      "headerOnlyText": "This section content is not detected",
+      "uploadPrompt": "Upload a resume to get started",
+      "scoreText": "Resume Score"
+    },
+    "sectionNames": {
+      "personalInfo": "Personal Info",
+      "experience": "Experience",
+      "education": "Education",
+      "skills": "Skills",
+      "languages": "Languages",
+      "certifications": "Certifications",
+      "default": "Section"
+    }
+  }
 }

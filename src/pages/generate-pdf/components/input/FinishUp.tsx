@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import Education from "./Education";
 import PersonalDetail from "./PersonalDetails";
@@ -41,6 +42,8 @@ const FinishUp = ({
   additionalSections: IAdditionalSections[];
   listAdditionalSections: IListSections[];
 }) => {
+  const { t } = useTranslation("creationPage");
+
   const selectedAdditionalSections = listAdditionalSections.filter(
     (section) =>
       additionalSections.find((item) => item.id === section.id)?.isSet ?? false,
@@ -78,7 +81,7 @@ const FinishUp = ({
           ))
         ) : (
           <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-4 py-5 text-sm text-slate-500">
-            No additional sections were selected.
+            {t("additionalSections.empty", "No additional sections were selected.")}
           </div>
         )}
       </div>

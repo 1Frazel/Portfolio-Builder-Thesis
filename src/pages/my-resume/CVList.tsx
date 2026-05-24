@@ -5,12 +5,14 @@ import { useToast } from "../../shared/hooks/useToast";
 import { deleteCV, getUserCVs } from "../../shared/utils/cvService";
 import type { CVDocument } from "../../shared/utils/cvService";
 import PreviewDownloadBtn from "./PreviewDownloadBtn";
+import { useTranslation } from "react-i18next";
 
 const CVList = () => {
   const navigate = useNavigate();
   const { showToast } = useToast();
   const [createdCVs, setCreatedCVs] = useState<CVDocument[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { t } = useTranslation("creationPage");
 
   useEffect(() => {
     const fetchCVs = async () => {
@@ -20,7 +22,7 @@ const CVList = () => {
         setCreatedCVs(cvs);
       } catch (err) {
         const message =
-          err instanceof Error ? err.message : "Failed to load resumes";
+          err instanceof Error ? err.message : t("main.cvList.failedToLoad");
         showToast(message, "error");
       } finally {
         setIsLoading(false);
@@ -39,16 +41,16 @@ const CVList = () => {
   };
 
   const handleDeleteCV = async (cvId: string) => {
-    const shouldDelete = window.confirm("Delete this resume?");
+    const shouldDelete = window.confirm(t("main.cvList.confirmDelete"));
     if (!shouldDelete) return;
 
     try {
       await deleteCV(cvId);
       setCreatedCVs((prev) => prev.filter((cv) => cv.resumeId !== cvId));
-      showToast("Resume deleted", "success");
+      showToast(t("main.cvList.resumeDeleted"), "success");
     } catch (err) {
       const message =
-        err instanceof Error ? err.message : "Failed to delete resume";
+        err instanceof Error ? err.message : t("main.cvList.failedToDelete");
       showToast(message, "error");
     }
   };
@@ -66,9 +68,9 @@ const CVList = () => {
 
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-slate-900">My Resumes</h1>
+          <h1 className="text-3xl font-bold text-slate-900">{t("main.title")}</h1>
           <p className="mt-2 text-slate-600">
-            Create and manage your professional resumes
+            {t("main.description")}
           </p>
         </div>
 
@@ -79,13 +81,13 @@ const CVList = () => {
             className="inline-flex items-center gap-2 rounded-lg bg-[#2951A3] px-6 py-3 font-semibold text-white transition hover:bg-[#274a9f]"
           >
             <span className="text-xl">+</span>
-            Create New Resume
+            {t("main.createButton")}
           </button>
         </div>
 
         {isLoading ? (
           <div className="rounded-lg border border-slate-200 bg-white px-6 py-12 text-center shadow-sm">
-            <p className="text-slate-600">Loading resumes...</p>
+            <p className="text-slate-600">{t("main.loading")}</p>
           </div>
         ) : createdCVs.length > 0 ? (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -100,7 +102,7 @@ const CVList = () => {
                     Template: {cv.template}
                   </p>
                   <p className="mt-2 text-xs text-slate-500">
-                    Last modified: {formatDate(cv.updatedAt)}
+                    {t("main.cvList.lastModified")} : {formatDate(cv.updatedAt)}
                   </p>
                 </div>
 
@@ -109,7 +111,7 @@ const CVList = () => {
                     onClick={() => handleEditCV(cv.resumeId)}
                     className="flex-1 rounded-md bg-[#2951A3] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#274a9f]"
                   >
-                    Edit
+                    {t("main.cvList.editButton")}
                   </button>
                   <PreviewDownloadBtn cv={cv} />
                 </div>
@@ -117,7 +119,7 @@ const CVList = () => {
                   onClick={() => handleDeleteCV(cv.resumeId)}
                   className="mt-3 rounded-md border border-red-200 px-4 py-2 text-sm font-semibold text-red-600 transition hover:bg-red-50"
                 >
-                  Delete
+                  {t("main.cvList.deleteButton")}
                 </button>
               </div>
             ))}
@@ -125,7 +127,7 @@ const CVList = () => {
         ) : (
           <div className="rounded-lg border-2 border-dashed border-slate-300 bg-slate-50 px-6 py-12 text-center">
             <p className="text-slate-600">
-              No resumes created yet. Click "Create New Resume" to get started.
+              {t("main.empty")}
             </p>
           </div>
         )}

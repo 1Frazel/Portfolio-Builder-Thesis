@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { DEFAULT_EDUCATION } from "../../const/generatePdfConst";
 import type { IEducation } from "../../interface/generatePdfInterface";
 import EducationSection from "./EducationSection";
@@ -12,6 +13,7 @@ const Education = ({
   setEducations: React.Dispatch<React.SetStateAction<IEducation[]>>;
   summaryMode?: boolean;
 }) => {
+  const { t } = useTranslation("creationPage");
   const handleEditEducations = (id: number, key: string, value: string) => {
     const updatedWorkExperiences = educations.map((education) => {
       if (education.id === id) {
@@ -58,9 +60,9 @@ const Education = ({
 
   return (
     <ExpandableSectionContainer
-      title="Education"
-      description="List your academic background, starting with your most recent or highest degree. Include relevant coursework, academic honors, or organizational involvement if you have limited professional experience."
-      addButtonTitle="Add another education"
+      title={t("education.title")}
+      description={t("education.description")}
+      addButtonTitle={t("education.addButton", "Add another education")}
       onAdd={handleAddEducations}
       summaryMode={summaryMode}
     >

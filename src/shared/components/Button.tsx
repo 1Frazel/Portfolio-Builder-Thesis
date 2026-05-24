@@ -17,7 +17,7 @@ const Button = ({
     <button
       onClick={disabled ? undefined : handleClick}
       disabled={disabled}
-      className={`rounded-md ${buttonClass} p-2 md:px-[16px] md:py-[8px] ${disabled ? "opacity-60 pointer-events-none" : "cursor-pointer"}`}
+      className={`rounded-full ${buttonClass} p-2 md:px-[20px] md:py-[8px] ${disabled ? "opacity-60 pointer-events-none" : "cursor-pointer"}`}
     >
       <div className="flex items-center justify-center gap-2">
         {isLoading && (

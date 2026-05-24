@@ -1,4 +1,5 @@
 import type React from "react";
+import { useTranslation } from "react-i18next";
 
 // layout handled locally to make it responsive (1 column mobile, 2 columns desktop)
 import { ExpandableSectionContainer } from "./ExpandableSectionContainer";
@@ -22,6 +23,8 @@ const AdditionalSections = ({
   activeAdditionalSection: string;
   setActiveAdditionalSection: React.Dispatch<React.SetStateAction<string>>;
 }) => {
+  const { t } = useTranslation("creationPage");
+
   const handleEnableSections = (id: string) => {
     setAdditionalSections(
       additionalSections.map((section) => {
@@ -41,15 +44,15 @@ const AdditionalSections = ({
   const currentActiveSectionsComponents = currentActiveSections ? (
     currentActiveSections.component
   ) : (
-    <p>Can't find the current section!...</p>
+    <p>{t("additionalSections.notFound", "Can't find the current section!...")}</p>
   );
 
   return (
     <>
       {activeAdditionalSection === "default" ? (
         <ExpandableSectionContainer
-          title="Additional Sections"
-          description="Include supplementary information that adds value to your candidacy, such as professional certifications and Trainings, or foreign language proficiencies."
+          title={t("additionalSections.title")}
+          description={t("additionalSections.description")}
         >
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {listAdditionalSections.map((list) => (

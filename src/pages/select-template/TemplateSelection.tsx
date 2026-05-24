@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import Header from "../../shared/components/Header";
 import atsPreviewImage from "../../assets/ats.png";
 import professionalPreviewImage from "../../assets/professional.png";
+import { useTranslation } from "react-i18next";
 
 interface Template {
   id: string;
@@ -15,23 +16,22 @@ interface Template {
 const TemplateSelection = () => {
   const navigate = useNavigate();
   const [previewTemplate, setPreviewTemplate] = useState<Template | null>(null);
+  const { t } = useTranslation("creationPage");
 
   const templates: Template[] = [
     {
       id: "ats",
       title: "Classic ATS",
       previewImage: atsPreviewImage,
-      description:
-        "A clean and straightforward resume layout designed for maximum ATS readability. This template uses a single-column structure, minimal styling, and clear section hierarchy to ensure all information is easily parsed by applicant tracking systems. Ideal for users who prioritize compatibility and simplicity.",
-      modalDesc: "Clean, compact, and optimized for ATS parsing.",
+      description: t("templateSelection.template.ats.description"),
+      modalDesc: t("templateSelection.template.ats.modalDesc"),
     },
     {
       id: "professional",
       title: "Professional",
       previewImage: professionalPreviewImage,
-      description:
-        "A modern and visually structured resume with a customizable color accent to enhance readability and personal branding. While maintaining ATS compatibility, this template introduces a sidebar layout to organize key information such as skills and contact details more effectively. Suitable for users who want a balance between professionalism and visual appeal.",
-      modalDesc: "A polished two-column layout with a sidebar profile.",
+      description: t("templateSelection.template.professional.description"),
+      modalDesc: t("templateSelection.template.professional.modalDesc"),
     },
   ];
 
@@ -46,10 +46,10 @@ const TemplateSelection = () => {
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-slate-900">
-            Select a Resume Template
+            {t("templateSelection.title", "Choose Your Template")}
           </h1>
           <p className="mt-2 text-slate-600">
-            Choose a template to start creating your resume
+            {t("templateSelection.description", "Choose a template to start creating your resume")}
           </p>
         </div>
 
@@ -82,14 +82,14 @@ const TemplateSelection = () => {
                     onClick={() => setPreviewTemplate(template)}
                     className="flex-1 rounded-md border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-[#2951A3] hover:text-[#2951A3]"
                   >
-                    Preview
+                    {t("templateSelection.previewButton", "Preview")}
                   </button>
                   <button
                     type="button"
                     onClick={() => handleSelectTemplate(template.id)}
                     className="flex-1 rounded-md bg-[#2951A3] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#1f3f82]"
                   >
-                    Select Template
+                    {t("templateSelection.selectButton", "Select Template")}
                   </button>
                 </div>
               </div>
@@ -103,7 +103,7 @@ const TemplateSelection = () => {
               <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
                 <div>
                   <h2 className="text-lg font-semibold text-slate-900">
-                    {previewTemplate.title} Preview
+                    {previewTemplate.title} {t("templateSelection.preview", "Preview")}
                   </h2>
                   <p className="text-sm text-slate-600">
                     {previewTemplate.modalDesc}
@@ -114,7 +114,7 @@ const TemplateSelection = () => {
                   onClick={() => setPreviewTemplate(null)}
                   className="rounded-full px-3 py-1 text-sm font-medium text-slate-500 transition hover:bg-slate-100 hover:text-slate-900"
                 >
-                  Close
+                  {t("templateSelection.close", "Close")}
                 </button>
               </div>
 
@@ -135,7 +135,7 @@ const TemplateSelection = () => {
             onClick={() => navigate("/creation")}
             className="text-slate-600 transition hover:text-[#2951A3]"
           >
-            ← Back to My Resumes
+            {t("templateSelection.backButton", "← Back to My Resumes")}
           </button>
         </div>
       </div>

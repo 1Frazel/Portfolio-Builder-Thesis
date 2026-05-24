@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { DEFAULT_WORK_EXPERIENCES } from "../../const/generatePdfConst";
 import type { IWorkExperience } from "../../interface/generatePdfInterface";
 import { ExpandableSectionContainer } from "./ExpandableSectionContainer";
@@ -13,6 +14,7 @@ const WorkExperiences = ({
   setWorkExperience: React.Dispatch<React.SetStateAction<IWorkExperience[]>>;
   summaryMode?: boolean;
 }) => {
+  const { t } = useTranslation("creationPage");
   const handleEditWorkExperiences = (
     id: number,
     key: string,
@@ -70,9 +72,9 @@ const WorkExperiences = ({
 
   return (
     <ExpandableSectionContainer
-      title="Work Experiences"
-      description="Detail your professional history in reverse chronological order. Focus on quantifiable achievements, specific responsibilities, and the direct impact you made in your previous roles."
-      addButtonTitle="Add another experiences"
+      title={t("workExperience.title")}
+      description={t("workExperience.description")}
+      addButtonTitle={t("workExperience.addButton")}
       onAdd={handleAddMoreWorkExperiences}
       summaryMode={summaryMode}
     >

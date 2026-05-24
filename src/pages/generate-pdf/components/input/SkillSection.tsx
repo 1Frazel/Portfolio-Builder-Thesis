@@ -1,4 +1,5 @@
 import { useDebouncedCallback } from "use-debounce";
+import { useTranslation } from "react-i18next";
 import InputField from "./InputField";
 
 import SkillInput from "./SkillInput";
@@ -24,6 +25,8 @@ const SkillSection = ({
   handleSectionUp: (currentIndex: number) => void;
   handleSectionDown: (currentIndex: number) => void;
 }) => {
+  const { t } = useTranslation("creationPage");
+
   const handleTextChange = useDebouncedCallback(
     (id: number, key: string, value: string) => {
       handleEditSkills(id, key, value);
@@ -43,7 +46,7 @@ const SkillSection = ({
           onChange={(input: string) => {
             handleTextChange(skill.id, "name", input);
           }}
-          label="Name"
+          label={t("skills.labels.skillName")}
           inputClass={fieldInputClass}
         />
       ),
@@ -63,7 +66,7 @@ const SkillSection = ({
 
   return (
     <ExpandableSectionItem
-      title={skill.name ? skill.name : "(Not Specified)"}
+      title={skill.name ? skill.name : t("skills.defaultJobTitle", "(Not Specified)")}
       description={skill.expertise && skill.expertise}
       onDelete={() => handleDeleteSkills(skill.id)}
       onMoveUp={handleSectionUp}

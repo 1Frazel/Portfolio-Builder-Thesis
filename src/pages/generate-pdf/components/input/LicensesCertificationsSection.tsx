@@ -1,4 +1,5 @@
 import { useDebouncedCallback } from "use-debounce";
+import { useTranslation } from "react-i18next";
 import InputField from "./InputField";
 import type { ILicensesCertifications } from "../../interface/generatePdfInterface";
 import DateInput from "./DateInput";
@@ -27,6 +28,8 @@ const LicensesCertificationsSection = ({
   handleSectionUp: (currentIndex: number) => void;
   handleSectionDown: (currentIndex: number) => void;
 }) => {
+  const { t } = useTranslation("creationPage");
+
   const handleTextChange = useDebouncedCallback(
     (id: number, key: string, value: string) => {
       handleEditLicensesCertifications(id, key, value);
@@ -46,7 +49,7 @@ const LicensesCertificationsSection = ({
           onChange={(input: string) => {
             handleTextChange(license.id, "name", input);
           }}
-          label="Certification Name"
+          label={t("additionalSectionLicensesCertifications.labels.certificationName")}
           inputClass={fieldInputClass}
         />
       ),
@@ -59,7 +62,7 @@ const LicensesCertificationsSection = ({
           onChange={(input: string) => {
             handleTextChange(license.id, "issuer", input);
           }}
-          label="Issuer"
+          label={t("additionalSectionLicensesCertifications.labels.issuer", "Issuer")}
           inputClass={fieldInputClass}
         />
       ),
@@ -76,8 +79,8 @@ const LicensesCertificationsSection = ({
           endOnChange={(value: string) => {
             handleTextChange(license.id, "endsAt", value);
           }}
-          label="Start & End Date"
-          placeholder="MM // YYYY"
+          label={t("additionalSectionLicensesCertifications.labels.startEndDate", "Start & End Date")}
+          placeholder={t("additionalSectionLicensesCertifications.labels.placeholder", "MM / YYYY")}
           inputClass={fieldInputClass}
         />
       ),
@@ -85,7 +88,7 @@ const LicensesCertificationsSection = ({
   ];
   return (
     <ExpandableSectionItem
-      title={license.name ? license.name : "(Not Specified)"}
+      title={license.name ? license.name : t("additionalSectionLicensesCertifications.default", "(Not Specified)")}
       description={
         license.startAt &&
         `${license.startAt} - ${license.endsAt ? license.endsAt : "Now"}`

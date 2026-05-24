@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useDebouncedCallback } from "use-debounce";
 
 import InputField from "./InputField";
@@ -25,6 +26,7 @@ const EducationSection = ({
   handleSectionUp: (currentIndex: number) => void;
   handleSectionDown: (currentIndex: number) => void;
 }) => {
+  const { t } = useTranslation("creationPage");
   const handleTextChange = useDebouncedCallback(
     (id: number, key: string, value: string) => {
       handleEditEducations(id, key, value);
@@ -44,7 +46,7 @@ const EducationSection = ({
           onChange={(input: string) =>
             handleTextChange(education.id, "school", input)
           }
-          label="School"
+          label={t("education.labels.institution")}
           inputClass={fieldInputClass}
         />
       ),
@@ -57,7 +59,7 @@ const EducationSection = ({
           onChange={(input: string) =>
             handleTextChange(education.id, "degree", input)
           }
-          label="Degree"
+          label={t("education.labels.degree")}
           inputClass={fieldInputClass}
         />
       ),
@@ -74,8 +76,8 @@ const EducationSection = ({
           endOnChange={(value: string) => {
             handleTextChange(education.id, "endsAt", value);
           }}
-          label="Start & End Date"
-          placeholder="MM // YYYY"
+          label={t("education.labels.startEndDate")}
+          placeholder={t("education.labels.placeholder")}
           inputClass={fieldInputClass}
         />
       ),
@@ -88,7 +90,7 @@ const EducationSection = ({
           onChange={(input: string) =>
             handleTextChange(education.id, "city", input)
           }
-          label="City"
+          label={t("education.labels.city")}
           inputClass={fieldInputClass}
         />
       ),
@@ -101,7 +103,7 @@ const EducationSection = ({
           onChange={(input: string) => {
             handleTextChange(education.id, "description", input);
           }}
-          label="Description"
+          label={t("education.labels.description")}
           inputClass={fieldInputClass}
         />
       ),
@@ -111,7 +113,7 @@ const EducationSection = ({
 
   return (
     <ExpandableSectionItem
-      title={education.school ? education.school : "(Not Specified)"}
+      title={education.school ? education.school : t("education.defaultDegree", "(Not Specified)")}
       description={
         education.startAt &&
         `${education.startAt} - ${education.endsAt ? education.endsAt : "Now"}`

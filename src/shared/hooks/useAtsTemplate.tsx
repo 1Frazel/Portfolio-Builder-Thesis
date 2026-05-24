@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import Languages from "../../pages/generate-pdf/components/input/Languages";
 import LicensesCertifications from "../../pages/generate-pdf/components/input/LicencesCertifications";
@@ -20,6 +21,7 @@ const useAtsTemplate = ({
   useMock: boolean;
   template: string;
 }) => {
+  const { t } = useTranslation("creationPage");
   const {
     formData,
     setFormData,
@@ -41,14 +43,14 @@ const useAtsTemplate = ({
   const listAdditionalSections = [
     {
       id: "language",
-      title: "Language",
+      title: t("additionalSections.labels.language"),
       component: (
         <Languages languages={formData.languages} setLanguages={setLanguages} />
       ),
     },
     {
       id: "licensesOrCertifications",
-      title: "Licenses / Certifications",
+      title: t("additionalSections.labels.licensesCertifications"),
       component: (
         <LicensesCertifications
           licensesCertifications={formData.licensesCertifications}
@@ -58,7 +60,7 @@ const useAtsTemplate = ({
     },
     {
       id: "professionalTraining",
-      title: "Professional Training",
+      title: t("additionalSections.labels.professionalTraining"),
       component: (
         <ProfessionalTraining
           professionalTraining={formData.professionalTraining}
@@ -71,7 +73,8 @@ const useAtsTemplate = ({
   const listAtsTemplateSection = [
     {
       id: "personalDetail",
-      title: "Personal Information",
+      title: t("personalInfo.title"),
+      nextButton: t("personalInfo.nextButton"),
       component: (
         <PersonalDetail
           personalDetail={formData.personalDetail}
@@ -81,7 +84,8 @@ const useAtsTemplate = ({
     },
     {
       id: "workExperiences",
-      title: "Work Experiences",
+      title: t("workExperience.title"),
+      nextButton: t("workExperience.nextButton"),
       component: (
         <WorkExperiences
           workExperiences={formData.workExperiences}
@@ -91,7 +95,8 @@ const useAtsTemplate = ({
     },
     {
       id: "education",
-      title: "Education",
+      title: t("education.title"),
+      nextButton: t("education.nextButton"),
       component: (
         <Education
           educations={formData.educations}
@@ -101,12 +106,14 @@ const useAtsTemplate = ({
     },
     {
       id: "skills",
-      title: "Skills",
+      title: t("skills.title"),
+      nextButton: t("skills.nextButton"),
       component: <Skills skills={formData.skills} setSkills={setSkills} />,
     },
     {
       id: "profileSummary",
-      title: "Profile Summary",
+      title: t("profileSummary.title"),
+      nextButton: t("profileSummary.nextButton"),
       component: (
         <ProfileSummary
           profileSummary={formData.profileSummary}
@@ -116,7 +123,8 @@ const useAtsTemplate = ({
     },
     {
       id: "additionalSections",
-      title: "Additional Sections",
+      title: t("additionalSections.title"),
+      nextButton: t("additionalSections.nextButton"),
       component: (
         <AdditionalSections
           additionalSections={formData.additionalSections}
@@ -129,7 +137,8 @@ const useAtsTemplate = ({
     },
     {
       id: "finishUp",
-      title: "Finish Up",
+      title: t("finishUp.title", "Finish Up"),
+      nextButton: "",
       component: (
         <FinishUp
           personalDetail={formData.personalDetail}
@@ -149,12 +158,8 @@ const useAtsTemplate = ({
     },
   ];
 
-  const isNotLast = activeSectionIndex < listAtsTemplateSection.length - 1;
 
-  const nextSectionTitle =
-    listAtsTemplateSection[
-      isNotLast ? activeSectionIndex + 1 : activeSectionIndex
-    ].title;
+  const nextSectionTitle = listAtsTemplateSection[activeSectionIndex].nextButton;
 
   const nextComponent = listAtsTemplateSection[activeSectionIndex].component;
 

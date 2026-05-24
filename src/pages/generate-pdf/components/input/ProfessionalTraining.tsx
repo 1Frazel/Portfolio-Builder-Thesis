@@ -1,4 +1,5 @@
 import { DEFAULT_PROFESSIONAL_TRAINING } from "../../const/generatePdfConst";
+import { useTranslation } from "react-i18next";
 import type { IProfessionalTraining } from "../../interface/generatePdfInterface";
 import { ExpandableSectionContainer } from "./ExpandableSectionContainer";
 import ProfessionalTrainingSection from "./ProfessionalTrainingSection";
@@ -14,6 +15,8 @@ const ProfessionalTraining = ({
   >;
   summaryMode?: boolean;
 }) => {
+  const { t } = useTranslation("creationPage");
+
   const handleEditProfessionalTraining = (
     id: number,
     key: string,
@@ -77,9 +80,9 @@ const ProfessionalTraining = ({
 
   return (
     <ExpandableSectionContainer
-      title="Professional Training"
-      addButtonTitle="Add another professional training"
-      description="Detail any non-degree educational programs, corporate training, or specialized workshops you have completed. Focus on training that directly aligns with your career goals and adds tangible value to your skill set."
+      title={t("additionalSectionProfessionalTraining.title")}
+      addButtonTitle={t("additionalSectionProfessionalTraining.addButton", "Add another professional training")}
+      description={t("additionalSectionProfessionalTraining.description")}
       onAdd={handleAddProfessionalTraining}
       summaryMode={summaryMode}
     >

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useDebouncedCallback } from "use-debounce";
 import { ExpandableSectionContainer } from "./ExpandableSectionContainer";
 
@@ -13,6 +14,7 @@ const PersonalDetail = ({
   setPersonalDetail: React.Dispatch<React.SetStateAction<IPersonalDetail>>;
   summaryMode?: boolean;
 }) => {
+  const { t } = useTranslation("creationPage");
   const handlePersonalDetailChange = useDebouncedCallback(
     (value: string, key: string) => {
       setPersonalDetail({ ...personalDetail, [key]: value });
@@ -32,8 +34,8 @@ const PersonalDetail = ({
           onChange={(input: string) => {
             handlePersonalDetailChange(input, "jobTarget");
           }}
-          label="Job Target"
-          placeholder="The role you want"
+          label={t("personalInfo.labels.jobTitle")}
+          placeholder={t("personalInfo.labels.placeholder")}
           inputClass={fieldInputClass}
         />
       ),
@@ -47,7 +49,7 @@ const PersonalDetail = ({
           onChange={(input: string) => {
             handlePersonalDetailChange(input, "firstName");
           }}
-          label="First Name"
+          label={t("personalInfo.labels.firstName")}
           inputClass={fieldInputClass}
         />
       ),
@@ -60,7 +62,7 @@ const PersonalDetail = ({
           onChange={(input: string) => {
             handlePersonalDetailChange(input, "lastName");
           }}
-          label="Last Name"
+          label={t("personalInfo.labels.lastName")}
           inputClass={fieldInputClass}
         />
       ),
@@ -73,7 +75,7 @@ const PersonalDetail = ({
           onChange={(input: string) => {
             handlePersonalDetailChange(input, "email");
           }}
-          label="Email"
+          label={t("personalInfo.labels.email", "Email")}
           inputClass={fieldInputClass}
         />
       ),
@@ -86,7 +88,7 @@ const PersonalDetail = ({
           onChange={(input: string) => {
             handlePersonalDetailChange(input, "phone");
           }}
-          label="Phone"
+          label={t("personalInfo.labels.phone")}
           inputClass={fieldInputClass}
         />
       ),
@@ -99,7 +101,7 @@ const PersonalDetail = ({
           onChange={(input: string) => {
             handlePersonalDetailChange(input, "linkedinUrl");
           }}
-          label="Linkedin URL"
+          label={t("personalInfo.labels.linkedin")}
           inputClass={fieldInputClass}
         />
       ),
@@ -112,7 +114,7 @@ const PersonalDetail = ({
           onChange={(input: string) => {
             handlePersonalDetailChange(input, "postalCode");
           }}
-          label="Postal Code"
+          label={t("personalInfo.labels.postal")}
           inputClass={fieldInputClass}
         />
       ),
@@ -125,7 +127,7 @@ const PersonalDetail = ({
           onChange={(input: string) => {
             handlePersonalDetailChange(input, "cityState");
           }}
-          label="City, State"
+          label={t("personalInfo.labels.cityState")}
           inputClass={fieldInputClass}
         />
       ),
@@ -138,7 +140,7 @@ const PersonalDetail = ({
           onChange={(input: string) => {
             handlePersonalDetailChange(input, "address");
           }}
-          label="Address"
+          label={t("personalInfo.labels.address")}
           inputClass={fieldInputClass}
         />
       ),
@@ -152,7 +154,7 @@ const PersonalDetail = ({
           onChange={(input: string) => {
             handlePersonalDetailChange(input, "country");
           }}
-          label="Country"
+          label={t("personalInfo.labels.country")}
           inputClass={fieldInputClass}
         />
       ),
@@ -162,8 +164,8 @@ const PersonalDetail = ({
   if (summaryMode) {
     return (
       <ExpandableSectionContainer
-        title="Personal Information"
-        description="Add your personal and contact details so employers can easily identify and reach you."
+        title={t("personalInfo.title")}
+        description={t("personalInfo.description")}
         summaryMode
       >
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-x-5 sm:gap-y-4">
@@ -182,11 +184,10 @@ const PersonalDetail = ({
       <div className="mb-5 flex items-center justify-between gap-4">
         <div>
           <h1 className="text-lg font-semibold text-slate-900">
-            Personal Information
+            {t("personalInfo.title")}
           </h1>
           <p className="mt-2 max-w-2xl text-sm leading-5 text-slate-600 sm:text-base">
-            Add your personal and contact details so employers can easily
-            identify and reach you.
+            {t("personalInfo.description")}
           </p>
         </div>
       </div>

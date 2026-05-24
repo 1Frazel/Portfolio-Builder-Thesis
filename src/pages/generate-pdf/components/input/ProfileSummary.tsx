@@ -1,4 +1,5 @@
 import type React from "react";
+import { useTranslation } from "react-i18next";
 import { ExpandableSectionContainer } from "./ExpandableSectionContainer";
 import TextArea from "./TextArea";
 import { useDebouncedCallback } from "use-debounce";
@@ -12,6 +13,8 @@ const ProfileSummary = ({
   setProfileSummary: React.Dispatch<React.SetStateAction<string>>;
   summaryMode?: boolean;
 }) => {
+  const { t } = useTranslation("creationPage");
+
   const handleEditProfileSummary = useDebouncedCallback((input) => {
     setProfileSummary(input);
   }, 500);
@@ -21,14 +24,14 @@ const ProfileSummary = ({
 
   return (
     <ExpandableSectionContainer
-      title="Profile Summary"
-      description="Write a concise, compelling overview of your professional identity. Highlight your core expertise, key accomplishments, and immediate career objectives in three to four sentences."
+      title={t("profileSummary.title")}
+      description={t("profileSummary.description")}
       summaryMode={summaryMode}
     >
       <TextArea
         defaultValue={profileSummary}
         onChange={(input) => handleEditProfileSummary(input)}
-        label="Description"
+        label={t("profileSummary.labels.description")}
         inputClass={fieldInputClass}
       />
     </ExpandableSectionContainer>

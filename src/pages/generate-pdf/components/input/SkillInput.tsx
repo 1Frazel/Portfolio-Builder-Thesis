@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import InputFieldWrapper from "./InputFieldWrapper";
 import ResponsiveDropdown from "../../../../shared/components/ResponsiveDropdown";
 
@@ -8,35 +9,37 @@ const SkillInput = ({
   defaultValue: string;
   onChange: (input: string) => void;
 }) => {
+  const { t } = useTranslation("creationPage");
+
   const listSkills = [
     {
-      label: "Novice",
+      label: t("skills.levels.novice", "Novice"),
       value: "Novice",
     },
     {
-      label: "Basic",
+      label: t("skills.levels.basic", "Basic"),
       value: "Basic",
     },
     {
-      label: "Intermediate",
+      label: t("skills.levels.intermediate", "Intermediate"),
       value: "Intermediate",
     },
     {
-      label: "Experienced",
+      label: t("skills.levels.experienced", "Experienced"),
       value: "Experienced",
     },
     {
-      label: "Expert",
+      label: t("skills.levels.expert", "Expert"),
       value: "Expert",
     },
   ];
 
   return (
-    <InputFieldWrapper label="Skills Expertise">
+    <InputFieldWrapper label={t("skills.labels.skillExpertise", "Skill Expertise")}>
       <ResponsiveDropdown
         options={listSkills}
         value={defaultValue}
-        placeholder="Select expertise"
+        placeholder={t("skills.placeholderExpertise", "Select expertise level")}
         onChange={onChange}
       />
     </InputFieldWrapper>

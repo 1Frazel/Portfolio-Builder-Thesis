@@ -1,4 +1,5 @@
 import { useDebouncedCallback } from "use-debounce";
+import { useTranslation } from "react-i18next";
 import InputField from "./InputField";
 import { ExpandableSectionItem } from "./ExpandableSectionContainer";
 
@@ -24,6 +25,8 @@ const LanguagesSection = ({
   handleSectionUp: (currentIndex: number) => void;
   handleSectionDown: (currentIndex: number) => void;
 }) => {
+  const { t } = useTranslation("creationPage");
+
   const handleTextChanges = useDebouncedCallback(
     (id: number, key: string, value: string) => {
       handleEditLanguages(id, key, value);
@@ -43,7 +46,7 @@ const LanguagesSection = ({
           onChange={(input: string) => {
             handleTextChanges(language.id, "name", input);
           }}
-          label="Languages"
+          label={t("additionalSectionLanguages.labels.name")}
           inputClass={fieldInputClass}
         />
       ),
@@ -63,7 +66,7 @@ const LanguagesSection = ({
 
   return (
     <ExpandableSectionItem
-      title={language.name ? language.name : "(Not Specified)"}
+      title={language.name ? language.name : t("additionalSectionLanguages.default")}
       description={language.expertise && language.expertise}
       onDelete={() => handleDeleteLanguages(language.id)}
       onMoveUp={handleSectionUp}

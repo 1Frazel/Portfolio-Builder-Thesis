@@ -13,10 +13,14 @@ const resources = {
   en: {
     common: translationEN.common,
     homepage: translationEN.homepage,
+    creationPage: translationEN.creationPage,
+    resumeCheckerPage: translationEN.resumeCheckerPage,
   },
   id: {
     common: translationID.common,
     homepage: translationID.homepage,
+    creationPage: translationID.creationPage,
+    resumeCheckerPage: translationID.resumeCheckerPage,
   },
 };
 
@@ -24,7 +28,7 @@ i18n.use(initReactI18next).init({
   resources,
   lng: savedLanguage?.startsWith("en") ? "en" : "id",
   fallbackLng: "id",
-  ns: ["common", "homepage"],
+  ns: ["common", "homepage", "creationPage", "resumeCheckerPage"],
   defaultNS: "common",
   interpolation: {
     escapeValue: false,

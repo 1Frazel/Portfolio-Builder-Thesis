@@ -3,10 +3,12 @@ import { pdf } from "@react-pdf/renderer";
 import { useToast } from "../../shared/hooks/useToast";
 import type { CVDocument } from "../../shared/utils/cvService";
 import { buildTemplateDocument } from "../../shared/utils/templateDocument";
+import { useTranslation } from "react-i18next";
 
 const PreviewDownloadBtn = ({ cv }: { cv: CVDocument }) => {
   const { showToast } = useToast();
   const [isPreparing, setIsPreparing] = useState(false);
+  const { t } = useTranslation("creationPage");
 
   const handleClick = async () => {
     if (isPreparing) return;
@@ -33,7 +35,7 @@ const PreviewDownloadBtn = ({ cv }: { cv: CVDocument }) => {
       setTimeout(() => URL.revokeObjectURL(url), 20000);
     } catch (err) {
       const message =
-        err instanceof Error ? err.message : "Failed to prepare preview";
+        err instanceof Error ? err.message : t("main.cvList.failedToLoad");
       showToast(message, "error");
     } finally {
       setIsPreparing(false);
@@ -46,7 +48,7 @@ const PreviewDownloadBtn = ({ cv }: { cv: CVDocument }) => {
       className="flex-1 rounded-md border border-[#2951A3] px-4 py-2 text-sm font-semibold text-[#2951A3] transition hover:bg-[#eef3ff]"
       disabled={isPreparing}
     >
-      {isPreparing ? "Preparing..." : "Preview"}
+      {isPreparing ? t("main.previewButton.loading") : t("main.previewButton.preview")}
     </button>
   );
 };

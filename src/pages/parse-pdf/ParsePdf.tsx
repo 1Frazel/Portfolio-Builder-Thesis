@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "../../shared/components/Header";
 import FileInput from "../../shared/components/FileInput";
 import checkCv, { type SectionData } from "./utils/checkCv";
+import { useTranslation } from "react-i18next";
 
 interface CvReport {
   rawText: string;
@@ -13,6 +14,7 @@ interface CvReport {
 const ParsePdf = () => {
   const [cvReport, setCvReport] = useState<CvReport | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { t } = useTranslation("resumeCheckerPage");
 
   const handleChange = async (fileUrl: string) => {
     try {
@@ -71,14 +73,14 @@ const ParsePdf = () => {
 
               {/* Text */}
               <p className="text-center text-gray-700 font-medium text-sm md:text-base mb-4">
-                Upload your resume here
+                {t("uploadBox.uploadText")}
               </p>
               <p className="text-center text-gray-500 text-xs md:text-sm mb-6">
-                (PDF only)
+                {t("uploadBox.pdfOnly")}
               </p>
               {/* File Input */}
               <FileInput
-                title="Upload"
+                title={t("uploadBox.uploadButton")}
                 acceptedFormat=".pdf"
                 handleClick={handleChange}
                 disabled={isLoading}
@@ -90,7 +92,7 @@ const ParsePdf = () => {
           <div className="flex flex-col gap-4">
             {/* Resume Checker Header */}
             <div className="bg-[#2951A3] text-white rounded-lg p-4 md:p-6 flex items-center justify-between">
-              <h2 className="text-lg md:text-xl font-bold">Resume Checker</h2>
+              <h2 className="text-lg md:text-xl font-bold">{t("header.title")}</h2>
             </div>
 
             {/* Description / Recommendations Section */}
@@ -98,7 +100,7 @@ const ParsePdf = () => {
               {cvReport && !isLoading ? (
                 <div className="space-y-3">
                   <h4 className="font-semibold text-gray-800 text-sm md:text-base">
-                    Recommendations:
+                    {t("recommendations.title")}
                   </h4>
                   <ul className="space-y-2">
                     {cvReport?.recommendations.map((recommendation, index) => (
@@ -118,18 +120,14 @@ const ParsePdf = () => {
                 </div>
               ) : (
                 <p className="text-gray-700 text-sm md:text-base leading-relaxed">
-                  Test your resume against our ATS parsing engine. Upload your
-                  PDF to verify that all essential sections are correctly
-                  formatted and machine-readable. Our system will flag any
-                  missing or unreadable categories, ensuring your qualifications
-                  are flawlessly extracted before you submit your application.
+                  {t("header.description")}
                 </p>
               )}
             </div>
 
             {/* Checking Result Header */}
             <div className="bg-[#2951A3] text-white rounded-lg p-4 md:p-6 flex items-center justify-between">
-              <h3 className="text-lg md:text-xl font-bold">Checking Result</h3>
+              <h3 className="text-lg md:text-xl font-bold">{t("results.title")}</h3>
             </div>
 
             {/* Results Content */}
@@ -141,7 +139,7 @@ const ParsePdf = () => {
                     role="status"
                     aria-label="loading"
                   />
-                  <p className="text-gray-600">Analyzing your resume...</p>
+                  <p className="text-gray-600">{t("results.analyzing")}</p>
                 </div>
               </div>
             ) : cvReport ? (
@@ -163,12 +161,12 @@ const ParsePdf = () => {
                             </p>
                             {section.status === "missing" && (
                               <p className="text-xs text-gray-500">
-                                This section is not detected
+                                {t("results.missingText")}
                               </p>
                             )}
                             {section.status === "header-only" && (
                               <p className="text-xs text-gray-500">
-                                This section content is not detected
+                                {t("results.headerOnlyText")}
                               </p>
                             )}
                           </div>
@@ -187,7 +185,7 @@ const ParsePdf = () => {
               </div>
             ) : (
               <div className="bg-white rounded-lg p-6 text-center">
-                <p className="text-gray-600">Upload a resume to get started</p>
+                <p className="text-gray-600">{t("results.uploadPrompt")}</p>
               </div>
             )}
 
@@ -195,7 +193,7 @@ const ParsePdf = () => {
             {cvReport && !isLoading && (
               <div className="bg-[#2951A3] text-white rounded-lg p-6 md:p-8 text-center">
                 <h3 className="text-xl md:text-2xl font-bold">
-                  Resume Score: {Math.round(cvReport.score)}
+                  {t("results.scoreText")}: {Math.round(cvReport.score)}
                 </h3>
               </div>
             )}
