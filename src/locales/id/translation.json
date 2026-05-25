@@ -93,6 +93,15 @@
       "createButton": "Buat CV Baru",
       "loading": "Memuat daftar CV...",
       "empty": "Anda belum memiliki CV. Klik tombol di atas untuk membuat CV pertama Anda!",
+      "fetching": "Mengambil data CV saat ini...",
+      "toast":{
+        "personalData": "Harap isi Posisi Pekerjaan, Nama Depan, dan Email sebelum melanjutkan.",
+        "formData": "Gagal memuat CV",
+        "resumeTitle": "Harap masukkan judul CV",
+        "saveSuccess": "CV berhasil disimpan!",
+        "saveFailed": "Gagal menyimpan CV. Silakan coba lagi nanti.",
+        "fetching": "Mengambil data CV saat ini..."
+      },
       "previewButton": {
         "preview": "Pratinjau",
         "failed": "Gagal memuat pratinjau. Silakan coba lagi nanti.",
@@ -125,7 +134,8 @@
         },
         "professional": {
             "description": "CV modern dengan struktur visual yang rapi dan aksen warna yang dapat disesuaikan untuk memperkuat keterbacaan dan personal branding. Tetap mempertahankan standar ATS, template ini menggunakan tata letak bilah sisi (sidebar) untuk menyusun informasi penting seperti keahlian dan kontak dengan lebih efektif. Cocok bagi Anda yang menginginkan keseimbangan antara kesan profesional dan estetika visual.",
-            "modalDesc": "Tata letak dua kolom yang elegan dengan profil di bilah sisi."
+            "modalDesc": "Tata letak dua kolom yang elegan dengan profil di bilah sisi.",
+            "sidebarColor": "Warna Aksen CV"
         }
         }
     },
@@ -152,29 +162,29 @@
       "defaultJobTitle": "(Posisi Belum Diisi)",
       "labels": {
         "jobTitle": "Posisi / Jabatan",
-        "employer": "Nama Perusahaan",
+        "employer": "Nama Tempat Bekerja",
         "startEndDate": "Bulan & Tahun Bekerja",
-        "address": "Lokasi",
+        "address": "Kota",
         "description": "Deskripsi Pekerjaan",
         "placeholder": "BB / TTTT"
       },
-      "addButton": "+ Tambah Pengalaman",
+      "addButton": "Tambah Pengalaman",
       "nextButton": "Selanjutnya: Pendidikan",
       "backButton": "Kembali"
     },
     "education": {
       "title": "Pendidikan",
       "description": "Cantumkan latar belakang akademik Anda. Jika Anda baru lulus (Fresh Graduate), Anda bisa menambahkan aktivitas organisasi atau nilai IPK di bagian deskripsi.",
-      "defaultDegree": "(Gelar Belum Diisi)",
+      "defaultDegree": "(Pendidikan Belum Diisi)",
       "labels": {
-        "degree": "Gelar / Jurusan",
+        "degree": "Gelar / Jurusan (Jika ada)",
         "institution": "Nama Institusi / Universitas",
         "startEndDate": "Bulan & Tahun Studi",
         "city": "Kota",
         "description": "Deskripsi Tambahan",
         "placeholder": "BB / TTTT"
       },
-      "addButton": "+ Tambah Pendidikan",
+      "addButton": "Tambah Pendidikan",
       "nextButton": "Selanjutnya: Keahlian",
       "backButton": "Kembali"
     },
@@ -187,7 +197,7 @@
         "skillExpertise": "Tingkat Kemahiran"
       },
       "placeholderExpertise": "Pilih tingkat kemahiran",
-      "addButton": "+ Tambah Keahlian",
+      "addButton": "Tambah Keahlian",
       "nextButton": "Selanjutnya: Ringkasan Profil",
       "backButton": "Kembali",
       "levels": {
@@ -204,11 +214,11 @@
       "labels": {
         "description": "Deskripsi Diri"
       },
-      "nextButton": "Selanjutnya: Bagian Tambahan",
+      "nextButton": "Selanjutnya: Data Pendukung",
       "backButton": "Kembali"
     },
     "additionalSections": {
-      "title": "Bagian Tambahan (Opsional)",
+      "title": "Data Pendukung",
       "description": "Perkuat CV Anda dengan menyertakan sertifikasi, pelatihan, atau kemampuan bahasa asing yang relevan dengan pekerjaan yang dilamar.",
       "labels": {
         "language": "Bahasa",
@@ -217,7 +227,7 @@
       },
       "backButton": "Kembali",
       "nextButton": "Selanjutnya: Selesai",
-      "empty": "Belum ada bagian tambahan yang dipilih.",
+      "empty": "Belum ada data pendukung yang dipilih.",
       "notFound": "Bagian tidak ditemukan."
     },
     "additionalSectionLanguages": {
@@ -229,7 +239,7 @@
         "selectLevel": "Tingkat Kefasihan",
         "level": "Tingkat Kefasihan"
       },
-      "addButton": "+ Tambah Bahasa",
+      "addButton": "Tambah Bahasa",
       "backButton": "Kembali",
       "addAnotherSectionButton": "Kembali ke Pilihan Bagian",
       "levels": {
@@ -237,7 +247,7 @@
         "conversational": "Percakapan Umum",
         "professional": "Profesional",
         "fluent": "Sangat Fasih",
-        "native": "Penutur Asli (Native)"
+        "native": "Bahasa Ibu"
       },
       "placeholder": "Pilih Tingkat"
     },
@@ -251,13 +261,13 @@
         "startEndDate": "Tanggal Dikeluarkan & Kedaluwarsa",
         "placeholder": "BB / TTTT"
       },
-      "addButton": "+ Tambah Sertifikasi",
+      "addButton": "Tambah Sertifikasi",
       "backButton": "Kembali",
       "addAnotherSectionButton": "Kembali ke Pilihan Bagian"
     },
     "additionalSectionProfessionalTraining": {
       "title": "Pelatihan Profesional",
-      "description": "Cantumkan kelas *bootcamp*, *workshop*, atau pelatihan intensif yang pernah Anda ikuti untuk menunjang kompetensi karir Anda.",
+      "description": "Cantumkan kelas bootcamp, workshop, atau pelatihan intensif yang pernah Anda ikuti untuk menunjang kompetensi karir Anda.",
       "default": "(Pelatihan Belum Diisi)",
       "labels": {
         "courseName": "Nama Pelatihan",
@@ -265,7 +275,7 @@
         "startEndDate": "Periode Pelatihan",
         "placeholder": "BB / TTTT"
       },
-      "addButton": "+ Tambah Pelatihan",
+      "addButton": "Tambah Pelatihan",
       "backButton": "Kembali",
       "addAnotherSectionButton": "Kembali ke Pilihan Bagian"
     },
@@ -281,7 +291,7 @@
       "hideButton": "Sembunyikan",
       "backButton": "Kembali",
       "finishButton": "Selesaikan CV",
-      "emptyAdditionalSection": "Tidak ada bagian tambahan yang dimasukkan."
+      "emptyAdditionalSection": "Tidak ada data pendukung yang dimasukkan."
     },
     "general": {
       "now": "Sekarang",
@@ -303,7 +313,7 @@
     "recommendations": {
       "title": "Rekomendasi Perbaikan:",
       "missingSection": "Kami tidak menemukan bagian '{{sectionName}}'. Pastikan Anda menggunakan judul bagian yang umum.",
-      "headerOnlySection": "Bagian '{{sectionName}}' terdeteksi, namun isinya tidak dapat terbaca. Hindari penggunaan tabel atau kolom."
+      "headerOnlySection": "Bagian '{{sectionName}}' terdeteksi, namun isinya tidak dapat terbaca. Tambahkan `{{sectionName}}` lainnya."
     },
     "results": {
       "title": "Hasil Analisis CV",

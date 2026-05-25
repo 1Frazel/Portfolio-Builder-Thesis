@@ -40,7 +40,6 @@ const LanguageSwitcher = ({ className = "" }: { className?: string }) => {
 
   const handleLanguageChange = async (language: "id" | "en") => {
     await i18n.changeLanguage(language);
-    globalThis.location.reload();
   };
 
   return (
@@ -101,9 +100,6 @@ const Header = () => {
 
   useEffect(() => {
     if (!isStickyPage) {
-      setShowStickyHeader(false);
-      setPlayStickyAnimation(false);
-
       if (stickyAnimationTimerRef.current !== null) {
         globalThis.clearTimeout(stickyAnimationTimerRef.current);
         stickyAnimationTimerRef.current = null;

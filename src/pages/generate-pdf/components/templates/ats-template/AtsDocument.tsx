@@ -66,6 +66,11 @@ const AtsDocument = ({
   );
 };
 
+const hasText = (value?: string) => Boolean(value?.trim());
+
+const joinText = (parts: Array<string | undefined>, separator = ", ") =>
+  parts.filter((part) => hasText(part)).map((part) => part!.trim()).join(separator);
+
 const PersonalDetail = ({
   personalDetail,
 }: {
@@ -83,6 +88,13 @@ const PersonalDetail = ({
     address,
   } = personalDetail;
 
+  const fullName = joinText([firstName, lastName]);
+  const headerText = joinText([fullName, jobTarget]);
+  const cityPostal = joinText([cityState, postalCode], " ");
+  const contactText = joinText([address, cityPostal, country, phone, email]);
+
+  if (!headerText && !contactText) return null;
+
   return (
     <>
       <View
@@ -97,7 +109,9 @@ const PersonalDetail = ({
             atsStyles.fontHeader,
             { fontWeight: "bold", textAlign: "center" },
           ]}
-        >{`${firstName} ${lastName}, ${jobTarget}`}</Text>
+        >
+          {headerText}
+        </Text>
       </View>
       <View
         style={[
@@ -112,7 +126,9 @@ const PersonalDetail = ({
       >
         <Text
           style={[atsStyles.fontParagraph, { textAlign: "center" }]}
-        >{`${address}, ${cityState} ${postalCode}, ${country}, ${phone}, ${email}`}</Text>
+        >
+          {contactText}
+        </Text>
       </View>
       <Divider />
     </>
@@ -161,16 +177,28 @@ const WorkExperience = ({
   const defaultWork = [DEFAULT_WORK_EXPERIENCES];
   if (!isDifferent(workExperiences, defaultWork)) return null;
 
+  const validWorkExperiences = workExperiences.filter(
+    (experience) =>
+      hasText(experience.jobTitle) ||
+      hasText(experience.employer) ||
+      hasText(experience.address) ||
+      hasText(experience.description) ||
+      hasText(experience.startAt) ||
+      hasText(experience.endsAt),
+  );
+
+  if (validWorkExperiences.length === 0) return null;
+
   return (
     <>
       <SectionDetailsWrapper title="EMPLOYMENT HISTORY">
-        {workExperiences.map((experience) => {
+        {validWorkExperiences.map((experience) => {
           return (
             <SectionDetails
               key={experience.id}
               startAt={formatDate(experience.startAt)}
               endsAt={formatDate(experience.endsAt, true)}
-              title={`${experience.jobTitle}, ${experience.employer}`}
+              title={joinText([experience.jobTitle, experience.employer])}
               address={experience.address}
               description={experience.description}
             />
@@ -186,16 +214,28 @@ const Education = ({ educations }: { educations: IEducation[] }) => {
   const defaultEd = [DEFAULT_EDUCATION];
   if (!isDifferent(educations, defaultEd)) return null;
 
+  const validEducations = educations.filter(
+    (education) =>
+      hasText(education.degree) ||
+      hasText(education.school) ||
+      hasText(education.city) ||
+      hasText(education.description) ||
+      hasText(education.startAt) ||
+      hasText(education.endsAt),
+  );
+
+  if (validEducations.length === 0) return null;
+
   return (
     <>
       <SectionDetailsWrapper title="EDUCATION">
-        {educations.map((education) => {
+        {validEducations.map((education) => {
           return (
             <SectionDetails
               key={education.id}
               startAt={formatDate(education.startAt)}
               endsAt={formatDate(education.endsAt, true)}
-              title={`${education.degree}, ${education.school}`}
+              title={joinText([education.degree, education.school])}
               address={education.city}
               description={education.description}
             />
@@ -211,11 +251,17 @@ const Skill = ({ skills }: { skills: ISkill[] }) => {
   const defaultSkills = [DEFAULT_SKILLS];
   if (!isDifferent(skills, defaultSkills)) return null;
 
+  const validSkills = skills.filter(
+    (skill) => hasText(skill.name) || hasText(skill.expertise),
+  );
+
+  if (validSkills.length === 0) return null;
+
   return (
     <>
       <SectionWrapper title="SKILLS">
         <SectionContainer>
-          {skills.map((skill) => {
+          {validSkills.map((skill) => {
             return (
               <Section
                 key={skill.id}
@@ -235,11 +281,17 @@ const Language = ({ languages }: { languages: ILanguages[] }) => {
   const defaultLang = [DEFAULT_LANGUAGES];
   if (!isDifferent(languages, defaultLang)) return null;
 
+  const validLanguages = languages.filter(
+    (language) => hasText(language.name) || hasText(language.expertise),
+  );
+
+  if (validLanguages.length === 0) return null;
+
   return (
     <>
       <SectionWrapper title="LANGUAGES">
         <SectionContainer>
-          {languages.map((language) => {
+          {validLanguages.map((language) => {
             return (
               <Section
                 key={language.id}
@@ -263,16 +315,26 @@ const ProfessionalTraining = ({
   const defaultProf = [DEFAULT_PROFESSIONAL_TRAINING];
   if (!isDifferent(professionalTraining, defaultProf)) return null;
 
+  const validProfessionalTraining = professionalTraining.filter(
+    (training) =>
+      hasText(training.courseName) ||
+      hasText(training.institution) ||
+      hasText(training.startAt) ||
+      hasText(training.endsAt),
+  );
+
+  if (validProfessionalTraining.length === 0) return null;
+
   return (
     <>
       <SectionDetailsWrapper title="COURSES">
-        {professionalTraining.map((training) => {
+        {validProfessionalTraining.map((training) => {
           return (
             <SectionDetails
               key={training.id}
               startAt={formatDate(training.startAt)}
               endsAt={formatDate(training.endsAt, true)}
-              title={`${training.courseName}, ${training.institution}`}
+              title={joinText([training.courseName, training.institution])}
             />
           );
         })}
@@ -290,16 +352,26 @@ const LicensesCertifications = ({
   const defaultLic = [DEFAULT_LICENSES_CERTIFICATION];
   if (!isDifferent(licensesCertifications, defaultLic)) return null;
 
+  const validLicenses = licensesCertifications.filter(
+    (license) =>
+      hasText(license.name) ||
+      hasText(license.issuer) ||
+      hasText(license.startAt) ||
+      hasText(license.endsAt),
+  );
+
+  if (validLicenses.length === 0) return null;
+
   return (
     <>
       <SectionDetailsWrapper title="LICENSES">
-        {licensesCertifications.map((license) => {
+        {validLicenses.map((license) => {
           return (
             <SectionDetails
               key={license.id}
               startAt={formatDate(license.startAt)}
               endsAt={formatDate(license.endsAt, true)}
-              title={`${license.name}, ${license.issuer}`}
+              title={joinText([license.name, license.issuer])}
             />
           );
         })}
