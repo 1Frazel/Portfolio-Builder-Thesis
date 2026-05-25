@@ -7,7 +7,7 @@
       "checker": "Resume Checker"
     },
     "auth": {
-      "signIn": "Sign In",
+      "signIn": "Sign In With Google",
       "signOut": "Sign Out",
       "signInToCreateResumes": "Sign in to create resumes"
     },

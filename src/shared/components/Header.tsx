@@ -1,9 +1,12 @@
 import { Link, useLocation } from "react-router";
 import HomeIcon from "../../icons/HomeIcon";
-import Button from "./Button";
 import useIsMobile from "../hooks/useIsMobile";
 import HomeNav from "../../icons/HomeNav";
+<<<<<<< HEAD
 import { useEffect, useRef, useState } from "react";
+=======
+import { useState, type ReactNode } from "react";
+>>>>>>> d2439e4 (feat: add google logo on auth button)
 import HomeCancel from "../../icons/HomeCancel";
 import Profile from "../../icons/Profile";
 import { useAuth } from "../hooks/useAuth";
@@ -43,7 +46,9 @@ const LanguageSwitcher = ({ className = "" }: { className?: string }) => {
   };
 
   return (
-    <div className={`shrink-0 rounded-full bg-black/20 p-1 shadow-sm ${className}`}>
+    <div
+      className={`shrink-0 rounded-full bg-black/20 p-1 shadow-sm ${className}`}
+    >
       <div className="grid grid-cols-2 gap-1">
         <button
           type="button"
@@ -69,6 +74,115 @@ const LanguageSwitcher = ({ className = "" }: { className?: string }) => {
         </button>
       </div>
     </div>
+  );
+};
+
+const GoogleMark = ({ className = "h-5 w-5" }: { className?: string }) => (
+  <svg
+    aria-hidden="true"
+    viewBox="0 0 24 24"
+    className={`${className} shrink-0`}
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M21.8 12.2c0-.7-.1-1.3-.2-2H12v3.8h5.5c-.3 1.5-1.2 2.7-2.5 3.4v2.8h4a9.7 9.7 0 0 0 2.8-8Z"
+      fill="#4285F4"
+    />
+    <path
+      d="M12 22c2.7 0 5-.9 6.7-2.5l-4-2.8c-1.1.7-2.4 1.1-3.7 1.1A6.1 6.1 0 0 1 6 14l-4 3a10 10 0 0 0 10 5Z"
+      fill="#34A853"
+    />
+    <path d="m6 14-4 3A10 10 0 0 1 2 7l4 3c-.4 1-.4 2 0 3Z" fill="#FBBC05" />
+    <path
+      d="M12 5.9c1.5 0 2.8.5 3.9 1.5l2.9-2.9A10 10 0 0 0 2 10l4 3a6.1 6.1 0 0 1 6-7.1Z"
+      fill="#EA4335"
+    />
+  </svg>
+);
+
+const LogoutMark = ({ className = "h-5 w-5" }: { className?: string }) => (
+  <svg
+    aria-hidden="true"
+    viewBox="0 0 24 24"
+    className={`${className} shrink-0`}
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M14 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-2"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="m11 12 9 0"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+    <path
+      d="m16 9 4 3-4 3"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+const DesktopAuthButton = ({
+  text,
+  handleClick,
+  icon,
+  loading,
+  loadingText,
+}: {
+  text: string;
+  handleClick: () => void;
+  icon?: ReactNode;
+  loading?: boolean;
+  loadingText?: string;
+}) => {
+  return (
+    <button
+      type="button"
+      onClick={loading ? undefined : handleClick}
+      disabled={loading}
+      className={`inline-flex items-center justify-center gap-2 rounded-full bg-[#214182] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#284ca0] focus:outline-none focus:ring-2 focus:ring-white/30 md:text-base ${loading ? "cursor-not-allowed opacity-70" : "cursor-pointer"} h-[44px] `}
+    >
+      {loading ? (
+        <>
+          <svg
+            className="h-4 w-4 animate-spin text-white"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            />
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 0 1 8-8v4a4 4 0 0 0-4 4H4Z"
+            />
+          </svg>
+          <span>{loadingText ?? "Loading..."}</span>
+        </>
+      ) : (
+        <>
+          {icon}
+          <span>{text}</span>
+        </>
+      )}
+    </button>
   );
 };
 
@@ -241,19 +355,19 @@ const DesktopHeader = ({
               <p className="text-white text-sm">
                 {user.displayName ?? user.email}
               </p>
-              <Button
+              <DesktopAuthButton
                 text={t("auth.signOut")}
-                buttonClass="text-white bg-[#FF9900]"
                 handleClick={() => handleLogout()}
+                icon={<LogoutMark />}
               />
             </div>
           ) : (
-            <Button
-              text={loading ? t("loading") : t("auth.signIn")}
-              buttonClass="text-white bg-[#FF9900]"
+            <DesktopAuthButton
+              text={t("auth.signIn")}
               handleClick={() => handleLogin()}
-              disabled={loading}
-              isLoading={loading}
+              icon={<GoogleMark />}
+              loading={loading}
+              loadingText={t("loading")}
             />
           )}
         </div>
@@ -329,7 +443,7 @@ const MobileHeader = ({
             )}
             {user ? (
               <div className="flex flex-col">
-                <p className="text-xl text-[#2951A3] text-bold">
+                <p className="text-base font-semibold text-[#2951A3] sm:text-lg">
                   {user.displayName ?? user.email}
                 </p>
                 <button
@@ -344,7 +458,7 @@ const MobileHeader = ({
                 onClick={() => !loading && handleLogin()}
                 disabled={loading}
                 aria-disabled={loading}
-                className={`text-xl text-[#2951A3] text-bold ${loading ? "opacity-60 pointer-events-none" : ""}`}
+                className={`flex items-center gap-2 text-base font-semibold text-[#2951A3] sm:text-lg ${loading ? "opacity-60 pointer-events-none" : ""}`}
               >
                 {loading ? (
                   <span className="flex items-center gap-2">
@@ -371,7 +485,10 @@ const MobileHeader = ({
                     {t("auth.signIn")}
                   </span>
                 ) : (
-                  t("auth.signIn")
+                  <>
+                    <GoogleMark className="h-4 w-4" />
+                    <span>{t("auth.signIn")}</span>
+                  </>
                 )}
               </button>
             )}
@@ -420,7 +537,7 @@ const MobileHeader = ({
                         ></path>
                       </svg>
                     )}
-                      {headerTitle}
+                    {headerTitle}
                   </button>
                 );
               }
