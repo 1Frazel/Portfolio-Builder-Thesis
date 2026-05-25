@@ -27,7 +27,9 @@
       "sentence3": "hanya dengan satu klik.",
       "button1": "Buat Sekarang!",
       "button2": "Pelajari Lebih Lanjut",
-      "imageAlt": "Pratinjau pembuat CV"
+      "imageAlt": "Pratinjau pembuat CV",
+      "buttonLoggedIn": "Buat Sekarang",
+      "buttonLoggedOut": "Masuk Dengan Google"
     },
     "atsSection": {
       "label": "Apa itu ATS?"
