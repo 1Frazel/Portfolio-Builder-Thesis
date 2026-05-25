@@ -8,6 +8,9 @@ const InputField = ({
   containerClass = "",
   labelClass = "",
   inputClass = "",
+  sanitizeValue,
+  inputMode,
+  pattern,
 }: {
   defaultValue: string;
   onChange: (input: string) => void;
@@ -16,6 +19,9 @@ const InputField = ({
   containerClass?: string;
   labelClass?: string;
   inputClass?: string;
+  sanitizeValue?: (input: string) => string;
+  inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
+  pattern?: string;
 }) => {
   return (
     <InputFieldWrapper
@@ -25,10 +31,22 @@ const InputField = ({
     >
       <input
         type="text"
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => {
+          const nextValue = sanitizeValue
+            ? sanitizeValue(e.target.value)
+            : e.target.value;
+
+          if (sanitizeValue) {
+            e.currentTarget.value = nextValue;
+          }
+
+          onChange(nextValue);
+        }}
         defaultValue={defaultValue}
         className={`bg-[#eff2f9] rounded-md ${inputClass}`}
         placeholder={placeholder}
+        inputMode={inputMode}
+        pattern={pattern}
       />
     </InputFieldWrapper>
   );

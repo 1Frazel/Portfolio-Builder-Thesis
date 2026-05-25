@@ -15,6 +15,9 @@ const SectionDetails = ({
   address?: string;
   description?: string;
 }) => {
+  const hasAddress = Boolean(address?.trim());
+  const hasDescription = Boolean(description?.trim());
+
   return (
     <View
       style={{
@@ -42,7 +45,7 @@ const SectionDetails = ({
           <Text style={[atsStyles.fontParagraph, { width: "68%" }]}>
             {title}
           </Text>
-          {address && (
+          {hasAddress && (
             <Text
               style={[
                 atsStyles.fontParagraph,
@@ -53,7 +56,7 @@ const SectionDetails = ({
             </Text>
           )}
         </View>
-        {description && (
+        {hasDescription && (
           <Text
             style={[atsStyles.fontDescriptionParagraph, { marginTop: "5px" }]}
           >

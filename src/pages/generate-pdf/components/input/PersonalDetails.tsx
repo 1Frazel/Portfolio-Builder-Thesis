@@ -90,6 +90,9 @@ const PersonalDetail = ({
           }}
           label={t("personalInfo.labels.phone")}
           inputClass={fieldInputClass}
+          sanitizeValue={(input: string) => input.replace(/\D/g, "")}
+          inputMode="numeric"
+          pattern="[0-9]*"
         />
       ),
     },
@@ -183,7 +186,7 @@ const PersonalDetail = ({
     <section className="rounded-2xl border border-slate-200 bg-white px-4 py-5 shadow-lg sm:px-6 lg:px-8 lg:py-6 h-full">
       <div className="mb-5 flex items-center justify-between gap-4">
         <div>
-          <h1 className="text-lg font-semibold text-slate-900">
+          <h1 className="text-[28px] font-semibold text-slate-900">
             {t("personalInfo.title")}
           </h1>
           <p className="mt-2 max-w-2xl text-sm leading-5 text-slate-600 sm:text-base">

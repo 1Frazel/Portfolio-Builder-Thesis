@@ -10,11 +10,13 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router";
 import { useToast } from "../../../../../shared/hooks/useToast";
 import { getCV } from "../../../../../shared/utils/cvService";
+import { useTranslation } from "react-i18next";
 
 const AtsTemplate = () => {
   const navigate = useNavigate();
   const { id: resumeId } = useParams<{ id: string }>();
   const [searchParams] = useSearchParams();
+  const { t } = useTranslation("creationPage");
   // Development-only toggle: set true manually when you want mock data
   const USE_MOCK_DATA = false;
   const { showToast } = useToast();
@@ -28,7 +30,6 @@ const AtsTemplate = () => {
     activeSectionIndex,
     sectionLength,
     handlePreviousSection,
-    handleNextSection,
     setActiveSectionIndex,
     activeAdditionalSection,
     handleAdditionalSection,
@@ -42,6 +43,46 @@ const AtsTemplate = () => {
   const [isLoadingCurrentCV, setIsLoadingCurrentCV] = useState(
     Boolean(resumeId),
   );
+
+  const isPersonalDetailComplete =
+    formData.personalDetail.jobTarget.trim() !== "" &&
+    formData.personalDetail.firstName.trim() !== "" &&
+    formData.personalDetail.email.trim() !== "";
+
+  const canLeavePersonalDetail = (targetIndex: number) => {
+    if (activeSectionIndex !== 0 || targetIndex <= activeSectionIndex) {
+      return true;
+    }
+
+    if (!isPersonalDetailComplete) {
+      showToast(
+        t("main.toast.personalData"),
+        "error",
+      );
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleValidatedNextSection = () => {
+    if (!canLeavePersonalDetail(activeSectionIndex + 1)) {
+      return;
+    }
+
+    setActiveSectionIndex((prev) => prev + 1);
+  };
+
+  const handleStepClick = (index: number) => {
+    if (
+      index >= 0 &&
+      index <= activeSectionIndex + 1 &&
+      index !== sectionLength &&
+      canLeavePersonalDetail(index)
+    ) {
+      setActiveSectionIndex(index);
+    }
+  };
 
   useEffect(() => {
     const loadExistingCV = async () => {
@@ -59,7 +100,7 @@ const AtsTemplate = () => {
         setSelectedTemplate(cv.template || "ats");
       } catch (err) {
         const message =
-          err instanceof Error ? err.message : "Failed to load resume";
+          err instanceof Error ? err.message : t("main.toast.formData");
         showToast(message, "error");
         navigate("/creation");
       } finally {
@@ -75,7 +116,7 @@ const AtsTemplate = () => {
   const isMobile = useIsMobile();
 
   if (isLoadingCurrentCV) {
-    return <LoadingPage message="Fetching current CV data..." />;
+    return <LoadingPage message={t("main.toast.fetching")} />;
   }
 
   return (
@@ -116,15 +157,7 @@ const AtsTemplate = () => {
         <ProgressBar
           steps={listAtsTemplateSection}
           currentStepIndex={activeSectionIndex}
-          onStepClick={(index) => {
-            if (
-              index >= 0 &&
-              index <= activeSectionIndex + 1 &&
-              index !== sectionLength
-            ) {
-              setActiveSectionIndex(index);
-            }
-          }}
+          onStepClick={handleStepClick}
         />
       )}
 
@@ -139,7 +172,7 @@ const AtsTemplate = () => {
                 activeSectionIndex={activeSectionIndex}
                 sectionLength={sectionLength}
                 handlePreviousSection={handlePreviousSection}
-                handleNextSection={handleNextSection}
+                handleNextSection={handleValidatedNextSection}
                 activeAdditionalSection={activeAdditionalSection}
                 handleAdditionalSection={handleAdditionalSection}
                 docs={docs}
@@ -164,7 +197,7 @@ const AtsTemplate = () => {
                 activeSectionIndex={activeSectionIndex}
                 sectionLength={sectionLength}
                 handlePreviousSection={handlePreviousSection}
-                handleNextSection={handleNextSection}
+                handleNextSection={handleValidatedNextSection}
                 activeAdditionalSection={activeAdditionalSection}
                 handleAdditionalSection={handleAdditionalSection}
                 docs={docs}

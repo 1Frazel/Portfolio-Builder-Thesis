@@ -70,6 +70,11 @@ const ProfessionalDocument = ({
   );
 };
 
+const hasText = (value?: string) => Boolean(value?.trim());
+
+const joinText = (parts: Array<string | undefined>, separator = ", ") =>
+  parts.filter((part) => hasText(part)).map((part) => part!.trim()).join(separator);
+
 const SidebarPersonalDetail = ({
   personalDetail,
 }: {
@@ -87,18 +92,41 @@ const SidebarPersonalDetail = ({
     address,
   } = personalDetail;
 
+  const fullName = joinText([firstName, lastName], " ");
+  const detailLines = [address, cityState, country, postalCode, phone, email].filter(
+    (line) => hasText(line),
+  );
+
   return (
     <View wrap={false}>
-      <Text style={professionalStyles.name}>{`${firstName} ${lastName}`}</Text>
-      <Text style={professionalStyles.jobTarget}>{jobTarget}</Text>
+      {hasText(fullName) && <Text style={professionalStyles.name}>{fullName}</Text>}
+      {hasText(jobTarget) && (
+        <Text style={professionalStyles.jobTarget}>{jobTarget.trim()}</Text>
+      )}
 
-      <Text style={professionalStyles.sidebarHeading}>Details</Text>
-      <Text style={professionalStyles.detailText}>{address}</Text>
-      <Text style={professionalStyles.detailText}>{`${cityState}`}</Text>
-      <Text style={professionalStyles.detailText}>{`${country}`}</Text>
-      <Text style={professionalStyles.linkText}>{postalCode}</Text>
-      <Text style={professionalStyles.linkText}>{phone}</Text>
-      <Text style={professionalStyles.linkText}>{email}</Text>
+      {detailLines.length > 0 && (
+        <>
+          <Text style={professionalStyles.sidebarHeading}>Details</Text>
+          {hasText(address) && (
+            <Text style={professionalStyles.detailText}>{address.trim()}</Text>
+          )}
+          {hasText(cityState) && (
+            <Text style={professionalStyles.detailText}>{cityState.trim()}</Text>
+          )}
+          {hasText(country) && (
+            <Text style={professionalStyles.detailText}>{country.trim()}</Text>
+          )}
+          {hasText(postalCode) && (
+            <Text style={professionalStyles.linkText}>{postalCode.trim()}</Text>
+          )}
+          {hasText(phone) && (
+            <Text style={professionalStyles.linkText}>{phone.trim()}</Text>
+          )}
+          {hasText(email) && (
+            <Text style={professionalStyles.linkText}>{email.trim()}</Text>
+          )}
+        </>
+      )}
 
       <View style={professionalStyles.sidebarDivider} />
     </View>
@@ -106,13 +134,18 @@ const SidebarPersonalDetail = ({
 };
 
 const SidebarSkillSection = ({ skills }: { skills: ISkill[] }) => {
+  const validSkills = skills.filter(
+    (skill) => hasText(skill.name) || hasText(skill.expertise),
+  );
+  if (validSkills.length === 0) return null;
+
   return (
     <View wrap={false}>
       <Text style={professionalStyles.sidebarHeading}>Skills</Text>
       <View style={professionalStyles.oneColumnList}>
-        {skills.map((skill) => (
+        {validSkills.map((skill) => (
           <View key={skill.id} style={professionalStyles.oneColumnItem}>
-            <Text style={professionalStyles.skillName}>{skill.name}</Text>
+            <Text style={professionalStyles.skillName}>{skill.name.trim()}</Text>
           </View>
         ))}
       </View>
@@ -122,13 +155,18 @@ const SidebarSkillSection = ({ skills }: { skills: ISkill[] }) => {
 };
 
 const SidebarLanguageSection = ({ languages }: { languages: ILanguages[] }) => {
+  const validLanguages = languages.filter(
+    (language) => hasText(language.name) || hasText(language.expertise),
+  );
+  if (validLanguages.length === 0) return null;
+
   return (
     <View wrap={false}>
       <Text style={professionalStyles.sidebarHeading}>Languages</Text>
       <View style={professionalStyles.oneColumnList}>
-        {languages.map((language) => (
+        {validLanguages.map((language) => (
           <View key={language.id} style={professionalStyles.oneColumnItem}>
-            <Text style={professionalStyles.skillName}>{language.name}</Text>
+            <Text style={professionalStyles.skillName}>{language.name.trim()}</Text>
           </View>
         ))}
       </View>
@@ -137,11 +175,15 @@ const SidebarLanguageSection = ({ languages }: { languages: ILanguages[] }) => {
 };
 
 const MainProfileSummary = ({ profileSummary }: { profileSummary: string }) => {
-  if (!isDifferent(profileSummary, DEFAULT_PROFILE_SUMMARY)) return null;
+  if (
+    !isDifferent(profileSummary, DEFAULT_PROFILE_SUMMARY) ||
+    !hasText(profileSummary)
+  )
+    return null;
 
   return (
     <SectionBlock title="Profile">
-      <Text style={professionalStyles.paragraph}>{profileSummary}</Text>
+      <Text style={professionalStyles.paragraph}>{profileSummary.trim()}</Text>
     </SectionBlock>
   );
 };
@@ -153,13 +195,29 @@ const MainWorkExperience = ({
 }) => {
   if (!isDifferent(workExperiences, [DEFAULT_WORK_EXPERIENCES])) return null;
 
+  const validWorkExperiences = workExperiences.filter(
+    (experience) =>
+      hasText(experience.jobTitle) ||
+      hasText(experience.employer) ||
+      hasText(experience.address) ||
+      hasText(experience.description) ||
+      hasText(experience.startAt) ||
+      hasText(experience.endsAt),
+  );
+
+  if (validWorkExperiences.length === 0) return null;
+
   return (
     <SectionBlock title="Employment History">
-      {workExperiences.map((experience) => (
+      {validWorkExperiences.map((experience) => (
         <View key={experience.id} style={{ marginBottom: "12px" }}>
           <View style={professionalStyles.sectionHeaderRow}>
             <Text style={professionalStyles.roleText}>
-              {`${experience.jobTitle}, ${experience.employer}${experience.address ? `, ${experience.address}` : ""}`}
+              {joinText([
+                experience.jobTitle,
+                experience.employer,
+                experience.address,
+              ])}
             </Text>
           </View>
           <Text style={professionalStyles.dateText}>
@@ -168,9 +226,9 @@ const MainWorkExperience = ({
               true,
             )}`}
           </Text>
-          {experience.description && (
+          {hasText(experience.description) && (
             <Text style={professionalStyles.paragraph}>
-              {experience.description}
+              {experience.description.trim()}
             </Text>
           )}
         </View>
@@ -182,13 +240,25 @@ const MainWorkExperience = ({
 const MainEducation = ({ educations }: { educations: IEducation[] }) => {
   if (!isDifferent(educations, [DEFAULT_EDUCATION])) return null;
 
+  const validEducations = educations.filter(
+    (education) =>
+      hasText(education.degree) ||
+      hasText(education.school) ||
+      hasText(education.city) ||
+      hasText(education.description) ||
+      hasText(education.startAt) ||
+      hasText(education.endsAt),
+  );
+
+  if (validEducations.length === 0) return null;
+
   return (
     <SectionBlock title="Education">
-      {educations.map((education) => (
+      {validEducations.map((education) => (
         <View key={education.id} style={{ marginBottom: "12px" }}>
           <View style={professionalStyles.sectionHeaderRow}>
             <Text style={professionalStyles.roleText}>
-              {`${education.degree}, ${education.school}${education.city ? `, ${education.city}` : ""}`}
+              {joinText([education.degree, education.school, education.city])}
             </Text>
           </View>
           <Text style={professionalStyles.dateText}>
@@ -197,9 +267,9 @@ const MainEducation = ({ educations }: { educations: IEducation[] }) => {
               true,
             )}`}
           </Text>
-          {education.description && (
+          {hasText(education.description) && (
             <Text style={professionalStyles.paragraph}>
-              {education.description}
+              {education.description.trim()}
             </Text>
           )}
         </View>
@@ -216,22 +286,27 @@ const MainProfessionalTraining = ({
   if (!isDifferent(professionalTraining, [DEFAULT_PROFESSIONAL_TRAINING]))
     return null;
 
+  const validProfessionalTraining = professionalTraining.filter(
+    (training) =>
+      hasText(training.courseName) ||
+      hasText(training.institution) ||
+      hasText(training.startAt) ||
+      hasText(training.endsAt),
+  );
+
+  if (validProfessionalTraining.length === 0) return null;
+
   return (
     <SectionBlock title="Courses">
-      {professionalTraining.map((training) => (
+      {validProfessionalTraining.map((training) => (
         <View key={training.id} style={{ marginBottom: "12px" }}>
-          <Text style={professionalStyles.roleText}>{training.courseName}</Text>
+          <Text style={professionalStyles.roleText}>{joinText([training.courseName, training.institution])}</Text>
           <Text style={professionalStyles.dateText}>
             {`${formatDate(training.startAt)} — ${formatDate(
               training.endsAt,
               true,
             )}`}
           </Text>
-          {training.institution && (
-            <Text style={professionalStyles.paragraph}>
-              {training.institution}
-            </Text>
-          )}
         </View>
       ))}
     </SectionBlock>
@@ -246,20 +321,27 @@ const MainLicenses = ({
   if (!isDifferent(licensesCertifications, [DEFAULT_LICENSES_CERTIFICATION]))
     return null;
 
+  const validLicenses = licensesCertifications.filter(
+    (license) =>
+      hasText(license.name) ||
+      hasText(license.issuer) ||
+      hasText(license.startAt) ||
+      hasText(license.endsAt),
+  );
+
+  if (validLicenses.length === 0) return null;
+
   return (
     <SectionBlock title="Licenses">
-      {licensesCertifications.map((license) => (
+      {validLicenses.map((license) => (
         <View key={license.id} style={{ marginBottom: "12px" }}>
-          <Text style={professionalStyles.roleText}>{license.name}</Text>
+          <Text style={professionalStyles.roleText}>{joinText([license.name, license.issuer])}</Text>
           <Text style={professionalStyles.dateText}>
             {`${formatDate(license.startAt)} — ${formatDate(
               license.endsAt,
               true,
             )}`}
           </Text>
-          {license.issuer && (
-            <Text style={professionalStyles.paragraph}>{license.issuer}</Text>
-          )}
         </View>
       ))}
     </SectionBlock>

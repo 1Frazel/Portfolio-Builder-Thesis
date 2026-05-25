@@ -28,7 +28,7 @@ const iconButtonClass =
   "flex h-8 w-8 items-center justify-center rounded-full border border-slate-300 bg-white text-lg font-bold text-[#3057b5] transition hover:bg-[#eef3ff] disabled:cursor-not-allowed disabled:text-slate-300";
 
 const headerActionButtonClass =
-  "flex h-8 w-8 items-center justify-center rounded-md text-[#3057b5] transition hover:bg-[#eef3ff]";
+  "flex h-8 w-8 items-center justify-center rounded-md text-3xl leading-none text-[#3057b5] transition hover:bg-[#eef3ff]";
 
 const ExpandableSectionContainer = ({
   children,
@@ -50,7 +50,7 @@ const ExpandableSectionContainer = ({
   return (
     <section className={sectionClassName}>
       <div className="flex items-start justify-between gap-3">
-        <h2 className="text-[32px] font-bold leading-tight text-slate-900 sm:text-[36px]">
+        <h2 className="text-2xl font-bold leading-tight text-slate-900 sm:text-[28px]">
           {title}
         </h2>
         {summaryMode && (

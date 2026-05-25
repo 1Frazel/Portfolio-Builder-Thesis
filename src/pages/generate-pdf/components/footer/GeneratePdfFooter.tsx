@@ -61,7 +61,7 @@ const GeneratePdfFooter = ({
           </button>
         ) : isLastSection && docs ? (
           <PdfDownloadBtn
-            filename="resume.pdf"
+            filename={`${initialTitle}.pdf`}
             docs={docs}
             formData={formData}
             template={template}

@@ -37,12 +37,12 @@ const PdfDownloadBtn = ({
 
   const handleSaveAndDownload = async () => {
     if (!formData) {
-      showToast("Form data unavailable", "error");
+      showToast(t("main.toast.formData"), "error");
       return;
     }
 
     if (!title.trim()) {
-      showToast("Please enter a CV title", "warning");
+      showToast(t("main.toast.resumeTitle"), "warning");
       return;
     }
 
@@ -61,12 +61,12 @@ const PdfDownloadBtn = ({
       a.remove();
       URL.revokeObjectURL(url);
 
-      showToast("Resume saved successfully!", "success");
+      showToast(t("main.toast.saveSuccess"), "success");
       setIsOpen(false);
       navigate("/creation");
     } catch (err) {
       const message =
-        err instanceof Error ? err.message : "Failed to save resume";
+        err instanceof Error ? err.message : t("main.toast.saveFailed");
       showToast(message, "error");
     } finally {
       setIsSaving(false);
