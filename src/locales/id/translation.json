@@ -99,7 +99,8 @@
         "formData": "Gagal memuat CV",
         "resumeTitle": "Harap masukkan judul CV",
         "saveSuccess": "CV berhasil disimpan!",
-        "saveFailed": "Gagal menyimpan CV. Silakan coba lagi nanti."
+        "saveFailed": "Gagal menyimpan CV. Silakan coba lagi nanti.",
+        "fetching": "Mengambil data CV saat ini..."
       },
       "previewButton": {
         "preview": "Pratinjau",
@@ -133,7 +134,8 @@
         },
         "professional": {
             "description": "CV modern dengan struktur visual yang rapi dan aksen warna yang dapat disesuaikan untuk memperkuat keterbacaan dan personal branding. Tetap mempertahankan standar ATS, template ini menggunakan tata letak bilah sisi (sidebar) untuk menyusun informasi penting seperti keahlian dan kontak dengan lebih efektif. Cocok bagi Anda yang menginginkan keseimbangan antara kesan profesional dan estetika visual.",
-            "modalDesc": "Tata letak dua kolom yang elegan dengan profil di bilah sisi."
+            "modalDesc": "Tata letak dua kolom yang elegan dengan profil di bilah sisi.",
+            "sidebarColor": "Warna Aksen CV"
         }
         }
     },

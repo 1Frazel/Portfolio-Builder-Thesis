@@ -41,10 +41,15 @@ const ProfessionalDocument = ({
   professionalTraining: IProfessionalTraining[];
   licensesCertifications: ILicensesCertifications[];
 }) => {
+  const sidebarColor = personalDetail.accentColor?.trim() || "#0f5a4e";
+
   return (
     <Document>
       <Page size="A4" style={professionalStyles.page}>
-        <View fixed style={professionalStyles.sidebar}>
+        <View
+          fixed
+          style={[professionalStyles.sidebar, { backgroundColor: sidebarColor }]}
+        >
           {isDifferent(personalDetail, DEFAULT_PERSONAL_DETAIL) && (
             <SidebarPersonalDetail personalDetail={personalDetail} />
           )}

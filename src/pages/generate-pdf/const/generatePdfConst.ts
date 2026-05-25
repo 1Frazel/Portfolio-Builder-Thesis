@@ -19,6 +19,7 @@ export const DEFAULT_WORK_EXPERIENCES = {
 export const DEFAULT_PERSONAL_DETAIL = {
   jobTarget: "",
   photo: "",
+  accentColor: "#333185",
   firstName: "",
   lastName: "",
   email: "",
@@ -80,6 +81,7 @@ export const mocks = (() => {
   const DEFAULT_PERSONAL_DETAIL = {
     jobTarget: "Senior Frontend Engineer",
     photo: "",
+    accentColor: "#4f7f7a",
     firstName: "Jane",
     lastName: "Anderson",
     email: "jane.anderson@example.com",

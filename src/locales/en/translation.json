@@ -99,7 +99,8 @@
         "formData": "Failed to load resume",
         "resumeTitle": "Please enter a CV title",
         "saveSuccess": "Resume saved successfully!",
-        "saveFailed": "Failed to save the resume. Please try again later."
+        "saveFailed": "Failed to save the resume. Please try again later.",
+        "fetching": "Fetching current CV data..."
       },
       "previewButton": {
         "preview": "Preview",
@@ -133,7 +134,8 @@
         },
         "professional": {
             "description": "A modern and visually structured resume with a customizable color accent to enhance readability and personal branding. While maintaining ATS compatibility, this template introduces a sidebar layout to organize key information such as skills and contact details more effectively. Suitable for users who want a balance between professionalism and visual appeal.",
-            "modalDesc": "A polished two-column layout with a sidebar profile."
+            "modalDesc": "A polished two-column layout with a sidebar profile.",
+            "sidebarColor": "Sidebar Color"
       }
     }
     },

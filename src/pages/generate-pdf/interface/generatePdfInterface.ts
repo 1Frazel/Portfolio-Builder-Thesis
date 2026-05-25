@@ -21,6 +21,7 @@ export interface IWorkExperience {
 export interface IPersonalDetail {
   jobTarget: string;
   photo: string;
+  accentColor: string;
   firstName: string;
   lastName: string;
   email: string;
