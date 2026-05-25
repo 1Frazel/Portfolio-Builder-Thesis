@@ -16,7 +16,7 @@ const AtsTemplate = () => {
   const { id: resumeId } = useParams<{ id: string }>();
   const [searchParams] = useSearchParams();
   // Development-only toggle: set true manually when you want mock data
-  const USE_MOCK_DATA = true;
+  const USE_MOCK_DATA = false;
   const { showToast } = useToast();
   const [selectedTemplate, setSelectedTemplate] = useState(
     searchParams.get("template") || "ats",
