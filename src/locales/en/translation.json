@@ -94,7 +94,7 @@
       "loading": "Loading your resumes...",
       "empty": "No resumes created yet. Click 'Create New Resume' to get started.",
       "fetching": "Fetching current CV data...",
-      "toast":{
+      "toast": {
         "personalData": "Please fill Job, First Name, and Email before continuing.",
         "formData": "Failed to load resume",
         "resumeTitle": "Please enter a CV title",
@@ -129,15 +129,15 @@
       "close": "Close",
       "template": {
         "ats": {
-            "description": "A clean and straightforward resume layout designed for maximum ATS readability. This template uses a single-column structure, minimal styling, and clear section hierarchy to ensure all information is easily parsed by applicant tracking systems. Ideal for users who prioritize compatibility and simplicity.",
-            "modalDesc": "Clean, compact, and optimized for ATS parsing."
+          "description": "A clean and straightforward resume layout designed for maximum ATS readability. This template uses a single-column structure, minimal styling, and clear section hierarchy to ensure all information is easily parsed by applicant tracking systems. Ideal for users who prioritize compatibility and simplicity.",
+          "modalDesc": "Clean, compact, and optimized for ATS parsing."
         },
         "professional": {
-            "description": "A modern and visually structured resume with a customizable color accent to enhance readability and personal branding. While maintaining ATS compatibility, this template introduces a sidebar layout to organize key information such as skills and contact details more effectively. Suitable for users who want a balance between professionalism and visual appeal.",
-            "modalDesc": "A polished two-column layout with a sidebar profile.",
-            "sidebarColor": "Sidebar Color"
+          "description": "A modern and visually structured resume with a customizable color accent to enhance readability and personal branding. While maintaining ATS compatibility, this template introduces a sidebar layout to organize key information such as skills and contact details more effectively. Suitable for users who want a balance between professionalism and visual appeal.",
+          "modalDesc": "A polished two-column layout with a sidebar profile.",
+          "sidebarColor": "Sidebar Color"
+        }
       }
-    }
     },
     "personalInfo": {
       "title": "Personal Information",

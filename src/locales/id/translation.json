@@ -94,7 +94,7 @@
       "loading": "Memuat daftar CV...",
       "empty": "Anda belum memiliki CV. Klik tombol di atas untuk membuat CV pertama Anda!",
       "fetching": "Mengambil data CV saat ini...",
-      "toast":{
+      "toast": {
         "personalData": "Harap isi Posisi Pekerjaan, Nama Depan, dan Email sebelum melanjutkan.",
         "formData": "Gagal memuat CV",
         "resumeTitle": "Harap masukkan judul CV",
@@ -129,15 +129,15 @@
       "close": "Tutup",
       "template": {
         "ats": {
-            "description": "Tata letak CV yang bersih dan lugas, dirancang khusus untuk tingkat keterbacaan ATS yang maksimal. Template ini menggunakan struktur satu kolom, gaya minimalis, dan hierarki bagian yang jelas untuk memastikan semua informasi mudah diekstrak oleh sistem rekruter. Pilihan tepat bagi Anda yang mengutamakan kompatibilitas dan kesederhanaan.",
-            "modalDesc": "Bersih, padat, dan dioptimalkan untuk pemindaian ATS."
+          "description": "Tata letak CV yang bersih dan lugas, dirancang khusus untuk tingkat keterbacaan ATS yang maksimal. Template ini menggunakan struktur satu kolom, gaya minimalis, dan hierarki bagian yang jelas untuk memastikan semua informasi mudah diekstrak oleh sistem rekruter. Pilihan tepat bagi Anda yang mengutamakan kompatibilitas dan kesederhanaan.",
+          "modalDesc": "Bersih, padat, dan dioptimalkan untuk pemindaian ATS."
         },
         "professional": {
-            "description": "CV modern dengan struktur visual yang rapi dan aksen warna yang dapat disesuaikan untuk memperkuat keterbacaan dan personal branding. Tetap mempertahankan standar ATS, template ini menggunakan tata letak bilah sisi (sidebar) untuk menyusun informasi penting seperti keahlian dan kontak dengan lebih efektif. Cocok bagi Anda yang menginginkan keseimbangan antara kesan profesional dan estetika visual.",
-            "modalDesc": "Tata letak dua kolom yang elegan dengan profil di bilah sisi.",
-            "sidebarColor": "Warna Aksen CV"
+          "description": "CV modern dengan struktur visual yang rapi dan aksen warna yang dapat disesuaikan untuk memperkuat keterbacaan dan personal branding. Tetap mempertahankan standar ATS, template ini menggunakan tata letak bilah sisi (sidebar) untuk menyusun informasi penting seperti keahlian dan kontak dengan lebih efektif. Cocok bagi Anda yang menginginkan keseimbangan antara kesan profesional dan estetika visual.",
+          "modalDesc": "Tata letak dua kolom yang elegan dengan profil di bilah sisi.",
+          "sidebarColor": "Warna Aksen CV"
         }
-        }
+      }
     },
     "personalInfo": {
       "title": "Informasi Pribadi",
@@ -330,7 +330,21 @@
       "skills": "Keahlian",
       "languages": "Bahasa",
       "certifications": "Sertifikasi",
-      "default": "Bagian Lainnya"
+      "default": "Bagian Lainnya",
+      "creation": "Pembuatan",
+      "checker": "Pemeriksa CV"
+    },
+    "auth": {
+      "signIn": "Masuk",
+      "signOut": "Keluar",
+      "signInToCreateResumes": "Masuk untuk membuat CV"
+    },
+    "navigation": {
+      "explore": "Jelajahi"
+    },
+    "languageSwitcher": {
+      "switchToEnglish": "Ganti ke Bahasa Inggris",
+      "switchToIndonesian": "Ganti ke Bahasa Indonesia"
     }
   }
 }
