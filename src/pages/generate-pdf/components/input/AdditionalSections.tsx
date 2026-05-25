@@ -101,8 +101,8 @@ const IndividualSections = ({
       <span
         className={`flex h-8 w-8 items-center justify-center rounded-full border ${
           isChecked
-            ? "border-blue-600 bg-white text-blue-600"
-            : "border-slate-300 bg-white text-slate-400"
+            ? "border-slate-300 bg-white text-slate-400"
+            : "border-blue-600 bg-white text-blue-600"
         }`}
         aria-hidden
       >
@@ -121,7 +121,7 @@ const IndividualSections = ({
           />
         </svg>
       </span>
-      <span className={`${isChecked ? "text-blue-600" : "text-slate-700"}`}>
+      <span className={`${isChecked ? "text-slate-700" : "text-blue-600"}`}>
         {list.title}
       </span>
     </button>

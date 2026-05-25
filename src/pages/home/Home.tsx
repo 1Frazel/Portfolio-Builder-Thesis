@@ -98,12 +98,15 @@ const Home = () => {
             <div className="flex-1 pt-2 lg:pt-0">
               <div className="max-w-xl">
                 <h1 className="text-4xl font-normal leading-tight tracking-tight text-slate-900 sm:text-5xl lg:text-[3.25rem]">
-                  {t('hero.sentence1')}
+                  {t("hero.sentence1")}
                   <br />
-                  {t('hero.sentence2')} <span className="font-bold">{t('hero.sentence2Highlight')}</span>
+                  {t("hero.sentence2")}{" "}
+                  <span className="font-bold">
+                    {t("hero.sentence2Highlight")}
+                  </span>
                   <br />
                   <span className="font-bold text-[#2951A3]">
-                    {t('hero.sentence3')}
+                    {t("hero.sentence3")}
                   </span>
                 </h1>
 
@@ -139,7 +142,7 @@ const Home = () => {
                         {tCommon("loading")}
                       </span>
                     ) : (
-                      t('hero.button1')
+                      t(user ? "hero.buttonLoggedIn" : "hero.buttonLoggedOut")
                     )}
                   </button>
                   <button
@@ -147,7 +150,7 @@ const Home = () => {
                     onClick={handleLearnAboutIt}
                     className="rounded-2xl border-2 border-[#2951A3] bg-white px-6 py-3 text-sm font-semibold text-[#2951A3] transition hover:bg-[#2951A3] hover:text-white"
                   >
-                    {t('hero.button2')}
+                    {t("hero.button2")}
                   </button>
                 </div>
               </div>
