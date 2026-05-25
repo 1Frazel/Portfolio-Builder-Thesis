@@ -48,7 +48,10 @@ const ProfessionalDocument = ({
       <Page size="A4" style={professionalStyles.page}>
         <View
           fixed
-          style={[professionalStyles.sidebar, { backgroundColor: sidebarColor }]}
+          style={[
+            professionalStyles.sidebar,
+            { backgroundColor: sidebarColor },
+          ]}
         >
           {isDifferent(personalDetail, DEFAULT_PERSONAL_DETAIL) && (
             <SidebarPersonalDetail personalDetail={personalDetail} />
@@ -78,7 +81,10 @@ const ProfessionalDocument = ({
 const hasText = (value?: string) => Boolean(value?.trim());
 
 const joinText = (parts: Array<string | undefined>, separator = ", ") =>
-  parts.filter((part) => hasText(part)).map((part) => part!.trim()).join(separator);
+  parts
+    .filter((part) => hasText(part))
+    .map((part) => part!.trim())
+    .join(separator);
 
 const SidebarPersonalDetail = ({
   personalDetail,
@@ -98,13 +104,20 @@ const SidebarPersonalDetail = ({
   } = personalDetail;
 
   const fullName = joinText([firstName, lastName], " ");
-  const detailLines = [address, cityState, country, postalCode, phone, email].filter(
-    (line) => hasText(line),
-  );
+  const detailLines = [
+    address,
+    cityState,
+    country,
+    postalCode,
+    phone,
+    email,
+  ].filter((line) => hasText(line));
 
   return (
     <View wrap={false}>
-      {hasText(fullName) && <Text style={professionalStyles.name}>{fullName}</Text>}
+      {hasText(fullName) && (
+        <Text style={professionalStyles.name}>{fullName}</Text>
+      )}
       {hasText(jobTarget) && (
         <Text style={professionalStyles.jobTarget}>{jobTarget.trim()}</Text>
       )}
@@ -116,7 +129,9 @@ const SidebarPersonalDetail = ({
             <Text style={professionalStyles.detailText}>{address.trim()}</Text>
           )}
           {hasText(cityState) && (
-            <Text style={professionalStyles.detailText}>{cityState.trim()}</Text>
+            <Text style={professionalStyles.detailText}>
+              {cityState.trim()}
+            </Text>
           )}
           {hasText(country) && (
             <Text style={professionalStyles.detailText}>{country.trim()}</Text>
@@ -150,7 +165,9 @@ const SidebarSkillSection = ({ skills }: { skills: ISkill[] }) => {
       <View style={professionalStyles.oneColumnList}>
         {validSkills.map((skill) => (
           <View key={skill.id} style={professionalStyles.oneColumnItem}>
-            <Text style={professionalStyles.skillName}>{skill.name.trim()}</Text>
+            <Text style={professionalStyles.skillName}>
+              {skill.name.trim()}
+            </Text>
           </View>
         ))}
       </View>
@@ -171,7 +188,9 @@ const SidebarLanguageSection = ({ languages }: { languages: ILanguages[] }) => {
       <View style={professionalStyles.oneColumnList}>
         {validLanguages.map((language) => (
           <View key={language.id} style={professionalStyles.oneColumnItem}>
-            <Text style={professionalStyles.skillName}>{language.name.trim()}</Text>
+            <Text style={professionalStyles.skillName}>
+              {language.name.trim()}
+            </Text>
           </View>
         ))}
       </View>
@@ -305,7 +324,9 @@ const MainProfessionalTraining = ({
     <SectionBlock title="Courses">
       {validProfessionalTraining.map((training) => (
         <View key={training.id} style={{ marginBottom: "12px" }}>
-          <Text style={professionalStyles.roleText}>{joinText([training.courseName, training.institution])}</Text>
+          <Text style={professionalStyles.roleText}>
+            {joinText([training.courseName, training.institution])}
+          </Text>
           <Text style={professionalStyles.dateText}>
             {`${formatDate(training.startAt)} — ${formatDate(
               training.endsAt,
@@ -340,7 +361,9 @@ const MainLicenses = ({
     <SectionBlock title="Licenses">
       {validLicenses.map((license) => (
         <View key={license.id} style={{ marginBottom: "12px" }}>
-          <Text style={professionalStyles.roleText}>{joinText([license.name, license.issuer])}</Text>
+          <Text style={professionalStyles.roleText}>
+            {joinText([license.name, license.issuer])}
+          </Text>
           <Text style={professionalStyles.dateText}>
             {`${formatDate(license.startAt)} — ${formatDate(
               license.endsAt,
