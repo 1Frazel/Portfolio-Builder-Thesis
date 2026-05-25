@@ -1,3 +1,5 @@
+import type { HTMLAttributes } from "react";
+
 import InputFieldWrapper from "./InputFieldWrapper";
 
 const InputField = ({
@@ -20,7 +22,7 @@ const InputField = ({
   labelClass?: string;
   inputClass?: string;
   sanitizeValue?: (input: string) => string;
-  inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
+  inputMode?: HTMLAttributes<HTMLInputElement>["inputMode"];
   pattern?: string;
 }) => {
   return (
