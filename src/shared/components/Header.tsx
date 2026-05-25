@@ -2,11 +2,7 @@ import { Link, useLocation } from "react-router";
 import HomeIcon from "../../icons/HomeIcon";
 import useIsMobile from "../hooks/useIsMobile";
 import HomeNav from "../../icons/HomeNav";
-<<<<<<< HEAD
-import { useEffect, useRef, useState } from "react";
-=======
-import { useState, type ReactNode } from "react";
->>>>>>> d2439e4 (feat: add google logo on auth button)
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import HomeCancel from "../../icons/HomeCancel";
 import Profile from "../../icons/Profile";
 import { useAuth } from "../hooks/useAuth";
@@ -300,14 +296,19 @@ const DesktopHeader = ({
 }) => {
   const { user, handleLogin, handleLogout, loading } = useAuth();
   const { t } = useTranslation("common");
-  const stickyHeaderClass = isStickyPage && showStickyHeader
-    ? "fixed left-0 right-0 top-0 z-50"
-    : "relative z-40";
+  const stickyHeaderClass =
+    isStickyPage && showStickyHeader
+      ? "fixed left-0 right-0 top-0 z-50"
+      : "relative z-40";
 
   return (
     <div
       className={`${stickyHeaderClass} bg-[#2951A3] p-2 md:px-16 md:py-8 ${showStickyHeader ? "shadow-lg" : ""}`}
-      style={showStickyHeader && playStickyAnimation ? { animation: "headerSlideDown 450ms cubic-bezier(0.16, 1, 0.3, 1)" } : undefined}
+      style={
+        showStickyHeader && playStickyAnimation
+          ? { animation: "headerSlideDown 450ms cubic-bezier(0.16, 1, 0.3, 1)" }
+          : undefined
+      }
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
@@ -376,16 +377,9 @@ const DesktopHeader = ({
   );
 };
 
-  const MobileLogo = () => {
-    return (
-      <img 
-        src={resumeezLogo}
-        alt="Resumeez Logo"
-        width={120} 
-        height={80}
-      />
-    );
-  };
+const MobileLogo = () => {
+  return <img src={resumeezLogo} alt="Resumeez Logo" width={120} height={80} />;
+};
 
 const MobileHeader = ({
   listHeader,
@@ -401,9 +395,10 @@ const MobileHeader = ({
   const [isShowNav, setIsShowNav] = useState(false);
   const { user, handleLogin, handleLogout, loading } = useAuth();
   const { t } = useTranslation("common");
-  const stickyHeaderClass = isStickyPage && showStickyHeader
-    ? "fixed left-0 right-0 top-0 z-50"
-    : "relative z-40";
+  const stickyHeaderClass =
+    isStickyPage && showStickyHeader
+      ? "fixed left-0 right-0 top-0 z-50"
+      : "relative z-40";
 
   const handleNavClose = () => {
     setIsShowNav(false);
@@ -413,7 +408,14 @@ const MobileHeader = ({
     <>
       <div
         className={`${stickyHeaderClass} bg-[#2951A3] px-4 py-4 flex items-center justify-between ${showStickyHeader ? "shadow-lg" : ""}`}
-        style={showStickyHeader && playStickyAnimation ? { animation: "headerSlideDown 450ms cubic-bezier(0.16, 1, 0.3, 1)" } : undefined}
+        style={
+          showStickyHeader && playStickyAnimation
+            ? {
+                animation:
+                  "headerSlideDown 450ms cubic-bezier(0.16, 1, 0.3, 1)",
+              }
+            : undefined
+        }
       >
         <a href="/">
           <MobileLogo />
@@ -495,7 +497,9 @@ const MobileHeader = ({
           </div>
           <nav className="flex flex-col gap-4 p-4 bg-[#FFFFFF] rounded-md">
             <div className="border-b border-gray-200 py-2">
-              <p className="text-xl text-black text-bold">{t("navigation.explore")}</p>
+              <p className="text-xl text-black text-bold">
+                {t("navigation.explore")}
+              </p>
             </div>
             {listHeader.map((header) => {
               const isCreation = header.id === "creation";
