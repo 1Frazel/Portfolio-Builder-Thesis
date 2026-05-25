@@ -27,7 +27,9 @@
       "sentence3": "In one click.",
       "button1": "Create now!",
       "button2": "Learn about it",
-      "imageAlt": "Resume builder preview"
+      "imageAlt": "Resume builder preview",
+      "buttonLoggedIn": "Create Now",
+      "buttonLoggedOut": "Sign in With Google"
     },
     "atsSection": {
       "label": "What is ATS?"

@@ -7,7 +7,7 @@
       "checker": "Cek Skor ATS"
     },
     "auth": {
-      "signIn": "Masuk",
+      "signIn": "Masuk dengan Google",
       "signOut": "Keluar",
       "signInToCreateResumes": "Masuk untuk mulai membuat CV"
     },
@@ -337,7 +337,7 @@
       "checker": "Pemeriksa CV"
     },
     "auth": {
-      "signIn": "Masuk",
+      "signIn": "Masuk dengan Google",
       "signOut": "Keluar",
       "signInToCreateResumes": "Masuk untuk membuat CV"
     },
