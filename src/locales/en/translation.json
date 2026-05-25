@@ -9,7 +9,13 @@
     "auth": {
       "signIn": "Sign In With Google",
       "signOut": "Sign Out",
-      "signInToCreateResumes": "Sign in to create resumes"
+      "signInToCreateResumes": "Sign in to create resumes",
+      "toast":{
+        "signInInfo": "Opening Google sign-in…",
+        "signInSuccess": "Signed in successfully",
+        "signInFailed": "Failed to sign in",
+        "SignInCancelled": "Sign-in cancelled"
+      }
     },
     "navigation": {
       "explore": "Explore"

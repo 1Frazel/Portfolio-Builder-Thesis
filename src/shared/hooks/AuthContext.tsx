@@ -4,11 +4,13 @@ import { logout, onAuthChange, signInWithGoogle } from "../utils/authService";
 import { AuthContext } from "./useAuth";
 import { useToast } from "./useToast";
 import { ensureUserDocument } from "../utils/cvService";
+import { useTranslation } from "react-i18next";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const { showToast } = useToast();
+  const { t } = useTranslation("common");
 
   useEffect(() => {
     const unsubscribe = onAuthChange((u) => {
@@ -48,10 +50,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const handleLogin = async () => {
     setLoading(true);
     // immediate feedback and prevent duplicate clicks
-    showToast("Opening Google sign-in…", "info");
+    showToast(t("auth.toast.signInInfo"), "info");
     try {
       await signInWithGoogle();
-      showToast("Signed in successfully", "success");
+      showToast(t("auth.toast.signInSuccess"), "success");
     } catch (err: unknown) {
       const code = (
         err && typeof err === "object" && "code" in err
@@ -61,12 +63,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       const msg =
         (err && typeof err === "object" && "message" in err
           ? ((err as { message?: string }).message ?? String(err))
-          : String(err)) || "Failed to sign in";
+          : String(err)) || t("auth.toast.signInFailed");
       if (
         code === "auth/popup-closed-by-user" ||
         code === "auth/cancelled-popup-request"
       ) {
-        showToast("Sign-in cancelled", "error");
+        showToast(t("auth.toast.SignInCancelled"), "error");
       } else {
         showToast(msg, "error");
       }

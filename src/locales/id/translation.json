@@ -9,7 +9,13 @@
     "auth": {
       "signIn": "Masuk dengan Google",
       "signOut": "Keluar",
-      "signInToCreateResumes": "Masuk untuk mulai membuat CV"
+      "signInToCreateResumes": "Masuk untuk mulai membuat CV",
+      "toast":{
+        "signInInfo": "Membuka Google sign-in…",
+        "signInSuccess": "Sign-in berhasil",
+        "signInFailed": "Gagal Sign-in",
+        "SignInCancelled": "Sign-in dibatalkan"
+      }
     },
     "navigation": {
       "explore": "Jelajahi"
