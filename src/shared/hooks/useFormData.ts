@@ -3,6 +3,7 @@ import type React from "react";
 
 import {
   DEFAULT_ADDITIONAL_SECTIONS,
+  DEFAULT_CUSTOM_SECTION,
   DEFAULT_EDUCATION,
   DEFAULT_LANGUAGES,
   DEFAULT_LICENSES_CERTIFICATION,
@@ -15,6 +16,7 @@ import {
 } from "../../pages/generate-pdf/const/generatePdfConst";
 import type {
   IAdditionalSections,
+  ICustomSection,
   IEducation,
   ILanguages,
   ILicensesCertifications,
@@ -31,6 +33,7 @@ export interface FormData {
   skills: ISkill[];
   profileSummary: string;
   additionalSections: IAdditionalSections[];
+  customSections: ICustomSection[];
   languages: ILanguages[];
   professionalTraining: IProfessionalTraining[];
   licensesCertifications: ILicensesCertifications[];
@@ -48,6 +51,7 @@ export interface UseFormDataReturn {
   setAdditionalSections: React.Dispatch<
     React.SetStateAction<IAdditionalSections[]>
   >;
+  setCustomSections: React.Dispatch<React.SetStateAction<ICustomSection[]>>;
   setProfessionalTraining: React.Dispatch<
     React.SetStateAction<IProfessionalTraining[]>
   >;
@@ -74,6 +78,7 @@ export const useFormData = ({
       ? mocks.DEFAULT_PROFILE_SUMMARY
       : DEFAULT_PROFILE_SUMMARY,
     additionalSections: DEFAULT_ADDITIONAL_SECTIONS,
+    customSections: [DEFAULT_CUSTOM_SECTION],
     languages: useMock ? mocks.DEFAULT_LANGUAGES : [DEFAULT_LANGUAGES],
     professionalTraining: useMock
       ? mocks.DEFAULT_PROFESSIONAL_TRAINING
@@ -159,6 +164,15 @@ export const useFormData = ({
     }));
   };
 
+  const setCustomSections: React.Dispatch<
+    React.SetStateAction<ICustomSection[]>
+  > = (value) => {
+    setFormData((prev) => ({
+      ...prev,
+      customSections: typeof value === "function" ? value(prev.customSections) : value,
+    }));
+  };
+
   const setLicensesCertifications: React.Dispatch<
     React.SetStateAction<ILicensesCertifications[]>
   > = (value) => {
@@ -181,6 +195,7 @@ export const useFormData = ({
     setProfileSummary,
     setPersonalDetail,
     setAdditionalSections,
+    setCustomSections,
     setProfessionalTraining,
     setLicensesCertifications,
   };

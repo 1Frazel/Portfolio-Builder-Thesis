@@ -9,7 +9,7 @@
     "auth": {
       "signIn": "Masuk dengan Google",
       "signOut": "Keluar",
-      "signInToCreateResumes": "Masuk untuk mulai membuat CV",
+      "signInToCreateResumes": "Masuk dengan Google untuk mulai membuat CV",
       "toast":{
         "signInInfo": "Membuka Google sign-in…",
         "signInSuccess": "Sign-in berhasil",
@@ -34,8 +34,8 @@
       "button1": "Buat Sekarang!",
       "button2": "Pelajari Lebih Lanjut",
       "imageAlt": "Pratinjau pembuat CV",
-      "buttonLoggedIn": "Buat Sekarang",
-      "buttonLoggedOut": "Masuk Dengan Google"
+      "buttonLoggedIn": "Buat Sekarang!",
+      "buttonLoggedOut": "Masuk dan Mulai Buat!"
     },
     "atsSection": {
       "label": "Apa itu ATS?"
@@ -128,8 +128,6 @@
     "templateSelection": {
       "title": "Pilih Template CV",
       "description": "Tentukan desain awal untuk CV Anda.",
-      "atsDescription": "Desain bersih dan lugas yang dioptimalkan khusus untuk sistem ATS. Menggunakan struktur satu kolom dan hierarki teks yang jelas agar dokumen Anda mudah diekstrak oleh mesin rekruter. Pilihan paling aman untuk melamar ke perusahaan korporat multinasional.",
-      "professionalDescription": "CV modern dengan struktur visual yang tegas dan aksen warna yang bisa disesuaikan. Mempertahankan kompatibilitas ATS namun menggunakan tata letak bilah sisi (sidebar) untuk menonjolkan keahlian dan kontak. Cocok untuk Anda yang menginginkan keseimbangan antara profesionalisme dan estetika.",
       "previewButton": "Lihat Detail",
       "selectButton": "Gunakan Template Ini",
       "backButton": "← Kembali ke CV Saya",
@@ -141,7 +139,8 @@
           "modalDesc": "Bersih, padat, dan dioptimalkan untuk pemindaian ATS."
         },
         "professional": {
-          "description": "CV modern dengan struktur visual yang rapi dan aksen warna yang dapat disesuaikan untuk memperkuat keterbacaan dan personal branding. Tetap mempertahankan standar ATS, template ini menggunakan tata letak bilah sisi (sidebar) untuk menyusun informasi penting seperti keahlian dan kontak dengan lebih efektif. Cocok bagi Anda yang menginginkan keseimbangan antara kesan profesional dan estetika visual.",
+          "description": "CV modern dengan struktur visual yang rapi dan aksen warna yang dapat disesuaikan untuk memperkuat keterbacaan dan personal branding. Template ini menggunakan tata letak bilah sisi (sidebar) untuk menyusun informasi penting seperti keahlian dan kontak dengan lebih efektif. Cocok bagi Anda yang menginginkan keseimbangan antara kesan profesional dan estetika visual.",
+          "disclaimer": "(Disclaimer: Template ini tidak sepenuhnya dioptimalkan untuk Sistem ATS dan mungkin mengalami masalah pemrosesan pada sistem ATS tertentu. Kami menyarankan untuk menggunakan template Classic ATS demi kompatibilitas ATS yang lebih optimal.)",
           "modalDesc": "Tata letak dua kolom yang elegan dengan profil di bilah sisi.",
           "sidebarColor": "Warna Aksen CV"
         }
@@ -151,6 +150,9 @@
       "title": "Informasi Pribadi",
       "description": "Masukkan informasi dasar dan kontak agar rekruter mudah menghubungi Anda.",
       "labels": {
+        "profilePicture": "Foto Profil",
+        "choosePhoto": "Pilih foto",
+        "removePhoto": "Hapus foto",
         "jobTitle": "Posisi Pekerjaan",
         "firstName": "Nama Depan",
         "lastName": "Nama Belakang",
@@ -161,6 +163,12 @@
         "address": "Alamat Lengkap",
         "country": "Negara",
         "placeholder": "Misal: Frontend Developer"
+      },
+      "toasts": {
+        "uploadPhoto":"Mengunggah foto...",
+        "uploadSuccess":"Foto berhasil diunggah!",
+        "uploadFailed":"Gagal mengunggah foto",
+        "UploadFailedSize":"Ukuran foto melebihi batas sebesar 2MB. Silakan pilih file yang lebih kecil."
       },
       "nextButton": "Selanjutnya: Pengalaman Kerja"
     },
@@ -227,14 +235,26 @@
     },
     "additionalSections": {
       "title": "Data Pendukung",
+      "customSectionTitle": "Judul Bagian",
+      "customName": "Judul Item",
+      "customDate": "Tanggal Mulai & Berakhir",
+      "customDatePlaceholder": "DD // TTTT",
+      "customCity": "Kota",
       "description": "Perkuat CV Anda dengan menyertakan sertifikasi, pelatihan, atau kemampuan bahasa asing yang relevan dengan pekerjaan yang dilamar.",
+      "customDescription": "Tambahkan bagian khusus untuk menonjolkan kualifikasi, proyek, atau pengalaman unik yang tidak masuk dalam kategori standar namun relevan dengan tujuan karir Anda.",
+      "customDefault": "(Belum Diisi)",
       "labels": {
         "language": "Bahasa",
         "licensesCertifications": "Lisensi & Sertifikasi",
-        "professionalTraining": "Pelatihan Profesional"
+        "professionalTraining": "Pelatihan Profesional",
+        "custom": "Bagian Khusus",
+        "customDescription": "Deskripsi"
       },
+      "addItem": "Tambah Item",
+      "deleteSection": "Hapus Bagian",
       "backButton": "Kembali",
       "nextButton": "Selanjutnya: Selesai",
+      "customAddButton": "Tambah Bagian Khusus lainnya",
       "empty": "Belum ada data pendukung yang dipilih.",
       "notFound": "Bagian tidak ditemukan."
     },

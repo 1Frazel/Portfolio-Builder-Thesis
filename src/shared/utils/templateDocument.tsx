@@ -9,6 +9,8 @@ type TemplateDocumentProps = {
   workExperiences: FormData["workExperiences"];
   educations: FormData["educations"];
   skills: FormData["skills"];
+  additionalSections: FormData["additionalSections"];
+  customAdditionalSections: FormData["customSections"];
   languages: FormData["languages"];
   professionalTraining: FormData["professionalTraining"];
   licensesCertifications: FormData["licensesCertifications"];
@@ -44,6 +46,8 @@ export const buildTemplateDocument = (
       workExperiences={formData.workExperiences}
       educations={formData.educations}
       skills={formData.skills}
+      additionalSections={formData.additionalSections}
+      customAdditionalSections={formData.customSections ?? []}
       languages={formData.languages}
       professionalTraining={formData.professionalTraining}
       licensesCertifications={formData.licensesCertifications}

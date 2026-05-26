@@ -61,6 +61,12 @@ export const DEFAULT_ADDITIONAL_SECTIONS = [
     title: "Professional Training",
     isSet: false,
   },
+  {
+    id: "custom",
+    title: "Custom Section",
+    isSet: false,
+    customTitle: "",
+  },
 ];
 
 export const DEFAULT_LANGUAGES = {
@@ -75,6 +81,21 @@ export const DEFAULT_LICENSES_CERTIFICATION = {
   issuer: "",
   startAt: "",
   endsAt: "",
+};
+
+export const DEFAULT_CUSTOM_SECTION_ITEM = {
+  id: 0,
+  name: "",
+  startAt: "",
+  endsAt: "",
+  city: "",
+  description: "",
+};
+
+export const DEFAULT_CUSTOM_SECTION = {
+  id: 0,
+  sectionTitle: "",
+  items: [{ ...DEFAULT_CUSTOM_SECTION_ITEM }],
 };
 
 export const mocks = (() => {

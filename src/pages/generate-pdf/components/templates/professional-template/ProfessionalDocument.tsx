@@ -1,5 +1,7 @@
-import { Document, Page, Text, View } from "@react-pdf/renderer";
+import { Document, Image, Page, Text, View } from "@react-pdf/renderer";
 import type {
+  IAdditionalSections,
+  ICustomSection,
   IEducation,
   ILanguages,
   ILicensesCertifications,
@@ -28,6 +30,8 @@ const ProfessionalDocument = ({
   workExperiences,
   educations,
   skills,
+  additionalSections,
+  customAdditionalSections,
   languages,
   professionalTraining,
   licensesCertifications,
@@ -37,11 +41,16 @@ const ProfessionalDocument = ({
   workExperiences: IWorkExperience[];
   educations: IEducation[];
   skills: ISkill[];
+  additionalSections: IAdditionalSections[];
+  customAdditionalSections: ICustomSection[];
   languages: ILanguages[];
   professionalTraining: IProfessionalTraining[];
   licensesCertifications: ILicensesCertifications[];
 }) => {
   const sidebarColor = personalDetail.accentColor?.trim() || "#0f5a4e";
+  const shouldRenderCustomSection = additionalSections.some(
+    (section) => section.id === "custom" && section.isSet,
+  );
 
   return (
     <Document>
@@ -72,6 +81,11 @@ const ProfessionalDocument = ({
             professionalTraining={professionalTraining}
           />
           <MainLicenses licensesCertifications={licensesCertifications} />
+          {shouldRenderCustomSection && (
+            <MainCustomAdditionalSections
+              sections={customAdditionalSections}
+            />
+          )}
         </View>
       </Page>
     </Document>
@@ -97,26 +111,38 @@ const SidebarPersonalDetail = ({
     lastName,
     email,
     phone,
+    linkedinUrl,
     postalCode,
     cityState,
     country,
     address,
   } = personalDetail;
 
-  const fullName = joinText([firstName, lastName], " ");
   const detailLines = [
     address,
     cityState,
     country,
     postalCode,
     phone,
+    linkedinUrl,
     email,
   ].filter((line) => hasText(line));
 
   return (
     <View wrap={false}>
-      {hasText(fullName) && (
-        <Text style={professionalStyles.name}>{fullName}</Text>
+      {hasText(personalDetail.photo) && (
+        <View style={professionalStyles.photoWrapper}>
+          <Image
+            src={personalDetail.photo.trim()}
+            style={professionalStyles.photo}
+          />
+        </View>
+      )}
+      {hasText(firstName) && (
+        <Text style={professionalStyles.name}>{firstName.trim()}</Text>
+      )}
+      {hasText(lastName) && (
+        <Text style={professionalStyles.name}>{lastName.trim()}</Text>
       )}
       {hasText(jobTarget) && (
         <Text style={professionalStyles.jobTarget}>{jobTarget.trim()}</Text>
@@ -141,6 +167,11 @@ const SidebarPersonalDetail = ({
           )}
           {hasText(phone) && (
             <Text style={professionalStyles.linkText}>{phone.trim()}</Text>
+          )}
+          {hasText(linkedinUrl) && (
+            <Text style={professionalStyles.linkText}>
+              {linkedinUrl.trim()}
+            </Text>
           )}
           {hasText(email) && (
             <Text style={professionalStyles.linkText}>{email.trim()}</Text>
@@ -176,7 +207,11 @@ const SidebarSkillSection = ({ skills }: { skills: ISkill[] }) => {
   );
 };
 
-const SidebarLanguageSection = ({ languages }: { languages: ILanguages[] }) => {
+const SidebarLanguageSection = ({
+  languages,
+}: {
+  languages: ILanguages[];
+}) => {
   const validLanguages = languages.filter(
     (language) => hasText(language.name) || hasText(language.expertise),
   );
@@ -195,6 +230,39 @@ const SidebarLanguageSection = ({ languages }: { languages: ILanguages[] }) => {
         ))}
       </View>
     </View>
+  );
+};
+
+const MainCustomAdditionalSections = ({ sections }: { sections: ICustomSection[] }) => {
+  const validGroups = sections
+    .map((group) => ({
+      ...group,
+      validItems: group.items.filter(
+        (item) => hasText(item.name) || hasText(item.startAt) || hasText(item.endsAt) || hasText(item.city) || hasText(item.description),
+      ),
+    }))
+    .filter((g) => hasText(g.sectionTitle) || (g.validItems && g.validItems.length > 0));
+
+  if (validGroups.length === 0) return null;
+
+  return (
+    <>
+      {validGroups.map((group) => (
+        <SectionBlock key={group.id} title={hasText(group.sectionTitle) ? group.sectionTitle.trim() : "Custom Section"}>
+          {group.validItems.map((item) => (
+            <View key={item.id} style={{ marginBottom: "12px" }}>
+              {hasText(item.name) && (
+                <Text style={professionalStyles.roleText}>{joinText([item.name, item.city])}</Text>
+              )}
+              <Text style={professionalStyles.dateText}>{`${formatDate(item.startAt)} — ${formatDate(item.endsAt, true)}`}</Text>
+              {hasText(item.description) && (
+                <Text style={professionalStyles.paragraph}>{item.description.trim()}</Text>
+              )}
+            </View>
+          ))}
+        </SectionBlock>
+      ))}
+    </>
   );
 };
 

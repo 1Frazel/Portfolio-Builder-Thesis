@@ -1,5 +1,7 @@
 import { Document, Page, Text, View } from "@react-pdf/renderer";
 import type {
+  IAdditionalSections,
+  ICustomSection,
   IEducation,
   ILanguages,
   ILicensesCertifications,
@@ -31,6 +33,8 @@ const AtsDocument = ({
   workExperiences,
   educations,
   skills,
+  additionalSections,
+  customAdditionalSections,
   languages,
   professionalTraining,
   licensesCertifications,
@@ -40,10 +44,16 @@ const AtsDocument = ({
   workExperiences: IWorkExperience[];
   educations: IEducation[];
   skills: ISkill[];
+  additionalSections: IAdditionalSections[];
+  customAdditionalSections: ICustomSection[];
   languages: ILanguages[];
   professionalTraining: IProfessionalTraining[];
   licensesCertifications: ILicensesCertifications[];
 }) => {
+  const shouldRenderCustomSection = additionalSections.some(
+    (section) => section.id === "custom" && section.isSet,
+  );
+
   return (
     <Document>
       <Page size="A4" style={atsStyles.page}>
@@ -60,6 +70,11 @@ const AtsDocument = ({
           <LicensesCertifications
             licensesCertifications={licensesCertifications}
           />
+          {shouldRenderCustomSection && (
+            <CustomAdditionalSections
+              sections={customAdditionalSections}
+            />
+          )}
         </View>
       </Page>
     </Document>
@@ -82,6 +97,7 @@ const PersonalDetail = ({
     lastName,
     email,
     phone,
+    linkedinUrl,
     postalCode,
     cityState,
     country,
@@ -91,7 +107,14 @@ const PersonalDetail = ({
   const fullName = joinText([firstName, lastName]);
   const headerText = joinText([fullName, jobTarget]);
   const cityPostal = joinText([cityState, postalCode], " ");
-  const contactText = joinText([address, cityPostal, country, phone, email]);
+  const contactText = joinText([
+    address,
+    cityPostal,
+    country,
+    phone,
+    linkedinUrl,
+    email,
+  ]);
 
   if (!headerText && !contactText) return null;
 
@@ -277,7 +300,11 @@ const Skill = ({ skills }: { skills: ISkill[] }) => {
   );
 };
 
-const Language = ({ languages }: { languages: ILanguages[] }) => {
+const Language = ({
+  languages,
+}: {
+  languages: ILanguages[];
+}) => {
   const defaultLang = [DEFAULT_LANGUAGES];
   if (!isDifferent(languages, defaultLang)) return null;
 
@@ -303,6 +330,29 @@ const Language = ({ languages }: { languages: ILanguages[] }) => {
         </SectionContainer>
       </SectionWrapper>
       <Divider />
+    </>
+  );
+};
+
+const CustomAdditionalSections = ({ sections }: { sections: ICustomSection[] }) => {
+  const validGroups = sections
+    .map((g) => ({ ...g, validItems: g.items.filter((it) => hasText(it.name) || hasText(it.startAt) || hasText(it.endsAt) || hasText(it.city) || hasText(it.description)) }))
+    .filter((g) => hasText(g.sectionTitle) || (g.validItems && g.validItems.length > 0));
+
+  if (validGroups.length === 0) return null;
+
+  return (
+    <>
+      {validGroups.map((group) => (
+        <View key={group.id}>
+          <SectionDetailsWrapper title={hasText(group.sectionTitle) ? group.sectionTitle.trim() : "CUSTOM SECTION"}>
+            {group.validItems.map((item) => (
+              <SectionDetails key={item.id} startAt={formatDate(item.startAt)} endsAt={formatDate(item.endsAt, true)} title={joinText([item.name, item.city])} description={item.description} />
+            ))}
+          </SectionDetailsWrapper>
+          <Divider />
+        </View>
+      ))}
     </>
   );
 };
@@ -363,20 +413,18 @@ const LicensesCertifications = ({
   if (validLicenses.length === 0) return null;
 
   return (
-    <>
-      <SectionDetailsWrapper title="LICENSES">
-        {validLicenses.map((license) => {
-          return (
-            <SectionDetails
-              key={license.id}
-              startAt={formatDate(license.startAt)}
-              endsAt={formatDate(license.endsAt, true)}
-              title={joinText([license.name, license.issuer])}
-            />
-          );
-        })}
-      </SectionDetailsWrapper>
-    </>
+    <SectionDetailsWrapper title="LICENSES">
+      {validLicenses.map((license) => {
+        return (
+          <SectionDetails
+            key={license.id}
+            startAt={formatDate(license.startAt)}
+            endsAt={formatDate(license.endsAt, true)}
+            title={joinText([license.name, license.issuer])}
+          />
+        );
+      })}
+    </SectionDetailsWrapper>
   );
 };
 
