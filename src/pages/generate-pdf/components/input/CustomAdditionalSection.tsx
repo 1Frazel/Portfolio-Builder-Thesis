@@ -27,67 +27,105 @@ const CustomAdditionalSection = ({
   const { t } = useTranslation("creationPage");
 
   const handleEditGroupTitle = (groupId: number, value: string) => {
-    setSections(
-      sections.map((g) => (g.id === groupId ? { ...g, sectionTitle: value } : g)),
+    setSections((prevSections) =>
+      prevSections.map((g) =>
+        g.id === groupId ? { ...g, sectionTitle: value } : g,
+      ),
     );
   };
 
   const handleAddGroup = () => {
-    const latestId = sections.length > 0 ? sections.at(-1)?.id ?? 0 : 0;
-    setSections([...sections, { ...DEFAULT_CUSTOM_SECTION, id: latestId + 1 }]);
+    setSections((prevSections) => {
+      const latestId = prevSections.length > 0 ? prevSections.at(-1)?.id ?? 0 : 0;
+      return [...prevSections, { ...DEFAULT_CUSTOM_SECTION, id: latestId + 1 }];
+    });
   };
 
   const handleDeleteGroup = (groupId: number) => {
-    setSections(sections.filter((g) => g.id !== groupId));
+    setSections((prevSections) => prevSections.filter((g) => g.id !== groupId));
   };
 
   const handleAddItem = (groupId: number) => {
-    setSections(
-      sections.map((g) => {
+    setSections((prevSections) =>
+      prevSections.map((g) => {
         if (g.id !== groupId) return g;
         const latestItemId = g.items.length > 0 ? g.items.at(-1)?.id ?? 0 : 0;
-        return { ...g, items: [...g.items, { ...DEFAULT_CUSTOM_SECTION_ITEM, id: latestItemId + 1 }] };
-      }),
-    );
-  };
-
-  const handleDeleteItem = (groupId: number, itemId: number) => {
-    setSections(
-      sections.map((g) => (g.id === groupId ? { ...g, items: g.items.filter((it) => it.id !== itemId) } : g)),
-    );
-  };
-
-  const handleEditItem = (groupId: number, itemId: number, key: string, value: string) => {
-    setSections(
-      sections.map((g) => {
-        if (g.id !== groupId) return g;
         return {
           ...g,
-          items: g.items.map((it) => (it.id === itemId ? { ...it, [key]: value } : it)),
+          items: [
+            ...g.items,
+            { ...DEFAULT_CUSTOM_SECTION_ITEM, id: latestItemId + 1 },
+          ],
         };
       }),
     );
   };
 
+  const handleDeleteItem = (groupId: number, itemId: number) => {
+    setSections((prevSections) => {
+      const nextSections = [...prevSections];
+
+      for (let index = 0; index < nextSections.length; index += 1) {
+        const group = nextSections[index];
+        if (group.id !== groupId) continue;
+
+        nextSections[index] = {
+          ...group,
+          items: group.items.filter((item) => item.id !== itemId),
+        };
+        break;
+      }
+
+      return nextSections;
+    });
+  };
+
+  const handleEditItem = (groupId: number, itemId: number, key: string, value: string) => {
+    setSections((prevSections) => {
+      const nextSections = [...prevSections];
+
+      for (let groupIndex = 0; groupIndex < nextSections.length; groupIndex += 1) {
+        const group = nextSections[groupIndex];
+        if (group.id !== groupId) continue;
+
+        nextSections[groupIndex] = {
+          ...group,
+          items: group.items.map((item) =>
+            item.id === itemId ? { ...item, [key]: value } : item,
+          ),
+        };
+        break;
+      }
+
+      return nextSections;
+    });
+  };
+
   const handleItemUp = (groupIndex: number, itemIndex: number) => {
-    const currentSections = [...sections];
-    const items = [...currentSections[groupIndex].items];
-    const tmp = items[itemIndex];
-    items[itemIndex] = items[itemIndex - 1];
-    items[itemIndex - 1] = tmp;
-    currentSections[groupIndex] = { ...currentSections[groupIndex], items };
-    setSections(currentSections);
+    setSections((prevSections) => {
+      const currentSections = [...prevSections];
+      const items = [...currentSections[groupIndex].items];
+      const tmp = items[itemIndex];
+      items[itemIndex] = items[itemIndex - 1];
+      items[itemIndex - 1] = tmp;
+      currentSections[groupIndex] = { ...currentSections[groupIndex], items };
+      return currentSections;
+    });
   };
 
   const handleItemDown = (groupIndex: number, itemIndex: number) => {
-    const currentSections = [...sections];
-    const items = [...currentSections[groupIndex].items];
-    const tmp = items[itemIndex];
-    items[itemIndex] = items[itemIndex + 1];
-    items[itemIndex + 1] = tmp;
-    currentSections[groupIndex] = { ...currentSections[groupIndex], items };
-    setSections(currentSections);
+    setSections((prevSections) => {
+      const currentSections = [...prevSections];
+      const items = [...currentSections[groupIndex].items];
+      const tmp = items[itemIndex];
+      items[itemIndex] = items[itemIndex + 1];
+      items[itemIndex + 1] = tmp;
+      currentSections[groupIndex] = { ...currentSections[groupIndex], items };
+      return currentSections;
+    });
   };
+
+    const fieldInputClass = "w-full rounded-md border border-slate-200 bg-slate-100 px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100";
 
   return (
     <ExpandableSectionContainer
@@ -107,7 +145,7 @@ const CustomAdditionalSection = ({
               defaultValue={group.sectionTitle}
               onChange={(v: string) => handleEditGroupTitle(group.id, v)}
               label={t("additionalSections.customSectionTitle", "Section Title")}
-              inputClass="w-3/4"
+              inputClass={fieldInputClass}
             />
             <div className="flex gap-2">
               <button type="button" onClick={() => handleAddItem(group.id)} className="text-sm text-blue-600">{t("additionalSections.addItem", "Add item")}</button>
@@ -190,7 +228,7 @@ const GroupItemEditor = ({
         <TextArea
           defaultValue={item.description}
           onChange={(input: string) => handleTextChange(groupId, item.id, "description", input)}
-          label={t("additionalSections.customDescriptionLabel", "Description")}
+          label={t("additionalSections.labels.customDescription", "Description")}
           inputClass={fieldInputClass}
         />
       </div>

@@ -153,6 +153,7 @@
       "labels": {
         "profilePicture": "Profile Picture",
         "choosePhoto": "Choose a photo",
+        "removePhoto": "Remove photo",
         "jobTitle": "Job Target",
         "firstName": "First Name",
         "lastName": "Last Name",
@@ -236,14 +237,26 @@
     },
     "additionalSections": {
       "title": "Additional Sections",
+      "customSectionTitle": "Section Title",
+      "customName": "Item Title",
+      "customDate": "Start & End Date",
+      "customDatePlaceholder": "MM // YYYY",
+      "customCity": "City",
       "description": "Include supplementary information that adds value to your candidacy, such as professional certifications and Trainings, or foreign language proficiencies.",
+      "customDescription": "Add a custom section to highlight any unique qualifications, projects, or experiences that don't fit into the standard categories but are relevant to your career goals.",
+      "customDefault": "(Not Specified)",
       "labels": {
         "language": "Language",
         "licensesCertifications": "Licenses / Certifications",
-        "professionalTraining": "Professional Training"
+        "professionalTraining": "Professional Training",
+        "custom": "Custom Section",
+        "customDescription": "Description"
       },
+      "addItem": "Add Items",
+      "deleteSection": "Delete Section",
       "backButton": "Back",
       "nextButton": "Next up, Finish Up",
+      "customAddButton": "Add another Custom Section",
       "empty": "No additional sections were selected.",
       "notFound": "Can't find the current section!..."
     },

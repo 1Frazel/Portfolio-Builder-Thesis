@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDebouncedCallback } from "use-debounce";
 import { ExpandableSectionContainer } from "./ExpandableSectionContainer";
@@ -21,6 +21,7 @@ const PersonalDetail = ({
   const { t } = useTranslation("creationPage");
   const { showToast } = useToast();
   const [isUploadingPhoto, setIsUploadingPhoto] = useState(false);
+  const photoInputRef = useRef<HTMLInputElement>(null);
   const canUploadPhoto = template === "professional";
   const handlePersonalDetailChange = useDebouncedCallback(
     (value: string, key: string) => {
@@ -93,6 +94,17 @@ const PersonalDetail = ({
     void uploadPhoto();
   };
 
+  const handleRemovePhoto = () => {
+    setPersonalDetail((prev) => ({
+      ...prev,
+      photo: "",
+    }));
+
+    if (photoInputRef.current) {
+      photoInputRef.current.value = "";
+    }
+  };
+
   const fieldInputClass =
     "w-full rounded-md border border-slate-200 bg-slate-100 px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100";
 
@@ -116,6 +128,7 @@ const PersonalDetail = ({
                     </label>
                     <input
                       id="profile-picture-input"
+                      ref={photoInputRef}
                       type="file"
                       accept="image/*"
                       onChange={handlePhotoChange}
@@ -129,11 +142,20 @@ const PersonalDetail = ({
                   </p>
                 )}
                 {personalDetail.photo && !isUploadingPhoto && (
-                  <img
-                    src={personalDetail.photo}
-                    alt="Profile preview"
-                    className="h-24 w-24 rounded-full border border-slate-200 object-cover"
-                  />
+                  <div className="flex flex-col items-center gap-2">
+                    <img
+                      src={personalDetail.photo}
+                      alt="Profile preview"
+                      className="h-24 w-24 rounded-full border border-slate-200 object-cover"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleRemovePhoto}
+                      className="text-sm font-medium text-red-600 transition hover:text-red-700"
+                    >
+                      {t("personalInfo.labels.removePhoto", "Remove photo")}
+                    </button>
+                  </div>
                 )}
               </div>
             ),

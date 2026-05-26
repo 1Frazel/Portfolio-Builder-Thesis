@@ -152,6 +152,7 @@
       "labels": {
         "profilePicture": "Foto Profil",
         "choosePhoto": "Pilih foto",
+        "removePhoto": "Hapus foto",
         "jobTitle": "Posisi Pekerjaan",
         "firstName": "Nama Depan",
         "lastName": "Nama Belakang",
@@ -234,14 +235,26 @@
     },
     "additionalSections": {
       "title": "Data Pendukung",
+      "customSectionTitle": "Judul Bagian",
+      "customName": "Judul Item",
+      "customDate": "Tanggal Mulai & Berakhir",
+      "customDatePlaceholder": "DD // TTTT",
+      "customCity": "Kota",
       "description": "Perkuat CV Anda dengan menyertakan sertifikasi, pelatihan, atau kemampuan bahasa asing yang relevan dengan pekerjaan yang dilamar.",
+      "customDescription": "Tambahkan bagian khusus untuk menonjolkan kualifikasi, proyek, atau pengalaman unik yang tidak masuk dalam kategori standar namun relevan dengan tujuan karir Anda.",
+      "customDefault": "(Belum Diisi)",
       "labels": {
         "language": "Bahasa",
         "licensesCertifications": "Lisensi & Sertifikasi",
-        "professionalTraining": "Pelatihan Profesional"
+        "professionalTraining": "Pelatihan Profesional",
+        "custom": "Bagian Khusus",
+        "customDescription": "Deskripsi"
       },
+      "addItem": "Tambah Item",
+      "deleteSection": "Hapus Bagian",
       "backButton": "Kembali",
       "nextButton": "Selanjutnya: Selesai",
+      "customAddButton": "Tambah Bagian Khusus lainnya",
       "empty": "Belum ada data pendukung yang dipilih.",
       "notFound": "Bagian tidak ditemukan."
     },
