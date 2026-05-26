@@ -10,6 +10,7 @@ interface Template {
   title: string;
   previewImage: string;
   description: string;
+  disclaimer: string;
   modalDesc: string;
 }
 
@@ -24,6 +25,7 @@ const TemplateSelection = () => {
       title: "Classic ATS",
       previewImage: atsPreviewImage,
       description: t("templateSelection.template.ats.description"),
+      disclaimer: t("templateSelection.template.ats.disclaimer"),
       modalDesc: t("templateSelection.template.ats.modalDesc"),
     },
     {
@@ -31,6 +33,7 @@ const TemplateSelection = () => {
       title: "Professional",
       previewImage: professionalPreviewImage,
       description: t("templateSelection.template.professional.description"),
+      disclaimer: t("templateSelection.template.professional.disclaimer"),
       modalDesc: t("templateSelection.template.professional.modalDesc"),
     },
   ];
@@ -75,6 +78,11 @@ const TemplateSelection = () => {
                   {template.title}
                 </h3>
                 <p className="text-sm text-slate-600">{template.description}</p>
+                {template.id === "professional" && template.disclaimer && (
+                  <div className="text-xs text-amber-600">
+                    {template.disclaimer}
+                  </div>
+                )}
 
                 <div className="mt-auto flex gap-3">
                   <button

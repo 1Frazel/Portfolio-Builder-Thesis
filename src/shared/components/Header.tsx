@@ -146,7 +146,7 @@ const DesktopAuthButton = ({
       type="button"
       onClick={loading ? undefined : handleClick}
       disabled={loading}
-      className={`inline-flex items-center justify-center gap-2 rounded-full bg-[#214182] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#284ca0] focus:outline-none focus:ring-2 focus:ring-white/30 md:text-base ${loading ? "cursor-not-allowed opacity-70" : "cursor-pointer"} h-[44px] `}
+      className={`inline-flex items-center justify-center gap-2 rounded-full bg-[#214182] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/30 md:text-base ${loading ? "cursor-not-allowed opacity-70" : "cursor-pointer"} h-[44px] `}
     >
       {loading ? (
         <>

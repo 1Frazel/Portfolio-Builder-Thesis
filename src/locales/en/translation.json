@@ -34,8 +34,8 @@
       "button1": "Create now!",
       "button2": "Learn about it",
       "imageAlt": "Resume builder preview",
-      "buttonLoggedIn": "Create Now",
-      "buttonLoggedOut": "Sign in With Google"
+      "buttonLoggedIn": "Create Now!",
+      "buttonLoggedOut": "Sign in and Start Building!"
     },
     "atsSection": {
       "label": "What is ATS?"
@@ -129,7 +129,6 @@
       "title": "Select a Resume Template",
       "description": "Choose a template to start creating your resume",
       "atsDescription": "A clean and straightforward resume layout designed for maximum ATS readability. This template uses a single-column structure, minimal styling, and clear section hierarchy to ensure all information is easily parsed by applicant tracking systems. Ideal for users who prioritize compatibility and simplicity.",
-      "professionalDescription": "A modern and visually structured resume with a customizable color accent to enhance readability and personal branding. While maintaining ATS compatibility, this template introduces a sidebar layout to organize key information such as skills and contact details more effectively. Suitable for users who want a balance between professionalism and visual appeal.",
       "previewButton": "Preview",
       "selectButton": "Select Template",
       "backButton": "← Back to My Resumes",
@@ -141,7 +140,8 @@
           "modalDesc": "Clean, compact, and optimized for ATS parsing."
         },
         "professional": {
-          "description": "A modern and visually structured resume with a customizable color accent to enhance readability and personal branding. While maintaining ATS compatibility, this template introduces a sidebar layout to organize key information such as skills and contact details more effectively. Suitable for users who want a balance between professionalism and visual appeal.",
+          "description": "A modern and visually structured resume with a customizable color accent to enhance readability and personal branding. This template introduces a sidebar layout to organize key information such as skills and contact details more effectively. Suitable for users who want a balance between professionalism and visual appeal.",
+          "disclaimer": "(Disclaimer: This template is not fully optimized for ATS System and may have parsing issues with certain ATS software. We recommend using the Classic ATS template for maximum compatibility.)",
           "modalDesc": "A polished two-column layout with a sidebar profile.",
           "sidebarColor": "Sidebar Color"
         }
@@ -151,6 +151,8 @@
       "title": "Personal Information",
       "description": "Add your personal and contact details so employers can easily identify and reach you.",
       "labels": {
+        "profilePicture": "Profile Picture",
+        "choosePhoto": "Choose a photo",
         "jobTitle": "Job Target",
         "firstName": "First Name",
         "lastName": "Last Name",
@@ -161,6 +163,13 @@
         "address": "Address",
         "country": "Country",
         "placeholder": "The role you want"
+      },
+      "toasts": {
+        "uploadPhoto":"Uploading photo...",
+        "uploadSuccess":"Photo uploaded successfully!",
+        "uploadFailed":"Failed to upload photo",
+        "UploadFailedSize":"Photo size exceeds the limit of 2MB. Please choose a smaller file.",
+        "UploadFailedType":"Please choose an image file."
       },
       "nextButton": "Next up, Work Experience"
     },

@@ -26,6 +26,21 @@ const AdditionalSections = ({
   const { t } = useTranslation("creationPage");
 
   const handleEnableSections = (id: string) => {
+    const hasSection = additionalSections.some((section) => section.id === id);
+
+    if (!hasSection) {
+      setAdditionalSections([
+        ...additionalSections,
+        {
+          id,
+          title: id === "custom" ? "Custom Section" : id,
+          isSet: true,
+          customTitle: id === "custom" ? "" : undefined,
+        },
+      ]);
+      return;
+    }
+
     setAdditionalSections(
       additionalSections.map((section) => {
         if (section.id === id) {

@@ -53,6 +53,22 @@ export interface IAdditionalSections {
   id: string;
   title: string;
   isSet: boolean;
+  customTitle?: string;
+}
+
+export interface ICustomSectionItem {
+  id: number;
+  name: string;
+  startAt: string;
+  endsAt: string;
+  city: string;
+  description: string;
+}
+
+export interface ICustomSection {
+  id: number;
+  sectionTitle: string;
+  items: ICustomSectionItem[];
 }
 
 export interface ILanguages {

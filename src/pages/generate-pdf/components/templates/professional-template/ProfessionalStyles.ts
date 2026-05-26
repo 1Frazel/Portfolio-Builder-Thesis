@@ -32,6 +32,17 @@ const professionalStyles = StyleSheet.create({
     fontSize: "18px",
     lineHeight: 1.1,
     fontWeight: 700,
+    textAlign: "center",
+  },
+  photoWrapper: {
+    marginBottom: "14px",
+  },
+  photo: {
+    width: "120px",
+    height: "120px",
+    borderRadius: "60px",
+    objectFit: "cover",
+    alignSelf: "center",
   },
   jobTarget: {
     fontSize: "6.5px",

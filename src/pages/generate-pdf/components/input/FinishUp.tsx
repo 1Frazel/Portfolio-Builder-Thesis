@@ -18,6 +18,7 @@ import type {
 const FinishUp = ({
   personalDetail,
   setPersonalDetail,
+  template,
   workExperiences,
   setWorkExperiences,
   educations,
@@ -31,6 +32,7 @@ const FinishUp = ({
 }: {
   personalDetail: IPersonalDetail;
   setPersonalDetail: React.Dispatch<React.SetStateAction<IPersonalDetail>>;
+  template?: string;
   workExperiences: IWorkExperience[];
   setWorkExperiences: React.Dispatch<React.SetStateAction<IWorkExperience[]>>;
   educations: IEducation[];
@@ -55,6 +57,7 @@ const FinishUp = ({
         <PersonalDetail
           personalDetail={personalDetail}
           setPersonalDetail={setPersonalDetail}
+          template={template}
           summaryMode
         />
         <WorkExperiences

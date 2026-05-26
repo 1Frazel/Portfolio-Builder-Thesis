@@ -1,20 +1,27 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDebouncedCallback } from "use-debounce";
 import { ExpandableSectionContainer } from "./ExpandableSectionContainer";
 
 import InputField from "./InputField";
 import type { IPersonalDetail } from "../../interface/generatePdfInterface";
+import { useToast } from "../../../../shared/hooks/useToast";
 
 const PersonalDetail = ({
   personalDetail,
   setPersonalDetail,
   summaryMode = false,
+  template = "ats",
 }: {
   personalDetail: IPersonalDetail;
   setPersonalDetail: React.Dispatch<React.SetStateAction<IPersonalDetail>>;
   summaryMode?: boolean;
+  template?: string;
 }) => {
   const { t } = useTranslation("creationPage");
+  const { showToast } = useToast();
+  const [isUploadingPhoto, setIsUploadingPhoto] = useState(false);
+  const canUploadPhoto = template === "professional";
   const handlePersonalDetailChange = useDebouncedCallback(
     (value: string, key: string) => {
       setPersonalDetail({ ...personalDetail, [key]: value });
@@ -22,10 +29,118 @@ const PersonalDetail = ({
     500,
   );
 
+  const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const maxSizeInBytes = 2 * 1024 * 1024;
+    if (file.size > maxSizeInBytes) {
+      showToast(t("personalInfo.toasts.UploadFailedSize"), "error");
+      event.target.value = "";
+      return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+      showToast(t("personalInfo.toasts.UploadFailedType"), "error");
+      event.target.value = "";
+      return;
+    }
+
+    const env = import.meta.env as Record<string, string | undefined>;
+    const apiKey = env.VITE_IMGBB_API_KEY;
+    if (!apiKey) {
+      showToast("An API key is missing", "error");
+      return;
+    }
+
+    const uploadPhoto = async () => {
+      try {
+        setIsUploadingPhoto(true);
+
+        const payload = new FormData();
+        payload.append("image", file);
+
+        const response = await fetch(
+          `https://api.imgbb.com/1/upload?key=${apiKey}`,
+          {
+            method: "POST",
+            body: payload,
+          },
+        );
+
+        const result = await response.json();
+        const downloadUrl = result?.data?.url;
+
+        if (!response.ok || !result?.success || !downloadUrl) {
+          throw new Error(result?.error?.message || "Upload failed");
+        }
+
+        setPersonalDetail((prev) => ({
+          ...prev,
+          photo: downloadUrl,
+        }));
+        showToast(t("personalInfo.toasts.uploadSuccess"), "success");
+      } catch (error) {
+        const message =
+          error instanceof Error ? error.message : t("personalInfo.toasts.uploadFailed");
+        showToast(message, "error");
+        event.target.value = "";
+      } finally {
+        setIsUploadingPhoto(false);
+      }
+    };
+
+    void uploadPhoto();
+  };
+
   const fieldInputClass =
     "w-full rounded-md border border-slate-200 bg-slate-100 px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100";
 
   const listPersonalDetail = [
+    ...(canUploadPhoto
+      ? [
+          {
+            id: "photo",
+            component: (
+              <div className="flex w-full flex-row items-center gap-4">
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-medium text-slate-700">
+                    {t("personalInfo.labels.profilePicture", "Profile picture")}
+                  </label>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <label
+                      htmlFor="profile-picture-input"
+                      className="inline-flex cursor-pointer items-center rounded-md border border-slate-200 bg-slate-100 px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-200"
+                    >
+                      {t("personalInfo.labels.choosePhoto", "Choose photo")}
+                    </label>
+                    <input
+                      id="profile-picture-input"
+                      type="file"
+                      accept="image/*"
+                      onChange={handlePhotoChange}
+                      className="sr-only"
+                    />
+                  </div>
+                </div>
+                {isUploadingPhoto && (
+                  <p className="text-xs text-slate-500">
+                    {t("personalInfo.toasts.uploadPhoto")}
+                  </p>
+                )}
+                {personalDetail.photo && !isUploadingPhoto && (
+                  <img
+                    src={personalDetail.photo}
+                    alt="Profile preview"
+                    className="h-24 w-24 rounded-full border border-slate-200 object-cover"
+                  />
+                )}
+              </div>
+            ),
+            containerClass: "sm:col-span-2",
+          },
+        ]
+      : []),
     {
       id: "jobTarget",
       component: (

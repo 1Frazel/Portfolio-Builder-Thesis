@@ -4,12 +4,14 @@ import { useTranslation } from "react-i18next";
 import Languages from "../../pages/generate-pdf/components/input/Languages";
 import LicensesCertifications from "../../pages/generate-pdf/components/input/LicencesCertifications";
 import ProfessionalTraining from "../../pages/generate-pdf/components/input/ProfessionalTraining";
+import CustomAdditionalSection from "../../pages/generate-pdf/components/input/CustomAdditionalSection";
 import PersonalDetail from "../../pages/generate-pdf/components/input/PersonalDetails";
 import WorkExperiences from "../../pages/generate-pdf/components/input/WorkExperiences";
 import Education from "../../pages/generate-pdf/components/input/Education";
 import Skills from "../../pages/generate-pdf/components/input/Skills";
 import ProfileSummary from "../../pages/generate-pdf/components/input/ProfileSummary";
 import AdditionalSections from "../../pages/generate-pdf/components/input/AdditionalSections";
+import { DEFAULT_CUSTOM_SECTION } from "../../pages/generate-pdf/const/generatePdfConst";
 import { useFormData } from "./useFormData";
 import FinishUp from "../../pages/generate-pdf/components/input/FinishUp";
 import { buildTemplateDocument } from "../utils/templateDocument";
@@ -32,6 +34,7 @@ const useAtsTemplate = ({
     setProfileSummary,
     setPersonalDetail,
     setAdditionalSections,
+    setCustomSections,
     setProfessionalTraining,
     setLicensesCertifications,
   } = useFormData({ useMock });
@@ -39,6 +42,8 @@ const useAtsTemplate = ({
   const [activeSectionIndex, setActiveSectionIndex] = useState(0);
   const [activeAdditionalSection, setActiveAdditionalSection] =
     useState("default");
+
+  const customAdditionalSections = formData.customSections ?? [DEFAULT_CUSTOM_SECTION];
 
   const listAdditionalSections = [
     {
@@ -68,6 +73,13 @@ const useAtsTemplate = ({
         />
       ),
     },
+    {
+      id: "custom",
+      title: t("additionalSections.labels.custom", "Custom Section"),
+      component: (
+        <CustomAdditionalSection sections={customAdditionalSections} setSections={setCustomSections} />
+      ),
+    },
   ];
 
   const listAtsTemplateSection = [
@@ -79,6 +91,7 @@ const useAtsTemplate = ({
         <PersonalDetail
           personalDetail={formData.personalDetail}
           setPersonalDetail={setPersonalDetail}
+          template={template}
         />
       ),
     },
@@ -143,6 +156,7 @@ const useAtsTemplate = ({
         <FinishUp
           personalDetail={formData.personalDetail}
           setPersonalDetail={setPersonalDetail}
+          template={template}
           workExperiences={formData.workExperiences}
           setWorkExperiences={setWorkExperiences}
           educations={formData.educations}
