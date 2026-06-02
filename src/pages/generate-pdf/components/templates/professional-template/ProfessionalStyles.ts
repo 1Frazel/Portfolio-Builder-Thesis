@@ -50,6 +50,7 @@ const professionalStyles = StyleSheet.create({
     letterSpacing: "1px",
     textTransform: "uppercase",
     marginTop: "14px",
+    textAlign: "center",
   },
   sidebarHeading: {
     fontSize: "13px",
