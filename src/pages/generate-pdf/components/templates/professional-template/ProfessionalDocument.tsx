@@ -1,4 +1,4 @@
-import { Document, Image, Page, Text, View } from "@react-pdf/renderer";
+import { Document, Page, Text, View } from "@react-pdf/renderer";
 import type {
   IAdditionalSections,
   ICustomSection,
@@ -130,14 +130,14 @@ const SidebarPersonalDetail = ({
 
   return (
     <View wrap={false}>
-      {hasText(personalDetail.photo) && (
+      {/* {hasText(personalDetail.photo) && (
         <View style={professionalStyles.photoWrapper}>
           <Image
             src={personalDetail.photo.trim()}
             style={professionalStyles.photo}
           />
         </View>
-      )}
+      )} */}
       {hasText(firstName) && (
         <Text style={professionalStyles.name}>{firstName.trim()}</Text>
       )}
