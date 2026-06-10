@@ -375,8 +375,9 @@
       "switchToIndonesian": "Ganti ke Bahasa Indonesia"
     },
     "toast": {
-      "InvalidPDFException": "Mohon unggah file dengan format PDF yang valid.",
-      "PasswordException": "Pastikan file PDF yang diunggah tidak terkunci oleh kata sandi"
+      "InvalidPDFException": "Hanya mendukung file berformat PDF yang valid.",
+      "PasswordException": "File PDF tidak boleh dilindungi kata sandi.",
+      "FileExceed5mb": "Ukuran maksimal file PDF adalah 5MB."
     }
   }
 }

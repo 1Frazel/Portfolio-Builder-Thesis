@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useToast } from "../hooks/useToast";
+import { useTranslation } from "react-i18next";
 
 const FileInput = ({
   title,
@@ -12,6 +14,8 @@ const FileInput = ({
   disabled?: boolean;
 }) => {
   const [fileName, setFileName] = useState("");
+  const { showToast } = useToast();
+  const { t: translatedText } = useTranslation("resumeCheckerPage");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (disabled) return;
@@ -21,6 +25,14 @@ const FileInput = ({
     if (!currentFiles) return;
 
     const newFiles = currentFiles[0];
+
+    const maxAllowedSize = 5 * 1024 * 1024;
+
+    if (newFiles.size > maxAllowedSize) {
+      showToast(translatedText("toast.FileExceed5mb"), "error");
+      return;
+    }
+
     const fileUrl = URL.createObjectURL(newFiles);
     handleClick(fileUrl);
     setFileName(newFiles.name);
@@ -33,27 +45,23 @@ const FileInput = ({
           disabled ? "bg-slate-400 cursor-not-allowed" : "bg-[#2951A3]"
         }`}
       >
-      <label
-        htmlFor="fileUpload"
-        className={disabled ? "cursor-not-allowed" : "cursor-pointer"}
-      >
-        <input
-          id="fileUpload"
-          type="file"
-          className="hidden"
-          accept={acceptedFormat}
-          disabled={disabled}
-          onChange={handleChange}
-        />
-        <p className="text-white text-center">
-          {title}
-        </p>
-      </label>
+        <label
+          htmlFor="fileUpload"
+          className={disabled ? "cursor-not-allowed" : "cursor-pointer"}
+        >
+          <input
+            id="fileUpload"
+            type="file"
+            className="hidden"
+            accept={acceptedFormat}
+            disabled={disabled}
+            onChange={handleChange}
+          />
+          <p className="text-white text-center">{title}</p>
+        </label>
+      </div>
+      <p className="text-sm text-gray-500 text-center mt-4">{fileName}</p>
     </div>
-    <p className="text-sm text-gray-500 text-center mt-4">
-      {fileName}
-    </p>
-  </div>
   );
 };
 

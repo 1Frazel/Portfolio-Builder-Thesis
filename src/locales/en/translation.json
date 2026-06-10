@@ -363,8 +363,9 @@
       "default": "Section"
     },
     "toast": {
-      "InvalidPDFException": "Please upload a file in a valid PDF format",
-      "PasswordException": "Please ensure your PDF file is not password-protected"
+      "InvalidPDFException": "Only valid PDF files are allowed.",
+      "PasswordException": "Password-protected PDFs are not allowed.",
+      "FileExceed5mb": "Maximum PDF file size is 5MB."
     }
   }
 }
