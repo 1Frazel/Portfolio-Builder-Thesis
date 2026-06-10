@@ -158,6 +158,8 @@ const buildRecommendations = (
 const detectSections = (text: string): Record<string, SectionData> => {
   const matchedKeyword = findAllKeywords(text);
   const contentBetweenKeyword = extractSectionContent(text, matchedKeyword);
+  const test = parseSections(matchedKeyword, contentBetweenKeyword);
+  console.log({ matchedKeyword, contentBetweenKeyword, test });
   return parseSections(matchedKeyword, contentBetweenKeyword);
 };
 

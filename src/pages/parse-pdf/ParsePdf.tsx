@@ -3,6 +3,7 @@ import Header from "../../shared/components/Header";
 import FileInput from "../../shared/components/FileInput";
 import checkCv, { type SectionData } from "./utils/checkCv";
 import { useTranslation } from "react-i18next";
+import { useToast } from "../../shared/hooks/useToast";
 
 interface CvReport {
   rawText: string;
@@ -15,6 +16,8 @@ const ParsePdf = () => {
   const [cvReport, setCvReport] = useState<CvReport | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation("resumeCheckerPage");
+  const { showToast } = useToast();
+  const { t: translatedText } = useTranslation("resumeCheckerPage");
 
   const handleChange = async (fileUrl: string) => {
     try {
@@ -27,6 +30,18 @@ const ParsePdf = () => {
       }, 3000);
     } catch (err) {
       console.error(err);
+      if (err instanceof Error) {
+        switch (err.name) {
+          case "InvalidPDFException":
+            showToast(translatedText("toast.InvalidPDFException"), "error");
+            break;
+          case "PasswordException":
+            showToast(translatedText("toast.PasswordException"), "error");
+            break;
+          default:
+            showToast(err.message, "error");
+        }
+      }
       setIsLoading(false);
     }
   };
@@ -66,8 +81,21 @@ const ParsePdf = () => {
             <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 md:p-8 bg-white flex flex-col items-center justify-center min-h-64">
               {/* File Icon */}
               <div className="mb-4">
-                <svg width="109" height="139" viewBox="0 0 109 139" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path opacity="0.5" d="M106.5 47.1667L61.9286 2.5H2.5V136.5H106.5V47.1667ZM61.9286 2.5V47.1667H106.5M47.0714 17.3889H14.3857M47.0714 32.2778H14.3857M47.0714 47.1667H14.3857M14.3857 62.0556H94.6143M14.3857 76.9444H94.6143M14.3857 91.8333H94.6143M14.3857 106.722H94.6143M14.3857 121.611H94.6143" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg
+                  width="109"
+                  height="139"
+                  viewBox="0 0 109 139"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    opacity="0.5"
+                    d="M106.5 47.1667L61.9286 2.5H2.5V136.5H106.5V47.1667ZM61.9286 2.5V47.1667H106.5M47.0714 17.3889H14.3857M47.0714 32.2778H14.3857M47.0714 47.1667H14.3857M14.3857 62.0556H94.6143M14.3857 76.9444H94.6143M14.3857 91.8333H94.6143M14.3857 106.722H94.6143M14.3857 121.611H94.6143"
+                    stroke="black"
+                    stroke-width="5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
                 </svg>
               </div>
 
@@ -92,7 +120,9 @@ const ParsePdf = () => {
           <div className="flex flex-col gap-4">
             {/* Resume Checker Header */}
             <div className="bg-[#2951A3] text-white rounded-lg p-4 md:p-6 flex items-center justify-between">
-              <h2 className="text-lg md:text-xl font-bold">{t("header.title")}</h2>
+              <h2 className="text-lg md:text-xl font-bold">
+                {t("header.title")}
+              </h2>
             </div>
 
             {/* Description / Recommendations Section */}
@@ -127,7 +157,9 @@ const ParsePdf = () => {
 
             {/* Checking Result Header */}
             <div className="bg-[#2951A3] text-white rounded-lg p-4 md:p-6 flex items-center justify-between">
-              <h3 className="text-lg md:text-xl font-bold">{t("results.title")}</h3>
+              <h3 className="text-lg md:text-xl font-bold">
+                {t("results.title")}
+              </h3>
             </div>
 
             {/* Results Content */}

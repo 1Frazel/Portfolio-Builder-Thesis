@@ -10,7 +10,7 @@
       "signIn": "Sign In With Google",
       "signOut": "Sign Out",
       "signInToCreateResumes": "Sign in to create resumes",
-      "toast":{
+      "toast": {
         "signInInfo": "Opening Google sign-in…",
         "signInSuccess": "Signed in successfully",
         "signInFailed": "Failed to sign in",
@@ -166,11 +166,11 @@
         "placeholder": "The role you want"
       },
       "toasts": {
-        "uploadPhoto":"Uploading photo...",
-        "uploadSuccess":"Photo uploaded successfully!",
-        "uploadFailed":"Failed to upload photo",
-        "UploadFailedSize":"Photo size exceeds the limit of 2MB. Please choose a smaller file.",
-        "UploadFailedType":"Please choose an image file."
+        "uploadPhoto": "Uploading photo...",
+        "uploadSuccess": "Photo uploaded successfully!",
+        "uploadFailed": "Failed to upload photo",
+        "UploadFailedSize": "Photo size exceeds the limit of 2MB. Please choose a smaller file.",
+        "UploadFailedType": "Please choose an image file."
       },
       "nextButton": "Next up, Work Experience"
     },
@@ -361,6 +361,10 @@
       "languages": "Languages",
       "certifications": "Certifications",
       "default": "Section"
+    },
+    "toast": {
+      "InvalidPDFException": "Please upload a file in a valid PDF format",
+      "PasswordException": "Please ensure your PDF file is not password-protected"
     }
   }
 }

@@ -10,7 +10,7 @@
       "signIn": "Masuk dengan Google",
       "signOut": "Keluar",
       "signInToCreateResumes": "Masuk dengan Google untuk mulai membuat CV",
-      "toast":{
+      "toast": {
         "signInInfo": "Membuka Google sign-in…",
         "signInSuccess": "Sign-in berhasil",
         "signInFailed": "Gagal Sign-in",
@@ -165,10 +165,10 @@
         "placeholder": "Misal: Frontend Developer"
       },
       "toasts": {
-        "uploadPhoto":"Mengunggah foto...",
-        "uploadSuccess":"Foto berhasil diunggah!",
-        "uploadFailed":"Gagal mengunggah foto",
-        "UploadFailedSize":"Ukuran foto melebihi batas sebesar 2MB. Silakan pilih file yang lebih kecil."
+        "uploadPhoto": "Mengunggah foto...",
+        "uploadSuccess": "Foto berhasil diunggah!",
+        "uploadFailed": "Gagal mengunggah foto",
+        "UploadFailedSize": "Ukuran foto melebihi batas sebesar 2MB. Silakan pilih file yang lebih kecil."
       },
       "nextButton": "Selanjutnya: Pengalaman Kerja"
     },
@@ -373,6 +373,10 @@
     "languageSwitcher": {
       "switchToEnglish": "Ganti ke Bahasa Inggris",
       "switchToIndonesian": "Ganti ke Bahasa Indonesia"
+    },
+    "toast": {
+      "InvalidPDFException": "Mohon unggah file dengan format PDF yang valid.",
+      "PasswordException": "Pastikan file PDF yang diunggah tidak terkunci oleh kata sandi"
     }
   }
 }
