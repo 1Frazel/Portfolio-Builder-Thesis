@@ -338,6 +338,10 @@
       "title": "Pengecek Skor ATS",
       "description": "Simulasikan CV Anda dengan mesin parser kami. Sistem akan mengekstrak data Anda untuk memastikan tidak ada bagian penting yang gagal terbaca atau hilang. Pastikan skor CV Anda aman sebelum dikirim ke HRD."
     },
+    "warning": {
+      "title": "Peringatan",
+      "description": "Sistem ATS di sebagian besar perusahaan multinasional menggunakan pemrosesan bahasa alami (NLP) yang dilatih dengan bahasa Inggris. Untuk tingkat akurasi ekstraksi data ATS yang maksimal, pastikan dokumen CV Anda ditulis sepenuhnya dalam bahasa Inggris. Dokumen berbahasa lainnya mungkin tidak akan terbaca atau menghasilkan skor rendah."
+    },
     "recommendations": {
       "title": "Rekomendasi Perbaikan:",
       "missingSection": "Kami tidak menemukan bagian '{{sectionName}}'. Pastikan Anda menggunakan judul bagian yang umum.",

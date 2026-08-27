@@ -340,6 +340,10 @@
       "title": "Resume Checker",
       "description": "Test your resume against our ATS parsing engine. Upload your PDF to verify that all essential sections are correctly formatted and machine-readable. Our system will flag any missing or unreadable categories, ensuring your qualifications are flawlessly extracted before you submit your application."
     },
+    "warning": {
+      "title": "Warning",
+      "description": "Most multinational companies ATS systems use natural language processing (NLP) trained on English. For maximum ATS data extraction accuracy, ensure your resume document is written entirely in English. Non-English documents may not be parsed correctly or could yield a low score."
+    },
     "recommendations": {
       "title": "Recommendations:",
       "missingSection": "Add a {{sectionName}} section with relevant details.",
