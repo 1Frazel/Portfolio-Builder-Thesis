@@ -169,7 +169,10 @@ export const useFormData = ({
   > = (value) => {
     setFormData((prev) => ({
       ...prev,
-      customSections: typeof value === "function" ? value(prev.customSections) : value,
+      customSections:
+        typeof value === "function"
+          ? value(prev.customSections ?? [DEFAULT_CUSTOM_SECTION])
+          : value,
     }));
   };
 

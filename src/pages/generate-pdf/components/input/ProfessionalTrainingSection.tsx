@@ -85,6 +85,20 @@ const ProfessionalTrainingSection = ({
         />
       ),
     },
+    {
+      id: "url",
+      component: (
+        <InputField
+          defaultValue={training.url || ""}
+          onChange={(input: string) => {
+            handleTextChange(training.id, "url", input);
+          }}
+          label={t("additionalSectionProfessionalTraining.labels.url", "Link / URL (Optional)")}
+          placeholder="https://..."
+          inputClass={fieldInputClass}
+        />
+      ),
+    },
   ];
 
   return (

@@ -4,6 +4,7 @@ export const DEFAULT_PROFESSIONAL_TRAINING = {
   institution: "",
   startAt: "",
   endsAt: "",
+  url: "",
 };
 
 export const DEFAULT_WORK_EXPERIENCES = {
@@ -25,6 +26,7 @@ export const DEFAULT_PERSONAL_DETAIL = {
   email: "",
   phone: "",
   linkedinUrl: "",
+  portfolioUrl: "",
   postalCode: "",
   cityState: "",
   country: "",
@@ -81,6 +83,7 @@ export const DEFAULT_LICENSES_CERTIFICATION = {
   issuer: "",
   startAt: "",
   endsAt: "",
+  url: "",
 };
 
 export const DEFAULT_CUSTOM_SECTION_ITEM = {
@@ -90,6 +93,7 @@ export const DEFAULT_CUSTOM_SECTION_ITEM = {
   endsAt: "",
   city: "",
   description: "",
+  url: "",
 };
 
 export const DEFAULT_CUSTOM_SECTION = {
@@ -108,6 +112,7 @@ export const mocks = (() => {
     email: "jane.anderson@example.com",
     phone: "+1 (415) 555-0132",
     linkedinUrl: "https://www.linkedin.com/in/jane-anderson",
+    portfolioUrl: "https://janeanderson.dev",
     postalCode: "94105",
     cityState: "San Francisco, CA",
     country: "USA",
@@ -173,6 +178,7 @@ export const mocks = (() => {
       institution: "Frontend Masters",
       startAt: "March, 2020",
       endsAt: "April, 2020",
+      url: "https://frontendmasters.com",
     },
     {
       id: 1,
@@ -180,6 +186,7 @@ export const mocks = (() => {
       institution: "Udacity",
       startAt: "August, 2019",
       endsAt: "October, 2019",
+      url: "",
     },
   ];
 
@@ -190,6 +197,7 @@ export const mocks = (() => {
       issuer: "Amazon Web Services",
       startAt: "June, 2022",
       endsAt: "June, 2025",
+      url: "https://aws.amazon.com/certification",
     },
     {
       id: 1,
@@ -197,6 +205,7 @@ export const mocks = (() => {
       issuer: "Coursera",
       startAt: "November, 2020",
       endsAt: "January, 2021",
+      url: "",
     },
   ];
 

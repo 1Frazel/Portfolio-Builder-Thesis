@@ -3,7 +3,7 @@ import type { HTMLAttributes } from "react";
 import InputFieldWrapper from "./InputFieldWrapper";
 
 const InputField = ({
-  defaultValue,
+  defaultValue = "",
   onChange,
   label,
   placeholder = "",
@@ -14,7 +14,7 @@ const InputField = ({
   inputMode,
   pattern,
 }: {
-  defaultValue: string;
+  defaultValue?: string;
   onChange: (input: string) => void;
   label: string;
   placeholder?: string;

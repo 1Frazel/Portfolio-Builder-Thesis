@@ -1,4 +1,5 @@
-import { Document, Page, Text, View } from "@react-pdf/renderer";
+import React from "react";
+import { Document, Page, Text, View, Link } from "@react-pdf/renderer";
 import type {
   IAdditionalSections,
   ICustomSection,
@@ -26,6 +27,7 @@ import {
   DEFAULT_PROFILE_SUMMARY,
   DEFAULT_PERSONAL_DETAIL,
 } from "../../../const/generatePdfConst";
+import { normalizeUrl } from "../../../../../shared/utils/urlUtils";
 
 const AtsDocument = ({
   personalDetail,
@@ -98,6 +100,7 @@ const PersonalDetail = ({
     email,
     phone,
     linkedinUrl,
+    portfolioUrl,
     postalCode,
     cityState,
     country,
@@ -107,52 +110,104 @@ const PersonalDetail = ({
   const fullName = joinText([firstName, lastName]);
   const headerText = joinText([fullName, jobTarget]);
   const cityPostal = joinText([cityState, postalCode], " ");
-  const contactText = joinText([
-    address,
-    cityPostal,
-    country,
-    phone,
-    linkedinUrl,
-    email,
-  ]);
 
-  if (!headerText && !contactText) return null;
+  const contactItems: Array<{
+    key: string;
+    text: string;
+    isLink?: boolean;
+    href?: string;
+  }> = [];
+
+  if (hasText(address)) {
+    contactItems.push({ key: "address", text: address!.trim() });
+  }
+  if (hasText(cityPostal)) {
+    contactItems.push({ key: "cityPostal", text: cityPostal });
+  }
+  if (hasText(country)) {
+    contactItems.push({ key: "country", text: country!.trim() });
+  }
+  if (hasText(phone)) {
+    contactItems.push({ key: "phone", text: phone!.trim() });
+  }
+  if (hasText(linkedinUrl)) {
+    contactItems.push({
+      key: "linkedinUrl",
+      text: linkedinUrl!.trim(),
+      isLink: true,
+      href: normalizeUrl(linkedinUrl),
+    });
+  }
+  if (hasText(portfolioUrl)) {
+    contactItems.push({
+      key: "portfolioUrl",
+      text: portfolioUrl!.trim(),
+      isLink: true,
+      href: normalizeUrl(portfolioUrl),
+    });
+  }
+  if (hasText(email)) {
+    contactItems.push({ key: "email", text: email!.trim() });
+  }
+
+  if (!headerText && contactItems.length === 0) return null;
 
   return (
     <>
-      <View
-        style={{
-          display: "flex",
-          alignItems: "center",
-          width: "100%",
-        }}
-      >
-        <Text
-          style={[
-            atsStyles.fontHeader,
-            { fontWeight: "bold", textAlign: "center" },
-          ]}
-        >
-          {headerText}
-        </Text>
-      </View>
-      <View
-        style={[
-          {
-            marginTop: "6px",
-            marginBottom: "10px",
+      {headerText ? (
+        <View
+          style={{
             display: "flex",
             alignItems: "center",
             width: "100%",
-          },
-        ]}
-      >
-        <Text
-          style={[atsStyles.fontParagraph, { textAlign: "center" }]}
+          }}
         >
-          {contactText}
-        </Text>
-      </View>
+          <Text
+            style={[
+              atsStyles.fontHeader,
+              { fontWeight: "bold", textAlign: "center" },
+            ]}
+          >
+            {headerText}
+          </Text>
+        </View>
+      ) : null}
+      {contactItems.length > 0 ? (
+        <View
+          style={[
+            {
+              marginTop: "6px",
+              marginBottom: "10px",
+              display: "flex",
+              alignItems: "center",
+              width: "100%",
+            },
+          ]}
+        >
+          <Text
+            style={[atsStyles.fontParagraph, { textAlign: "center" }]}
+          >
+            {contactItems.map((item, index) => (
+              <React.Fragment key={item.key}>
+                {index > 0 ? ", " : ""}
+                {item.isLink && item.href ? (
+                  <Link
+                    src={item.href}
+                    href={item.href}
+                    style={{ color: "#000000", textDecoration: "none" }}
+                  >
+                    <Text hyphenationCallback={(word) => [word]}>
+                      {item.text}
+                    </Text>
+                  </Link>
+                ) : (
+                  item.text
+                )}
+              </React.Fragment>
+            ))}
+          </Text>
+        </View>
+      ) : null}
       <Divider />
     </>
   );
@@ -336,7 +391,7 @@ const Language = ({
 
 const CustomAdditionalSections = ({ sections }: { sections: ICustomSection[] }) => {
   const validGroups = sections
-    .map((g) => ({ ...g, validItems: g.items.filter((it) => hasText(it.name) || hasText(it.startAt) || hasText(it.endsAt) || hasText(it.city) || hasText(it.description)) }))
+    .map((g) => ({ ...g, validItems: g.items.filter((it) => hasText(it.name) || hasText(it.startAt) || hasText(it.endsAt) || hasText(it.city) || hasText(it.description) || hasText(it.url)) }))
     .filter((g) => hasText(g.sectionTitle) || (g.validItems && g.validItems.length > 0));
 
   if (validGroups.length === 0) return null;
@@ -345,9 +400,9 @@ const CustomAdditionalSections = ({ sections }: { sections: ICustomSection[] }) 
     <>
       {validGroups.map((group) => (
         <View key={group.id}>
-          <SectionDetailsWrapper title={hasText(group.sectionTitle) ? group.sectionTitle.trim() : "CUSTOM SECTION"}>
+          <SectionDetailsWrapper title={hasText(group.sectionTitle) ? group.sectionTitle.trim().toUpperCase() : "CUSTOM SECTION"}>
             {group.validItems.map((item) => (
-              <SectionDetails key={item.id} startAt={formatDate(item.startAt)} endsAt={formatDate(item.endsAt, true)} title={joinText([item.name, item.city])} description={item.description} />
+              <SectionDetails key={item.id} startAt={formatDate(item.startAt)} endsAt={formatDate(item.endsAt, true)} title={joinText([item.name, item.city])} description={item.description} url={item.url} />
             ))}
           </SectionDetailsWrapper>
           <Divider />
@@ -370,7 +425,8 @@ const ProfessionalTraining = ({
       hasText(training.courseName) ||
       hasText(training.institution) ||
       hasText(training.startAt) ||
-      hasText(training.endsAt),
+      hasText(training.endsAt) ||
+      hasText(training.url),
   );
 
   if (validProfessionalTraining.length === 0) return null;
@@ -385,6 +441,7 @@ const ProfessionalTraining = ({
               startAt={formatDate(training.startAt)}
               endsAt={formatDate(training.endsAt, true)}
               title={joinText([training.courseName, training.institution])}
+              url={training.url}
             />
           );
         })}
@@ -407,7 +464,8 @@ const LicensesCertifications = ({
       hasText(license.name) ||
       hasText(license.issuer) ||
       hasText(license.startAt) ||
-      hasText(license.endsAt),
+      hasText(license.endsAt) ||
+      hasText(license.url),
   );
 
   if (validLicenses.length === 0) return null;
@@ -421,6 +479,7 @@ const LicensesCertifications = ({
             startAt={formatDate(license.startAt)}
             endsAt={formatDate(license.endsAt, true)}
             title={joinText([license.name, license.issuer])}
+            url={license.url}
           />
         );
       })}

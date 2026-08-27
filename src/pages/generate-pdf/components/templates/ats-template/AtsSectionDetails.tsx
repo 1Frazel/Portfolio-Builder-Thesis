@@ -1,6 +1,7 @@
 import React from "react";
-import { Text, View } from "@react-pdf/renderer";
+import { Text, View, Link } from "@react-pdf/renderer";
 import atsStyles from "./atsStyles";
+import { normalizeUrl } from "../../../../../shared/utils/urlUtils";
 
 const SectionDetails = ({
   startAt,
@@ -8,15 +9,18 @@ const SectionDetails = ({
   title,
   address,
   description,
+  url,
 }: {
   startAt: string;
   endsAt: string;
   title: string;
   address?: string;
   description?: string;
+  url?: string;
 }) => {
   const hasAddress = Boolean(address?.trim());
   const hasDescription = Boolean(description?.trim());
+  const hasUrl = Boolean(url?.trim());
 
   return (
     <View
@@ -43,7 +47,17 @@ const SectionDetails = ({
           }}
         >
           <Text style={[atsStyles.fontParagraph, { width: "68%" }]}>
-            {title}
+            {hasUrl ? (
+              <Link
+                src={normalizeUrl(url)}
+                href={normalizeUrl(url)}
+                style={{ color: "#000000", textDecoration: "underline" }}
+              >
+                <Text hyphenationCallback={(word) => [word]}>{title}</Text>
+              </Link>
+            ) : (
+              title
+            )}
           </Text>
           {hasAddress && (
             <Text

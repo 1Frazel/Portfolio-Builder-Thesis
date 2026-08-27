@@ -6,6 +6,7 @@ export interface IProfessionalTraining {
   institution: string;
   startAt: string;
   endsAt: string;
+  url?: string;
 }
 
 export interface IWorkExperience {
@@ -27,6 +28,7 @@ export interface IPersonalDetail {
   email: string;
   phone: string;
   linkedinUrl: string;
+  portfolioUrl: string;
   postalCode: string;
   cityState: string;
   country: string;
@@ -63,6 +65,7 @@ export interface ICustomSectionItem {
   endsAt: string;
   city: string;
   description: string;
+  url?: string;
 }
 
 export interface ICustomSection {
@@ -83,6 +86,7 @@ export interface ILicensesCertifications {
   issuer: string;
   startAt: string;
   endsAt: string;
+  url?: string;
 }
 
 export interface IListSections {

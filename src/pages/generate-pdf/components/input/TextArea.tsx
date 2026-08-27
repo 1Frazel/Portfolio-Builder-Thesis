@@ -1,7 +1,7 @@
 import InputFieldWrapper from "./InputFieldWrapper";
 
 const TextArea = ({
-  defaultValue,
+  defaultValue = "",
   onChange,
   label,
   placeholder,
@@ -9,7 +9,7 @@ const TextArea = ({
   labelClass = "",
   inputClass = "",
 }: {
-  defaultValue: string;
+  defaultValue?: string;
   onChange: (input: string) => void;
   label: string;
   placeholder?: string;

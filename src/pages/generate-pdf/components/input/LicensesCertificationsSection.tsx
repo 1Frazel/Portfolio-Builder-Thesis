@@ -85,6 +85,20 @@ const LicensesCertificationsSection = ({
         />
       ),
     },
+    {
+      id: "url",
+      component: (
+        <InputField
+          defaultValue={license.url || ""}
+          onChange={(input: string) => {
+            handleTextChange(license.id, "url", input);
+          }}
+          label={t("additionalSectionLicensesCertifications.labels.url", "Link / URL (Optional)")}
+          placeholder="https://..."
+          inputClass={fieldInputClass}
+        />
+      ),
+    },
   ];
   return (
     <ExpandableSectionItem

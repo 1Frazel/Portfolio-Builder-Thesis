@@ -77,7 +77,7 @@ const ParsePdf = () => {
         {/* Mobile: Stacked Layout, Desktop: 2-Column Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {/* Left Column: Upload Section */}
-          <div className="flex flex-col justify-start">
+          <div className="flex flex-col justify-start gap-4">
             <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 md:p-8 bg-white flex flex-col items-center justify-center min-h-64">
               {/* File Icon */}
               <div className="mb-4">
@@ -113,6 +113,25 @@ const ParsePdf = () => {
                 handleClick={handleChange}
                 disabled={isLoading}
               />
+            </div>
+
+            {/* Resume Checker Warning */}
+            <div className="bg-[#2951A3] text-white rounded-lg p-4 md:p-6 flex items-center gap-2">
+              <div className="flex items-center justify-center w-6 h-6 flex-shrink-0">
+                <svg width="49" height="49" viewBox="0 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M24.4189 35.0696C25.1093 35.0696 25.6689 35.6293 25.6689 36.3196C25.6689 37.01 25.1093 37.5696 24.4189 37.5696C23.7286 37.5696 23.1689 37.01 23.1689 36.3196C23.1689 35.6293 23.7286 35.0696 24.4189 35.0696Z" fill="black" stroke="#FF9900" stroke-width="2.5"/>
+                  <path d="M24.4189 18.8196V28.8196" stroke="#FF9900" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M3.03726 39.0837L19.947 5.26393C21.7897 1.57868 27.0487 1.5787 28.8915 5.26393L45.8012 39.0837C47.4635 42.4082 45.046 46.3197 41.329 46.3197H7.50938C3.79246 46.3197 1.37498 42.4082 3.03726 39.0837Z" stroke="#FF9900" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+
+              <h2 className="text-lg md:text-xl font-bold">{t("warning.title")}</h2>
+            </div>
+
+            <div className="bg-white rounded-lg p-4 md:p-6 border border-gray-200 mt-2">
+              <p className="text-[#FF9900] text-sm md:text-base leading-relaxed">
+                {t("warning.description")}
+              </p>
             </div>
           </div>
 

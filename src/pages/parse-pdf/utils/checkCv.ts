@@ -190,7 +190,7 @@ const checkCv = async (fileUrl: string) => {
   const sections = detectSections(rawText);
   const score = calculateScore(sections);
   const recommendations = buildRecommendations(sections);
-  console.log({ score, recommendations, rawText, sections });
+  // console.log({ score, recommendations, rawText, sections });
 
   return {
     rawText,

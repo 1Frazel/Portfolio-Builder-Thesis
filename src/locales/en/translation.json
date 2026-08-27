@@ -159,6 +159,7 @@
         "lastName": "Last Name",
         "phone": "Phone Number",
         "linkedin": "LinkedIn URL",
+        "portfolio": "Portfolio URL",
         "postal": "Postal Code",
         "cityState": "City, State",
         "address": "Address",
@@ -242,6 +243,7 @@
       "customDate": "Start & End Date",
       "customDatePlaceholder": "MM // YYYY",
       "customCity": "City",
+      "customUrl": "Supporting URL",
       "description": "Include supplementary information that adds value to your candidacy, such as professional certifications and Trainings, or foreign language proficiencies.",
       "customDescription": "Add a custom section to highlight any unique qualifications, projects, or experiences that don't fit into the standard categories but are relevant to your career goals.",
       "customDefault": "(Not Specified)",
@@ -289,6 +291,7 @@
         "certificationName": "Certification Name",
         "issuer": "Issuer",
         "startEndDate": "Start & End Date",
+        "url": "Link / URL (Optional)",
         "placeholder": "MM // YYYY"
       },
       "addButton": "Add another licenses / certifications",
@@ -303,6 +306,7 @@
         "courseName": "Course Name",
         "institution": "Institution",
         "startEndDate": "Start & End Date",
+        "url": "Link / URL (Optional)",
         "placeholder": "MM // YYYY"
       },
       "addButton": "Add another professional training",
@@ -339,6 +343,10 @@
     "header": {
       "title": "Resume Checker",
       "description": "Test your resume against our ATS parsing engine. Upload your PDF to verify that all essential sections are correctly formatted and machine-readable. Our system will flag any missing or unreadable categories, ensuring your qualifications are flawlessly extracted before you submit your application."
+    },
+    "warning": {
+      "title": "Warning",
+      "description": "Most multinational companies ATS systems use natural language processing (NLP) trained on English. For maximum ATS data extraction accuracy, ensure your resume document is written entirely in English. Non-English documents may not be parsed correctly or could yield a low score."
     },
     "recommendations": {
       "title": "Recommendations:",
