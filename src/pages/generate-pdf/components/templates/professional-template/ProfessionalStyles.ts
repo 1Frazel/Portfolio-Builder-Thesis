@@ -35,13 +35,22 @@ const professionalStyles = StyleSheet.create({
     textAlign: "center",
   },
   photoWrapper: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     marginBottom: "14px",
+    flexShrink: 0,
   },
   photo: {
     width: "120px",
     height: "120px",
+    minWidth: "120px",
+    maxWidth: "120px",
+    minHeight: "120px",
+    maxHeight: "120px",
     borderRadius: "60px",
     objectFit: "cover",
+    flexShrink: 0,
     alignSelf: "center",
   },
   jobTarget: {
