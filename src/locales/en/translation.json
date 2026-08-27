@@ -243,6 +243,7 @@
       "customDate": "Start & End Date",
       "customDatePlaceholder": "MM // YYYY",
       "customCity": "City",
+      "customUrl": "Supporting URL",
       "description": "Include supplementary information that adds value to your candidacy, such as professional certifications and Trainings, or foreign language proficiencies.",
       "customDescription": "Add a custom section to highlight any unique qualifications, projects, or experiences that don't fit into the standard categories but are relevant to your career goals.",
       "customDefault": "(Not Specified)",
@@ -290,6 +291,7 @@
         "certificationName": "Certification Name",
         "issuer": "Issuer",
         "startEndDate": "Start & End Date",
+        "url": "Link / URL (Optional)",
         "placeholder": "MM // YYYY"
       },
       "addButton": "Add another licenses / certifications",
@@ -304,6 +306,7 @@
         "courseName": "Course Name",
         "institution": "Institution",
         "startEndDate": "Start & End Date",
+        "url": "Link / URL (Optional)",
         "placeholder": "MM // YYYY"
       },
       "addButton": "Add another professional training",

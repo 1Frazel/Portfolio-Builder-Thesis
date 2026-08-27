@@ -27,27 +27,30 @@ const CustomAdditionalSection = ({
   const { t } = useTranslation("creationPage");
 
   const handleEditGroupTitle = (groupId: number, value: string) => {
-    setSections((prevSections) =>
-      prevSections.map((g) =>
+    setSections((prevSections = []) => {
+      const source = prevSections && prevSections.length > 0 ? prevSections : [DEFAULT_CUSTOM_SECTION];
+      return source.map((g) =>
         g.id === groupId ? { ...g, sectionTitle: value } : g,
-      ),
-    );
+      );
+    });
   };
 
   const handleAddGroup = () => {
-    setSections((prevSections) => {
-      const latestId = prevSections.length > 0 ? prevSections.at(-1)?.id ?? 0 : 0;
-      return [...prevSections, { ...DEFAULT_CUSTOM_SECTION, id: latestId + 1 }];
+    setSections((prevSections = []) => {
+      const source = prevSections && prevSections.length > 0 ? prevSections : [DEFAULT_CUSTOM_SECTION];
+      const latestId = source.length > 0 ? source.at(-1)?.id ?? 0 : 0;
+      return [...source, { ...DEFAULT_CUSTOM_SECTION, id: latestId + 1 }];
     });
   };
 
   const handleDeleteGroup = (groupId: number) => {
-    setSections((prevSections) => prevSections.filter((g) => g.id !== groupId));
+    setSections((prevSections = []) => (prevSections ?? []).filter((g) => g.id !== groupId));
   };
 
   const handleAddItem = (groupId: number) => {
-    setSections((prevSections) =>
-      prevSections.map((g) => {
+    setSections((prevSections = []) => {
+      const source = prevSections && prevSections.length > 0 ? prevSections : [DEFAULT_CUSTOM_SECTION];
+      return source.map((g) => {
         if (g.id !== groupId) return g;
         const latestItemId = g.items.length > 0 ? g.items.at(-1)?.id ?? 0 : 0;
         return {
@@ -57,53 +60,42 @@ const CustomAdditionalSection = ({
             { ...DEFAULT_CUSTOM_SECTION_ITEM, id: latestItemId + 1 },
           ],
         };
-      }),
-    );
+      });
+    });
   };
 
   const handleDeleteItem = (groupId: number, itemId: number) => {
-    setSections((prevSections) => {
-      const nextSections = [...prevSections];
-
-      for (let index = 0; index < nextSections.length; index += 1) {
-        const group = nextSections[index];
-        if (group.id !== groupId) continue;
-
-        nextSections[index] = {
+    setSections((prevSections = []) => {
+      const source = prevSections && prevSections.length > 0 ? prevSections : [DEFAULT_CUSTOM_SECTION];
+      return source.map((group) => {
+        if (group.id !== groupId) return group;
+        return {
           ...group,
           items: group.items.filter((item) => item.id !== itemId),
         };
-        break;
-      }
-
-      return nextSections;
+      });
     });
   };
 
   const handleEditItem = (groupId: number, itemId: number, key: string, value: string) => {
-    setSections((prevSections) => {
-      const nextSections = [...prevSections];
-
-      for (let groupIndex = 0; groupIndex < nextSections.length; groupIndex += 1) {
-        const group = nextSections[groupIndex];
-        if (group.id !== groupId) continue;
-
-        nextSections[groupIndex] = {
+    setSections((prevSections = []) => {
+      const source = prevSections && prevSections.length > 0 ? prevSections : [DEFAULT_CUSTOM_SECTION];
+      return source.map((group) => {
+        if (group.id !== groupId) return group;
+        return {
           ...group,
           items: group.items.map((item) =>
             item.id === itemId ? { ...item, [key]: value } : item,
           ),
         };
-        break;
-      }
-
-      return nextSections;
+      });
     });
   };
 
   const handleItemUp = (groupIndex: number, itemIndex: number) => {
-    setSections((prevSections) => {
-      const currentSections = [...prevSections];
+    setSections((prevSections = []) => {
+      const source = prevSections && prevSections.length > 0 ? prevSections : [DEFAULT_CUSTOM_SECTION];
+      const currentSections = [...source];
       const items = [...currentSections[groupIndex].items];
       const tmp = items[itemIndex];
       items[itemIndex] = items[itemIndex - 1];
@@ -114,8 +106,9 @@ const CustomAdditionalSection = ({
   };
 
   const handleItemDown = (groupIndex: number, itemIndex: number) => {
-    setSections((prevSections) => {
-      const currentSections = [...prevSections];
+    setSections((prevSections = []) => {
+      const source = prevSections && prevSections.length > 0 ? prevSections : [DEFAULT_CUSTOM_SECTION];
+      const currentSections = [...source];
       const items = [...currentSections[groupIndex].items];
       const tmp = items[itemIndex];
       items[itemIndex] = items[itemIndex + 1];
@@ -190,8 +183,8 @@ const GroupItemEditor = ({
 }) => {
   const { t } = useTranslation("creationPage");
 
-  const handleTextChange = useDebouncedCallback((groupId: number, itemId: number, key: string, value: string) => {
-    handleEditItem(groupId, itemId, key, value);
+  const handleTextChange = useDebouncedCallback((key: string, value: string) => {
+    handleEditItem(groupId, item.id, key, value);
   }, 500);
 
   const fieldInputClass = "w-full rounded-md border border-slate-200 bg-slate-100 px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100";
@@ -201,7 +194,7 @@ const GroupItemEditor = ({
       <div className="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2">
         <InputField
           defaultValue={item.name}
-          onChange={(input: string) => handleTextChange(groupId, item.id, "name", input)}
+          onChange={(input: string) => handleTextChange("name", input)}
           label={t("additionalSections.customName", "Name")}
           inputClass={fieldInputClass}
         />
@@ -209,8 +202,8 @@ const GroupItemEditor = ({
         <DateInput
           startDefaultValue={item.startAt}
           endDefaultValue={item.endsAt}
-          startOnChange={(value: string) => handleTextChange(groupId, item.id, "startAt", value)}
-          endOnChange={(value: string) => handleTextChange(groupId, item.id, "endsAt", value)}
+          startOnChange={(value: string) => handleTextChange("startAt", value)}
+          endOnChange={(value: string) => handleTextChange("endsAt", value)}
           label={t("additionalSections.customDate", "Start & End Date")}
           placeholder={t("additionalSections.customDatePlaceholder", "MM // YYYY")}          
           inputClass={fieldInputClass}
@@ -218,8 +211,16 @@ const GroupItemEditor = ({
 
         <InputField
           defaultValue={item.city}
-          onChange={(input: string) => handleTextChange(groupId, item.id, "city", input)}
+          onChange={(input: string) => handleTextChange("city", input)}
           label={t("additionalSections.customCity", "City")}
+          inputClass={fieldInputClass}
+        />
+
+        <InputField
+          defaultValue={item.url || ""}
+          onChange={(input: string) => handleTextChange("url", input)}
+          label={t("additionalSections.customUrl", "Supporting URL")}
+          placeholder="https://..."
           inputClass={fieldInputClass}
         />
       </div>
@@ -227,7 +228,7 @@ const GroupItemEditor = ({
       <div className="mt-4">
         <TextArea
           defaultValue={item.description}
-          onChange={(input: string) => handleTextChange(groupId, item.id, "description", input)}
+          onChange={(input: string) => handleTextChange("description", input)}
           label={t("additionalSections.labels.customDescription", "Description")}
           inputClass={fieldInputClass}
         />

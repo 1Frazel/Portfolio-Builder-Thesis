@@ -264,7 +264,7 @@ const MainCustomAdditionalSections = ({ sections }: { sections: ICustomSection[]
     .map((group) => ({
       ...group,
       validItems: group.items.filter(
-        (item) => hasText(item.name) || hasText(item.startAt) || hasText(item.endsAt) || hasText(item.city) || hasText(item.description),
+        (item) => hasText(item.name) || hasText(item.startAt) || hasText(item.endsAt) || hasText(item.city) || hasText(item.description) || hasText(item.url),
       ),
     }))
     .filter((g) => hasText(g.sectionTitle) || (g.validItems && g.validItems.length > 0));
@@ -275,17 +275,34 @@ const MainCustomAdditionalSections = ({ sections }: { sections: ICustomSection[]
     <>
       {validGroups.map((group) => (
         <SectionBlock key={group.id} title={hasText(group.sectionTitle) ? group.sectionTitle.trim() : "Custom Section"}>
-          {group.validItems.map((item) => (
-            <View key={item.id} style={{ marginBottom: "12px" }}>
-              {hasText(item.name) && (
-                <Text style={professionalStyles.roleText}>{joinText([item.name, item.city])}</Text>
-              )}
-              <Text style={professionalStyles.dateText}>{`${formatDate(item.startAt)} — ${formatDate(item.endsAt, true)}`}</Text>
-              {hasText(item.description) && (
-                <Text style={professionalStyles.paragraph}>{item.description.trim()}</Text>
-              )}
-            </View>
-          ))}
+          {group.validItems.map((item) => {
+            const itemTitle = joinText([item.name, item.city]);
+            return (
+              <View key={item.id} style={{ marginBottom: "12px" }}>
+                {hasText(itemTitle) && (
+                  <Text style={professionalStyles.roleText}>
+                    {hasText(item.url) ? (
+                      <Link
+                        src={normalizeUrl(item.url)}
+                        href={normalizeUrl(item.url)}
+                        style={{ color: "#111111", textDecoration: "underline" }}
+                      >
+                        <Text hyphenationCallback={(word) => [word]}>
+                          {itemTitle}
+                        </Text>
+                      </Link>
+                    ) : (
+                      itemTitle
+                    )}
+                  </Text>
+                )}
+                <Text style={professionalStyles.dateText}>{`${formatDate(item.startAt)} — ${formatDate(item.endsAt, true)}`}</Text>
+                {hasText(item.description) && (
+                  <Text style={professionalStyles.paragraph}>{item.description.trim()}</Text>
+                )}
+              </View>
+            );
+          })}
         </SectionBlock>
       ))}
     </>
@@ -409,7 +426,8 @@ const MainProfessionalTraining = ({
       hasText(training.courseName) ||
       hasText(training.institution) ||
       hasText(training.startAt) ||
-      hasText(training.endsAt),
+      hasText(training.endsAt) ||
+      hasText(training.url),
   );
 
   if (validProfessionalTraining.length === 0) return null;
@@ -419,7 +437,19 @@ const MainProfessionalTraining = ({
       {validProfessionalTraining.map((training) => (
         <View key={training.id} style={{ marginBottom: "12px" }}>
           <Text style={professionalStyles.roleText}>
-            {joinText([training.courseName, training.institution])}
+            {hasText(training.url) ? (
+              <Link
+                src={normalizeUrl(training.url)}
+                href={normalizeUrl(training.url)}
+                style={{ color: "#111111", textDecoration: "underline" }}
+              >
+                <Text hyphenationCallback={(word) => [word]}>
+                  {joinText([training.courseName, training.institution])}
+                </Text>
+              </Link>
+            ) : (
+              joinText([training.courseName, training.institution])
+            )}
           </Text>
           <Text style={professionalStyles.dateText}>
             {`${formatDate(training.startAt)} — ${formatDate(
@@ -446,7 +476,8 @@ const MainLicenses = ({
       hasText(license.name) ||
       hasText(license.issuer) ||
       hasText(license.startAt) ||
-      hasText(license.endsAt),
+      hasText(license.endsAt) ||
+      hasText(license.url),
   );
 
   if (validLicenses.length === 0) return null;
@@ -456,7 +487,19 @@ const MainLicenses = ({
       {validLicenses.map((license) => (
         <View key={license.id} style={{ marginBottom: "12px" }}>
           <Text style={professionalStyles.roleText}>
-            {joinText([license.name, license.issuer])}
+            {hasText(license.url) ? (
+              <Link
+                src={normalizeUrl(license.url)}
+                href={normalizeUrl(license.url)}
+                style={{ color: "#111111", textDecoration: "underline" }}
+              >
+                <Text hyphenationCallback={(word) => [word]}>
+                  {joinText([license.name, license.issuer])}
+                </Text>
+              </Link>
+            ) : (
+              joinText([license.name, license.issuer])
+            )}
           </Text>
           <Text style={professionalStyles.dateText}>
             {`${formatDate(license.startAt)} — ${formatDate(

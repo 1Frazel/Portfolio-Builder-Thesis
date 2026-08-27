@@ -241,6 +241,7 @@
       "customDate": "Tanggal Mulai & Berakhir",
       "customDatePlaceholder": "DD // TTTT",
       "customCity": "Kota",
+      "customUrl": "Supporting URL",
       "description": "Perkuat CV Anda dengan menyertakan sertifikasi, pelatihan, atau kemampuan bahasa asing yang relevan dengan pekerjaan yang dilamar.",
       "customDescription": "Tambahkan bagian khusus untuk menonjolkan kualifikasi, proyek, atau pengalaman unik yang tidak masuk dalam kategori standar namun relevan dengan tujuan karir Anda.",
       "customDefault": "(Belum Diisi)",
@@ -288,6 +289,7 @@
         "certificationName": "Nama Sertifikasi",
         "issuer": "Institusi Penerbit",
         "startEndDate": "Tanggal Dikeluarkan & Kedaluwarsa",
+        "url": "Tautan / URL (Opsional)",
         "placeholder": "BB / TTTT"
       },
       "addButton": "Tambah Sertifikasi",
@@ -302,6 +304,7 @@
         "courseName": "Nama Pelatihan",
         "institution": "Penyelenggara",
         "startEndDate": "Periode Pelatihan",
+        "url": "Tautan / URL (Opsional)",
         "placeholder": "BB / TTTT"
       },
       "addButton": "Tambah Pelatihan",

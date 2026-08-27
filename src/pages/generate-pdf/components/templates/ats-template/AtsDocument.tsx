@@ -391,7 +391,7 @@ const Language = ({
 
 const CustomAdditionalSections = ({ sections }: { sections: ICustomSection[] }) => {
   const validGroups = sections
-    .map((g) => ({ ...g, validItems: g.items.filter((it) => hasText(it.name) || hasText(it.startAt) || hasText(it.endsAt) || hasText(it.city) || hasText(it.description)) }))
+    .map((g) => ({ ...g, validItems: g.items.filter((it) => hasText(it.name) || hasText(it.startAt) || hasText(it.endsAt) || hasText(it.city) || hasText(it.description) || hasText(it.url)) }))
     .filter((g) => hasText(g.sectionTitle) || (g.validItems && g.validItems.length > 0));
 
   if (validGroups.length === 0) return null;
@@ -400,9 +400,9 @@ const CustomAdditionalSections = ({ sections }: { sections: ICustomSection[] }) 
     <>
       {validGroups.map((group) => (
         <View key={group.id}>
-          <SectionDetailsWrapper title={hasText(group.sectionTitle) ? group.sectionTitle.trim() : "CUSTOM SECTION"}>
+          <SectionDetailsWrapper title={hasText(group.sectionTitle) ? group.sectionTitle.trim().toUpperCase() : "CUSTOM SECTION"}>
             {group.validItems.map((item) => (
-              <SectionDetails key={item.id} startAt={formatDate(item.startAt)} endsAt={formatDate(item.endsAt, true)} title={joinText([item.name, item.city])} description={item.description} />
+              <SectionDetails key={item.id} startAt={formatDate(item.startAt)} endsAt={formatDate(item.endsAt, true)} title={joinText([item.name, item.city])} description={item.description} url={item.url} />
             ))}
           </SectionDetailsWrapper>
           <Divider />
@@ -425,7 +425,8 @@ const ProfessionalTraining = ({
       hasText(training.courseName) ||
       hasText(training.institution) ||
       hasText(training.startAt) ||
-      hasText(training.endsAt),
+      hasText(training.endsAt) ||
+      hasText(training.url),
   );
 
   if (validProfessionalTraining.length === 0) return null;
@@ -440,6 +441,7 @@ const ProfessionalTraining = ({
               startAt={formatDate(training.startAt)}
               endsAt={formatDate(training.endsAt, true)}
               title={joinText([training.courseName, training.institution])}
+              url={training.url}
             />
           );
         })}
@@ -462,7 +464,8 @@ const LicensesCertifications = ({
       hasText(license.name) ||
       hasText(license.issuer) ||
       hasText(license.startAt) ||
-      hasText(license.endsAt),
+      hasText(license.endsAt) ||
+      hasText(license.url),
   );
 
   if (validLicenses.length === 0) return null;
@@ -476,6 +479,7 @@ const LicensesCertifications = ({
             startAt={formatDate(license.startAt)}
             endsAt={formatDate(license.endsAt, true)}
             title={joinText([license.name, license.issuer])}
+            url={license.url}
           />
         );
       })}
