@@ -159,6 +159,7 @@
         "lastName": "Last Name",
         "phone": "Phone Number",
         "linkedin": "LinkedIn URL",
+        "portfolio": "Portfolio URL",
         "postal": "Postal Code",
         "cityState": "City, State",
         "address": "Address",

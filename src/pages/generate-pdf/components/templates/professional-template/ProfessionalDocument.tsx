@@ -1,4 +1,4 @@
-import { Document, Page, Text, View, Image } from "@react-pdf/renderer";
+import { Document, Page, Text, View, Image, Link } from "@react-pdf/renderer";
 import type {
   IAdditionalSections,
   ICustomSection,
@@ -23,6 +23,7 @@ import {
   DEFAULT_PROFILE_SUMMARY,
   DEFAULT_PERSONAL_DETAIL,
 } from "../../../const/generatePdfConst";
+import { normalizeUrl } from "../../../../../shared/utils/urlUtils";
 
 const ProfessionalDocument = ({
   personalDetail,
@@ -112,6 +113,7 @@ const SidebarPersonalDetail = ({
     email,
     phone,
     linkedinUrl,
+    portfolioUrl,
     postalCode,
     cityState,
     country,
@@ -125,6 +127,7 @@ const SidebarPersonalDetail = ({
     postalCode,
     phone,
     linkedinUrl,
+    portfolioUrl,
     email,
   ].filter((line) => hasText(line));
 
@@ -169,8 +172,31 @@ const SidebarPersonalDetail = ({
             <Text style={professionalStyles.linkText}>{phone.trim()}</Text>
           )}
           {hasText(linkedinUrl) && (
-            <Text style={professionalStyles.linkText}>
-              {linkedinUrl.trim()}
+            <Text
+              style={professionalStyles.linkText}
+              hyphenationCallback={(word) => [word]}
+            >
+              <Link
+                src={normalizeUrl(linkedinUrl)}
+                href={normalizeUrl(linkedinUrl)}
+                style={{ color: "#ffffff", textDecoration: "underline" }}
+              >
+                {linkedinUrl.trim()}
+              </Link>
+            </Text>
+          )}
+          {hasText(portfolioUrl) && (
+            <Text
+              style={professionalStyles.linkText}
+              hyphenationCallback={(word) => [word]}
+            >
+              <Link
+                src={normalizeUrl(portfolioUrl)}
+                href={normalizeUrl(portfolioUrl)}
+                style={{ color: "#ffffff", textDecoration: "underline" }}
+              >
+                {portfolioUrl.trim()}
+              </Link>
             </Text>
           )}
           {hasText(email) && (

@@ -256,6 +256,19 @@ const PersonalDetail = ({
       ),
     },
     {
+      id: "portfolioUrl",
+      component:(
+        <InputField
+          defaultValue={personalDetail.portfolioUrl}
+          onChange={(input: string) => {
+            handlePersonalDetailChange(input, "portfolioUrl");
+          }}
+          label={t("personalInfo.labels.portfolio")}
+          inputClass={fieldInputClass}
+        />
+      )
+    },
+    {
       id: "postalCode",
       component: (
         <InputField

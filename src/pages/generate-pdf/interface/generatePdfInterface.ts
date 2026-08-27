@@ -27,6 +27,7 @@ export interface IPersonalDetail {
   email: string;
   phone: string;
   linkedinUrl: string;
+  portfolioUrl: string;
   postalCode: string;
   cityState: string;
   country: string;

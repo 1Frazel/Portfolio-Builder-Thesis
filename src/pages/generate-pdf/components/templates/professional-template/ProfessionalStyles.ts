@@ -69,6 +69,7 @@ const professionalStyles = StyleSheet.create({
     lineHeight: 1.45,
     marginBottom: "6px",
     textDecoration: "underline",
+    color: "#ffffff",
   },
   sectionTitle: {
     fontSize: "14px",
