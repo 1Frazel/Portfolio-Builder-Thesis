@@ -122,7 +122,15 @@
         "failedToLoad": "Gagal memuat daftar CV. Silakan periksa koneksi Anda.",
         "confirmDelete": "Yakin ingin menghapus CV ini? Tindakan ini tidak dapat dibatalkan.",
         "resumeDeleted": "CV berhasil dihapus.",
-        "failedToDelete": "Gagal menghapus CV. Silakan coba lagi."
+        "failedToDelete": "Gagal menghapus CV. Silakan coba lagi.",
+        "duplicateButton": "Duplikat",
+        "duplicating": "Menduplikasi...",
+        "copySuffix": " (Salinan)",
+        "resumeDuplicated": "CV berhasil diduplikasi.",
+        "failedToDuplicate": "Gagal menduplikasi CV. Silakan coba lagi.",
+        "confirmDuplicateTitle": "Duplikat CV",
+        "confirmDuplicate": "Buat salinan dari \"{{title}}\"? Salinan akan muncul di bagian atas daftar Anda.",
+        "cancelButton": "Batal"
       }
     },
     "templateSelection": {

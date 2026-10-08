@@ -107,7 +107,7 @@ const PersonalDetail = ({
     address,
   } = personalDetail;
 
-  const fullName = joinText([firstName, lastName]);
+  const fullName = joinText([firstName, lastName], " ");
   const headerText = joinText([fullName, jobTarget]);
   const cityPostal = joinText([cityState, postalCode], " ");
 
